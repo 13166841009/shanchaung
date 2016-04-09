@@ -1,7 +1,7 @@
 /*
  * @author http://blog.csdn.net/singwhatiwanna
  */
-package ruanjianbei.wifi.com.ui;
+package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;

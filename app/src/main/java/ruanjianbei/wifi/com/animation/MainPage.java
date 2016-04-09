@@ -3,19 +3,15 @@ package ruanjianbei.wifi.com.animation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
 import activity.WiFiActivity;
 import fragment.SettingFragment;
-import ruanjianbei.wifi.com.ViewPagerinfo.MainActivity;
-import ruanjianbei.wifi.com.shanchuang.Mobile_PostAndroid;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 import ruanjianbei.wifi.com.shanchuang.UserGame;
-import ruanjianbei.wifi.com.shanchuang.Wifi_PostAndroid;
 
 public class MainPage extends Activity {
     private Context mContext;
@@ -61,7 +57,7 @@ public class MainPage extends Activity {
 //                }else{
 //                    Toast.makeText(mContext,"断网了",Toast.LENGTH_SHORT).show();
 //                }
-                Intent intent=new Intent(mContext, MainActivity.class);
+                Intent intent=new Intent(mContext, MainPageActivity.class);
                 startActivity(intent);
                 MainPage.this.overridePendingTransition(R.anim.activity_up, R.anim.fade_out);
             }

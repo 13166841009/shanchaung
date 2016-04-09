@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ruanjianbei.wifi.com.ui.TitleIndicator
+    <ruanjianbei.wifi.com.ViewPagerinfo.ui.TitleIndicator
         android:id="@+id/pagerindicator"
         android:layout_width="fill_parent"
         android:layout_height="34dp"
@@ -19,11 +19,15 @@
 
     <!-- Don't set background for ViewPager. It doesn't work because of page margin -->
 
-    <ruanjianbei.wifi.com.ui.ViewPagerCompat
+    <ruanjianbei.wifi.com.ViewPagerinfo.ui.ViewPagerCompat
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:duplicateParentState="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题"/>
 
 </LinearLayout>

@@ -111,9 +111,10 @@
     <string name="storage_warning">没有外部存储设备或SD卡不可用</string>
     <string name="wifi">电脑传输管理</string>
 
-    <string name="fragment_one">音乐</string>
-    <string name="fragment_two">相册</string>
-    <string name="fragment_three">视频</string>
-    <string name="fragment_four">文档</string>
-    <string name="fragment_five">其他</string>
+    <string name="fragment_one">应用</string>
+    <string name="fragment_two">图片</string>
+    <string name="fragment_three">音乐</string>
+    <string name="fragment_four">视频</string>
+    <string name="fragment_five">文档</string>
+    <string name="fragment_six">其他</string>
 </resources>

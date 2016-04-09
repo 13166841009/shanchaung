@@ -2,7 +2,7 @@
  * @author http://blog.csdn.net/singwhatiwanna
  */
 
-package ruanjianbei.wifi.com.ui;
+package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
 
 import android.content.Context;

@@ -82,7 +82,7 @@
             android:name="viewpager.IntroductionPage"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainActivity"
+            android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.animation.MainPage"
