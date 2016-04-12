@@ -45,6 +45,9 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     //选项卡控件
     protected TitleIndicator mIndicator;
 
+    //初始化fragment下端
+    private FragmentBottom fragmentBottom = new FragmentBottom();
+
     public TitleIndicator getIndicator() {
         return mIndicator;
     }
@@ -104,7 +107,15 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         mPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.page_margin_width));
         //设置viewpager内部页面间距的drawable
         mPager.setPageMarginDrawable(R.color.page_viewer_margin_color);
+        //初始化pager界面的下面部位
+        initViewpager();
     }
+
+    private void initViewpager() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -201,7 +212,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
 
     @Override
     public void onBackPressed() {
-            finish();
+        finish();
     }
 
     /**
