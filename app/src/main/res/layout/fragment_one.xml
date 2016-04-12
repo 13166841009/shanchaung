@@ -28,28 +28,6 @@
         android:visibility="gone">
     </ListView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_alignParentBottom = "true"
-        android:background="@drawable/bottom_bg">
-        <ImageButton
-            android:id="@+id/ib_change_view"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            android:src="@drawable/list"
-            android:layout_width="76dp"
-            android:layout_height="54dp"/>
-        <ImageButton
-            android:id="@+id/ib_change_category"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="1dp"
-            android:src="@drawable/all"
-            android:layout_width="76dp"
-            android:layout_height="54dp"/>
-    </RelativeLayout>
+
 
 </LinearLayout>

@@ -41,7 +41,6 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	private static final int DELETE_APP = 1;
 
 	GridView gv;
-	ListView lv;
 	//加载程序信息的List
 	private List<PackageInfo> packageInfo;
 	//存放手机所有程序信息的List
@@ -51,10 +50,8 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 
 	private View mBaseView;
 	private ProgressDialog pd;
-	ImageButton ib_change_view;
-	ImageButton ib_change_category ;
+
 	private boolean allApplication = true;
-	private boolean isListView = false;
 
 	/**
 	 * 程序一个Handler，用来接收进程传过来的信息
@@ -69,7 +66,6 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 			if(msg.what == SEARCH_APP)
 			{
 				showPackageInfo = packageInfo;
-				lv.setAdapter(new ListViewAdapter(getActivity(),showPackageInfo));
 				gv.setAdapter(new GridViewAdapter(getActivity(),showPackageInfo));
 				pd.dismiss();
 			}
@@ -95,11 +91,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	 */
 	private void findView() {
 		gv = (GridView)mBaseView.findViewById(R.id.gv_apps);
-		lv = (ListView)mBaseView.findViewById(R.id.lv_apps);
 		pd = ProgressDialog.show(getActivity(), "温馨提示", "加载中,请稍等...", true, false);
-		ib_change_category = (ImageButton)mBaseView.findViewById(R.id.ib_change_category);
-		ib_change_view = (ImageButton)mBaseView.findViewById(R.id.ib_change_view);
-
 	}
 
 	/**
@@ -144,10 +136,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 				}
 			}
 		}).start();
-		ib_change_category.setOnClickListener(changeAppsCategory);
-		ib_change_view.setOnClickListener(changeListView);
 		gv.setOnItemClickListener(this);
-		lv.setOnItemClickListener(this);
 	}
 
 	//添加GridView ItemClick监听器
@@ -157,59 +146,8 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 								long arg3) {
 		}
 	};
-	//ListView ItemClick监听器
-	private ListView.OnItemClickListener lvItemClickListener = new ListView.OnItemClickListener(){
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-								long arg3) {
-		}
-	};
-
-	//点击事件
-	private ImageButton.OnClickListener changeListView = new ImageButton.OnClickListener(){
-		@Override
-		public void onClick(View v) {
-			if(isListView){
-				MyToast.myToastShow(getActivity(), R.drawable.grids, "表格视图", Toast.LENGTH_SHORT);
-				ib_change_view.setImageResource(R.drawable.grids);
-				lv.setVisibility(View.GONE);
-				gv.setVisibility(View.VISIBLE);
-				isListView = false;
-			}
-			else {
-				MyToast.myToastShow(getActivity(), R.drawable.list, "列表视图", Toast.LENGTH_SHORT);
-				ib_change_view.setImageResource(R.drawable.list);
-				lv.setVisibility(View.VISIBLE);
-				gv.setVisibility(View.GONE);
-				isListView = true;
-			}
-		}
-	};
-
-	//点击事件
-	private ImageButton.OnClickListener changeAppsCategory =  new ImageButton.OnClickListener(){
-		@Override
-		public void onClick(View v) {
-
-			if(allApplication){
-				ib_change_category.setImageResource(R.drawable.user);
-				showPackageInfo = userPackageInfo;
-				allApplication = false;
-				MyToast.myToastShow(getActivity(), R.drawable.user, "用户的APP", Toast.LENGTH_SHORT);
-			}
-			else{
-				MyToast.myToastShow(getActivity(), R.drawable.all, "所有的APP", Toast.LENGTH_SHORT);
-				ib_change_category.setImageResource(R.drawable.all);
-				showPackageInfo = packageInfo;
-				allApplication = true;
-			}
-			gv.setAdapter(new GridViewAdapter(getActivity(),showPackageInfo));
-			lv.setAdapter(new ListViewAdapter(getActivity(),showPackageInfo));
-		}
-	};
 
 	class GridViewAdapter extends BaseAdapter {
-
 		LayoutInflater inflater;
 		List<PackageInfo> pkInfo;
 		public GridViewAdapter(Context context,List<PackageInfo> packageInfos){
@@ -242,48 +180,13 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 			return view;
 		}
 	}
-	//ListView的适配器类
-	class ListViewAdapter extends BaseAdapter{
-		LayoutInflater inflater;
-		List<PackageInfo> pkInfo;
-		public ListViewAdapter(Context context,List<PackageInfo> packageInfos){
-			inflater = LayoutInflater.from(context);
-			this.pkInfo = packageInfos;
-		}
-		@Override
-		public int getCount() {
-			return pkInfo.size();
-		}
-		@Override
-		public Object getItem(int arg0) {
-			return pkInfo.get(arg0);
-		}
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = inflater.inflate(R.layout.list_item, null);
-			TextView tv_appName = (TextView)view.findViewById(R.id.lv_item_appname);
-			TextView tv_packageName = (TextView)view.findViewById(R.id.lv_item_packageame);
-			ImageView iv =(ImageView) view.findViewById(R.id.lv_icon);
-
-			tv_appName.setText(pkInfo.get(position).applicationInfo.loadLabel(getActivity().getPackageManager()));
-			tv_packageName.setText(pkInfo.get(position).packageName);
-			iv.setImageDrawable(pkInfo.get(position).applicationInfo.loadIcon(getActivity().getPackageManager()));
-			return view;
-		}
-	}
-
 	/**
 	 * ItemClick的处理
 	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		/**
-		 * 选中动作
-		 */
+//		Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
+		showAppDetail(showPackageInfo.get(position));
 	}
 
 	/**
@@ -296,7 +199,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 		messageDetail.append("程序名称: " + packageInfo.applicationInfo.loadLabel(getActivity().getPackageManager()));
 		messageDetail.append("\n包名: " + packageInfo.packageName);
 		messageDetail.append("\n版本: " + packageInfo.versionName);
-//		messageDetail.append("\n大小: " + packageInfo.size)
+//		messageDetail.append("\n大小: " + packageInfo);
 		builder.setMessage(messageDetail);
 		builder.setIcon(packageInfo.applicationInfo.loadIcon(getActivity().getPackageManager()));
 		builder.setPositiveButton("确定", null);
@@ -333,7 +236,6 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 			showPackageInfo = userPackageInfo;
 		}
 		gv.setAdapter(new GridViewAdapter(getActivity(), showPackageInfo));
-		lv.setAdapter(new ListViewAdapter(getActivity(), showPackageInfo));
 	}
 	/**
 	 * 回退按钮处理
