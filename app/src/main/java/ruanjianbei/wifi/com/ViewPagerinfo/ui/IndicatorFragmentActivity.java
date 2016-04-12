@@ -19,17 +19,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 @SuppressWarnings("static-access")
 public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener {
     private static final String TAG = "DxFragmentActivity";
-
     public static final String EXTRA_TAB = "tab";
     public static final String EXTRA_QUIT = "extra.quit";
 
+
+    //private MainPageActivity mainPageActivity = new MainPageActivity();
     protected int mCurrentTab = 0;
     protected int mLastTab = -1;
 
@@ -99,7 +106,13 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+//        BottomImagePop = mainPageActivity.getBottomimage();
+//        BottomImagePop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showMoreWindow(v);
+//            }
+//        });
         setContentView(getMainViewResId());
         initViews();
 
@@ -115,7 +128,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
     }
-
 
     @Override
     protected void onDestroy() {

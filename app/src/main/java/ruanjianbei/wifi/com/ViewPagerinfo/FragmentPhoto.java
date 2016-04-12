@@ -68,11 +68,12 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 
 	private RelativeLayout mBottomLy;
 
-	private TextView mChooseDir;
-	private TextView mImageCount;
-	int totalCount = 0;
+	//private TextView mChooseDir;
+	//private TextView mImageCount;
+	//int totalCount = 0;
 
 	private int mScreenHeight;
+	private int mScreenWidth;
 
 	private ListImageDirPopupWindow mListImageDirPopupWindow;
 
@@ -107,7 +108,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 		mAdapter = new MyAdapter(this.getActivity(), mImgs,
 				R.layout.grid_item, mImgDir.getAbsolutePath());
 		mGirdView.setAdapter(mAdapter);
-		mImageCount.setText(totalCount + "张");
+		//mImageCount.setText(totalCount + "张");
 	};
 
 	/**
@@ -116,7 +117,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 	private void initListDirPopupWindw()
 	{
 		mListImageDirPopupWindow = new ListImageDirPopupWindow(
-				LayoutParams.MATCH_PARENT, (int) (mScreenHeight * 0.7),
+				(int) (mScreenWidth * 1), (int) (mScreenHeight * 1),
 				mImageFloders, LayoutInflater.from(this.getActivity())
 				.inflate(R.layout.list_dir, null));
 
@@ -144,9 +145,10 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
 		mScreenHeight = outMetrics.heightPixels;
+		mScreenWidth = outMetrics.widthPixels;
 		initView();
 		getImages();
-		initEvent();
+//		initEvent();
 		return mBaseView;
 	}
 	/**
@@ -224,7 +226,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 							return false;
 						}
 					}).length;
-					totalCount += picSize;
+					//totalCount += picSize;
 
 					imageFloder.setCount(picSize);
 					mImageFloders.add(imageFloder);
@@ -254,34 +256,34 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 	private void initView()
 	{
 		mGirdView = (GridView) mBaseView.findViewById(R.id.id_gridView);
-		mChooseDir = (TextView) mBaseView.findViewById(R.id.id_choose_dir);
-		mImageCount = (TextView) mBaseView.findViewById(R.id.id_total_count);
+		//mChooseDir = (TextView) mBaseView.findViewById(R.id.id_choose_dir);
+		//mImageCount = (TextView) mBaseView.findViewById(R.id.id_total_count);
 
 		mBottomLy = (RelativeLayout)mBaseView. findViewById(R.id.id_bottom_ly);
 
 	}
 
-	private void initEvent()
-	{
-		/**
-		 * 为底部的布局设置点击事件，弹出popupWindow
-		 */
-		mBottomLy.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				mListImageDirPopupWindow
-						.setAnimationStyle(R.style.anim_popup_dir);
-				mListImageDirPopupWindow.showAsDropDown(mBottomLy, 0, 0);
-
-				// 设置背景颜色变暗
-				WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-				lp.alpha = .3f;
-				getActivity().getWindow().setAttributes(lp);
-			}
-		});
-	}
+//	private void initEvent()
+//	{
+//		/**
+//		 * 为底部的布局设置点击事件，弹出popupWindow
+//		 */
+//		mBottomLy.setOnClickListener(new OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View v)
+//			{
+//				mListImageDirPopupWindow
+//						.setAnimationStyle(R.style.anim_popup_dir);
+//				mListImageDirPopupWindow.showAsDropDown(mBottomLy, 0, 0);
+//
+//				// 设置背景颜色变暗
+//				WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+//				lp.alpha = 0f;
+//				getActivity().getWindow().setAttributes(lp);
+//			}
+//		});
+//	}
 
 	@Override
 	public void selected(ImageFloder floder)
@@ -306,8 +308,8 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 				R.layout.grid_item, mImgDir.getAbsolutePath());
 		mGirdView.setAdapter(mAdapter);
 		// mAdapter.notifyDataSetChanged();
-		mImageCount.setText(floder.getCount() + "张");
-		mChooseDir.setText(floder.getName());
+		//mImageCount.setText(floder.getCount() + "张");
+		//mChooseDir.setText(floder.getName());
 		mListImageDirPopupWindow.dismiss();
 
 	}

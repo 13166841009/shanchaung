@@ -13,7 +13,8 @@
             android:layout_width="wrap_content"
             android:text="已选文件"/>
         <ImageView
-            android:src="@mipmap/ic_launcher"
+            android:id="@+id/pagebottom"
+            android:src="@mipmap/pagebottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
