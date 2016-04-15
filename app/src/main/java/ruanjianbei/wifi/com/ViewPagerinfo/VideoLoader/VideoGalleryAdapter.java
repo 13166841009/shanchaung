@@ -18,7 +18,7 @@ public class VideoGalleryAdapter extends BaseAdapter{
 	private ArrayList<VideoViewInfo> videoRows;
 	LayoutInflater inflater;
 	public VideoGalleryAdapter(Context context,
-			ArrayList<VideoViewInfo> videoRows) {
+							   ArrayList<VideoViewInfo> videoRows) {
 		this.context = context;
 		this.videoRows = videoRows;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -41,14 +41,26 @@ public class VideoGalleryAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View videoRow = inflater.inflate(R.layout.pager_fragmentvideo, null);
-		ImageView videoThumb = (ImageView) videoRow.findViewById(R.id.imageView);
-		if (videoRows.get(position).getThumbPath() != null) {
-			videoThumb.setImageURI(Uri.parse(videoRows.get(position).getThumbPath()));
+		ViewHolder viewHolder;
+		if(convertView==null){
+			convertView = inflater.inflate(R.layout.pager_fragmentvideo, null);
+			viewHolder = new ViewHolder();
+			viewHolder.videoThumb = (ImageView) convertView.findViewById(R.id.imageView);
+			viewHolder.videoTitle = (TextView) convertView.findViewById(R.id.textView);
+			convertView.setTag(viewHolder);
+		}else{
+			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		TextView videoTitle = (TextView) videoRow.findViewById(R.id.textView);
-		videoTitle.setText(videoRows.get(position).getTitle());
-		return videoRow;
+		if (videoRows.get(position).getThumbPath() != null) {
+			viewHolder.videoThumb.setImageURI(Uri.parse(videoRows.get(position).getThumbPath()));
+		}
+		viewHolder.videoTitle.setText(videoRows.get(position).getTitle());
+		return convertView;
+	}
+
+	static class ViewHolder{
+		ImageView videoThumb;
+		TextView videoTitle;
 	}
 
 }
