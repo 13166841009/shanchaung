@@ -1,19 +1,15 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
-import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.MyToast;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,11 +21,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +73,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
-		mBaseView = inflater.inflate(R.layout.fragment_one,null);
+		mBaseView = inflater.inflate(R.layout.fragment_application,null);
 		findView();
 		initSettings();
 		return mBaseView;
