@@ -26,7 +26,7 @@ public class SettingFragment extends Activity {
 	private void findView(){
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 	}
-	
+
 	private void init(){
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.mime);
