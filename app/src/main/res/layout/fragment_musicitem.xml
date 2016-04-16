@@ -48,11 +48,13 @@
                 android:gravity="right"
                 android:orientation="vertical">
                 <CheckBox
+                    style="@style/CheckBoxstyle"
                     android:id="@+id/checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:checked="false" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
