@@ -64,6 +64,7 @@ public class MyAdpater extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(context,"dde",Toast.LENGTH_SHORT).show();
+				notifyDataSetChanged();
 			}
 		});
 		return convertView;

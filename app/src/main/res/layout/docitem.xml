@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/mydocimage" />
 
     <LinearLayout
         android:layout_width="wrap_content"
