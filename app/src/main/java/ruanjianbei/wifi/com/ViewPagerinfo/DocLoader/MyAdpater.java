@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,12 @@ public class MyAdpater extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		viewHolder.docname.setText(documentlist.get(position));
+		viewHolder.docname.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(context,"dde",Toast.LENGTH_SHORT).show();
+			}
+		});
 		return convertView;
 	}
 
