@@ -32,6 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="muscicname"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:textSize="15sp" />
 
                 <TextView

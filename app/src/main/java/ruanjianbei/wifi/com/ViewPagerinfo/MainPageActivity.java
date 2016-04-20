@@ -47,7 +47,7 @@ public class MainPageActivity extends IndicatorFragmentActivity {
                 FragmentWord.class));
         tabs.add(new TabInfo(FRAGMENT_SIX, getString(R.string.fragment_six),
                 FragmentOthers.class));
-        return FRAGMENT_TWO;
+        return FRAGMENT_ONE;
     }
 
 }

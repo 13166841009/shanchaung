@@ -13,7 +13,7 @@ public class GetDocument {
 	/**
 	 * 根据条件获取相应的文件
 	 */
-	private static String [] DocFormatSet = new String[] { ".docx",".doc", ".txt", ".pdf" }; // 合法的音频文件格式
+	private static String [] DocFormatSet = new String[] { ".docx",".doc"}; // 合法的音频文件格式
 	private static String sdpath = "/sdcard/";
 
 	public static String GetDocument(Context context){

@@ -46,7 +46,8 @@ public class VideoGalleryAdapter extends BaseAdapter{
 			convertView = inflater.inflate(R.layout.pager_fragmentvideo, null);
 			viewHolder = new ViewHolder();
 			viewHolder.videoThumb = (ImageView) convertView.findViewById(R.id.imageView);
-			viewHolder.videoTitle = (TextView) convertView.findViewById(R.id.textView);
+			viewHolder.videoTitle = (TextView) convertView.findViewById(R.id.videoTitle);
+			viewHolder.videoSize = (TextView) convertView.findViewById(R.id.videoSize);
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -55,12 +56,14 @@ public class VideoGalleryAdapter extends BaseAdapter{
 			viewHolder.videoThumb.setImageURI(Uri.parse(videoRows.get(position).getThumbPath()));
 		}
 		viewHolder.videoTitle.setText(videoRows.get(position).getTitle());
+		viewHolder.videoSize.setText("大小："+Integer.parseInt(videoRows.get(position).getVideosize())/(1024*1024)+"M "+"类型："+videoRows.get(position).getMimeType());
 		return convertView;
 	}
 
 	static class ViewHolder{
 		ImageView videoThumb;
 		TextView videoTitle;
+		TextView videoSize;
 	}
 
 }

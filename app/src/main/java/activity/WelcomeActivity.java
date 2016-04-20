@@ -2,6 +2,7 @@ package activity;
 
 
 
+import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.SpUtil;
 import test.SDManager;
@@ -38,6 +39,7 @@ public class WelcomeActivity extends Activity {
 		mImageView.postDelayed(new Runnable() {
 			@Override
 			public void run() {
+				//GetDocument.GetDocument(getApplicationContext());
 				sp = SpUtil.getInstance().getSharePerference(mContext);
 				boolean isFirst = SpUtil.getInstance().isFirst(sp);
 				if (!isFirst) {
@@ -54,7 +56,7 @@ public class WelcomeActivity extends Activity {
 					finish();
 				}
 			}
-		},3000);
+		},1000);
 		
 	}
 }

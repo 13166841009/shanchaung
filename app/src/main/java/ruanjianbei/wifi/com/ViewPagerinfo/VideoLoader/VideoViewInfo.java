@@ -5,11 +5,22 @@ public class VideoViewInfo {
 	private String mimeType;
 	private String thumbPath;
 	private String title;
-	public VideoViewInfo(String filePath,String mimeType, String thumbPath,String title) {
+
+	public String getVideosize() {
+		return videosize;
+	}
+
+	public void setVideosize(String videosize) {
+		this.videosize = videosize;
+	}
+
+	private String videosize;
+	public VideoViewInfo(String filePath,String mimeType, String thumbPath,String title,String videosize) {
 		setFilePath(filePath);
 		setMimeType(mimeType);
 		setThumbPath(thumbPath);
 		setTitle(title);
+		setVideosize(videosize);
 	}
 	public String getFilePath() {
 		return filePath;

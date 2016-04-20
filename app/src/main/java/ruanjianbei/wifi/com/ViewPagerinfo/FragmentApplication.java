@@ -1,5 +1,6 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
+import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 import android.app.AlertDialog;
@@ -49,7 +50,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	/**
 	 * 程序一个Handler，用来接收进程传过来的信息
 	 * 然后设置ListView和GridView的适配器
-	 */
+	*/
 	private Handler mHandler = new Handler()
 	{
 		@Override
@@ -94,6 +95,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				//GetDocument.GetDocument(getContext());
 				packageInfo = mBaseView.getContext().getPackageManager().getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES
 						| PackageManager.GET_ACTIVITIES);
 				userPackageInfo = new ArrayList<PackageInfo>();
@@ -121,7 +123,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 				mHandler.sendEmptyMessage(SEARCH_APP);
 				try {
 					Thread.currentThread();
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 					//用Handler传送Message
 					mHandler.sendEmptyMessage(DELETE_APP);
 				} catch (InterruptedException e) {

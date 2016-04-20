@@ -59,14 +59,15 @@ public class MyAdpater extends BaseAdapter {
 		}else{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		viewHolder.docname.setText(documentlist.get(position));
-		viewHolder.docname.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(context,"dde",Toast.LENGTH_SHORT).show();
-				notifyDataSetChanged();
-			}
-		});
+		//String docname = documentlist.get(position);
+		viewHolder.docname.setText(documentlist.get(position).substring(documentlist.get(position).lastIndexOf("/")+1));
+//		viewHolder.docname.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Toast.makeText(context,"dde",Toast.LENGTH_SHORT).show();
+//				notifyDataSetChanged();
+//			}
+//		});
 		return convertView;
 	}
 
