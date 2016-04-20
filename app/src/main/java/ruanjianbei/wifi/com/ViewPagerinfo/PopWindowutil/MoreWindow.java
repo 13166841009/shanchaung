@@ -5,6 +5,7 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -28,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
+import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
+import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class MoreWindow extends PopupWindow implements OnClickListener{
@@ -239,12 +242,16 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.more_window_local:
 			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
+			//Intent intent = new Intent(mContext, ErcodeScanActivity.class);
+			//mContext.startActivity(intent);
 			break;
 		case R.id.more_window_online:
 			Toast.makeText(mContext, "Ios", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.more_window_delete:
 			Toast.makeText(mContext, "我的快传", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(mContext, ScanActivity.class);
+			mContext.startActivity(intent);
 			break;
 		case R.id.more_window_collect:
 			Toast.makeText(mContext, "我要接收",  Toast.LENGTH_SHORT).show();

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ercode;
+package ruanjianbei.wifi.com.ScanActivity.camera;
 
 import android.hardware.Camera;
 import android.os.Handler;

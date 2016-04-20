@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package ercode;
+package ruanjianbei.wifi.com.ScanActivity.view;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
-import view.ErcodeScanView;
 
 public final class ViewfinderResultPointCallback implements ResultPointCallback {
 
-  private final ErcodeScanView viewfinderView;
+  private final ViewfinderView viewfinderView;
 
-  public ViewfinderResultPointCallback(ErcodeScanView viewfinderView) {
+  public ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
     this.viewfinderView = viewfinderView;
   }
 

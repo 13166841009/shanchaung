@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ercode;
+package ruanjianbei.wifi.com.ScanActivity.decoding;
 
 /**
  * This class provides the constants to use when sending an Intent to Barcode Scanner.
@@ -119,7 +119,7 @@ public final class Intents {
      * Intent.putExtra(TYPE, type) with one of Contents.Type.
      */
     public static final String TYPE = "ENCODE_TYPE";
-    
+
     /**
      * The barcode format to be displayed. If this isn't specified or is blank, 
      * it defaults to QR Code. Use Intent.putExtra(FORMAT, format), where
@@ -152,29 +152,29 @@ public final class Intents {
   }
 
   public static final class WifiConnect {
-	    /**
-	     * Internal intent used to trigger connection to a wi-fi network.
-	     */
-	    public static final String ACTION = "com.google.zxing.client.android.WIFI_CONNECT";
+    /**
+     * Internal intent used to trigger connection to a wi-fi network.
+     */
+    public static final String ACTION = "com.google.zxing.client.android.WIFI_CONNECT";
 
-	    /**
-	     * The network to connect to, all the configuration provided here.
-	     */
-	    public static final String SSID = "SSID";
+    /**
+     * The network to connect to, all the configuration provided here.
+     */
+    public static final String SSID = "SSID";
 
-	    /**
-	     * The network to connect to, all the configuration provided here.
-	     */
-	    public static final String TYPE = "TYPE";
+    /**
+     * The network to connect to, all the configuration provided here.
+     */
+    public static final String TYPE = "TYPE";
 
-	    /**
-	     * The network to connect to, all the configuration provided here.
-	     */
-	    public static final String PASSWORD = "PASSWORD";
+    /**
+     * The network to connect to, all the configuration provided here.
+     */
+    public static final String PASSWORD = "PASSWORD";
 
-	    private WifiConnect() {
-	    }
-	  }
+    private WifiConnect() {
+    }
+  }
 
 
   public static final class Share {

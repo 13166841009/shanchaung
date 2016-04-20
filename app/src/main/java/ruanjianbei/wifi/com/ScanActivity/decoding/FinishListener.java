@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ercode;
+package ruanjianbei.wifi.com.ScanActivity.decoding;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -24,7 +24,7 @@ import android.content.DialogInterface;
  *
  */
 public final class FinishListener
-    implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener, Runnable {
+        implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener, Runnable {
 
   private final Activity activityToFinish;
 
