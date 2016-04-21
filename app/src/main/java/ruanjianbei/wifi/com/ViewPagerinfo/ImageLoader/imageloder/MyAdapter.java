@@ -11,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.CommonAdapter;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.FragmentBottom;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
 public class MyAdapter extends CommonAdapter<String>
 {
-
+	private FragmentBottom fragmentBottom = new FragmentBottom();
+	private int countphoto = 0;
 
 	/**
 	 * 用户选择的图片，存储为图片的完整路径
@@ -81,6 +83,8 @@ public class MyAdapter extends CommonAdapter<String>
 		 */
 		if (mSelectedImage.contains(mDirPath + "/" + item))
 		{
+			countphoto++;
+			fragmentBottom.setCount_file(countphoto);
 			mSelect.setImageResource(R.mipmap.pictures_selected);
 			mImageView.setColorFilter(Color.parseColor("#77000000"));
 		}

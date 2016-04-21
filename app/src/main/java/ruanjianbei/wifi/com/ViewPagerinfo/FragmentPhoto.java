@@ -39,7 +39,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.OnImageDirSelected
 {
 	private View mBaseView;
-	private ProgressDialog mProgressDialog;
+	//private ProgressDialog mProgressDialog;
 
 	/**
 	 * 存储文件夹中的图片数量
@@ -81,7 +81,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 	{
 		public void handleMessage(android.os.Message msg)
 		{
-			mProgressDialog.dismiss();
+			//mProgressDialog.dismiss();
 			// 为View绑定数据
 			data2View();
 			// 初始化展示文件夹的popupWindw
@@ -163,7 +163,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 			return;
 		}
 		// 显示进度条
-		mProgressDialog = ProgressDialog.show(this.getActivity(), null, "正在加载...");
+		//mProgressDialog = ProgressDialog.show(this.getActivity(), null, "正在加载...");
 
 		new Thread(new Runnable()
 		{

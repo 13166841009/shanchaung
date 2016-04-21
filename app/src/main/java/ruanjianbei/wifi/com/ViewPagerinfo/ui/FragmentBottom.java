@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
@@ -17,20 +18,38 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentBottom extends Fragment {
     //获取Imagepop对象
     private ImageView BottomImageView;
+
+    public int getCount_file() {
+        return count_file;
+    }
+
+    public void setCount_file(int count_file) {
+        this.count_file = count_file;
+    }
+
+    /**
+     * 记录选择文件的个数
+     */
+
+    private int count_file = 0;
     /**
      * pager页面底部图标
      */
     //点击图标进行操作
     private MoreWindow mMoreWindow;
+    //选择文件的数量
+    private TextView counttext;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page_fragment_bottom,container,false);
         return view;
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //counttext = (TextView) getActivity().findViewById(R.id.checkedsize);
         BottomImageView = (ImageView) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +59,14 @@ public class FragmentBottom extends Fragment {
         });
     }
 
+//    public Thread thread = new Thread(){
+//        @Override
+//        public void run() {
+//            while (true) {
+//                counttext.setText(count_file);
+//            }
+//        }
+//    };
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -53,9 +80,9 @@ public class FragmentBottom extends Fragment {
 //        });
 //    }
 
-        /**
-         * 显示选项进行操作popwindow
-         */
+    /**
+     * 显示选项进行操作popwindow
+     */
     private void showMoreWindow(View view) {
         if (null == mMoreWindow) {
             mMoreWindow = new MoreWindow(getActivity());
