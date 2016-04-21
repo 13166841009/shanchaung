@@ -31,6 +31,9 @@ public class FragmentBottom extends Fragment {
      * 记录选择文件的个数
      */
 
+    public void changetext(String text){
+        counttext.setText(text);
+    }
     private int count_file = 0;
     /**
      * pager页面底部图标
@@ -49,7 +52,7 @@ public class FragmentBottom extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //counttext = (TextView) getActivity().findViewById(R.id.checkedsize);
+        counttext = (TextView) getActivity().findViewById(R.id.checkedsize);
         BottomImageView = (ImageView) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override

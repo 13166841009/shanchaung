@@ -1,6 +1,5 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,13 +8,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.PopupWindow.OnDismissListener;
@@ -33,14 +31,14 @@ import java.util.List;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.bean.ImageFloder;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder.ListImageDirPopupWindow;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder.MyAdapter;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.FragmentBottom;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
 public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.OnImageDirSelected
 {
 	private View mBaseView;
-	//private ProgressDialog mProgressDialog;
-
+	//private FragmentManager fragmentManager;
 	/**
 	 * 存储文件夹中的图片数量
 	 */
@@ -109,7 +107,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 				R.layout.grid_item, mImgDir.getAbsolutePath());
 		mGirdView.setAdapter(mAdapter);
 		//mImageCount.setText(totalCount + "张");
-	};
+	}
 
 	/**
 	 * 初始化展示文件夹的popupWindw
@@ -141,6 +139,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
+		//fragmentManager = getActivity().getSupportFragmentManager();
 		mBaseView=inflater.inflate(R.layout.fragment_main, null);
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
@@ -312,6 +311,16 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 		//mChooseDir.setText(floder.getName());
 		mListImageDirPopupWindow.dismiss();
 
+	}
+
+	public void selectsize(int count){
+		if(count<0){
+			count = 0;
+		}
+		System.out.print(count+"\n");
+		//Toast.makeText(getContext(),count,Toast.LENGTH_SHORT).show();
+//		TextView fragmentBottom = (FragmentBottom) fragmentManager.findFragmentById(R.id.checkedsize);
+//		fragmentBottom.changetext(""+count);
 	}
 
 }
