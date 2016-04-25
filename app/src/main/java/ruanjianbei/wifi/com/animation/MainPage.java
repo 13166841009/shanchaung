@@ -61,6 +61,7 @@ public class MainPage extends Activity {
 //                }else{
 //                    Toast.makeText(mContext,"断网了",Toast.LENGTH_SHORT).show();
 //                }
+               //
                 Intent intent=new Intent(mContext, MainPageActivity.class);
                 startActivity(intent);
                 MainPage.this.overridePendingTransition(R.anim.activity_up, R.anim.fade_out);
