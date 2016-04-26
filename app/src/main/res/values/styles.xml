@@ -98,6 +98,6 @@
     </style>
     <!--自定义checkbox音乐界面的按钮-->
     <style name="CheckBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/checkbox_style</item>
+        <item name="android:button">@drawable/checkbox</item>
     </style>
 </resources>

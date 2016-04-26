@@ -1,9 +1,12 @@
 package ruanjianbei.wifi.com.Recevie_PageActivty;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Utils.WifiCheck;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -21,6 +24,8 @@ public class Android_receiveActivity extends Activity {
                 Toast.makeText(Android_receiveActivity.this,"您将选择有网传输",Toast.LENGTH_LONG).show();
             }else if (wifiCheck.isWifi()){
                 Toast.makeText(Android_receiveActivity.this,"您将使用无网络连接或wifi",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Android_receiveActivity.this, downloadActivity.class);
+                startActivity(intent);
             }else{
             }
         }else{

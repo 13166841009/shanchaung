@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
+import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivty.Ios_recevieActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivty.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
@@ -264,6 +265,8 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			break;
 		case R.id.more_window_external:
 			Toast.makeText(mContext, "我要发送",  Toast.LENGTH_SHORT).show();
+			Intent intent1 = new Intent(mContext, uploadActivity.class);
+			mContext.startActivity(intent1);
 			break;
 
 		default:
