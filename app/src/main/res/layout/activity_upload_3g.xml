@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity">
+    <EditText
+        android:id="@+id/et_filepath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="file path" />
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPLOAD"
+        android:onClick="onClick"
+        android:layout_below="@+id/et_filepath"
+        />
+
+    <Button
+        android:id="@+id/btn_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CANCLE"
+        android:onClick="onClick"
+        android:layout_below="@+id/btn_upload"
+        />
+    <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
+        android:id="@+id/pro"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="#44ff0000"
+        android:padding="40dp"
+        android:progress="0" />
+
+</RelativeLayout>
