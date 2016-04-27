@@ -1,6 +1,7 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
+import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.MyToast;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 import android.app.AlertDialog;
@@ -22,8 +23,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,8 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 
 	private View mBaseView;
 	private ProgressDialog pd;
+
+	private ImageButton ib_change_category;
 
 	private boolean allApplication = true;
 
@@ -84,6 +89,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	 * 加载视图
 	 */
 	private void findView() {
+		ib_change_category = (ImageButton) mBaseView.findViewById(R.id.ib_change_category);
 		gv = (GridView)mBaseView.findViewById(R.id.gv_apps);
 		pd = ProgressDialog.show(getActivity(), "温馨提示", "加载中,请稍等...", true, false);
 	}
@@ -123,7 +129,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 				mHandler.sendEmptyMessage(SEARCH_APP);
 				try {
 					Thread.currentThread();
-					Thread.sleep(2000);
+					Thread.sleep(5000);
 					//用Handler传送Message
 					mHandler.sendEmptyMessage(DELETE_APP);
 				} catch (InterruptedException e) {
@@ -131,6 +137,7 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 				}
 			}
 		}).start();
+		ib_change_category.setOnClickListener(changeAppsCategory);
 		gv.setOnItemClickListener(this);
 	}
 
@@ -139,6 +146,22 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 								long arg3) {
+		}
+	};
+
+	private ImageButton.OnClickListener changeAppsCategory = new ImageButton.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if(allApplication){
+				ib_change_category.setImageResource(R.drawable.app_location);
+				showPackageInfo = userPackageInfo;
+				allApplication = false;
+			}else{
+				ib_change_category.setImageResource(R.drawable.app_system);
+				showPackageInfo = packageInfo;
+				allApplication = true;
+			}
+			gv.setAdapter(new GridViewAdapter(getActivity(), showPackageInfo));
 		}
 	};
 

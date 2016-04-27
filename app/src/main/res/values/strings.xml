@@ -119,4 +119,6 @@
     <string name="fragment_five">文档</string>
     <string name="fragment_six">其他</string>
 
+    <string name="app_localhost">本地应用</string>
+
 </resources>
