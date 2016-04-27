@@ -5,16 +5,31 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <ImageView
-        android:id="@+id/gv_item_icon"
-        android:layout_width="64dp"
-        android:layout_height="64dp">
-    </ImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/gv_item_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp">
+        </ImageView>
+        <ImageButton
+            android:id="@+id/id_item_select"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@null"
+            android:src="@mipmap/pictures_selected" />
+    </RelativeLayout>
     <TextView
         android:id="@+id/gv_item_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:lines="2"
+        android:lines="1"
         android:textColor="#000"
         android:textSize="12dp" />
 

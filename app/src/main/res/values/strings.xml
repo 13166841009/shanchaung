@@ -119,15 +119,4 @@
     <string name="fragment_five">文档</string>
     <string name="fragment_six">其他</string>
 
-    <!--我要传输文件选择页面-->
-    <color name="zh_color_white">#ffffff</color>
-    <color name="zh_color_blue">#ff0099cc</color>
-    <color name="zh_color_blue_dark">#ff00719b</color>
-
-    <dimen name="zh_dimen_70">100dp</dimen>
-    <dimen name="zh_dimen_38">20dp</dimen>
-    <dimen name="zh_dimen_52">30dp</dimen>
-    <dimen name="zh_dimen_25">20dp</dimen>
-    <dimen name="zh_dimen_1">1dp</dimen>
-    <dimen name="zh_dimen_3">3dp</dimen>
 </resources>

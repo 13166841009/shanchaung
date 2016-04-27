@@ -3,31 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageButton
+        android:id="@+id/ib_change_category"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/app_system"/>
+    
 
     <GridView
         android:id="@+id/gv_apps"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:layout_marginBottom="58dp"
+        android:layout_weight="10"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="5dp"
         android:horizontalSpacing="5dp"
         android:numColumns="4"
         android:verticalSpacing="10dp" />
-    <ListView
-        android:id="@+id/lv_apps"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="28dp"
-        android:visibility="gone">
-    </ListView>
-
-
 
 </LinearLayout>
