@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
+import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivty.Ios_recevieActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivty.RecevieMain.ReceiveActivity;

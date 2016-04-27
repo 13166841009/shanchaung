@@ -3,35 +3,64 @@ package ruanjianbei.wifi.com.Recevie_PageActivty.RecevieMain;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 
-import ruanjianbei.wifi.com.Recevie_PageActivty.Android_receiveActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivty.Ios_recevieActivity;
+import com.bruce.library.ComboView;
+
+import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class ReceiveActivity extends Activity {
 
-    private Button android_receive;
-    private Button ios_receive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive);
-        android_receive = (Button) findViewById(R.id.android_receive);
-        ios_receive = (Button) findViewById(R.id.ios_recevie);
-        android_receive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReceiveActivity.this, Android_receiveActivity.class));
-            }
-        });
+        ComboView comboView = (ComboView) findViewById(R.id.android_receive);
+        ComboView.Params params = ComboView.Params.create()
 
-        ios_receive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReceiveActivity.this, Ios_recevieActivity.class));
-            }
-        });
+                //Must
+                .cornerRadius(dimen(R.dimen.cb_dimen_25), dimen(R.dimen.cb_dimen_52))// Following three to***** values must be the same can morph to circle
+                .width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
+                .height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
+                .morphDuration(300)
+                .text("Android文件传输", "点击进入")
+                        //Option -- and values below is default
+                .color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
+                .colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
+                .strokeWidth(dimen(R.dimen.cb_dimen_1), dimen(R.dimen.cb_dimen_1))
+                .strokeColor(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
+                .circleDuration(3000)
+                .rippleDuration(200)
+                .padding(dimen(R.dimen.cb_dimen_3))
+                .textSize(16)
+                .textColor(color(R.color.cb_color_white))
+                .comboClickListener(new ComboView.ComboClickListener() {
+                    @Override
+                    public void onComboClick() {
+                        startActivity(new Intent(ReceiveActivity.this, downloadActivity.class));
+                    }
+
+                    @Override
+                    public void onNormalClick() {
+                    }
+                });
+
+        comboView.settingMorphParams(params);
+    }
+
+    public int dimen(@DimenRes int resId) {
+        return (int) getResources().getDimension(resId);
+    }
+
+    public int color(@ColorRes int resId) {
+        return getResources().getColor(resId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
+
