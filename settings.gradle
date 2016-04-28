@@ -1,1 +1,1 @@
-include ':app', ':comboview'
+include ':comboview', ':app'

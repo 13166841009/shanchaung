@@ -117,6 +117,8 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <service android:name="foregin.FTPServerService" />
+        <service android:name="ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService">
+        </service>
 
         <activity
             android:name=".UserGame"
