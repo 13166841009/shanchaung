@@ -133,14 +133,16 @@
         <activity
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainViewpager"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            />
-        <activity android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-
-        <activity android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Ios_recevieActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity
+            android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Ios_recevieActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi"></activity>
     </application>
 
 </manifest>
