@@ -29,12 +29,10 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
-import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivty.Ios_recevieActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivty.RecevieMain.ReceiveActivity;
+import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
-import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class MoreWindow extends PopupWindow implements OnClickListener{
@@ -266,7 +264,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			break;
 		case R.id.more_window_external:
 			Toast.makeText(mContext, "我要发送",  Toast.LENGTH_SHORT).show();
-			Intent intent1 = new Intent(mContext, uploadActivity.class);
+			Intent intent1 = new Intent(mContext, PostActivity.class);
 			mContext.startActivity(intent1);
 			break;
 
