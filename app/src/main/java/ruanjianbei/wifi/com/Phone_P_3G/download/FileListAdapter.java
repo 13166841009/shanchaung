@@ -2,7 +2,6 @@ package ruanjianbei.wifi.com.Phone_P_3G.download;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
-import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -55,7 +53,6 @@ public class FileListAdapter extends BaseAdapter {
             //获取布局中的控件
             holder = new ViewHolder();
             holder.tv_fileName = (TextView) view.findViewById(R.id.tv_fileName);
-            holder.pb_progress1 = (RoundProgressBarWidthNumber) view.findViewById(R.id.pb_progress1);
             holder.pb_progress = (ProgressBar) view.findViewById(R.id.pb_progress);
             holder.btn_start = (Button) view.findViewById(R.id.btn_start);
             holder.btn_stop = (Button) view.findViewById(R.id.btn_stop);
@@ -89,7 +86,6 @@ public class FileListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();//对上面的优化，不用重复加载耗时
         }
         holder.pb_progress.setProgress(fileInfo.getFinished());
-        holder.pb_progress1.setProgress(fileInfo.getFinished());
         return view;
     }
     //更新列表项中的进度条
@@ -100,7 +96,6 @@ public class FileListAdapter extends BaseAdapter {
     }
     static class ViewHolder{
         TextView tv_fileName;
-        RoundProgressBarWidthNumber pb_progress1;
         ProgressBar pb_progress;
         Button btn_stop,btn_start;
     }

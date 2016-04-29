@@ -15,7 +15,7 @@
         android:drawableTop="@mipmap/tabbar_compose_idea"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="Android" />
+        android:text="ANDROID" />
 
     <TextView
         android:id="@+id/more_window_online"
@@ -27,7 +27,7 @@
         android:drawableTop="@mipmap/tabbar_compose_photo"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="Ios"/>
+        android:text="IOS"/>
 
     <TextView
         android:id="@+id/more_window_delete"
@@ -38,7 +38,7 @@
         android:drawableTop="@mipmap/tabbar_compose_camera"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="我的快传"/>
+        android:text="扫一扫"/>
 
     <TextView
         android:id="@+id/more_window_collect"

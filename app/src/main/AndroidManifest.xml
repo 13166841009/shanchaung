@@ -116,10 +116,6 @@
             android:name=".Mobile_PostAndroid"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
-        <service android:name="foregin.FTPServerService" />
-        <service android:name="ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService">
-        </service>
-
         <activity
             android:name=".UserGame"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
@@ -136,6 +132,9 @@
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainViewpager"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
+            android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
             android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
@@ -144,7 +143,12 @@
         <activity
             android:name="ruanjianbei.wifi.com.Recevie_PageActivity.Ios_recevieActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi"></activity>
+        <activity
+            android:name="ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.WifiPcDirect.SettingsActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
     </application>
 
 </manifest>

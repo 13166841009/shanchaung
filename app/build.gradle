@@ -28,7 +28,9 @@ dependencies {
     compile files('libs/android-support-v4.jar')
     compile files('libs/zxing.jar')
     compile project(':comboview')
-    compile files('libs/AsyncHttpHelp-2.0.jar')
+    compile project(':library')
+    compile project(':rippleview')
+    compile project(':randomtextview')
 }
 
 android {

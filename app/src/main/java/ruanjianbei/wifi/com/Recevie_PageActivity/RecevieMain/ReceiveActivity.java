@@ -9,6 +9,7 @@ import android.support.annotation.DimenRes;
 import com.bruce.library.ComboView;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class ReceiveActivity extends Activity {
@@ -43,7 +44,7 @@ public class ReceiveActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(ReceiveActivity.this, downloadActivity.class));
+                        startActivity(new Intent(ReceiveActivity.this, RecevieByWifi.class));
                     }
 
                     @Override

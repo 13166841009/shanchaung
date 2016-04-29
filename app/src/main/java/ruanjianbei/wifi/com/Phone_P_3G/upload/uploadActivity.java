@@ -37,8 +37,7 @@ public class uploadActivity extends Activity {
     public static final String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
                     + "/zip/";
-    //private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
-    private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Test";
+    private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
     private Map<String, FileWrapper> fileWrappers ;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
