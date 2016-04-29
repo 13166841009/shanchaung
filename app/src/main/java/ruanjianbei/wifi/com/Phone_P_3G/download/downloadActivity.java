@@ -1,12 +1,15 @@
 package ruanjianbei.wifi.com.Phone_P_3G.download;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +30,8 @@ import java.util.Map;
 import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
 import ruanjianbei.wifi.com.Phone_P_3G.download.zipper.zip;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.FragmentApplication;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -103,11 +108,31 @@ public class downloadActivity extends Activity {
 
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+//        unregisterReceiver(mReceiver);
+        try {
+            unregisterReceiver(mReceiver);//重复注销广播处理函数是会报错，而且会让进程奔溃。可以用使用try catch方式捕获错误
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("Receiver not registered")) {
+                // Ignore this exception. This is exactly what is desired
+            } else {
+                // unexpected, re-throw
+                throw e;
+            }
+        }
     }
+    /*public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { //按下的如果是BACK，同时没有重复
+            //do something here
+            Intent intent = new Intent(downloadActivity.this, FragmentApplication.class);
+            startActivity(intent);
+            return false;//如果是true则屏蔽后退键
+        }
+        //return true;
+        return super.onKeyDown(keyCode, event);
+    }*/
 
-    /**
-     * 更新UI的广播接收器
+/**
+     * 更新UI的广播接收器1
      */
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
