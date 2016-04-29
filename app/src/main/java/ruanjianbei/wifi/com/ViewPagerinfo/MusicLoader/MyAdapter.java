@@ -88,6 +88,9 @@ public class MyAdapter extends BaseAdapter{
 				public void onClick(View v) {
 					CheckBox cb = (CheckBox) v;
 					mChecked.set(mposition, cb.isChecked());// 设置CheckBox为选中状态
+					if(cb.isChecked()){
+						Toast.makeText(context, "地址！！！！", Toast.LENGTH_SHORT).show();
+					}
 				}
 			});
 			view.setTag(holder);

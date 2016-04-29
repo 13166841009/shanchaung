@@ -2,7 +2,7 @@ package ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.app.FragmentManager;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
