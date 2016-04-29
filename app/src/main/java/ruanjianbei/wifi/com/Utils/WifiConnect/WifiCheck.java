@@ -1,4 +1,4 @@
-package ruanjianbei.wifi.com.Utils;
+package ruanjianbei.wifi.com.Utils.WifiConnect;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -64,6 +64,7 @@
         <activity
             android:name="activity.RegisterResultActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <service android:name="ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService"/>
         <!-- <activity -->
         <!-- android:name="" -->
         <!-- android:theme="@android:style/Theme.Light.NoTitleBar" /> -->

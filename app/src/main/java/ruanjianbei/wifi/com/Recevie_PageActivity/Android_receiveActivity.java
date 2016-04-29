@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
-import ruanjianbei.wifi.com.Utils.WifiCheck;
+import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class Android_receiveActivity extends Activity {
