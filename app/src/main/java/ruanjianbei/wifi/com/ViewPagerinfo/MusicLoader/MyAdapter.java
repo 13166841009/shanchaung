@@ -99,6 +99,7 @@ public class MyAdapter extends BaseAdapter{
                         mSelectedMusci.add(listPerson.get(position).getMusicdistance());
 					}else{
                         mSelectedMusci.remove(listPerson.get(position).getMusicdistance());
+
                     }
 				}
 			});
