@@ -47,7 +47,7 @@ public class uploadActivity extends Activity {
     private static final int MSG_PROGRESS_UPDATE = 0x110;
     private AsyncHttpRequest request = null;
 
-    private static List<String> fileUpload = new ArrayList<String>();
+    private static List<String> fileUpload = FragmentChoose.getFileChoose();
 
     private Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -78,7 +78,6 @@ public class uploadActivity extends Activity {
         /**
          * 将已选文件设置到此处
          */
-        fileUpload = FragmentChoose.getFileChoose();
         String str = "";
         for(String s : fileUpload){
             str +=  s + ";";
