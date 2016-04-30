@@ -19,11 +19,14 @@ import com.luoxudong.app.asynchttp.model.FileWrapper;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -42,6 +45,8 @@ public class uploadActivity extends Activity {
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
     private AsyncHttpRequest request = null;
+
+    private static List<String> fileUpload = new ArrayList<String>();
 
     private Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -68,6 +73,17 @@ public class uploadActivity extends Activity {
         context = this;
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
+
+        /**
+         * 将已选文件设置到此处
+         */
+        fileUpload = FragmentChoose.getFileChoose();
+        String str = "";
+        for(String s : fileUpload){
+            str +=  s + ";";
+        }
+        et_filepath.setText(str);
+
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
     }
