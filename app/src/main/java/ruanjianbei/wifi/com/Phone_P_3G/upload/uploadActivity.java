@@ -40,7 +40,7 @@ public class uploadActivity extends Activity {
     private Context context;
     public static final String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/zip/";
+                    + "/shangchuan/zip/";
     private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
     private Map<String, FileWrapper> fileWrappers ;
     private static final int MSG_HANDLER_MSG = 1;

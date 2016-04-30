@@ -30,6 +30,7 @@ import java.util.Map;
 import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
 import ruanjianbei.wifi.com.Phone_P_3G.download.zipper.zip;
+import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.FragmentApplication;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -157,6 +158,9 @@ public class downloadActivity extends Activity {
                 Toast.makeText(downloadActivity.this,
                         mFileList.get(fileInfo.getId()).gettrueName() + " 下载完成",
                         Toast.LENGTH_SHORT).show();
+                //删除压缩文件
+                files_delete files = new files_delete(DownloadService.DOWNLOAD_PATH);
+                files.deleteAll();
             }
         }
     };

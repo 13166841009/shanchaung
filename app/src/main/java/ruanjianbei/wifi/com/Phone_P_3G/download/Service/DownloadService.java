@@ -25,7 +25,7 @@ public class DownloadService extends Service
 {
     public static final String DOWNLOAD_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/zip/";
+                    + "/shangchuan/zip/";
     public static final String ACTION_START = "ACTION_START";
     public static final String ACTION_STOP = "ACTION_STOP";
     public static final String ACTION_UPDATE = "ACTION_UPDATE";
