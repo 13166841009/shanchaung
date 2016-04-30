@@ -1,10 +1,5 @@
 package ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -18,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -81,7 +80,7 @@ public class MyAdapter extends BaseAdapter{
 			view = mInflater.inflate(R.layout.fragment_musicitem, null);
 			// 初始化ViewHolder对象
 			holder = new ViewHolder();
-			holder.checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+			holder.checkBox = (CheckBox) view.findViewById(R.id.checkboxmusic);
 			holder.muscicname = (TextView) view.findViewById(R.id.muscicname);
 			holder.musicpeople = (TextView) view.findViewById(R.id.musicpeople);
 			holder.imagemusic = (ImageView) view.findViewById(R.id.imagemusic);
@@ -99,8 +98,8 @@ public class MyAdapter extends BaseAdapter{
                         mSelectedMusci.add(listPerson.get(position).getMusicdistance());
 					}else{
                         mSelectedMusci.remove(listPerson.get(position).getMusicdistance());
-
                     }
+
 				}
 			});
 			view.setTag(holder);

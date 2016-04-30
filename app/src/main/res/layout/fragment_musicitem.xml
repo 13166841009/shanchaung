@@ -13,7 +13,6 @@
             android:id="@+id/imagemusic"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:focusable="false"
             android:src="@mipmap/fragmentmusic" />
 
         <LinearLayout
@@ -51,11 +50,10 @@
                 android:orientation="vertical">
                 <CheckBox
                     style="@style/CheckBoxstyle"
-                    android:id="@+id/checkbox"
+                    android:id="@+id/checkboxmusic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:focusable="false"
                     android:checked="false" />
             </LinearLayout>
         </LinearLayout>
