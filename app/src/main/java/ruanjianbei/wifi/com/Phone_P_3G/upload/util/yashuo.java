@@ -1,5 +1,7 @@
 package ruanjianbei.wifi.com.Phone_P_3G.upload.util;
 
+import android.os.Environment;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -8,6 +10,8 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
+
 /**
  * Created by linankun1 on 2016/4/21.
  */
@@ -15,6 +19,13 @@ public class yashuo {
     private int k = 1; // 定义递归次数变量
 
     public yashuo() {
+         String ZIP_PATH = uploadActivity.ZIP_PATH;
+            //构建文件夹
+            File dir = new File(ZIP_PATH);
+            if (!dir.exists())
+            {
+                dir.mkdir();
+            }
         // TODO Auto-generated constructor stub
     }
 
