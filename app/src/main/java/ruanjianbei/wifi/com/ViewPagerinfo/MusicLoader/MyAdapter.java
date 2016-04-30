@@ -1,9 +1,5 @@
 package ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -18,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
@@ -38,6 +39,8 @@ public class MyAdapter extends BaseAdapter{
 	private HashMap<Integer, View> map = new HashMap<Integer, View>();
 	//音乐图标点击事件
 	private int firstonclick = 0;
+
+    public static List<String> mSelectedMusci = FragmentChoose.getFileChoose();
 
 	public MyAdapter(List<MusicInfo> lists,Context context) {
 		this.lists = lists;
@@ -66,7 +69,7 @@ public class MyAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		View view;
 		int positional;
 		positional = position;
@@ -77,7 +80,7 @@ public class MyAdapter extends BaseAdapter{
 			view = mInflater.inflate(R.layout.fragment_musicitem, null);
 			// 初始化ViewHolder对象
 			holder = new ViewHolder();
-			holder.checkBox = (CheckBox) view.findViewById(R.id.checkbox);
+			holder.checkBox = (CheckBox) view.findViewById(R.id.checkboxmusic);
 			holder.muscicname = (TextView) view.findViewById(R.id.muscicname);
 			holder.musicpeople = (TextView) view.findViewById(R.id.musicpeople);
 			holder.imagemusic = (ImageView) view.findViewById(R.id.imagemusic);
@@ -88,9 +91,15 @@ public class MyAdapter extends BaseAdapter{
 				public void onClick(View v) {
 					CheckBox cb = (CheckBox) v;
 					mChecked.set(mposition, cb.isChecked());// 设置CheckBox为选中状态
+                    /**
+                     * 存储已经选择文件路径
+                     */
 					if(cb.isChecked()){
-						Toast.makeText(context, "地址！！！！", Toast.LENGTH_SHORT).show();
-					}
+                        mSelectedMusci.add(listPerson.get(position).getMusicdistance());
+					}else{
+                        mSelectedMusci.remove(listPerson.get(position).getMusicdistance());
+                    }
+
 				}
 			});
 			view.setTag(holder);
@@ -102,8 +111,7 @@ public class MyAdapter extends BaseAdapter{
 		holder.checkBox.setChecked(mChecked.get(position));
 		holder.muscicname.setText(listPerson.get(position).getName());
 		holder.musicpeople.setText(listPerson.get(position).getPople());
-		
-		
+
 		final String musicdistance = lists.get(positional).getMusicdistance();
 		holder.imagemusic.setOnClickListener(new OnClickListener() {
 			@Override

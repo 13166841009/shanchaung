@@ -21,11 +21,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
+import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -39,14 +41,14 @@ public class uploadActivity extends Activity {
     private Context context;
     public static final String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/zip/";
+                    + "/shangchuan/zip/";
     private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
     private Map<String, FileWrapper> fileWrappers ;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
     private AsyncHttpRequest request = null;
 
-    private static List<String> fileUpload = new ArrayList<String>();
+    private static List<String> fileUpload = FragmentChoose.getFileChoose();
 
     private Handler mHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -77,7 +79,6 @@ public class uploadActivity extends Activity {
         /**
          * 将已选文件设置到此处
          */
-        fileUpload = FragmentChoose.getFileChoose();
         String str = "";
         for(String s : fileUpload){
             str +=  s + ";";
@@ -105,6 +106,7 @@ public class uploadActivity extends Activity {
                     //获取文件全名，包括后缀
                     String[] str1 = str[x].split("/");
                     String file_all_name = str1[str1.length-1];
+                    Log.i("wenjian:",file_all_name);
                     //获取文件名
                     String file_name = file_all_name.substring(0,file_all_name.lastIndexOf("."));
                     File fileinfo = new File(str[x]);
@@ -115,6 +117,7 @@ public class uploadActivity extends Activity {
                     //对文件名进行URL转码
                     String file_name_encode = url(file_name);
                     //将文件进行压缩
+                    //Toast.makeText(context, "file:"+file_all_name+" is compressing!", Toast.LENGTH_LONG).show();
                     String zipload = ZIP_PATH+file_name_encode+".zip";
                     yashuo ys = new yashuo();
                     try {
@@ -123,6 +126,7 @@ public class uploadActivity extends Activity {
                         // TODO 自动生成的 catch 块
                         e.printStackTrace();
                     }
+                    //Toast.makeText(context, "file:"+file_all_name+" compress complete!", Toast.LENGTH_LONG).show();
                     Log.i("文件路径/压缩路径", zipload);
                     File files = new File(zipload);
                     if (files.exists()) {
@@ -180,6 +184,9 @@ public class uploadActivity extends Activity {
                                 message.what = MSG_HANDLER_MSG;
                                 message.obj = "全部文件上传成功！";
                                 mHandler.sendMessage(message);
+                                //删除压缩文件
+                                files_delete files = new files_delete(ZIP_PATH);
+                                files.deleteAll();
                             }
 
                             @Override

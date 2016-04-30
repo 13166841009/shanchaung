@@ -14,14 +14,15 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.MusicInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class VideoGalleryAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<VideoViewInfo> videoRows;
-	LayoutInflater inflater;
 
 	/** 标记CheckBox是否被选中 **/
 	private List<Boolean> mChecked;
@@ -30,6 +31,11 @@ public class VideoGalleryAdapter extends BaseAdapter{
 	/** 一个HashMap对象 **/
 	@SuppressLint("UseSparseArrays")
 	private HashMap<Integer, View> map = new HashMap<Integer, View>();
+
+	/**
+	 * 用户选择的图片，存储为图片的完整路径
+	 */
+	public static List<String> mSelectedVideo = FragmentChoose.getFileChoose();
 
 	public VideoGalleryAdapter(Context context,
 							   ArrayList<VideoViewInfo> videoRows) {
@@ -61,30 +67,40 @@ public class VideoGalleryAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder;
-		int positional;
-		positional = position;
+		View view;
+		ViewHolder viewHolder = null;
 		if(map.get(position)==null){
-			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.pager_fragmentvideo, null);
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.pager_fragmentvideo, null);
+			// 初始化ViewHolder对象
 			viewHolder = new ViewHolder();
-			viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
-			viewHolder.videoThumb = (ImageView) convertView.findViewById(R.id.imageView);
-			viewHolder.videoTitle = (TextView) convertView.findViewById(R.id.videoTitle);
-			viewHolder.videoSize = (TextView) convertView.findViewById(R.id.videoSize);
+			viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkboxvedio);
+			viewHolder.videoThumb = (ImageView) view.findViewById(R.id.imageView);
+			viewHolder.videoTitle = (TextView) view.findViewById(R.id.videoTitle);
+			viewHolder.videoSize = (TextView) view.findViewById(R.id.videoSize);
 			final int mposition = position;
-			map.put(position, convertView);// 存储视图信息
+			map.put(position, view);// 存储视图信息
 			viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					CheckBox cb = (CheckBox) v;
 					mChecked.set(mposition, cb.isChecked());// 设置CheckBox为选中状态
+					/**
+					 * 存储已经选择文件
+					 */
+					if(cb.isChecked()){
+						mSelectedVideo.add(videoRows.get(position).getFilePath());
+//						Toast.makeText(context,videoRows.get(position).getFilePath(),Toast.LENGTH_SHORT).show();
+					}else{
+						mSelectedVideo.remove(videoRows.get(position).getFilePath());
+//						Toast.makeText(context,"xxxx",Toast.LENGTH_SHORT).show();
+					}
 				}
 			});
-			convertView.setTag(viewHolder);
+			view.setTag(viewHolder);
 		}else{
-			convertView = map.get(position);
-			viewHolder = (ViewHolder) convertView.getTag();
+			view = map.get(position);
+			viewHolder = (ViewHolder) view.getTag();
 		}
 		if (videoRows.get(position).getThumbPath() != null) {
 			viewHolder.videoThumb.setImageURI(Uri.parse(videoRows.get(position).getThumbPath()));
@@ -92,7 +108,7 @@ public class VideoGalleryAdapter extends BaseAdapter{
 		viewHolder.checkBox.setChecked(mChecked.get(position));
 		viewHolder.videoTitle.setText(videoRows.get(position).getTitle());
 		viewHolder.videoSize.setText("大小："+Integer.parseInt(videoRows.get(position).getVideosize())/(1024*1024)+"M "+"类型："+videoRows.get(position).getMimeType());
-		return convertView;
+		return view;
 	}
 
 	static class ViewHolder{

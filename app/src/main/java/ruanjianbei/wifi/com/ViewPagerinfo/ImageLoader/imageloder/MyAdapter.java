@@ -30,7 +30,7 @@ public class MyAdapter extends CommonAdapter<String>
 	/**
 	 * 用户选择的图片，存储为图片的完整路径
 	 */
-	public static List<String> mSelectedImage = new LinkedList<String>();
+	public static List<String> mSelectedImage = FragmentChoose.getFileChoose();
 
 	/**
 	 * 文件夹路径
@@ -100,11 +100,6 @@ public class MyAdapter extends CommonAdapter<String>
 			mSelect.setImageResource(R.mipmap.pictures_selected);
 			mImageView.setColorFilter(Color.parseColor("#77000000"));
 		}
-
-		/**
-		 * 将已选图片的路径传入FragmentChoose中的filechoose集合中
-		 */
-		FragmentChoose.setFileChoose(mSelectedImage);
 
 	}
 }

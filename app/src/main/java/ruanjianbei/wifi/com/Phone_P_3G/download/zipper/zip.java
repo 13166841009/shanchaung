@@ -19,7 +19,7 @@ import java.util.zip.ZipInputStream;
 public class zip {
     public static String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/downloads/";
+                    + "/shangchuan/Download/";
     public zip() {
         //构建文件夹
         File dir = new File(ZIP_PATH);
