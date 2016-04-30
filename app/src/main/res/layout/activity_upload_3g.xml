@@ -9,24 +9,16 @@
         android:id="@+id/et_filepath"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="file path" />
-    <Button
-        android:id="@+id/btn_upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UPLOAD"
-        android:onClick="onClick"
-        android:layout_below="@+id/et_filepath"
-        />
+        android:hint="file z" />
 
-    <Button
-        android:id="@+id/btn_cancle"
+    <ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton
+        android:id="@+id/mi_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CANCLE"
-        android:onClick="onClick"
-        android:layout_below="@+id/btn_upload"
-        />
+        android:layout_height="match_parent">
+
+    </ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton>
+
+
     <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
         android:id="@+id/pro"
         android:layout_width="wrap_content"

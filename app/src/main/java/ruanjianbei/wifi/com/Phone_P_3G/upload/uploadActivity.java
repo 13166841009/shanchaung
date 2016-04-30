@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
@@ -43,14 +46,18 @@ public class uploadActivity extends Activity {
             Environment.getExternalStorageDirectory().getAbsolutePath()
                     + "/shangchuan/zip/";
     private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
-    private Map<String, FileWrapper> fileWrappers ;
+    private Map<String, FileWrapper> fileWrappers;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
     private AsyncHttpRequest request = null;
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
+    private MiSportButton mBtn;
+    private Button mFinishBtn;        // 左边完成Btn
+    private Button mContinueBtn;        // 右边继续Btn
+    private Button mLongPressBtn;        // 长按暂停Btn
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
@@ -60,7 +67,7 @@ public class uploadActivity extends Activity {
                     int roundProgress = mRoundProgressBar.getProgress();
                     //mProgressBar.setProgress(++progress);
                     mRoundProgressBar.setProgress(Integer.parseInt(String.valueOf(msg.obj)));
-                    Log.i("记录", ""+Integer.parseInt(String.valueOf(msg.obj)));
+                    Log.i("记录", "" + Integer.parseInt(String.valueOf(msg.obj)));
                     if (roundProgress >= 100) {
                         mHandler.removeMessages(MSG_PROGRESS_UPDATE);
                     }
@@ -69,6 +76,7 @@ public class uploadActivity extends Activity {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,48 +88,50 @@ public class uploadActivity extends Activity {
          * 将已选文件设置到此处
          */
         String str = "";
-        for(String s : fileUpload){
-            str +=  s + ";";
+        for (String s : fileUpload) {
+            str += s + ";";
         }
         et_filepath.setText(str);
 
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
-    }
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_upload:
+
+        mFinishBtn = (Button) findViewById(R.id.finish_btn);
+        mContinueBtn = (Button) findViewById(R.id.continue_btn);
+        mFinishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 fileWrappers = new HashMap<String, FileWrapper>();//初始化Map集合
                 String filespath = null;
                 //判断文件选择是否为空
-                if(!"".equals(String.valueOf(et_filepath.getText()))){
+                if (!"".equals(String.valueOf(et_filepath.getText()))) {
                     filespath = et_filepath.getText().toString();
-                }else{
+                } else {
                     Toast.makeText(context, "your choose files is empty", Toast.LENGTH_LONG).show();
                     return;
                 }
                 //转换多文件路径
                 String str[] = filedo(filespath);
-                for(int x=0;x<str.length;x++){
+                for (int x = 0; x < str.length; x++) {
                     //获取文件全名，包括后缀
                     String[] str1 = str[x].split("/");
-                    String file_all_name = str1[str1.length-1];
-                    Log.i("wenjian:",file_all_name);
+                    String file_all_name = str1[str1.length - 1];
+                    Log.i("wenjian:", file_all_name);
                     //获取文件名
-                    String file_name = file_all_name.substring(0,file_all_name.lastIndexOf("."));
+                    String file_name = file_all_name.substring(0, file_all_name.lastIndexOf("."));
                     File fileinfo = new File(str[x]);
                     if (!fileinfo.exists()) {
-                        Toast.makeText(context, "file:"+file_all_name+" not exists", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "file:" + file_all_name + " not exists", Toast.LENGTH_LONG).show();
                         return;
                     }
                     //对文件名进行URL转码
                     String file_name_encode = url(file_name);
                     //将文件进行压缩
                     //Toast.makeText(context, "file:"+file_all_name+" is compressing!", Toast.LENGTH_LONG).show();
-                    String zipload = ZIP_PATH+file_name_encode+".zip";
+                    String zipload = ZIP_PATH + file_name_encode + ".zip";
                     yashuo ys = new yashuo();
                     try {
-                        ys.zip(zipload,new File(str[x]));
+                        ys.zip(zipload, new File(str[x]));
                     } catch (Exception e) {
                         // TODO 自动生成的 catch 块
                         e.printStackTrace();
@@ -134,10 +144,9 @@ public class uploadActivity extends Activity {
                         FileWrapper file = new FileWrapper();
                         file.setFile(new File(zipload));
                         fileWrappers.put(file_all_name, file);
-                        Log.i("文件路径"+x,str[x]);
-                    }else
-                    {
-                        Toast.makeText(context, "zipfile:"+file_name_encode+" not exists", Toast.LENGTH_LONG).show();
+                        Log.i("文件路径" + x, str[x]);
+                    } else {
+                        Toast.makeText(context, "zipfile:" + file_name_encode + " not exists", Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
@@ -162,9 +171,9 @@ public class uploadActivity extends Activity {
                             public void onTransfering(String name, long totalLength, long transferedLength) {
                                 //上传进度
                                 Message message = new Message();
-                                message.what = MSG_HANDLER_MSG+1;
+                                message.what = MSG_HANDLER_MSG + 1;
                                 //message.obj = "上传进度：" + name + ">>>" + totalLength + ">>>" + transferedLength;
-                                message.obj = transferedLength*100/totalLength;
+                                message.obj = transferedLength * 100 / totalLength;
                                 mHandler.sendMessage(message);
                             }
 
@@ -199,19 +208,45 @@ public class uploadActivity extends Activity {
                             }
                         })
                         .build().upload();
-                break;
-            case R.id.btn_cancle:
-                request.cancel();
-                break;
-        }
+            }
+        });
 
+        mContinueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                request.cancel();
+            }
+        });
+
+        mBtn = (MiSportButton) findViewById(R.id.mi_btn);
+        mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
+            @Override
+            public void finishClick() {
+
+            }
+
+            @Override
+            public void continueClick() {
+
+            }
+        });
+
+        mBtn.setMiSportBtnLongClickListener(new MiSportButton.miSportButtonLongClickListener() {
+            @Override
+            public void longPressClick() {
+
+            }
+        });
     }
-    private String[] filedo(String files){
+
+
+    private String[] filedo(String files) {
         String str[] = null;
         str = files.split(";");
         return str;
     }
-    private String url(String file_name){
+
+    private String url(String file_name) {
         String file_name_encoder = null;
         try {
             file_name_encoder = URLEncoder.encode(file_name, "UTF-8");
