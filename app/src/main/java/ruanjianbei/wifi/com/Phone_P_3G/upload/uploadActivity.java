@@ -172,9 +172,6 @@ public class uploadActivity extends Activity {
                                 message.what = MSG_HANDLER_MSG;
                                 message.obj = "文件:" + name + " 上传完成";
                                 mHandler.sendMessage(message);
-                                //删除压缩文件
-                                files_delete files = new files_delete(ZIP_PATH);
-                                files.deleteAll();
                             }
 
                             @Override
@@ -184,6 +181,9 @@ public class uploadActivity extends Activity {
                                 message.what = MSG_HANDLER_MSG;
                                 message.obj = "全部文件上传成功！";
                                 mHandler.sendMessage(message);
+                                //删除压缩文件
+                                files_delete files = new files_delete(ZIP_PATH);
+                                files.deleteAll();
                             }
 
                             @Override
