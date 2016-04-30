@@ -14,6 +14,7 @@ import java.util.List;
 import ruanjianbei.wifi.com.ViewPagerinfo.FragmentPhoto;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.CommonAdapter;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.ViewHolder;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
@@ -99,6 +100,11 @@ public class MyAdapter extends CommonAdapter<String>
 			mSelect.setImageResource(R.mipmap.pictures_selected);
 			mImageView.setColorFilter(Color.parseColor("#77000000"));
 		}
+
+		/**
+		 * 将已选图片的路径传入FragmentChoose中的filechoose集合中
+		 */
+		FragmentChoose.setFileChoose(mSelectedImage);
 
 	}
 }
