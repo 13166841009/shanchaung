@@ -13,21 +13,46 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.ImageView;
 
+import java.io.File;
+
 public class WelcomeActivity extends Activity {
+	/**
+	 * app目录文件结构的创建
+	 */
 	protected static final String TAG = "WelcomeActivity";
 	private Context mContext;
 	private ImageView mImageView;
 	private SharedPreferences sp;
 
+	/**
+	 *主文件目录(+下载)
+	 */
+	private File maindir;
+    private File downdir;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		mContext = this;
+		initfile();
 		findView();
 		init();
+	}
+
+	private void initfile() {
+		maindir = new File(Environment.getExternalStorageDirectory().getPath()+File.separator
+				+"shangchuan");
+		if(!maindir.exists()){
+			maindir.mkdir();
+		}
+		downdir = new File(Environment.getExternalStorageDirectory().getPath()+File.separator
+				+"shangchuan"+File.separator+"Download");
+		if(!downdir.exists()) {
+			downdir.mkdirs();
+		}
 	}
 
 	private void findView() {
