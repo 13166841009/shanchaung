@@ -53,9 +53,6 @@ public class uploadActivity extends Activity {
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
     private MiSportButton mBtn;
-    private Button mFinishBtn;        // 左边完成Btn
-    private Button mContinueBtn;        // 右边继续Btn
-    private Button mLongPressBtn;        // 长按暂停Btn
 
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -96,11 +93,11 @@ public class uploadActivity extends Activity {
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
 
-        mFinishBtn = (Button) findViewById(R.id.finish_btn);
-        mContinueBtn = (Button) findViewById(R.id.continue_btn);
-        mFinishBtn.setOnClickListener(new View.OnClickListener() {
+
+        mBtn = (MiSportButton) findViewById(R.id.mi_btn);
+        mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
             @Override
-            public void onClick(View v) {
+            public void finishClick() {
                 fileWrappers = new HashMap<String, FileWrapper>();//初始化Map集合
                 String filespath = null;
                 //判断文件选择是否为空
@@ -209,25 +206,10 @@ public class uploadActivity extends Activity {
                         })
                         .build().upload();
             }
-        });
-
-        mContinueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                request.cancel();
-            }
-        });
-
-        mBtn = (MiSportButton) findViewById(R.id.mi_btn);
-        mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
-            @Override
-            public void finishClick() {
-
-            }
 
             @Override
             public void continueClick() {
-
+                request.cancel();
             }
         });
 
