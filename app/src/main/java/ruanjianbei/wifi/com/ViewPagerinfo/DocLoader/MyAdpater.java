@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class MyAdpater extends BaseAdapter {
@@ -31,6 +32,8 @@ public class MyAdpater extends BaseAdapter {
 	/** 一个HashMap对象 **/
 	@SuppressLint("UseSparseArrays")
 	private HashMap<Integer, View> map = new HashMap<Integer, View>();
+
+	public static List<String> mSelectedDocu = FragmentChoose.getFileChoose();
 
 	public MyAdpater(List<String> documentlist,Context context) {
 		// TODO 自动生成的构造函数存根
@@ -63,7 +66,7 @@ public class MyAdpater extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		int positional;
 		positional = position;
 		ViewHolder viewHolder = null;
@@ -82,6 +85,11 @@ public class MyAdpater extends BaseAdapter {
 				public void onClick(View v) {
 					CheckBox cb = (CheckBox) v;
 					mChecked.set(mposition, cb.isChecked());// 设置CheckBox为选中状态
+					if(cb.isChecked()){
+						mSelectedDocu.add(documentlist.get(position));;
+					}else{
+						mSelectedDocu.remove(documentlist.get(position));
+					}
 				}
 			});
 			convertView.setTag(viewHolder);
@@ -99,6 +107,9 @@ public class MyAdpater extends BaseAdapter {
 //				notifyDataSetChanged();
 //			}
 //		});
+
+
+
 		return convertView;
 	}
 
