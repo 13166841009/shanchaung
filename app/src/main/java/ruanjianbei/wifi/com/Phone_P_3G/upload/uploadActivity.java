@@ -117,6 +117,7 @@ public class uploadActivity extends Activity {
                     //对文件名进行URL转码
                     String file_name_encode = url(file_name);
                     //将文件进行压缩
+                    //Toast.makeText(context, "file:"+file_all_name+" is compressing!", Toast.LENGTH_LONG).show();
                     String zipload = ZIP_PATH+file_name_encode+".zip";
                     yashuo ys = new yashuo();
                     try {
@@ -125,6 +126,7 @@ public class uploadActivity extends Activity {
                         // TODO 自动生成的 catch 块
                         e.printStackTrace();
                     }
+                    //Toast.makeText(context, "file:"+file_all_name+" compress complete!", Toast.LENGTH_LONG).show();
                     Log.i("文件路径/压缩路径", zipload);
                     File files = new File(zipload);
                     if (files.exists()) {
