@@ -115,7 +115,7 @@ public class FragmentOthers extends Fragment {
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("xls")){
 				listItem.put("icon",R.mipmap.file_xls);
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("pdf")){
-				listItem.put("icon",R.mipmap.file_xls);
+				listItem.put("icon",R.mipmap.file_pdf);
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("apk")){
 				listItem.put("icon",R.mipmap.file_apk);
 			}else if(files[i].getName().substring(files[i].getName()
