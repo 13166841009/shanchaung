@@ -275,7 +275,8 @@
                 android:layout_margin="10dp"
                 android:layout_below="@id/three"
                 android:background="@drawable/ll_bg_d"
-                android:id="@+id/about_us">
+                android:id="@+id/about_us"
+                android:onClick="aboutMe">
                 <ImageView
                     android:id="@+id/setting"
                     android:layout_width="40dp"
