@@ -78,7 +78,25 @@
             android:name="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.Phone_P_3G.aboutActivity"
+            android:name="ruanjianbei.wifi.com.my_setting.aboutUs"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.wait_kaifa"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.my_photo"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.my_file"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.my_music"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.tran_history"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.my_information"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="activity.WaterPhotoActivity"

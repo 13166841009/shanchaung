@@ -27,7 +27,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp" >
+                    android:layout_height="70dp"
+                    android:onClick="my_information">
 
                     <ImageView
                         android:id="@+id/pic"
@@ -87,7 +88,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="50dp"
+                    android:onClick="tran_history">
 
                     <TextView
                         android:id="@+id/tv_n"
@@ -129,7 +131,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" >
+                    android:layout_height="50dp"
+                    android:onClick="my_music">
 
                     <ImageView
                         android:id="@+id/qianbao"
@@ -166,7 +169,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" >
+                    android:layout_height="50dp"
+                    android:onClick="my_file">
 
                     <ImageView
                         android:id="@+id/shoucang"
@@ -203,7 +207,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" >
+                    android:layout_height="50dp"
+                    android:onClick="my_photo">
 
                     <ImageView
                         android:id="@+id/xiangce"
@@ -240,7 +245,8 @@
                 android:layout_height="50dp" 
                 android:layout_margin="10dp"
                 android:layout_below="@id/two"
-                android:background="@drawable/ll_bg_d">
+                android:background="@drawable/ll_bg_d"
+                android:onClick="wait_kf">
                 <ImageView
                     android:id="@+id/biaoqing"
                     android:layout_width="40dp"
