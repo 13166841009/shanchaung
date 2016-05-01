@@ -31,7 +31,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentApplication extends Fragment implements AdapterView.OnItemClickListener {
+public class FragmentApplication extends Fragment {
 
 	//Handler用来识别的标志
 	private static final int SEARCH_APP = 0;
@@ -49,6 +49,10 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 	private ProgressDialog pd;
 
 	private ImageButton ib_change_category;
+
+	private ImageButton ib;
+	private TextView tv;
+	private ImageView iv;
 
 	private boolean allApplication = true;
 
@@ -138,16 +142,16 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 			}
 		}).start();
 		ib_change_category.setOnClickListener(changeAppsCategory);
-		gv.setOnItemClickListener(this);
 	}
 
-	//添加GridView ItemClick监听器
-	private GridView.OnItemClickListener gvItemClickListener = new GridView.OnItemClickListener(){
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-								long arg3) {
-		}
-	};
+//	//添加GridView ItemClick监听器
+//	private GridView.OnItemClickListener gvItemClickListener = new GridView.OnItemClickListener(){
+//		@Override
+//		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//								long arg3) {
+//			Toast.makeText(getActivity(),"hhhhhhhh",Toast.LENGTH_SHORT).show();
+//		}
+//	};
 
 	private ImageButton.OnClickListener changeAppsCategory = new ImageButton.OnClickListener() {
 		@Override
@@ -189,23 +193,36 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = inflater.inflate(R.layout.list_gv_item, null);
-			TextView tv = (TextView)view.findViewById(R.id.gv_item_appname);
+			final View view = inflater.inflate(R.layout.list_gv_item, null);
+
+			tv = (TextView)view.findViewById(R.id.gv_item_appname);
 //			TextView tv2= (TextView) view.findViewById(R.id.lv_item_appSize);
-			ImageView iv =(ImageView) view.findViewById(R.id.gv_item_icon);
+			iv =(ImageView) view.findViewById(R.id.gv_item_icon);
+			ib = (ImageButton) view.findViewById(R.id.id_item_select);
 			tv.setText(pkInfo.get(position).applicationInfo.loadLabel(getActivity().getPackageManager()));
 			iv.setImageDrawable(pkInfo.get(position).applicationInfo.loadIcon(getActivity().getPackageManager()));
+//			ib.setImageResource(R.mipmap.picture_unselected);
+
+			iv.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(view.getContext(),"xxxxx",Toast.LENGTH_SHORT).show();
+					ib.setImageResource(R.mipmap.pictures_selected);
+				}
+			});
+
 			return view;
 		}
 	}
-	/**
-	 * ItemClick的处理
-	 */
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//	/**
+//	 * ItemClick的处理
+//	 */
+//	@Override
+//	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //		Toast.makeText(getActivity(),""+position,Toast.LENGTH_SHORT).show();
-		showAppDetail(showPackageInfo.get(position));
-	}
+////		showAppDetail(showPackageInfo.get(position));
+//		System.err.println("xxxxxxxxxxxxxxxxxxxx");
+//	}
 
 	/**
 	 *显示程序的详细详细
@@ -255,30 +272,30 @@ public class FragmentApplication extends Fragment implements AdapterView.OnItemC
 		}
 		gv.setAdapter(new GridViewAdapter(getActivity(), showPackageInfo));
 	}
-	/**
-	 * 回退按钮处理
-	 */
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if(keyCode==KeyEvent.KEYCODE_BACK&&event.getRepeatCount()==0){
-			AlertDialog.Builder alertbBuilder=new AlertDialog.Builder(getActivity());
-			alertbBuilder.setTitle("提示").setMessage("确认退出？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					getActivity().finish();
-				}
-			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			}).create();
-			//显示提示框
-			alertbBuilder.show();
-		}
-		return onKeyDown(keyCode, event);
-	}
+//	/**
+//	 * 回退按钮处理
+//	 */
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		// TODO Auto-generated method stub
+//		if(keyCode==KeyEvent.KEYCODE_BACK&&event.getRepeatCount()==0){
+//			AlertDialog.Builder alertbBuilder=new AlertDialog.Builder(getActivity());
+//			alertbBuilder.setTitle("提示").setMessage("确认退出？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					getActivity().finish();
+//				}
+//			}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					dialog.cancel();
+//				}
+//			}).create();
+//			//显示提示框
+//			alertbBuilder.show();
+//		}
+//		return onKeyDown(keyCode, event);
+//	}
 }
 
