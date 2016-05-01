@@ -52,6 +52,7 @@ public class uploadActivity extends Activity {
     private AsyncHttpRequest request = null;
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
+    private String filePath = "";
 
 
     private MiSportButton mBtn;
@@ -86,9 +87,8 @@ public class uploadActivity extends Activity {
         /**
          * 将已选文件设置到此处
          */
-        String str = "";
         for (String s : fileUpload) {
-            str += s + ";";
+            filePath += s + ";";
         }
 
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
@@ -102,8 +102,8 @@ public class uploadActivity extends Activity {
                 fileWrappers = new HashMap<String, FileWrapper>();//初始化Map集合
                 String filespath = null;
                 //判断文件选择是否为空
-                if (!"".equals(String.valueOf(et_filepath.getText()))) {
-                    filespath = et_filepath.getText().toString();
+                if (!filePath.equals("")) {
+                    filespath = filePath;
                 } else {
                     Toast.makeText(context, "your choose files is empty", Toast.LENGTH_LONG).show();
                     return;
