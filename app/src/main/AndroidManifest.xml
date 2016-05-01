@@ -78,6 +78,9 @@
             android:name="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
+            android:name="ruanjianbei.wifi.com.Phone_P_3G.aboutActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
             android:name="activity.WaterPhotoActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
