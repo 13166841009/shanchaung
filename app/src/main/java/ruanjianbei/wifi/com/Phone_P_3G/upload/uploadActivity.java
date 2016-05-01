@@ -52,6 +52,8 @@ public class uploadActivity extends Activity {
     private AsyncHttpRequest request = null;
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
+
+
     private MiSportButton mBtn;
 
     private Handler mHandler = new Handler() {
@@ -88,7 +90,6 @@ public class uploadActivity extends Activity {
         for (String s : fileUpload) {
             str += s + ";";
         }
-        et_filepath.setText(str);
 
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);

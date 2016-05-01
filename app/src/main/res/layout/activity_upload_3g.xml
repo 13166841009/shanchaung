@@ -9,12 +9,14 @@
         android:id="@+id/et_filepath"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入用户名密码" />
+        android:hint="请输入传输对象用户名" />
 
     <ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton
         android:id="@+id/mi_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp"
+        android:layout_below="@+id/et_filepath"
+        android:layout_marginTop="80dp">
 
     </ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton>
 
@@ -28,6 +30,7 @@
         android:layout_marginBottom="14dp"
         android:background="#44ff0000"
         android:padding="40dp"
-        android:progress="0" />
+        android:progress="0"
+        android:indeterminate="false" />
 
 </RelativeLayout>
