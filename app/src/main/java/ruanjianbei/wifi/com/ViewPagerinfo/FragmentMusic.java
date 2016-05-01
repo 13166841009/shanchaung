@@ -1,7 +1,7 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.GetMusic;
-import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.MyAdapter;
+import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.MusicAdapter;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 public class FragmentMusic extends Fragment {
 	private ListView lv;
-	private MyAdapter adapter;
+	private MusicAdapter adapter;
 	private ImageView image;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,7 +31,7 @@ public class FragmentMusic extends Fragment {
 		GetMusic.getNumber(getContext());
 //      image = (ImageView) findViewById(R.id.imagemusic);
 		lv = (ListView) getActivity().findViewById(R.id.lv);
-		adapter = new MyAdapter(GetMusic.lists, getContext());
+		adapter = new MusicAdapter(GetMusic.lists, getContext());
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override

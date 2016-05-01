@@ -1,30 +1,21 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
-import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.MyAdpater;
+import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.DocAdpater;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class FragmentWord extends Fragment {
 	private ListView listview;
-	private MyAdpater Adpater;
+	private DocAdpater Adpater;
 	/**
 	 * 程序一个Handler，用来接收进程传过来的信息
 	 * 然后设置ListView的点击事件
@@ -34,7 +25,7 @@ public class FragmentWord extends Fragment {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what==1){
-				Adpater = new MyAdpater(GetDocument.documentlist, getContext());
+				Adpater = new DocAdpater(GetDocument.documentlist, getContext());
 				listview.setAdapter(Adpater);
 				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override

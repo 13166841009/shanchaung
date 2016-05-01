@@ -17,7 +17,7 @@ import java.util.List;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
-public class MyAdpater extends BaseAdapter {
+public class DocAdpater extends BaseAdapter {
 
 	/**
 	 * 获取存储文件路径的集合
@@ -35,7 +35,7 @@ public class MyAdpater extends BaseAdapter {
 
 	public static List<String> mSelectedDocu = FragmentChoose.getFileChoose();
 
-	public MyAdpater(List<String> documentlist,Context context) {
+	public DocAdpater(List<String> documentlist, Context context) {
 		// TODO 自动生成的构造函数存根
 		this.documentlist = documentlist;
 		this.context = context;

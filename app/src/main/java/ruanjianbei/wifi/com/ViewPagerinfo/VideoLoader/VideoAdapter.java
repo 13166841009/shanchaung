@@ -20,7 +20,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.MusicInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
-public class VideoGalleryAdapter extends BaseAdapter{
+public class VideoAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<VideoViewInfo> videoRows;
 
@@ -37,8 +37,8 @@ public class VideoGalleryAdapter extends BaseAdapter{
 	 */
 	public static List<String> mSelectedVideo = FragmentChoose.getFileChoose();
 
-	public VideoGalleryAdapter(Context context,
-							   ArrayList<VideoViewInfo> videoRows) {
+	public VideoAdapter(Context context,
+						ArrayList<VideoViewInfo> videoRows) {
 		this.context = context;
 		this.videoRows = videoRows;
 

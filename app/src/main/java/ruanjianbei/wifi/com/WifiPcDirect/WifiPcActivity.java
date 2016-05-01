@@ -25,8 +25,6 @@ public class WifiPcActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_pc_direct);
-
-
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
 
         ((CheckBox)findViewById(R.id.checkbox_download)).setChecked(pref.getBoolean("download", true));

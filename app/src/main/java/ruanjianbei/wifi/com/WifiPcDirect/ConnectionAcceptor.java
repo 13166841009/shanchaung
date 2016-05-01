@@ -3,7 +3,11 @@ package ruanjianbei.wifi.com.WifiPcDirect;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.DisplayMetrics;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.zxing.WriterException;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -11,6 +15,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 
+import ruanjianbei.wifi.com.ScanActivity.camera.Utils;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -101,7 +106,24 @@ public class ConnectionAcceptor implements Runnable {
             @Override
             public void run() {
                 TextView tv = (TextView) mainActivity.findViewById(R.id.ip);
-                tv.setText(ipstr);
+                ImageView mImageView = (ImageView) mainActivity.findViewById(R.id.qrcode_bitmap);
+                tv.setText("IP："+ipstr);
+                DisplayMetrics metric = new DisplayMetrics();
+                mainActivity.getWindowManager().getDefaultDisplay().getMetrics(metric);
+                int width = metric.widthPixels;
+                try {
+
+                    mImageView.setImageBitmap(Utils.createQRCode("http://"+ipstr, width/2));
+                    // Resources res = getResources();
+                    // Bitmap bmp = BitmapFactory.decodeResource(res,
+                    // R.drawable.ic_xiner);
+                    // mImageView.setImageBitmap(Utils.createQRCodeLogo(str, width / 2,
+                    // bmp));
+
+                } catch (WriterException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 

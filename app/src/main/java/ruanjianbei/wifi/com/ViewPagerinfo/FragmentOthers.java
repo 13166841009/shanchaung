@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentOthers extends Fragment {
 	private ListView listview;
 	private TextView textview;
+	private CheckBox filecheckbox;
 	//记录当前父文件夹
 	File currentParent;
 	File [] currentFiles;
@@ -37,6 +39,7 @@ public class FragmentOthers extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		filecheckbox = (CheckBox) getActivity().findViewById(R.id.filecheck);
 		listview = (ListView) getActivity().findViewById(R.id.list);
 		textview = (TextView) getActivity().findViewById(R.id.path);
 		//获取系统SD卡的目录
@@ -107,7 +110,23 @@ public class FragmentOthers extends Fragment {
 			}else{
 				listItem.put("icon",R.mipmap.file_image);
 			}
-			System.out.println(files[i].getName());
+			if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("doc")){
+				listItem.put("icon", R.mipmap.file_doc);
+			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("xls")){
+				listItem.put("icon",R.mipmap.file_xls);
+			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("pdf")){
+				listItem.put("icon",R.mipmap.file_xls);
+			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("apk")){
+				listItem.put("icon",R.mipmap.file_apk);
+			}else if(files[i].getName().substring(files[i].getName()
+					.lastIndexOf(".")+1).equals("jpg")){
+				listItem.put("icon",R.mipmap.file_jpg);
+			}else if(files[i].getName().substring(files[i].getName()
+					.lastIndexOf(".")+1).equals("png")){
+				listItem.put("icon",R.mipmap.file_png);
+			}else{
+				listItem.put("icon",R.mipmap.file_image);
+			}
 			listItem.put("filename", files[i].getName());
 			//添加List项
 			listItems.add(listItem);

@@ -363,7 +363,7 @@ public class SingleConnection implements Runnable {
             }
         }
 
-        String argStr = new String(byteArr, Charset.forName("utf-8"));
+        String argStr = new String(byteArr, Charset.forName("GBK"));
 //        System.out.println("argstr:\n" + argStr);
 //        System.out.println("boundary:\n" + pi.boundary);
 
@@ -797,7 +797,7 @@ public class SingleConnection implements Runnable {
                     throw ai;
                 }
                 // make new string only out of the array part written
-                String xStr = new String(xArr, 0, validInArray, Charset.forName("UTF-8"));
+                String xStr = new String(xArr, 0, validInArray, Charset.forName("GBK"));
 
 
                 if(xStr.contains(pi.boundary)) // if boundary found, write everything before last newline prior to boundary

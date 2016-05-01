@@ -22,7 +22,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
-public class MyAdapter extends BaseAdapter{
+public class MusicAdapter extends BaseAdapter{
 
 	private List<MusicInfo> lists;
 	private Context context;
@@ -42,7 +42,7 @@ public class MyAdapter extends BaseAdapter{
 
     public static List<String> mSelectedMusci = FragmentChoose.getFileChoose();
 
-	public MyAdapter(List<MusicInfo> lists,Context context) {
+	public MusicAdapter(List<MusicInfo> lists, Context context) {
 		this.lists = lists;
 		this.context = context;
 		listPerson = new ArrayList<MusicInfo>();

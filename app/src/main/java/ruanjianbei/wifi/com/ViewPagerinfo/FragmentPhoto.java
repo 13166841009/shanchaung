@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -30,8 +28,7 @@ import java.util.List;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.bean.ImageFloder;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder.ListImageDirPopupWindow;
-import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder.MyAdapter;
-import ruanjianbei.wifi.com.ViewPagerinfo.ui.FragmentBottom;
+import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.imageloder.ImageAdapter;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
@@ -53,7 +50,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 	private List<String> mImgs;
 
 	private GridView mGirdView;
-	private MyAdapter mAdapter;
+	private ImageAdapter mAdapter;
 	/**
 	 * 临时的辅助类，用于防止同一个文件夹的多次扫描
 	 */
@@ -103,7 +100,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 		/**
 		 * 可以看到文件夹的路径和图片的路径分开保存，极大的减少了内存的消耗；
 		 */
-		mAdapter = new MyAdapter(this.getActivity(), mImgs,
+		mAdapter = new ImageAdapter(this.getActivity(), mImgs,
 				R.layout.grid_item, mImgDir.getAbsolutePath());
 		mGirdView.setAdapter(mAdapter);
 		//mImageCount.setText(totalCount + "张");
@@ -303,7 +300,7 @@ public class FragmentPhoto extends Fragment implements ListImageDirPopupWindow.O
 		/**
 		 * 可以看到文件夹的路径和图片的路径分开保存，极大的减少了内存的消耗；
 		 */
-		mAdapter = new MyAdapter(this.getActivity(), mImgs,
+		mAdapter = new ImageAdapter(this.getActivity(), mImgs,
 				R.layout.grid_item, mImgDir.getAbsolutePath());
 		mGirdView.setAdapter(mAdapter);
 		// mAdapter.notifyDataSetChanged();

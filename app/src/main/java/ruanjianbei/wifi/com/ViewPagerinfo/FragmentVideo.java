@@ -1,21 +1,15 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.File;
-
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.GetVideoInfo;
-import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoGalleryAdapter;
+import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoAdapter;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class FragmentVideo extends Fragment {
@@ -38,7 +32,7 @@ public class FragmentVideo extends Fragment {
 //		cursor = getActivity().managedQuery(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
 //				mediaColumns, null, null, null);
 		listView = (ListView) getActivity().findViewById(R.id.listView);
-		listView.setAdapter(new VideoGalleryAdapter(getContext(), GetVideoInfo.videoRows));
+		listView.setAdapter(new VideoAdapter(getContext(), GetVideoInfo.videoRows));
 //		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //			@Override
 //			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -18,7 +18,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
-public class MyAdapter extends CommonAdapter<String>
+public class ImageAdapter extends CommonAdapter<String>
 {
 	//private Context context;
 	/**
@@ -37,8 +37,8 @@ public class MyAdapter extends CommonAdapter<String>
 	 */
 	private String mDirPath;
 
-	public MyAdapter(Context context, List<String> mDatas, int itemLayoutId,
-					 String dirPath)
+	public ImageAdapter(Context context, List<String> mDatas, int itemLayoutId,
+						String dirPath)
 	{
 		super(context,mDatas,itemLayoutId);
 		//this.context = context;
