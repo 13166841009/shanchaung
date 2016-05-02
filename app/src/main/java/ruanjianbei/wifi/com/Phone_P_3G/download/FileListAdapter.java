@@ -59,7 +59,9 @@ public class FileListAdapter extends BaseAdapter {
             holder.pb_progress = (ProgressBar) view.findViewById(R.id.pb_progress);
             holder.btn_start = (Button) view.findViewById(R.id.btn_start);
             holder.btn_stop = (Button) view.findViewById(R.id.btn_stop);
+            holder.tv_size = (TextView) view.findViewById(R.id.tv_size);
             holder.tv_fileName.setText(fileInfo.gettrueName());
+            holder.tv_size.setText(fileInfo.getFilesize());
             holder.pb_progress.setMax(100);
             holder.btn_start.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +101,7 @@ public class FileListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
     static class ViewHolder{
-        TextView tv_fileName;
+        TextView tv_fileName,tv_size;
         RoundProgressBarWidthNumber pb_progress1;
         ProgressBar pb_progress;
         Button btn_stop,btn_start;

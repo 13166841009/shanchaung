@@ -13,7 +13,7 @@ public class FileInfo implements Serializable
     private String trueName;
     private int length;
     private int finished;
-
+    private String filesize;
     /**
      *@param id
      *@param url
@@ -22,7 +22,7 @@ public class FileInfo implements Serializable
      *@param finished
      */
     public FileInfo(int id, String url, String fileName,String trueName, int length,
-                    int finished)
+                    int finished,String filesize)
     {
         this.id = id;
         this.url = url;
@@ -30,6 +30,7 @@ public class FileInfo implements Serializable
         this.trueName = trueName;
         this.length = length;
         this.finished = finished;
+        this.filesize = filesize;
     }
     public int getId()
     {
@@ -79,12 +80,17 @@ public class FileInfo implements Serializable
     {
         this.finished = finished;
     }
-    @Override
+    public String getFilesize()
+    {
+        return filesize;
+    }
+    public void setFinished(String filesize) {this.filesize = filesize; }
+/*    @Override
     public String toString()
     {
         return "FileInfo [id=" + id + ", url=" + url + ", fileName=" + fileName
                 + ", length=" + length + ", finished=" + finished + "]";
-    }
+    }*/
 
 
 }

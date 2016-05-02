@@ -45,7 +45,7 @@ public class downloadActivity extends Activity {
     private List<FileInfo> mFileList = null;
     private FileListAdapter mAdapter = null;
     private TextView textView = null;
-    private Map<String, String> file;
+    private Map<String, String[]> file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class downloadActivity extends Activity {
     }
 
     public void onClick(View v) {
-        file = new HashMap<String, String>();
+        file = new HashMap<String, String[]>();
         String toman = textView.getText().toString();
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
                 .url("http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Get")
@@ -75,9 +75,12 @@ public class downloadActivity extends Activity {
                             for (int i = 0; i < numberList.length(); i++) {
                                 String file_name = numberList.getJSONObject(i).getString("file_name");
                                 String file_load = numberList.getJSONObject(i).getString("load");
-                                file.put(file_name, file_load);
+                                String file_size = numberList.getJSONObject(i).getString("file_size");
+                                String im[] = {file_load,file_size};
+                                file.put(file_name, im);
                                 //Log.i("数据",file_name+" "+file_load);
                             }
+
                         } catch (JSONException e) {
                             // TODO 自动生成的 catch 块
                             e.printStackTrace();
@@ -86,12 +89,12 @@ public class downloadActivity extends Activity {
                         mFileList = new ArrayList<FileInfo>();
                         mListView = (ListView) findViewById(R.id.lv_file);
                         int count = 0;//计算器
-                        for (Map.Entry<String, String> entry : file.entrySet()) {
+                        for (Map.Entry<String, String[]> entry : file.entrySet()) {
                             String zipname = entry.getKey().substring(0, entry.getKey().lastIndexOf(".")) + ".zip";
-                            FileInfo fileInfo = new FileInfo(count, entry.getValue(), zipname, entry.getKey(), 0, 0);
+                            FileInfo fileInfo = new FileInfo(count, entry.getValue()[0], zipname, entry.getKey(), 0, 0,entry.getValue()[1]);
                             mFileList.add(fileInfo);
                             count++;
-                            Log.i("数据", entry.getKey() + " " + entry.getValue());
+                            Log.i("数据", entry.getKey() + " " + entry.getValue()[0] + " " + entry.getValue()[1]);
                         }
                         //创建适配器
                         mAdapter = new FileListAdapter(mMainActivity, mFileList);
