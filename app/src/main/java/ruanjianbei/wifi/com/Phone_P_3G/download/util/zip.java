@@ -1,4 +1,4 @@
-package ruanjianbei.wifi.com.Phone_P_3G.download.zipper;
+package ruanjianbei.wifi.com.Phone_P_3G.download.util;
 
 import android.os.Environment;
 import android.util.Log;

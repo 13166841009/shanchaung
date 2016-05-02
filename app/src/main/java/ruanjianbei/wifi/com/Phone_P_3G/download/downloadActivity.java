@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,10 +28,9 @@ import java.util.Map;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
-import ruanjianbei.wifi.com.Phone_P_3G.download.zipper.zip;
+import ruanjianbei.wifi.com.Phone_P_3G.download.util.dialog;
+import ruanjianbei.wifi.com.Phone_P_3G.download.util.zip;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
-import ruanjianbei.wifi.com.ViewPagerinfo.FragmentApplication;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -46,21 +44,25 @@ public class downloadActivity extends Activity {
     private FileListAdapter mAdapter = null;
     private TextView textView = null;
     private Map<String, String[]> file;
+    private int number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_main);
-        textView = (TextView) findViewById(R.id.textView1);
+        //textView = (TextView) findViewById(R.id.textView1);
         mMainActivity = this;
+        onConn();
     }
-
-    public void onClick(View v) {
+    public void onClick(View v){
+        onConn();
+    }
+    public void onConn() {
         file = new HashMap<String, String[]>();
-        String toman = textView.getText().toString();
+        //String toman = textView.getText().toString();
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
                 .url("http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Get")
-                .addFormData("Toman", toman)//设置form表单数据，也可以调用setFormDatas方法
+                .addFormData("Toman", "linankun")//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override
                     public void onFailed(int errorCode, String errorMsg) {
@@ -72,39 +74,44 @@ public class downloadActivity extends Activity {
                         try {
                             //JSONObject information = new JSONObject(responseInfo);
                             JSONArray numberList = new JSONArray(responseInfo);
-                            for (int i = 0; i < numberList.length(); i++) {
+                            number = numberList.length();
+                            for (int i = 0; i < number; i++) {
                                 String file_name = numberList.getJSONObject(i).getString("file_name");
                                 String file_load = numberList.getJSONObject(i).getString("load");
                                 String file_size = numberList.getJSONObject(i).getString("file_size");
-                                String im[] = {file_load,file_size};
+                                String im[] = {file_load, file_size};
                                 file.put(file_name, im);
                                 //Log.i("数据",file_name+" "+file_load);
                             }
-
                         } catch (JSONException e) {
                             // TODO 自动生成的 catch 块
                             e.printStackTrace();
                         }
-                        //创建文件集合
-                        mFileList = new ArrayList<FileInfo>();
-                        mListView = (ListView) findViewById(R.id.lv_file);
-                        int count = 0;//计算器
-                        for (Map.Entry<String, String[]> entry : file.entrySet()) {
-                            String zipname = entry.getKey().substring(0, entry.getKey().lastIndexOf(".")) + ".zip";
-                            FileInfo fileInfo = new FileInfo(count, entry.getValue()[0], zipname, entry.getKey(), 0, 0,entry.getValue()[1]);
-                            mFileList.add(fileInfo);
-                            count++;
-                            Log.i("数据", entry.getKey() + " " + entry.getValue()[0] + " " + entry.getValue()[1]);
+                        //对话框
+                        Log.i("数据", number + "");
+                        if (new dialog().checkDialog(number, mMainActivity) == 1) {
+
+                            //创建文件集合
+                            mFileList = new ArrayList<FileInfo>();
+                            mListView = (ListView) findViewById(R.id.lv_file);
+                            int count = 0;//计数器
+                            for (Map.Entry<String, String[]> entry : file.entrySet()) {
+                                String zipname = entry.getKey().substring(0, entry.getKey().lastIndexOf(".")) + ".zip";
+                                FileInfo fileInfo = new FileInfo(count, entry.getValue()[0], zipname, entry.getKey(), 0, 0, entry.getValue()[1]);
+                                mFileList.add(fileInfo);
+                                count++;
+                                Log.i("数据", entry.getKey() + " " + entry.getValue()[0] + " " + entry.getValue()[1]);
+                            }
+                            //创建适配器
+                            mAdapter = new FileListAdapter(mMainActivity, mFileList);
+                            //设置ListView
+                            mListView.setAdapter(mAdapter);
+                            // 注册广播接收器
+                            IntentFilter filter = new IntentFilter();
+                            filter.addAction(DownloadService.ACTION_UPDATE);
+                            filter.addAction(DownloadService.ACTION_FINISH);
+                            registerReceiver(mReceiver, filter);
                         }
-                        //创建适配器
-                        mAdapter = new FileListAdapter(mMainActivity, mFileList);
-                        //设置ListView
-                        mListView.setAdapter(mAdapter);
-                        // 注册广播接收器
-                        IntentFilter filter = new IntentFilter();
-                        filter.addAction(DownloadService.ACTION_UPDATE);
-                        filter.addAction(DownloadService.ACTION_FINISH);
-                        registerReceiver(mReceiver, filter);
                     }
                 })
                 .build().post();

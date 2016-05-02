@@ -9,22 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity" >
 
-    <EditText
+<!--    <EditText
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/lv_file"
-        android:hint="用户名" />
+        android:hint="用户名" />-->
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lv_file"
-        android:layout_below="@+id/textView1"
-        android:text="点击下载用户需接收的文件"
-        android:onClick="onClick"/>
+        android:text="点击刷新"
+        android:onClick="onClick"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
     <ListView
         android:id="@+id/lv_file"
         android:layout_width="match_parent"
