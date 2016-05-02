@@ -11,24 +11,25 @@
         android:layout_height="wrap_content"
         android:hint="请输入传输对象用户名" />
 
+
     <ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton
         android:id="@+id/mi_btn"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/et_filepath"
-        android:layout_marginTop="80dp">
+        android:layout_height="100dp"
+        android:layout_above="@+id/pro"
+        android:layout_marginBottom="0dp">
 
     </ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton>
 
 
     <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
         android:id="@+id/pro"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
-        android:background="#44ff0000"
+        android:background="#fff"
         android:padding="40dp"
         android:progress="0"
         android:indeterminate="false" />

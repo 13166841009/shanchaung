@@ -92,9 +92,6 @@ public class RoundProgressBarWidthNumber extends
         mPaint.setStyle(Style.FILL);
         canvas.drawText(text, mRadius - textWidth / 2, mRadius - textHeight,
                 mPaint);
-
         canvas.restore();
-
     }
-
 }

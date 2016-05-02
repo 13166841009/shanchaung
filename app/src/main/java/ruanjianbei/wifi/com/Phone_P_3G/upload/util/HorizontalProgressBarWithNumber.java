@@ -49,11 +49,11 @@ public class HorizontalProgressBarWithNumber extends ProgressBar
     /**
      * color of reached bar
      */
-    protected int mReachedBarColor = DEFAULT_TEXT_COLOR;
+    protected int mUnReachedBarColor = DEFAULT_TEXT_COLOR;
     /**
      * color of unreached bar
      */
-    protected int mUnReachedBarColor = DEFAULT_COLOR_UNREACHED_COLOR;
+    protected int mReachedBarColor = DEFAULT_COLOR_UNREACHED_COLOR;
     /**
      * height of unreached progress bar
      */
