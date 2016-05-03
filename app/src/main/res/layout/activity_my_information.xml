@@ -25,7 +25,7 @@
                     android:id="@+id/userface"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:src="@drawable/face" />
+                    android:src="@mipmap/chengxuyuan" />
                 <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
