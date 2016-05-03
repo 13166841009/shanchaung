@@ -3,8 +3,13 @@ package fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.io.File;
 
 import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.my_setting.my_file;
@@ -16,10 +21,14 @@ import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
-public class SettingFragment extends Activity {
+import static ruanjianbei.wifi.com.my_setting.my_information.getLoacalBitmap;
 
+public class SettingFragment extends Activity {
+	private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()
+			+ "/shangchuan/data/image/face.png";
 	private Context mContext;
 	private TitleBarView mTitleBarView;
+	private ImageView iv1;
 	//private View mAboutme;
 
 	@Override
@@ -35,10 +44,17 @@ public class SettingFragment extends Activity {
 	
 	private void findView(){
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
-		//mAboutme = findViewById(R.id.about_us);
+		iv1 = (ImageView) findViewById(R.id.pic);
 	}
 
 	private void init(){
+		//获得本地图片,设置头像
+		File file = new File(load);
+		if (file.exists())
+		{
+			Bitmap bitmap = getLoacalBitmap(load);
+			iv1.setImageBitmap(bitmap);
+		}
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.mime);
 	}

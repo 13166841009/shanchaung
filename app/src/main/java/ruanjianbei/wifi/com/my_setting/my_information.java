@@ -46,7 +46,7 @@ public class my_information extends Activity{
     private String[] items = new String[] { "选择本地图片", "拍照" };
     /* 头像名称 */
     private static final String IMAGE_FILE_NAME = "face.png";
-    private static String load = Environment.getExternalStorageDirectory().getAbsolutePath()
+    private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()
             + "/shangchuan/data/image/";
     /* 请求码 */
     private static final int IMAGE_REQUEST_CODE = 0;
