@@ -12,7 +12,7 @@ import android.widget.Toast;
  */
 public class diolog {
     public String str = null;
-    public String getcontent(final Context context, final TextView et){
+    public void getcontent(final Context context, final TextView et){
         final EditText name=new EditText(context);
          new AlertDialog.Builder(context).setTitle("请输入").setIcon(
                 android.R.drawable.ic_dialog_info).setView(name).
@@ -22,6 +22,5 @@ public class diolog {
                             et.setText(str);
                      }
                  }).setNegativeButton("取消", null).show();
-        return str;
     }
 }

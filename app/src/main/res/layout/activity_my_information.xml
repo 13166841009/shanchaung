@@ -18,7 +18,9 @@
             <FrameLayout
                 android:layout_width="60.0dip"
                 android:layout_height="60.0dip"
-                android:layout_marginLeft="15dip">
+                android:layout_marginLeft="15dip"
+                android:onClick="onClickTouxiang"
+                android:id="@+id/flayout">
                 <ImageView
                     android:id="@+id/userface"
                     android:layout_width="fill_parent"
