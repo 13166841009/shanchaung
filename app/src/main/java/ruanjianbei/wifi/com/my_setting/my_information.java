@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -20,12 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.my_setting.util.Tools;
 import ruanjianbei.wifi.com.my_setting.util.diolog;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -34,20 +38,14 @@ import ruanjianbei.wifi.com.shanchuang.R;
  * Created by linankun1 on 2016/5/1.
  */
 public class my_information extends Activity{
-    private TextView tv1;
-    private TextView tv2;
-    private TextView tv3;
-    private TextView tv4;
-    private TextView tv5;
-    private TextView tv6;
+    private TextView tv1,tv2,tv3,tv4,tv5,tv6;
     private ImageView iv1;
     private FrameLayout switchAvatar;
+    private DBServiceOperate db;
 
     private String[] items = new String[] { "选择本地图片", "拍照" };
     /* 头像名称 */
     private static final String IMAGE_FILE_NAME = "face.png";
-    private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()
-            + "/shangchuan/data/image/";
     /* 请求码 */
     private static final int IMAGE_REQUEST_CODE = 0;
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -64,31 +62,66 @@ public class my_information extends Activity{
         tv6 = (TextView) findViewById(R.id.address);
         iv1 = (ImageView) findViewById(R.id.userface);
         switchAvatar = (FrameLayout) findViewById(R.id.flayout);
-        //获得本地图片
-        File file = new File(load+IMAGE_FILE_NAME);
-        if (file.exists())
-        {
-            Bitmap bitmap = getLoacalBitmap(load+IMAGE_FILE_NAME);
-            iv1.setImageBitmap(bitmap);
+        db = new DBServiceOperate(my_information.this);
+        UpdataInformation();
+    }
+    public void UpdataInformation(){
+        String nicheng = null,name = null,sex = null,number = null,address = null,email = null;
+        Cursor cursor =  db.selectInformation();
+        //取出头像
+        byte[] photo = null;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                //取出图片
+                photo = cursor.getBlob(cursor.getColumnIndex("Photo"));
+                //取出其他信息
+                nicheng = cursor.getString(cursor.getColumnIndex("Nicheng"));
+                name = cursor.getString(cursor.getColumnIndex("Name"));
+                sex = cursor.getString(cursor.getColumnIndex("Sex"));
+                number = cursor.getString(cursor.getColumnIndex("Number"));
+                email = cursor.getString(cursor.getColumnIndex("Email"));
+                address = cursor.getString(cursor.getColumnIndex("Address"));
+            }
         }
+        ByteArrayInputStream bais = null;
+        if (photo != null) {
+            bais = new ByteArrayInputStream(photo);
+            Drawable drawable = Drawable.createFromStream(bais, "Photo");
+            iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        tv1.setText(nicheng);
+        tv2.setText(name);
+        tv3.setText(sex);
+        tv4.setText(number);
+        tv5.setText(email);
+        tv6.setText(address);
     }
     public void onClicknicheng(View v){
-        new diolog().getcontent(my_information.this, tv1);
+        String LEIXING = "Nicheng";
+        new diolog().getcontent(my_information.this, tv1, LEIXING, db);
     }
     public void onClickname(View v){
-        new diolog().getcontent(my_information.this, tv2);
+        String LEIXING = "Name";
+        new diolog().getcontent(my_information.this, tv2,LEIXING,db);
     }
     public void onClicksex(View v){
-        new diolog().getcontent(my_information.this, tv3);
+        String LEIXING = "Sex";
+        new diolog().getcontent(my_information.this, tv3,LEIXING,db);
     }
     public void onClickphone(View v){
-        new diolog().getcontent(my_information.this, tv4);
+        String LEIXING = "Number";
+        new diolog().getcontent(my_information.this, tv4,LEIXING,db);
     }
     public void onClickemail(View v){
-        new diolog().getcontent(my_information.this, tv5);
+        String LEIXING = "Email";
+        new diolog().getcontent(my_information.this, tv5,LEIXING,db);
     }
     public void onClickaddress(View v){
-        new diolog().getcontent(my_information.this, tv6);
+        String LEIXING = "Email";
+        new diolog().getcontent(my_information.this, tv6,LEIXING,db);
     }
     public void onClickTouxiang(View v) {
         showDialog();
@@ -199,34 +232,7 @@ public class my_information extends Activity{
             Bitmap photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(photo);
             iv1.setImageDrawable(drawable);
-            //保存在本地
-            FileOutputStream b = null;
-            File file = new File(load);
-            if (!file.exists())
-            {
-                file.mkdirs();
-            }
-            String fileName = load+IMAGE_FILE_NAME;
-            try {
-                b = new FileOutputStream(fileName);
-                photo.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    b.flush();
-                    b.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-/*            try
-            {
-                view.setImageBitmap(bitmap);// 将图片显示在ImageView里
-            }catch(Exception e)
-            {
-                Log.e("error", e.getMessage());
-            }*/
+            db.upDateInformation(photo);
         }
     }
     public static Bitmap getLoacalBitmap(String url) {

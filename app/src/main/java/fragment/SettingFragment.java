@@ -3,12 +3,17 @@ package fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 import ruanjianbei.wifi.com.my_setting.aboutUs;
@@ -17,6 +22,7 @@ import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
 import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history;
+import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
@@ -29,6 +35,7 @@ public class SettingFragment extends Activity {
 	private Context mContext;
 	private TitleBarView mTitleBarView;
 	private ImageView iv1;
+	private DBServiceOperate db;
 	//private View mAboutme;
 
 	@Override
@@ -36,6 +43,7 @@ public class SettingFragment extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_mine);
 		mContext=this;
+		db = new DBServiceOperate(mContext);
 		findView();
 		init();
 		//aboutUs();
@@ -45,15 +53,33 @@ public class SettingFragment extends Activity {
 	private void findView(){
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		iv1 = (ImageView) findViewById(R.id.pic);
+		iv1.setDrawingCacheEnabled(true);
 	}
 
 	private void init(){
-		//获得本地图片,设置头像
-		File file = new File(load);
-		if (file.exists())
-		{
-			Bitmap bitmap = getLoacalBitmap(load);
-			iv1.setImageBitmap(bitmap);
+		//初始化个人信息
+		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
+		if(!db.selectInformation().moveToFirst()) {
+			db.saveInformation(image, "熊孩子", "张行", "未知", "110", "110@120.com", "火星");
+			db.selectInformation().close();
+		}
+		//更新头像
+		Cursor cursor =  db.selectInformation();
+		//取出头像
+		byte[] photo = null;
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {//just need to query one time
+				photo = cursor.getBlob(cursor.getColumnIndex("Photo"));//取出图片
+			}
+		}
+		if (cursor != null) {
+			cursor.close();
+		}
+		ByteArrayInputStream bais = null;
+		if (photo != null) {
+			bais = new ByteArrayInputStream(photo);
+			Drawable drawable = Drawable.createFromStream(bais, "Photo");
+			iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
 		}
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.mime);

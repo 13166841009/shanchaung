@@ -12,7 +12,8 @@ import android.widget.Toast;
  */
 public class diolog {
     public String str = null;
-    public void getcontent(final Context context, final TextView et){
+    public void getcontent(final Context context, final TextView et, final String lx,
+                           final DBServiceOperate db){
         final EditText name=new EditText(context);
          new AlertDialog.Builder(context).setTitle("请输入").setIcon(
                 android.R.drawable.ic_dialog_info).setView(name).
@@ -20,6 +21,7 @@ public class diolog {
                      public void onClick(DialogInterface dialog, int which) {
                             str = name.getText().toString();
                             et.setText(str);
+                            db.upDateInformation(lx, str);
                      }
                  }).setNegativeButton("取消", null).show();
     }
