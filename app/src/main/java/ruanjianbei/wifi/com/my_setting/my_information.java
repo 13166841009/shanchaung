@@ -43,6 +43,8 @@ public class my_information extends Activity{
     private FrameLayout switchAvatar;
     private DBServiceOperate db;
 
+    private String tv_sex;
+
     private String[] items = new String[] { "选择本地图片", "拍照" };
     /* 头像名称 */
     private static final String IMAGE_FILE_NAME = "face.png";
@@ -108,8 +110,34 @@ public class my_information extends Activity{
         new diolog().getcontent(my_information.this, tv2,LEIXING,db);
     }
     public void onClicksex(View v){
-        String LEIXING = "Sex";
-        new diolog().getcontent(my_information.this, tv3,LEIXING,db);
+        AlertDialog.Builder builder = new AlertDialog.Builder(my_information.this);
+        builder.setTitle("请选择性别");
+        final String LEIXING = "Sex";
+        final String[] sex = {"男", "女"};
+        builder.setSingleChoiceItems(sex, 1, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+//                Toast.makeText(my_information.this, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
+                tv_sex = sex[which];
+                tv3.setText(tv_sex);
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DBServiceOperate db = new DBServiceOperate(my_information.this);
+                db.upDateInformation(LEIXING,tv_sex);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
     public void onClickphone(View v){
         String LEIXING = "Number";
