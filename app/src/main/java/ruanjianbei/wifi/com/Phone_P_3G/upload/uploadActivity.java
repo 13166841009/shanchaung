@@ -1,5 +1,6 @@
 package ruanjianbei.wifi.com.Phone_P_3G.upload;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -7,10 +8,19 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luoxudong.app.asynchttp.AsyncHttpRequest;
@@ -31,6 +41,8 @@ import ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
+import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.ViewHolder;
+import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -53,7 +65,9 @@ public class uploadActivity extends Activity {
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
     private String filePath = "";
+    private ListView list_choosed;
 
+    private List<String> fileNames = new ArrayList<String>();
 
     private MiSportButton mBtn;
 
@@ -83,17 +97,27 @@ public class uploadActivity extends Activity {
         context = this;
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
-
+        list_choosed = (ListView) findViewById(R.id.list_choosed);
         /**
          * 将已选文件设置到此处
          */
         for (String s : fileUpload) {
+            /**
+             * 获取文件名
+             */
+            int start = s.lastIndexOf("/");
+            int end = s.lastIndexOf(".");
+            if(start!=-1&&end!=-1){
+                fileNames.add(s.substring(start+1,end));
+            }else{
+                fileNames.add(null);
+            }
+            //所有已选文件的路径
             filePath += s + ";";
         }
 
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
-
 
         mBtn = (MiSportButton) findViewById(R.id.mi_btn);
         mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
