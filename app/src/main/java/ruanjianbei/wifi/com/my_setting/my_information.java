@@ -120,13 +120,14 @@ public class my_information extends Activity{
             public void onClick(DialogInterface dialog, int which)
             {
 //                Toast.makeText(my_information.this, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
-                tv_sex = sex[which];
-                tv3.setText(tv_sex);
+
             }
         });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                tv_sex = sex[which];
+                tv3.setText(tv_sex);
                 DBServiceOperate db = new DBServiceOperate(my_information.this);
                 db.upDateInformation(LEIXING,tv_sex);
             }
