@@ -34,6 +34,7 @@ import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
+import ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class MoreWindow extends PopupWindow implements OnClickListener{
@@ -244,9 +245,9 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_window_local:
-			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
-			//Intent intent = new Intent(mContext, ErcodeScanActivity.class);
-			//mContext.startActivity(intent);
+//			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
+			Intent intentwifi = new Intent(mContext, WifiTranAndroid.class);
+			mContext.startActivity(intentwifi);
 			break;
 		case R.id.more_window_online:
 			Toast.makeText(mContext, "Ios", Toast.LENGTH_SHORT).show();

@@ -30,6 +30,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--热点建立-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
         android:allowBackup="true"
@@ -64,7 +71,8 @@
         <activity
             android:name="activity.RegisterResultActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <service android:name="ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService"/>
+
+        <service android:name="ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService" />
         <!-- <activity -->
         <!-- android:name="" -->
         <!-- android:theme="@android:style/Theme.Light.NoTitleBar" /> -->
@@ -137,7 +145,6 @@
         <activity
             android:name=".Mobile_PostAndroid"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
         <activity
             android:name=".UserGame"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
@@ -171,6 +178,7 @@
         <activity
             android:name="ruanjianbei.wifi.com.WifiPcDirect.SettingsActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name="ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid"></activity>
     </application>
 
 </manifest>
