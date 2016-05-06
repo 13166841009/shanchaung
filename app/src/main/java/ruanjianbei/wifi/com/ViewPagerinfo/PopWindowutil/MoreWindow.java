@@ -34,6 +34,7 @@ import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
+import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -253,8 +254,9 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			Toast.makeText(mContext, "Ios", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.more_window_delete:
-			Toast.makeText(mContext, "我的快传", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(mContext, ScanActivity.class);
+			Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent();
+			intent.setClass(mContext, ScanningActivity.class);
 			mContext.startActivity(intent);
 			break;
 		case R.id.more_window_collect:

@@ -3,12 +3,6 @@ package ruanjianbei.wifi.com.Utils.WifiConnect;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by dell-pc on 2016/4/25.
@@ -82,4 +76,7 @@ public class WifiCheck {
         }
         return false;
     }
+    /**
+     * 判断当前连接网络是否可以正常的访问因特网
+     */
 }

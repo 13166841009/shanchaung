@@ -46,7 +46,7 @@ public class aboutUs extends Activity{
             weibo.setVisibility(View.VISIBLE);
             weixing.setVisibility(View.VISIBLE);
             qq.setVisibility(View.VISIBLE);
-            img_connect_us.setImageResource(R.mipmap.qvip_pay_wallet_icon_arrow_bottom_normal);
+            img_connect_us.setImageResource(R.mipmap.qvip_pay_wallet_icon_arrow_right_normal);
             flag = false;
         }else{
             weibo.setVisibility(View.GONE);
