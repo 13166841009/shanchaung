@@ -88,11 +88,12 @@ public class SettingFragment extends Activity {
 		ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
 				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
 		Cursor cursor1 = db.selectInformation();
-		if(cursor != null){
+		if(cursor1 != null&&cursor1.getCount()!=0){
 			tv_tran.setText("您有"+cursor1.getCount()+"条传输记录，点击查看");
 		}else{
 			tv_tran.setText("您没有传输记录");
 		}
+		cursor.close();
 	}
 	public void aboutMe(View view){
 		Intent intent = new Intent(mContext,aboutUs.class);
