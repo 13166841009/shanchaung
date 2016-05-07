@@ -57,6 +57,7 @@ public class ListAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) view.getTag();//对上面的优化，不用重复加载耗时
         }
+        //！！！放在后面
         holder.tv_fileName.setText(fileInfo[0]);
         holder.tv_time.setText(fileInfo[1]);
         if(fileInfo[2].equals("上传")){

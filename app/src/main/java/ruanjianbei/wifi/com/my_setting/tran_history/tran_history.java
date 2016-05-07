@@ -43,6 +43,7 @@ public class tran_history extends Activity{
                 }
                 此方法有bug，不能用，数组会越位。
             }*/
+            //遍历结果集
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
                 String file_name = cursor.getString(cursor.getColumnIndex("file_name"));
                 String time = cursor.getString(cursor.getColumnIndex("time"));
