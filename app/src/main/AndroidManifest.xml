@@ -101,7 +101,7 @@
             android:name="ruanjianbei.wifi.com.my_setting.my_music"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.my_setting.tran_history"
+            android:name="ruanjianbei.wifi.com.my_setting.tran_history.tran_history"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.my_setting.my_information"

@@ -9,25 +9,21 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 
 import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
 import ruanjianbei.wifi.com.my_setting.my_photo;
-import ruanjianbei.wifi.com.my_setting.tran_history;
+import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
-
-import static ruanjianbei.wifi.com.my_setting.my_information.getLoacalBitmap;
 
 public class SettingFragment extends Activity {
 	private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()

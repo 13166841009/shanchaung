@@ -1,12 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/three"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:textSize="30dp"
-        android:id="@+id/mTextView"/>
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    android:layout_below="@+id/two"
+    android:background="@drawable/ll_bg_d"
+    android:onClick="wait_kf">
+    <ImageView
+        android:id="@+id/biaoqing"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/qq_leba_list_seek_individuation" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:text="文件名"
+        android:id="@+id/textView1"
+        android:layout_alignTop="@+id/biaoqing"
+        android:layout_toRightOf="@+id/biaoqing"
+        android:layout_toEndOf="@+id/biaoqing"
+        android:layout_marginStart="21dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="文件1"
+        android:id="@+id/tv1"
+        android:layout_alignBottom="@+id/biaoqing"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignStart="@+id/textView1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_toEndOf="@+id/textView1"
+        android:layout_marginLeft="114dp"
+        android:layout_marginStart="114dp"
+        android:id="@+id/textView2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间1"
+        android:id="@+id/tv2"
+        android:layout_alignTop="@+id/tv1"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+</RelativeLayout>
 </LinearLayout>

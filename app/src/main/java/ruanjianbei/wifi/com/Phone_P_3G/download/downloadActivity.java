@@ -30,7 +30,9 @@ import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
 import ruanjianbei.wifi.com.Phone_P_3G.download.util.dialog;
 import ruanjianbei.wifi.com.Phone_P_3G.download.util.zip;
+import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
+import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -171,6 +173,9 @@ public class downloadActivity extends Activity {
                 //删除压缩文件
                 files_delete files = new files_delete(DownloadService.DOWNLOAD_PATH);
                 files.deleteAll();
+                //保存信息到本地数据库
+                DBServiceOperate db =new DBServiceOperate(mMainActivity);
+                db.saveInformation(fileInfo.gettrueName(),new get_time().getTime(),"下载");
             }
         }
     };

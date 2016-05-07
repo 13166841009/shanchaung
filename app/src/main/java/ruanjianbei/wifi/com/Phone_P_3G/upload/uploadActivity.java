@@ -40,7 +40,9 @@ import java.util.Map;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
+import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
+import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.ViewHolder;
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
@@ -206,6 +208,9 @@ public class uploadActivity extends Activity {
                                 message.what = MSG_HANDLER_MSG;
                                 message.obj = "文件:" + name + " 上传完成";
                                 mHandler.sendMessage(message);
+                                //保存信息到本地数据库
+                                DBServiceOperate db =new DBServiceOperate(uploadActivity.this);
+                                db.saveInformation(name, new get_time().getTime(), "上传");
                             }
 
                             @Override
