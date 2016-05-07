@@ -32,23 +32,25 @@ public class tran_history extends Activity{
     public void readSQLdata(){
         Cursor cursor = db.selectInformation();
         if (cursor != null) {
-            if (cursor.moveToFirst()) {
+/*            if (cursor.moveToFirst()) {
                 for(int i=0;i<cursor.getCount();i++){
+                    cursor.move(i);//移动到指定记录
                     String file_name = cursor.getString(cursor.getColumnIndex("file_name"));
                     String time = cursor.getString(cursor.getColumnIndex("time"));
                     String type = cursor.getString(cursor.getColumnIndex("type"));
                     String str[] = {file_name,time,type};
                     file_info.add(str);
-                    cursor.move(i);//移动到指定记录
                 }
+                此方法有bug，不能用，数组会越位
+            }*/
+            for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+                String file_name = cursor.getString(cursor.getColumnIndex("file_name"));
+                String time = cursor.getString(cursor.getColumnIndex("time"));
+                String type = cursor.getString(cursor.getColumnIndex("type"));
+                String str[] = {file_name,time,type};
+                file_info.add(str);
             }
             Toast.makeText(tran_history.this, "有内容+"+cursor.getCount(), Toast.LENGTH_SHORT).show();
-            for(int i = 0; i < file_info.size(); i++)
-            {
-                String s[] = file_info.get(i);
-                Log.i("neirong",s[i]+"");
-                //System.out.println(list.get(i));
-            }
             //添加适配器
             mListAdapter = new ListAdapter(tran_history.this,file_info);
             mList.setAdapter(mListAdapter);
