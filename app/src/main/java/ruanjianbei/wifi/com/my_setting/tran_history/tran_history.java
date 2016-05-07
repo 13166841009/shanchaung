@@ -41,7 +41,7 @@ public class tran_history extends Activity{
                     String str[] = {file_name,time,type};
                     file_info.add(str);
                 }
-                此方法有bug，不能用，数组会越位
+                此方法有bug，不能用，数组会越位。
             }*/
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
                 String file_name = cursor.getString(cursor.getColumnIndex("file_name"));
