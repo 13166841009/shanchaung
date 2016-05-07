@@ -60,36 +60,38 @@ public class FileListAdapter extends BaseAdapter {
             holder.btn_start = (Button) view.findViewById(R.id.btn_start);
             holder.btn_stop = (Button) view.findViewById(R.id.btn_stop);
             holder.tv_size = (TextView) view.findViewById(R.id.tv_size);
-            holder.tv_fileName.setText(fileInfo.gettrueName());
-            holder.tv_size.setText(fileInfo.getFilesize());
-            holder.pb_progress.setMax(100);
-            holder.btn_start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 通过Intent传递参数给Service
-                    Intent intent = new Intent(mContext, DownloadService.class);
-                    intent.setAction(DownloadService.ACTION_START);
-                    intent.putExtra("fileInfo", fileInfo);
-                    mContext.startService(intent);
-                    Toast.makeText(mContext, "开始下载:" + fileInfo.gettrueName(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            holder.btn_stop.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    // 通过Intent传递参数给Service
-                    Intent intent = new Intent(mContext, DownloadService.class);
-                    intent.setAction(DownloadService.ACTION_STOP);
-                    intent.putExtra("fileInfo", fileInfo);
-                    mContext.startService(intent);
-                    Toast.makeText(mContext, "下载暂停:"+fileInfo.getFileName(), Toast.LENGTH_SHORT).show();
-                }
-            });
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();//对上面的优化，不用重复加载耗时
         }
+        //！！！注意，适配器的操作必须放在下面，否则会出现重复加载
+        holder.tv_fileName.setText(fileInfo.gettrueName());
+        holder.tv_size.setText(fileInfo.getFilesize());
+        holder.pb_progress.setMax(100);
+        holder.btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 通过Intent传递参数给Service
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.setAction(DownloadService.ACTION_START);
+                intent.putExtra("fileInfo", fileInfo);
+                mContext.startService(intent);
+                Toast.makeText(mContext, "开始下载:" + fileInfo.gettrueName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.btn_stop.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // 通过Intent传递参数给Service
+                Intent intent = new Intent(mContext, DownloadService.class);
+                intent.setAction(DownloadService.ACTION_STOP);
+                intent.putExtra("fileInfo", fileInfo);
+                mContext.startService(intent);
+                Toast.makeText(mContext, "下载暂停:"+fileInfo.getFileName(), Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.pb_progress.setProgress(fileInfo.getFinished());
         holder.pb_progress1.setProgress(fileInfo.getFinished());
         return view;

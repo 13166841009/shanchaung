@@ -34,12 +34,12 @@ public class tran_history extends Activity{
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 for(int i=0;i<cursor.getCount();i++){
-                    cursor.move(i);//移动到指定记录
                     String file_name = cursor.getString(cursor.getColumnIndex("file_name"));
                     String time = cursor.getString(cursor.getColumnIndex("time"));
                     String type = cursor.getString(cursor.getColumnIndex("type"));
                     String str[] = {file_name,time,type};
                     file_info.add(str);
+                    cursor.move(i);//移动到指定记录
                 }
             }
             Toast.makeText(tran_history.this, "有内容+"+cursor.getCount(), Toast.LENGTH_SHORT).show();
