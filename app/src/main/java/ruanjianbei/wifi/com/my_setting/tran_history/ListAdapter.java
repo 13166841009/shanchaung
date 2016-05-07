@@ -1,6 +1,7 @@
 package ruanjianbei.wifi.com.my_setting.tran_history;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,9 @@ public class ListAdapter extends BaseAdapter {
             holder.iv = (ImageView) view.findViewById(R.id.biaoqing);
             holder.tv_fileName.setText(fileInfo[0]);
             holder.tv_time.setText(fileInfo[1]);
-            if(fileInfo[2] == "上传"){
+            if(fileInfo[2].equals("上传")){
                 holder.iv.setImageResource(R.drawable.send);
-            }else if(fileInfo[2] == "下载"){
+            }else if(fileInfo[2].equals("下载")){
                 holder.iv.setImageResource(R.drawable.receive);
             }
             else {

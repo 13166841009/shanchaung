@@ -42,7 +42,7 @@ public class tran_history extends Activity{
                     file_info.add(str);
                 }
             }
-            Toast.makeText(tran_history.this, "有内容", Toast.LENGTH_SHORT).show();
+            Toast.makeText(tran_history.this, "有内容+"+cursor.getCount(), Toast.LENGTH_SHORT).show();
             for(int i = 0; i < file_info.size(); i++)
             {
                 String s[] = file_info.get(i);
