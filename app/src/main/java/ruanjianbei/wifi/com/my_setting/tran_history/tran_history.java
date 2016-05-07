@@ -3,8 +3,11 @@ package ruanjianbei.wifi.com.my_setting.tran_history;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
@@ -16,16 +19,17 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class tran_history extends Activity{
     private ListView mList;
     private ListAdapter mListAdapter = null;
-    private List<String[]> file_info = null;
+    private List<String[]> file_info;
     private DBServiceOperate db;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tran_list);
         mList = (ListView) findViewById(R.id.lv);
         db = new DBServiceOperate(tran_history.this);
+        file_info = new ArrayList<String[]>();
         readSQLdata();
     }
-    private void readSQLdata(){
+    public void readSQLdata(){
         Cursor cursor = db.selectInformation();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -38,10 +42,20 @@ public class tran_history extends Activity{
                     file_info.add(str);
                 }
             }
+            Toast.makeText(tran_history.this, "有内容", Toast.LENGTH_SHORT).show();
+            for(int i = 0; i < file_info.size(); i++)
+            {
+                String s[] = file_info.get(i);
+                Log.i("neirong",s[i]+"");
+                //System.out.println(list.get(i));
+            }
+            //添加适配器
+            mListAdapter = new ListAdapter(tran_history.this,file_info);
+            mList.setAdapter(mListAdapter);
+        }else{
+            Toast.makeText(tran_history.this, "没有内容", Toast.LENGTH_SHORT).show();
         }
-        //添加适配器
-        mListAdapter = new ListAdapter(tran_history.this,file_info);
-        mList.setAdapter(mListAdapter);
+        cursor.close();
     }
 }
 

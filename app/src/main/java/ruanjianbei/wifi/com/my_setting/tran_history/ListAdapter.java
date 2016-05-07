@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -57,6 +58,8 @@ public class ListAdapter extends BaseAdapter {
                 holder.iv.setImageResource(R.drawable.send);
             }else if(fileInfo[2] == "下载"){
                 holder.iv.setImageResource(R.drawable.receive);
+            }
+            else {
             }
             view.setTag(holder);
         }else{

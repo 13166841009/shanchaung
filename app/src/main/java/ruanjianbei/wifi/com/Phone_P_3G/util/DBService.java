@@ -21,7 +21,7 @@ public class DBService extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table file_info(_id integer primary key autoincrement," +
-                "file_name char(50),time char(20),type char(5)");
+                "file_name char(50),time char(20),type char(10))");
     }
 
     @Override

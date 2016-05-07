@@ -5,36 +5,34 @@ android:layout_height="match_parent">
 <RelativeLayout
     android:id="@+id/three"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="70dp"
     android:layout_margin="10dp"
     android:layout_below="@+id/two"
-    android:background="@drawable/ll_bg_d"
-    android:onClick="wait_kf">
+    android:background="@drawable/ll_bg_d">
     <ImageView
         android:id="@+id/biaoqing"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/qq_leba_list_seek_individuation" />
+        android:src="@mipmap/qq_leba_list_seek_individuation"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
         android:text="文件名"
         android:id="@+id/textView1"
-        android:layout_alignTop="@+id/biaoqing"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/biaoqing"
-        android:layout_toEndOf="@+id/biaoqing"
-        android:layout_marginStart="21dp" />
+        android:layout_toEndOf="@+id/biaoqing" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="文件1"
         android:id="@+id/tv1"
-        android:layout_alignBottom="@+id/biaoqing"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/textView1"
         android:layout_alignStart="@+id/textView1" />
     <TextView
