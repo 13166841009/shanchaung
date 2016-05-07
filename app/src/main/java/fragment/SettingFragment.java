@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.ByteArrayInputStream;
 
@@ -20,7 +21,6 @@ import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
 import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
-import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
@@ -31,7 +31,8 @@ public class SettingFragment extends Activity {
 	private Context mContext;
 	private TitleBarView mTitleBarView;
 	private ImageView iv1;
-	private DBServiceOperate db;
+	private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db;
+	private TextView tv_tran;
 	//private View mAboutme;
 
 	@Override
@@ -39,7 +40,7 @@ public class SettingFragment extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_mine);
 		mContext=this;
-		db = new DBServiceOperate(mContext);
+		db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mContext);
 		findView();
 		init();
 		//aboutUs();
@@ -50,9 +51,15 @@ public class SettingFragment extends Activity {
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		iv1 = (ImageView) findViewById(R.id.pic);
 		iv1.setDrawingCacheEnabled(true);
+		tv_tran = (TextView) findViewById(R.id.tv_tran);
 	}
 
 	private void init(){
+		get_your_infor();
+		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+		mTitleBarView.setTitleText(R.string.mime);
+	}
+	public void get_your_infor(){
 		//初始化个人信息
 		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
 		if(!db.selectInformation().moveToFirst()) {
@@ -77,8 +84,15 @@ public class SettingFragment extends Activity {
 			Drawable drawable = Drawable.createFromStream(bais, "Photo");
 			iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
 		}
-		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
-		mTitleBarView.setTitleText(R.string.mime);
+		//查看文件传输记录
+		ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
+				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
+		Cursor cursor1 = db.selectInformation();
+		if(cursor != null){
+			tv_tran.setText("您有"+cursor1.getCount()+"条传输记录，点击查看");
+		}else{
+			tv_tran.setText("您没有传输记录");
+		}
 	}
 	public void aboutMe(View view){
 		Intent intent = new Intent(mContext,aboutUs.class);
