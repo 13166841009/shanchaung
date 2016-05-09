@@ -81,10 +81,8 @@
         android:id="@+id/center_music_window_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/more_window_auto"
         android:layout_below="@+id/more_window_auto"
         android:layout_marginBottom="78dip"
-        android:layout_toRightOf="@+id/more_window_collect"
         android:src="@mipmap/tabbar_compose_background_icon_close" />
 
 </RelativeLayout>

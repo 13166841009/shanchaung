@@ -88,7 +88,7 @@ public class Android_receiveActivity extends Activity {
                 case 0: // 网络连接成功
                 {
                     if((wifiCheck.isNetworkAvailable())||wifiCheck.is3G()){
-                        Toast.makeText(Android_receiveActivity.this,"您将选择有网传输",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Android_receiveActivity.this,"您将选择有网接收",Toast.LENGTH_LONG).show();
                         final CustomDialog dialog = new CustomDialog("网络类型选择",Android_receiveActivity.this,
                                 R.style.dialogstyle, R.layout.custom_dialog_update);
                         dialog.setOnOkClickListener(new CustomDialog.OnCustomClickListener() {
@@ -120,12 +120,9 @@ public class Android_receiveActivity extends Activity {
                         /**
                          * 扫描当前热点
                          */
-                        Toast.makeText(Android_receiveActivity.this, "您将打开wifi扫描热点连接", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(Android_receiveActivity.this, "请打开你的wifi或网络连接", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Android_receiveActivity.this, "您将建立热带点进行连接", Toast.LENGTH_LONG).show();
                     }
                 }
-//                    Toast.makeText(Android_receiveActivity.this, "网络未准备好 ！", Toast.LENGTH_SHORT).show();
                 //此处可以进行重试处理
                 break;
             }

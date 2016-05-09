@@ -5,6 +5,7 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
@@ -29,13 +31,11 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
-import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
+import ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity;
+
 import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
-import ruanjianbei.wifi.com.ScanActivity.ScanActivity;
 import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
-import ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class MoreWindow extends PopupWindow implements OnClickListener{
@@ -128,6 +128,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 	
 
 	public void showMoreWindow(View anchor,int bottomMargin) {
+		WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		final RelativeLayout layout = (RelativeLayout)LayoutInflater.from(mContext).inflate(R.layout.popwindowactivity, null);
 		setContentView(layout);
 		
@@ -137,7 +138,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 		params.addRule(RelativeLayout.BELOW, R.id.more_window_auto);
 		params.addRule(RelativeLayout.RIGHT_OF, R.id.more_window_collect);
 		params.topMargin = 200;
-		params.leftMargin = 18;
+		params.leftMargin = windowManager.getDefaultDisplay().getWidth()/2;
 		close.setLayoutParams(params);
 		
 		close.setOnClickListener(new OnClickListener() {
@@ -247,7 +248,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.more_window_local:
 //			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
-			Intent intentwifi = new Intent(mContext, WifiTranAndroid.class);
+			Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
 			mContext.startActivity(intentwifi);
 			break;
 		case R.id.more_window_online:

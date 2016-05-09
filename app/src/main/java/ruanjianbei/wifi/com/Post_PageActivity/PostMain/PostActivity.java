@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
+import android.widget.Toast;
 
 import com.bruce.library.ComboView;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
+import ruanjianbei.wifi.com.Post_PageActivity.Android_postActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class PostActivity extends Activity {
@@ -44,7 +46,7 @@ public class PostActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(PostActivity.this, uploadActivity.class));
+                        startActivity(new Intent(PostActivity.this, Android_postActivity.class));
                     }
 
                     @Override
@@ -72,7 +74,8 @@ public class PostActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(PostActivity.this, downloadActivity.class));
+                        Toast.makeText(PostActivity.this,"IosPost",Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(PostActivity.this, Android_postActivity.class));
                     }
 
                     @Override

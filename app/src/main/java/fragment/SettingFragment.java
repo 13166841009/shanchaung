@@ -13,9 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity;
+
 import java.io.ByteArrayInputStream;
 
-import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
@@ -46,7 +47,7 @@ public class SettingFragment extends Activity {
 		//aboutUs();
 	}
 
-	
+
 	private void findView(){
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		iv1 = (ImageView) findViewById(R.id.pic);
@@ -96,8 +97,10 @@ public class SettingFragment extends Activity {
 		cursor.close();
 	}
 	public void aboutMe(View view){
-		Intent intent = new Intent(mContext,aboutUs.class);
-		startActivity(intent);
+		Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
+		startActivity(intentwifi);
+//		Intent intent = new Intent(mContext,aboutUs.class);
+//		startActivity(intent);
 	}
 	public void wait_kf(View view){
 		Intent intent = new Intent(mContext,wait_kaifa.class);

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ruanjianbei.wifi.com.shanchuang">
 
+    <!--文件传输协议-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <!-- 二维码扫描权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -30,13 +34,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--热点建立-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <!-- 热点建立 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -178,7 +179,9 @@
         <activity
             android:name="ruanjianbei.wifi.com.WifiPcDirect.SettingsActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name="ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid"></activity>
+        <activity android:name="ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity android:name="ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
     </application>
-
 </manifest>
