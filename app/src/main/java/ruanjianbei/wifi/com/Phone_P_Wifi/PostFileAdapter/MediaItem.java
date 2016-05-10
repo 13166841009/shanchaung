@@ -63,7 +63,6 @@ public class MediaItem {
 		mTitle = getTitle(mData);
 		mMimeType = getType(mData);
 
-
 		File ff = new File(mData);
 
 		try {
