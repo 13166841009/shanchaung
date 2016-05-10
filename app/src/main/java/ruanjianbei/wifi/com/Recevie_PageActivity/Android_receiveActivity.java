@@ -1,132 +1,140 @@
 package ruanjianbei.wifi.com.Recevie_PageActivity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
+import android.content.IntentFilter;
+import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
+import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.telephony.TelephonyManager;
+import android.os.StrictMode;
+import android.view.View;
 import android.widget.Toast;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import com.guo.duoduo.randomtextview.RandomTextView;
+
+import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
-import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
-import ruanjianbei.wifi.com.dialog.CustomDialog;
+import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
 import ruanjianbei.wifi.com.shanchuang.R;
 
-public class Android_receiveActivity extends Activity {
-    /**
-     * 数据连接
-     */
-    Class telephonyManagerClass;
-    Object ITelephonyStub;
-    Class ITelephonyClass;
-    TelephonyManager telephonyManager;
-    //判断当前网络是否可以访问internet
-    private Boolean ifconnect;
-    //wifi网卡操作
-    private WifiAdmin wifiadmin;
-    //获取wifi操作的实例
-    private WifiCheck wifiCheck;
+public class Android_receiveActivity extends Activity implements WifiApManager.WifiStateListener{
+    public static final String ACTION_UPDATE_RECEIVER = "action_update_receiver";
+    public static final String EXTRA_DATA = "extra_data";
+    private WifiApManager mWifiApManager;
+    private RandomTextView randomTextView;
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ACTION_UPDATE_RECEIVER.equals(action)) {
+                Toast.makeText(Android_receiveActivity.this
+                        ,intent.getStringExtra(EXTRA_DATA),Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_android_receive);telephonyManager = (TelephonyManager) getApplicationContext()
-                .getSystemService(Context.TELEPHONY_SERVICE);
-        wifiadmin = new WifiAdmin(Android_receiveActivity.this);
-        wifiCheck = new WifiCheck(this);
-        checkNetWork();
-        /**
-         * 数据连接
-         */
-        try {
-            telephonyManagerClass = Class.forName(telephonyManager
-                    .getClass().getName());
-            Method   getITelephonyMethod = telephonyManagerClass
-                    .getDeclaredMethod("getITelephony");
-            getITelephonyMethod.setAccessible(true);
-            ITelephonyStub = getITelephonyMethod
-                    .invoke(telephonyManager);
-            ITelephonyClass = Class.forName(ITelephonyStub.getClass()
-                    .getName());
-        } catch (Exception e) {
-            e.printStackTrace();
+        setContentView(R.layout.activity_android_receive);
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().
+                detectDiskWrites().detectNetwork().penaltyLog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
+                detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+        mWifiApManager = new WifiApManager(this, this);
+        mWifiApManager.startScan();
+        registerReceiver(mReceiver, new IntentFilter(ACTION_UPDATE_RECEIVER));
+        randomTextView = (RandomTextView) findViewById(
+                R.id.random_textview);
+    }
+
+    @Override
+    public void onScanFinished(List<ScanResult> scanResults) {
+
+    }
+
+    @Override
+    public void onSupplicantStateChanged(SupplicantState state, int supplicantError) {
+
+    }
+
+    @Override
+    public void onSupplicantConnectionChanged(boolean connected) {
+
+    }
+
+    @Override
+    public void onWifiStateChanged(int wifiState, int prevWifiState) {
+
+    }
+
+    @Override
+    public void onWifiApStateChanged(int wifiApState) {
+
+    }
+
+    @Override
+    public void onNetworkIdsChanged() {
+
+    }
+
+    @Override
+    public void onRSSIChanged(int rssi) {
+
+    }
+
+    @Override
+    public void onPickWifiNetwork() {
+
+    }
+
+    @Override
+    public void onConnectionPreparing(String ssid) {
+        Toast.makeText(Android_receiveActivity.this,"热点"+ssid+"准备中",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onConnectionPrepared(boolean success, String ssid) {
+        if(success){
+            Toast.makeText(Android_receiveActivity.this,"热点"+ssid+"连接中...",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(Android_receiveActivity.this,"热点"+ssid+"不能连接！",Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void checkNetWork() {
-
-        String checkUrl = "https://www.baidu.com/index.html";
-
-        int timeoutDurationConn  = 3;
-
-        Looper mainLooper = Looper.getMainLooper();
-        CheckWebserver_Handler handler = new CheckWebserver_Handler(mainLooper);
-
-        new Wifistatus(checkUrl, timeoutDurationConn, handler);
-    }
-
-
-    private class CheckWebserver_Handler extends Handler {
-
-        public CheckWebserver_Handler(Looper mainLooper) {
-            super(mainLooper);
-            // TODO Auto-generated constructor stub
+    @Override
+    public void onConnectNetworkSucceeded(NetworkInfo networkInfo, final WifiInfo wifiInfo) {
+        if (!wifiInfo.getSSID().contains(WifiApManager.SSID_PREFIX)) {
+            return;
         }
-
-        public void handleMessage(Message msg) {
-
-
-            switch (msg.what) {
-                case 0: // 网络连接成功
-                {
-                    if((wifiCheck.isNetworkAvailable())||wifiCheck.is3G()){
-                        Toast.makeText(Android_receiveActivity.this,"您将选择有网接收",Toast.LENGTH_LONG).show();
-                        final CustomDialog dialog = new CustomDialog("网络类型选择",Android_receiveActivity.this,
-                                R.style.dialogstyle, R.layout.custom_dialog_update);
-                        dialog.setOnOkClickListener(new CustomDialog.OnCustomClickListener() {
-                            @Override
-                            public void onClick(CustomDialog dialog) {
-                                wifiadmin.closeNetCard();
-                                Toast.makeText(Android_receiveActivity.this, "打开数据连接", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Android_receiveActivity.this, downloadActivity.class);
-                                startActivity(intent);
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog.setOnCancleClickListener(new CustomDialog.OnCustomClickListener() {
-                            @Override
-                            public void onClick(CustomDialog dialog) {
-                                Toast.makeText(Android_receiveActivity.this, ",打开wifi连接", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Android_receiveActivity.this, downloadActivity.class);
-                                startActivity(intent);
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog.show();
+        Toast.makeText(Android_receiveActivity.this,"连接成功"
+                +wifiInfo.getBSSID(),Toast.LENGTH_SHORT).show();
+        randomTextView.setOnRippleViewClickListener(
+                new RandomTextView.OnRippleViewClickListener() {
+                    @Override
+                    public void onRippleViewClicked(View view) {
+                        Android_receiveActivity.this.startActivity(
+                                new Intent(Android_receiveActivity.this, downloadActivity.class));
                     }
-                }
-                break;
-                case 1:  //网络未准备好
-                {
-                    if (wifiCheck.isWifi()) {
-                        /**
-                         * 扫描当前热点
-                         */
-                        Toast.makeText(Android_receiveActivity.this, "您将建立热带点进行连接", Toast.LENGTH_LONG).show();
-                    }
-                }
-                //此处可以进行重试处理
-                break;
+                });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                randomTextView.addKeyWord(wifiInfo.getBSSID());
+                randomTextView.show();
             }
-        }
+        }, 2 * 1000);
     }
 
+    @Override
+    public void onConnectNetworkFailed(NetworkInfo networkInfo) {
+        Toast.makeText(Android_receiveActivity.this,"请您退出重新连接",Toast.LENGTH_SHORT).show();
+    }
 }

@@ -15,19 +15,10 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class RecevieByWifi extends Activity {
-    private WifiAdmin wifiAdmin;
-    //当前应用是否开启wifi
-    public Boolean ifopenwifi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recevie_wifi);
-        wifiAdmin = new WifiAdmin(this);
-        if(wifiAdmin.isNetCardFrindly()){
-            Toast.makeText(RecevieByWifi.this,"您的wifi已经开启",Toast.LENGTH_SHORT).show();
-        }else{
-            wifiAdmin.openNetCard();
-        }
         final RandomTextView randomTextView = (RandomTextView) findViewById(
                 R.id.random_textview);
         randomTextView.setOnRippleViewClickListener(

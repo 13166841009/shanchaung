@@ -17,6 +17,7 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity;
 
 import java.io.ByteArrayInputStream;
 
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
@@ -107,7 +108,7 @@ public class SettingFragment extends Activity {
 		startActivity(intent);
 	}
 	public void my_photo(View view){
-		Intent intent = new Intent(mContext,my_photo.class);
+		Intent intent = new Intent(mContext,RecevieByWifi.class);
 		startActivity(intent);
 	}
 	public void my_file(View view){
