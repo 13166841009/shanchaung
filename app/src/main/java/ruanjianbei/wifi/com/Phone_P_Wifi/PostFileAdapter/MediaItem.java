@@ -67,7 +67,7 @@ public class MediaItem {
 		File ff = new File(mData);
 
 		try {
-			size = FormentFileSize(getFileSizes(ff));
+			mSize = Long.parseLong(FormentFileSize(getFileSizes(ff)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
