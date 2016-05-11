@@ -19,6 +19,9 @@ public class MainPage extends Activity {
     private Context mContext;
     //记录按钮返回次数
      private int count=0;
+
+    private long exitTime = 0;
+
     /** Called when the activity is first created. */
     MyImageView joke,shouji,dadishu,wo;
     @Override
@@ -88,19 +91,23 @@ public class MainPage extends Activity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            if(count==0){
-                Toast.makeText(MainPage.this,"请再按一次退出",Toast.LENGTH_SHORT).show();
-                count++;
-            }
-            if(count==1){
-                Toast.makeText(MainPage.this,"退出",Toast.LENGTH_SHORT).show();
-                finishAffinity();
-            }
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                    Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finishAffinity();
+        }
     }
 }
