@@ -21,6 +21,7 @@ import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 public class Android_postActivity extends Activity implements WifiApManager.WifiStateListener{
@@ -28,6 +29,7 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     public static final String EXTRA_DATA = "extra_data";
     private WifiApManager mWifiApManager;
     private RandomTextView randomTextView;
+    private WifiAdmin wifiAdmin;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -48,6 +50,8 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
                 detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
         mWifiApManager = new WifiApManager(this, this);
+        wifiAdmin = new WifiAdmin(Android_postActivity.this);
+        wifiAdmin.openNetCard();
         mWifiApManager.startScan();
         registerReceiver(mReceiver, new IntentFilter(ACTION_UPDATE_RECEIVER));
         randomTextView = (RandomTextView) findViewById(
@@ -135,6 +139,15 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
 
     @Override
     public void onConnectNetworkFailed(NetworkInfo networkInfo) {
-        Toast.makeText(Android_postActivity.this,"请您退出重新连接",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Android_postActivity.this,"请您退出重新连接",Toast.LENGTH_SHORT).show();
+    }
+    /**
+     * 关闭wifi扫描
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wifiAdmin.closeNetCard();
+        mWifiApManager.destroy(Android_postActivity.this);
     }
 }

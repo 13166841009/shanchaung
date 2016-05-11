@@ -201,8 +201,10 @@ public class PostActivity extends Activity {
                     /**
                      * 扫描当前热点
                      */
+                //断开当前连接热点
                     wifiadmin.closeNetCard();
                     Toast.makeText(PostActivity.this, "您将连接热点进行发送...", Toast.LENGTH_LONG).show();
+//                    wifiadmin.openNetCard();
                     startActivity(new Intent(PostActivity.this,Android_postActivity.class));
                 }
                 //此处可以进行重试处理

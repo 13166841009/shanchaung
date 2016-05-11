@@ -21,7 +21,6 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
-import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -45,7 +44,7 @@ public class SettingFragment extends Activity {
 		db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mContext);
 		findView();
 		init();
-		//aboutUs();
+		//AboutUs();
 	}
 
 
@@ -100,7 +99,7 @@ public class SettingFragment extends Activity {
 	public void aboutMe(View view){
 		Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
 		startActivity(intentwifi);
-//		Intent intent = new Intent(mContext,aboutUs.class);
+//		Intent intent = new Intent(mContext,AboutUs.class);
 //		startActivity(intent);
 	}
 	public void wait_kf(View view){

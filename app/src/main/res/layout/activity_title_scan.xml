@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/mmtitle_bg_alpha" >
+    android:background="@color/blue" >
 
     <Button
         android:id="@+id/button_back"
@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:gravity="center_vertical"
-        android:text="二维码扫描"
+        android:text="二维码连接"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 

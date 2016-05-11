@@ -16,8 +16,8 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
-    
+
+
     <!-- QQ -->
     <style name="ButtomBar">
         <item name="android:layout_height">60dp</item>
@@ -25,32 +25,32 @@
         <item name="android:layout_weight">1</item>
         <item name="android:padding">5dp</item>
     </style>
-    
+
     <style name="ButtomBarImgBtn">
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_width">55dp</item>
         <item name="android:scaleType">fitXY</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
-    
+
     <style name="popwin_anim_style">
         <item name="android:windowEnterAnimation">@anim/pop_enter</item>
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
-    
+
     <style name="app_pop">
         <item name="android:windowEnterAnimation">@anim/pop_up</item>
         <item name="android:windowExitAnimation">@anim/pop_down</item>
     </style>
-    
+
     <style name="scan_dialog">
-         <item name="android:windowFrame">@null</item>  
-         <item name="android:windowNoTitle">true</item> 
-         <item name="android:windowIsFloating">true</item>  
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/whites</item>
     </style>
-    
+
     <style name="top_group">
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">0dp</item>
@@ -59,7 +59,7 @@
         <item name="android:textColor">@drawable/qq_constact_font</item>
         <item name="android:background">@drawable/qq_constact_group</item>
     </style>
-    
+
     <style name="top_all">
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">0dp</item>
@@ -128,5 +128,23 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/dialog_bg</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!--自定义底部选择-->
+    <style name="MaterialDialogSheet" parent="@android:style/Theme.Dialog">
+        <!--设置背景的透明度-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!--对话框弹出后的背景是否覆盖或者显示-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--窗口是否浮动-->
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/MaterialDialogSheetAnimation</item>
+    </style>
+
+    <style name="MaterialDialogSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
     </style>
 </resources>

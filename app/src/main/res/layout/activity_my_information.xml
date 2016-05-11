@@ -7,7 +7,7 @@
     <FrameLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="194dp"
+        android:layout_height="157dp"
         android:background="@drawable/user_info_bg">
         <LinearLayout
             android:orientation="horizontal"
@@ -29,31 +29,31 @@
                     android:src="@mipmap/chengxuyuan"
                     android:layout_gravity="right|top" />
             </FrameLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dip"
-                android:layout_marginTop="10dip"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:onClick="onClicknicheng"
-                android:background="@drawable/me_my_fans_bg">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:layout_marginTop="5dip"
-                    android:textSize="20sp"
-                    android:text="我的昵称"/>
-                <TextView
-                    android:id="@+id/nicheng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:layout_marginTop="5dip"
-                    android:text="123"
-                    android:textSize="20sp" />
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="15dip"-->
+                <!--android:layout_marginTop="10dip"-->
+                <!--android:orientation="vertical"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:onClick="onClicknicheng"-->
+                <!--android:background="@drawable/me_my_fans_bg">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:layout_marginTop="5dip"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:text="我的昵称"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/nicheng"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:layout_marginTop="5dip"-->
+                    <!--android:text="123"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/setting"
-            android:text="姓名:"
+            android:text="昵称:"
             android:textSize="20sp"
             android:id="@+id/tv11"/>
         <TextView
