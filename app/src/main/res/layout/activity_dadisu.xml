@@ -25,12 +25,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上次排名："/>
+                android:text="上次排名：1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="上次分数："/>
+                android:text="上次分数：100"/>
         </LinearLayout>
     </LinearLayout>
 
