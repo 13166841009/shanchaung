@@ -20,6 +20,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.jpush.android.api.JPushInterface;
 import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
@@ -76,6 +77,8 @@ public class LoginActivity extends Activity {
 		public void onClick(View v) {
 			name = username.getText().toString();
 			pass = userpass.getText().toString();
+			//设置推送的标签
+			JPushInterface.setAlias(mContext,name,null);
 			User_login();
 		}
 	};
@@ -150,4 +153,6 @@ public class LoginActivity extends Activity {
 			}
 		});
 	}
+
+
 }

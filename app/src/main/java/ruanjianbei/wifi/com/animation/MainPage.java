@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import activity.WiFiActivity;
+import cn.jpush.android.api.JPushInterface;
 import fragment.SettingFragment;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.shanchuang.R;

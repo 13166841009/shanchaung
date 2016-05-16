@@ -2,6 +2,7 @@ package activity;
 
 
 
+import cn.jpush.android.api.JPushInterface;
 import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.SpUtil;
@@ -83,5 +84,16 @@ public class WelcomeActivity extends Activity {
 			}
 		},1000);
 		
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		JPushInterface.onPause(mContext);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		JPushInterface.onResume(mContext);
 	}
 }
