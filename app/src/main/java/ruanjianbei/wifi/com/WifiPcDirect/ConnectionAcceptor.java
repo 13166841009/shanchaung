@@ -113,7 +113,7 @@ public class ConnectionAcceptor implements Runnable {
                 int width = metric.widthPixels;
                 try {
 
-                    mImageView.setImageBitmap(Utils.createQRCode("http://"+ipstr, width/2));
+                    mImageView.setImageBitmap(Utils.createQRCode("http://"+ipstr, (int) (width/1.5)));
                     // Resources res = getResources();
                     // Bitmap bmp = BitmapFactory.decodeResource(res,
                     // R.drawable.ic_xiner);

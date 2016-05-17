@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +17,12 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.Map;
 
+import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class WifiPcActivity extends Activity {
+    private TitleBarView mTitleBarView;
 
     ConnectionAcceptor acceptor;
     @Override
@@ -26,7 +30,7 @@ public class WifiPcActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wifi_pc_direct);
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
-
+        init();
         ((CheckBox)findViewById(R.id.checkbox_download)).setChecked(pref.getBoolean("download", true));
         ((CheckBox)findViewById(R.id.checkbox_upload)).setChecked(pref.getBoolean("upload", true));
         ((CheckBox)findViewById(R.id.checkbox_rename)).setChecked(pref.getBoolean("rename", false));
@@ -38,6 +42,19 @@ public class WifiPcActivity extends Activity {
             acceptor = new ConnectionAcceptor(this);
             new Thread(acceptor).start();
         }
+    }
+
+    private void init() {
+        mTitleBarView = (TitleBarView) findViewById(R.id.title_bar);
+        mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
+        mTitleBarView.setTitleText(R.string.connectpc);
+        mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mTitleBarView.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WifiPcActivity.this, MainPage.class));
+            }
+        });
     }
 
     /**
@@ -160,5 +177,14 @@ public class WifiPcActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            startActivity(new Intent(WifiPcActivity.this, MainPage.class));
+            this.finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

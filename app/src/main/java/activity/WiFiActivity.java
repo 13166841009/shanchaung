@@ -1,13 +1,12 @@
 package activity;
 
 
-import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
-import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
-import ruanjianbei.wifi.com.shanchuang.R;
-import view.TitleBarView;
-import foregin.UiUpdater;
-
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -21,14 +20,14 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 
 import com.bruce.library.ComboView;
+
+import foregin.UiUpdater;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
+import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
+import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 @SuppressLint("NewApi")
 public class WiFiActivity extends Activity {
@@ -78,8 +77,15 @@ public class WiFiActivity extends Activity {
 					}
 				});
 
-		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.wifi);
+		mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+		mTitleBarView.setBtnLeftOnclickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				WiFiActivity.this.finish();
+			}
+		});
 		ComboView pcwifi = (ComboView) findViewById(R.id.pc_wifi_post);
 		ComboView.Params params = ComboView.Params.create()
 
