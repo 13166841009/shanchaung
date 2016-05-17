@@ -27,7 +27,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class Android_postActivity extends Activity implements WifiApManager.WifiStateListener{
     public static final String ACTION_UPDATE_RECEIVER = "action_update_receiver";
     public static final String EXTRA_DATA = "extra_data";
-    private WifiApManager mWifiApManager;
+    private static WifiApManager mWifiApManager;
     private RandomTextView randomTextView;
     private WifiAdmin wifiAdmin;
 
@@ -63,6 +63,9 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
 
     }
 
+    public static WifiApManager getwifiApManager(){
+        return mWifiApManager;
+    }
     @Override
     public void onSupplicantStateChanged(SupplicantState state, int supplicantError) {
 
@@ -123,8 +126,9 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
                 new RandomTextView.OnRippleViewClickListener() {
                     @Override
                     public void onRippleViewClicked(View view) {
-                        Android_postActivity.this.startActivity(
-                                new Intent(Android_postActivity.this, downloadActivity.class));
+                        Intent intent = new Intent();
+                        intent.setClass(Android_postActivity.this, Post_Activity.class);
+                        startActivity(intent);
                     }
                 });
 
@@ -148,6 +152,6 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     protected void onDestroy() {
         super.onDestroy();
         wifiAdmin.closeNetCard();
-        mWifiApManager.destroy(Android_postActivity.this);
+        //mWifiApManager.destroy(Android_postActivity.this);
     }
 }

@@ -1,6 +1,7 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,8 @@ public class FragmentOthers extends Fragment {
 		listview = (ListView) getActivity().findViewById(R.id.list);
 		textview = (TextView) getActivity().findViewById(R.id.path);
 		//获取系统SD卡的目录
-		File root = new File("/mnt/sdcard/");
+		String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
+		File root = new File(sdpath);
 		if(root.exists()){
 			currentParent = root;
 			currentFiles = root.listFiles();
@@ -81,7 +83,8 @@ public class FragmentOthers extends Fragment {
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
 					try {
-						if (!currentParent.getCanonicalPath().equals("/mnt/sdcard")) {
+						if (!currentParent.getCanonicalPath().equals(Environment
+								.getDataDirectory().getAbsolutePath())) {
                             //获取上一级的目录
                             currentParent = currentParent.getParentFile();
                             //列出当前目录下的所有文件
@@ -100,7 +103,7 @@ public class FragmentOthers extends Fragment {
 	 */
 	private void inflateListView(File[] files) {
 		//创建一个List集合，List集合的元素是Map
-		System.out.println(files.length);
+//		System.out.println(files.length);
 		List<Map<String,Object>> listItems = new ArrayList<Map<String,Object>>();
 		for(int i = 0;i<files.length;i++){
 			Map<String,Object> listItem = new HashMap<String,Object>();

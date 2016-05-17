@@ -13,6 +13,7 @@ import activity.WiFiActivity;
 import cn.jpush.android.api.JPushInterface;
 import fragment.SettingFragment;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
+import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 import ruanjianbei.wifi.com.shanchuang.UserGame;
 
@@ -46,26 +47,6 @@ public class MainPage extends Activity {
 
             @Override
             public void onClick() {
-//                ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-//                NetworkInfo activieNetWork =  connectivityManager.getActiveNetworkInfo();
-//                if(activieNetWork.isConnectedOrConnecting()){
-//                    if (activieNetWork.getType()==ConnectivityManager.TYPE_MOBILE){
-//                        Toast.makeText(mContext,"3G/4G",Toast.LENGTH_SHORT).show();
-//                        Intent intent=new Intent(mContext, Mobile_PostAndroid.class);
-//                        startActivity(intent);
-//                        MainPage.this.overridePendingTransition(R.anim.activity_up, R.anim.fade_out);
-//                    }else if (activieNetWork.getType()==ConnectivityManager.TYPE_WIFI){
-//                        Toast.makeText(mContext,"wifi",Toast.LENGTH_SHORT).show();
-//                        Intent intent=new Intent(mContext, Wifi_PostAndroid.class);
-//                        startActivity(intent);
-//                        MainPage.this.overridePendingTransition(R.anim.activity_up, R.anim.fade_out);
-//                    }else {
-//                        Toast.makeText(mContext,"蓝牙",Toast.LENGTH_SHORT).show();
-//                    }
-//                }else{
-//                    Toast.makeText(mContext,"断网了",Toast.LENGTH_SHORT).show();
-//                }
-               //
                 Intent intent=new Intent(mContext, MainPageActivity.class);
                 startActivity(intent);
                 MainPage.this.overridePendingTransition(R.anim.activity_up, R.anim.fade_out);

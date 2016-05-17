@@ -29,7 +29,6 @@ public class FragmentMusic extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		GetMusic.getNumber(getContext());
-//      image = (ImageView) findViewById(R.id.imagemusic);
 		lv = (ListView) getActivity().findViewById(R.id.lv);
 		adapter = new MusicAdapter(GetMusic.lists, getContext());
 		lv.setAdapter(adapter);

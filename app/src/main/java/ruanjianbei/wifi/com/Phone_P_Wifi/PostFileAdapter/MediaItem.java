@@ -58,16 +58,15 @@ public class MediaItem {
 	public MediaItem(int i) {
 		// TODO 自动生成的构造函数存根
 		mId = i;
-		mSize = 20000;
 		mData = testlist.get(i);
 		mTitle = getTitle(mData);
 		mMimeType = getType(mData);
-
-		File ff = new File(mData);
-
+		File datafile = new File(mData);
 		try {
-			mSize = Long.parseLong(FormentFileSize(getFileSizes(ff)));
-		} catch (IOException e) {
+			long s = getFileSizes(datafile);
+			mSize = s;
+			//mSize = Long.parseLong(FormentFileSize(s));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -94,8 +93,10 @@ public class MediaItem {
 		type = path.substring(path.lastIndexOf(".")+1);
 		return type;
 	}
-
-	public long getFileSizes(File f) throws IOException {
+	/**
+	 * 获取文件的大小
+	 */
+	public long getFileSizes(File f) throws Exception {
 		long s = 0;
 		if (f.exists()) {
 			FileInputStream fis = null;
@@ -110,36 +111,20 @@ public class MediaItem {
 	}
 
 //	/**
-//	 * 递归
+//	 * 转换文件大小
 //	 * */
-//	public long getFileSize(File f) {
-//		long size = 0;
-//		File flist[] = f.listFiles();
-//		for (int i = 0; i < flist.length; i++) {
-//			if (flist[i].isDirectory()) {
-//				size = size + getFileSize(flist[i]);
-//			} else {
-//				size = size + flist[i].length();
-//			}
+//	public String FormentFileSize(long fileS) {
+//		DecimalFormat df = new DecimalFormat("#.00");
+//		String fileSizeString = "";
+//		if (fileS < 1024) {
+//			fileSizeString = df.format((double) fileS);
+//		} else if (fileS < 1048576) {
+//			fileSizeString = df.format((double) fileS / 1024);
+//		} else if (fileS < 1073741824) {
+//			fileSizeString = df.format((double) fileS / 1048576);
+//		} else {
+//			fileSizeString = df.format((double) fileS / 1073741824);
 //		}
-//		return size;
+//		return fileSizeString;
 //	}
-
-	/**
-	 * 转换文件大小
-	 **/
-	public String FormentFileSize(long fileS) {
-		DecimalFormat df = new DecimalFormat("#.00");
-		String fileSizeString = "";
-		if (fileS < 1024) {
-			fileSizeString = df.format((double) fileS) + "B";
-		} else if (fileS < 1048576) {
-			fileSizeString = df.format((double) fileS / 1024) + "K";
-		} else if (fileS < 1073741824) {
-			fileSizeString = df.format((double) fileS / 1048576) + "M";
-		} else {
-			fileSizeString = df.format((double) fileS / 1073741824) + "G";
-		}
-		return fileSizeString;
-	}
 }

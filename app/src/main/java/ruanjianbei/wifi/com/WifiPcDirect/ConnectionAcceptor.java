@@ -19,8 +19,8 @@ import ruanjianbei.wifi.com.ScanActivity.camera.Utils;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
-* Created by lispascal on 2/17/2015.
-*/
+ * Created by zhanghang on 4/17/2016.
+ */
 public class ConnectionAcceptor implements Runnable {
     private WifiPcActivity mainActivity;
     boolean stop = false;
@@ -96,7 +96,7 @@ public class ConnectionAcceptor implements Runnable {
 //        System.out.println(ip);
         if(ip != 0x00000000)
             ipstr = (ip & 0xff) + "." + ((ip >> 8) & 0xff) + "." + ((ip >> 16) & 0xff)
-                + "." + ((ip >> 24) & 0xff) + ":" + ssock.getLocalPort();
+                    + "." + ((ip >> 24) & 0xff) + ":" + ssock.getLocalPort();
         else
             ipstr = "Relaunch with WiFi";
 

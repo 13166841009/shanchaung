@@ -38,7 +38,6 @@ public class GetMusic {
 			imchoose = true;
 			MusicInfo phoneInfo = new MusicInfo(musicname, musicpeople,imchoose,musicdistance);
 			lists.add(phoneInfo);
-//			System.out.println(phoneName+phoneNumber);
 		}
 		return null;
 	}

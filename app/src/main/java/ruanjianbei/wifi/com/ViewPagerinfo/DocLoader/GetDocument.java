@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.Toast;
 
 public class GetDocument {
@@ -14,7 +15,7 @@ public class GetDocument {
 	 * 根据条件获取相应的文件
 	 */
 	private static String [] DocFormatSet = new String[] { ".docx",".doc"}; // 合法的音频文件格式
-	private static String sdpath = "/sdcard/";
+	private static String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
 	public static String GetDocument(Context context){
 		mcontext = context;

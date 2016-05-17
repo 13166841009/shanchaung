@@ -119,7 +119,6 @@ public class WifiPcActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         acceptor.stop();
-//        System.out.println("thread stopped");
     }
 
     String getPassword(){

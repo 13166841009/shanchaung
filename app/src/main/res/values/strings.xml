@@ -11,7 +11,9 @@
     <string name="login">登陆</string>
     <string name="forget_password">无账号登陆</string>
     <string name="tv_country">中国+86</string>
-    <string name="et_phoneNumber_hint">请输入你的手机号码</string>
+    <string name="add_verify">获取验证码</string>
+    <string name="et_phoneNumber_hint">请输入您的手机号码</string>
+    <string name="et_verify_hint">请填写您的验证码</string>
     <string name="title_phoneNumber">请填写手机号码</string>
     <string name="btn_next">下一步</string>
     <string name="tv_xieyi">我已阅读并同意</string>
