@@ -57,6 +57,16 @@
             android:layout_width="match_parent"
             android:background="@color/devide_line"/>
     </LinearLayout>
+        
+        <CheckBox
+            android:id="@+id/id_cb_rememberpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/ll_user_info"
+            android:layout_alignParentRight="true"
+            android:paddingRight="25dp"
+            android:text="记住用户名和密码"
+            />
     
     <Button 
         android:id="@+id/login"
@@ -66,7 +76,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="@string/login"
-        android:layout_below="@id/ll_user_info"
+        android:layout_below="@id/id_cb_rememberpwd"
         android:background="@drawable/login_btn"
         android:textColor="@android:color/white"/>
     </RelativeLayout>

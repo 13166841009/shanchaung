@@ -3,12 +3,14 @@ package activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -40,14 +42,25 @@ public class LoginActivity extends Activity {
 	private String name = null;
 	private String pass =null;
 	private String result = null ;//判断返回的类型
+
+	//SharePreferences是用来存储一些简单配置信息的一种机制，使用Map数据结构来存储数据，以键值对的方式存储，采用了XML格式将数据存储到设备中
+	//只能在同一个包内使用，不能在不同的包之间使用，其实也就是说只能在创建它的应用中使用，其他应用无法使用。
+	private SharedPreferences userInfo;//保存账号和密码
+	private CheckBox mChkSavePassword;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		//获取配置文件
+		userInfo = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+
 		mContext=this;
 		findView();
 		initTvUrl();
 		init();
+		loadNameAndPassword();
 	}
 
 	private void findView(){
@@ -57,6 +70,7 @@ public class LoginActivity extends Activity {
 		mTextViewURL=(TextURLView) findViewById(R.id.tv_forget_password);
 		username = (EditText) findViewById(R.id.account);
 		userpass = (EditText) findViewById(R.id.password);
+		mChkSavePassword = (CheckBox) findViewById(R.id.id_cb_rememberpwd);
 	}
 
 	private void init(){
@@ -140,6 +154,7 @@ public class LoginActivity extends Activity {
 					if(resultString.equals("1")){
 						stopDialog();
 						Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+						saveNameAndPassword();
 						Intent intent = new Intent(mContext,MainPage.class);
 						startActivity(intent);
 					}else{
@@ -154,5 +169,33 @@ public class LoginActivity extends Activity {
 		});
 	}
 
+
+	/**
+	 * 读取账号和密码
+	 */
+	private void loadNameAndPassword() {
+		username.setText(userInfo.getString("loginName", ""));
+		userpass.setText(userInfo.getString("password", ""));
+		mChkSavePassword.setChecked(userInfo.getBoolean("chkSavePassword", false));
+	}
+
+	/**
+	 * 保存账号和密码
+	 */
+	private void saveNameAndPassword() {
+		String loginName = "";
+		String password = "";
+		if (mChkSavePassword.isChecked()) {
+			loginName = username.getText().toString().trim();
+			password = userpass.getText().toString().trim();
+		}
+
+		//如果保存密码是选择状态
+		SharedPreferences.Editor editor = userInfo.edit();
+		editor.putString("loginName", loginName);
+		editor.putString("password", password);
+		editor.putBoolean("chkSavePassword", mChkSavePassword.isChecked());
+		editor.commit();
+	}
 
 }
