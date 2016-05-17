@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bruce.library.ComboView;
@@ -20,10 +21,12 @@ import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
 import ruanjianbei.wifi.com.Post_PageActivity.Android_postActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class PostActivity extends Activity {
     /**
@@ -39,6 +42,7 @@ public class PostActivity extends Activity {
     private WifiAdmin wifiadmin;
     //获取wifi操作的实例
     private WifiCheck wifiCheck;
+    private TitleBarView mtitlrbar;
     /**
      * 进入后进行文件传输存在bug
      * @param savedInstanceState
@@ -47,6 +51,7 @@ public class PostActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive);
+        initTitle();
         telephonyManager = (TelephonyManager) getApplicationContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
         wifiadmin = new WifiAdmin(PostActivity.this);
@@ -129,7 +134,12 @@ public class PostActivity extends Activity {
         android.settingMorphParams(params);
         ios.settingMorphParams(iosparams);
     }
-
+    private  void initTitle(){
+        mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
+        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
+        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back,R.string.back);
+        mtitlrbar.setTitleText(R.string.wifipostTitle);
+    }
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);
     }

@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bruce.library.ComboView;
@@ -24,6 +25,7 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class ReceiveActivity extends Activity {
     /**
@@ -39,6 +41,7 @@ public class ReceiveActivity extends Activity {
     private WifiAdmin wifiadmin;
     //获取wifi操作的实例
     private WifiCheck wifiCheck;
+    private TitleBarView mtitlebar;
     /**
      * 进入后进行文件传输存在bug
      * @param savedInstanceState
@@ -47,6 +50,7 @@ public class ReceiveActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive);
+        initTitle();
         telephonyManager = (TelephonyManager) getApplicationContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
         wifiadmin = new WifiAdmin(ReceiveActivity.this);
@@ -134,6 +138,13 @@ public class ReceiveActivity extends Activity {
         ios.settingMorphParams(iosparams);
     }
 
+    private void initTitle() {
+        mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
+        mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
+        mtitlebar.setTitleText(R.string.receivetitle);
+        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back,R.string.back);
+    }
+
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);
     }
@@ -207,6 +218,7 @@ public class ReceiveActivity extends Activity {
                      */
                     Toast.makeText(ReceiveActivity.this, "您将建立热带点进行连接", Toast.LENGTH_LONG).show();
                     wifiadmin.closeNetCard();
+                    startActivity(new Intent(ReceiveActivity.this,Android_receiveActivity.class));
                 }
                 //此处可以进行重试处理
                 break;

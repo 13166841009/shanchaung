@@ -12,6 +12,7 @@ import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +23,12 @@ import java.util.List;
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
+import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class Android_postActivity extends Activity implements WifiApManager.WifiStateListener{
     public static final String ACTION_UPDATE_RECEIVER = "action_update_receiver";
@@ -30,6 +36,7 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     private static WifiApManager mWifiApManager;
     private RandomTextView randomTextView;
     private WifiAdmin wifiAdmin;
+    private TitleBarView mtitlrbar;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -45,6 +52,7 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recevie_wifi);
+        initTitle();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().
                 detectDiskWrites().detectNetwork().penaltyLog().build());
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
@@ -153,5 +161,27 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         super.onDestroy();
         wifiAdmin.closeNetCard();
         //mWifiApManager.destroy(Android_postActivity.this);
+    }
+    private  void initTitle(){
+        mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
+        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE,View.GONE,View.VISIBLE);
+        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlrbar.setTitleText(R.string.wifiscan);
+    }
+
+    /**
+     * 自定义后退
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            startActivity(new Intent(Android_postActivity.this, MoreWindow.class));
+            this.finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
