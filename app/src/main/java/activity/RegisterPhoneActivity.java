@@ -17,6 +17,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class RegisterPhoneActivity extends Activity {
 
 	private Context mContext;
+	private CheckBox privacycheck;
 	private String phoneString;
 	private Handler handler;
 	private String inputveifyCode;
@@ -86,6 +88,7 @@ public class RegisterPhoneActivity extends Activity {
 		SMSSDK.registerEventHandler(eh);
 	}
 	private void findView(){
+		privacycheck  = (CheckBox) findViewById(R.id.checkbox_privacy);
 		verifyCode = (TextView) findViewById(R.id.add_verify);
 		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		mTextViewURL=(TextURLView) findViewById(R.id.tv_url);
@@ -95,6 +98,14 @@ public class RegisterPhoneActivity extends Activity {
 	}
 
 	private void init(){
+		privacycheck.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (privacycheck.isChecked()){
+					Toast.makeText(RegisterPhoneActivity.this,"您已阅读条款",Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -146,6 +157,12 @@ public class RegisterPhoneActivity extends Activity {
 
 	private void initTvUrl(){
 		mTextViewURL.setText(R.string.tv_xieyi_url);
+		mTextViewURL.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(RegisterPhoneActivity.this,"待添加条款",Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	/**

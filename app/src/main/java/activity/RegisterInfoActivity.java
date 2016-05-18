@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.DialogHelp;
 import view.TitleBarView;
@@ -46,7 +48,7 @@ public class RegisterInfoActivity extends Activity {
 		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		btn_complete=(Button) findViewById(R.id.register_complete);
 		userpass = (EditText) findViewById(R.id.password);
-		username = (EditText) findViewById(R.id.name); 
+		username = (EditText) findViewById(R.id.name);
 	}
 
 	private void init(){
@@ -79,7 +81,8 @@ public class RegisterInfoActivity extends Activity {
 		mTitleBarView.setBtnLeftOnclickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				startActivity(new Intent(RegisterInfoActivity.this,LoginActivity.class));
+				RegisterInfoActivity.this.finish();
 			}
 		});
 	}
@@ -144,6 +147,13 @@ public class RegisterInfoActivity extends Activity {
 			}
 		});
 	}
-
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			startActivity(new Intent(RegisterInfoActivity.this, LoginActivity.class));
+			this.finish();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }
 

@@ -84,12 +84,12 @@
         android:layout_margin="20dp"
         android:orientation="horizontal">
         <CheckBox
-            android:id="@+id/ck_agreen"
+            android:id="@+id/checkbox_privacy"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:background="@drawable/checkbox"
+            android:background="@drawable/checkbox_privacy"
             android:button="@null"
-            android:checked="true"/>
+            android:checked="false"/>
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

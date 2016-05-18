@@ -100,6 +100,26 @@
     <style name="CheckBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox</item>
     </style>
+    <!--自定义PC端连接操作下载-->
+    <style name="DownloadBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/downloadcheckbox</item>
+    </style>
+    <!--自定义PC端连接操作上传-->
+    <style name="UploadBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/uploadcheckbox</item>
+    </style>
+    <!--自定义PC端连接操作删除-->
+    <style name="DeleteBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/deletecheckbox</item>
+    </style>
+    <!--自定义PC端连接操作提醒-->
+    <style name="ReminBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/remincheckbox</item>
+    </style>
+    <!--自定义PC端连接操作命名-->
+    <style name="RenameBoxstyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/renamecheckbox</item>
+    </style>
     <!--自定义dialog-->
     <style name="user_info_detail_item">
         <item name="android:paddingLeft">16.0dip</item>

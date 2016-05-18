@@ -168,20 +168,4 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
         mtitlrbar.setTitleText(R.string.wifiscan);
     }
-
-    /**
-     * 自定义后退
-     * @param keyCode
-     * @param event
-     * @return
-     */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            startActivity(new Intent(Android_postActivity.this, MoreWindow.class));
-            this.finish();
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 }
