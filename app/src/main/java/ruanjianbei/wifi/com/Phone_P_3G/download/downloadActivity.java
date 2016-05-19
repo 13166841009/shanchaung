@@ -68,6 +68,7 @@ public class downloadActivity extends Activity {
             }
         }
         cursor.close();
+        Log.i("1233425334535:::",user_name);
         if("".equals(user_name)){
             Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
             return;
