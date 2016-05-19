@@ -19,15 +19,15 @@ public class DBServiceOperate {
         this.context = context;
         this.operate  = new DBService(context);
     }
-    public void saveInformation(Bitmap bitmap,String nicheng,String name,String sex,
+    public void saveInformation(Bitmap bitmap,String name,String sex,
                                    String number,String email,String address){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         // 将Bitmap压缩成PNG编码，质量为100%存储
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         //如果数据库不存在，则创建一个数据库，再可读可写数据库对象；如果数据库存在，则直接打开
         database = operate.getWritableDatabase();
-        database.execSQL("insert into information(Photo,Nicheng,Name,Sex,Number,Email,Address" +
-                ")values(?,?,?,?,?,?,?)",new Object[]{baos.toByteArray(),nicheng,name,sex,number,email,address});
+        database.execSQL("insert into information(Photo,Name,Sex,Number,Email,Address" +
+                ")values(?,?,?,?,?,?)",new Object[]{baos.toByteArray(),name,sex,number,email,address});
         database.close();
     }
     public void upDateInformation(Bitmap bitmap){
@@ -41,11 +41,6 @@ public class DBServiceOperate {
     }
     public void upDateInformation(String leixing,String data){
         switch (leixing) {
-            case "Nicheng":
-                database = operate.getWritableDatabase();
-                database.execSQL("update information set Nicheng = ? where _id = ?",
-                        new Object[]{data,1});
-                break;
             case "Name":
                 database = operate.getWritableDatabase();
                 database.execSQL("update information set Name = ? where _id = ?",

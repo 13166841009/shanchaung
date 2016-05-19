@@ -1,26 +1,15 @@
 package ruanjianbei.wifi.com.Phone_P_3G.upload;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luoxudong.app.asynchttp.AsyncHttpRequest;
@@ -40,12 +29,10 @@ import java.util.Map;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.MiSportButton;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.util.yashuo;
-import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
-import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.ViewHolder;
-import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
+import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -68,6 +55,9 @@ public class uploadActivity extends Activity {
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
     private String filePath = "";
     private ListView list_choosed;
+    private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
+    private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
+    private String user_name = null;
 
     private List<String> fileNames = new ArrayList<String>();
 
@@ -117,7 +107,19 @@ public class uploadActivity extends Activity {
             //所有已选文件的路径
             filePath += s + ";";
         }
-
+        //读取用户名
+        db_user = new DBServiceOperate(uploadActivity.this);
+        Cursor cursor =  db_user.selectInformation();
+        if (cursor != null&&cursor.getCount()!=0) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                user_name = cursor.getString(cursor.getColumnIndex("Name"));
+            }
+        }
+        cursor.close();
+        if("".equals(user_name)){
+            Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+            return;
+        }
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
 
@@ -132,6 +134,12 @@ public class uploadActivity extends Activity {
                     filespath = filePath;
                 } else {
                     Toast.makeText(context, "your choose files is empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                // 判断是否输入用户名
+                if(et_filepath.getText().toString().equals(null)){
+                    Toast.makeText(context, "please input toUserName", Toast.LENGTH_LONG).show();
+                }else {
                     return;
                 }
                 //转换多文件路径
@@ -174,12 +182,13 @@ public class uploadActivity extends Activity {
                         return;
                     }
                 }
+                //联网上传文件
                 request = new AsyncHttpUtil.Builder()
                         .url(URL)
                                 //.addUploadFile("file1", new File("/storage/sdcard1/IMG_20160318_202540_HDR.jpg"))
                         .setFileWrappers(fileWrappers)
-                        .addFormData("Postman", "zhanghang")
-                        .addFormData("Toman", "linankun")
+                        .addFormData("Postman", user_name)
+                        .addFormData("Toman", et_filepath.getText().toString())
                                 //.addFormData("Filename", filename)//添加form参数
                         .setCallable(new UploadRequestCallable() {
                             @Override
@@ -209,8 +218,8 @@ public class uploadActivity extends Activity {
                                 message.obj = "文件:" + name + " 上传完成";
                                 mHandler.sendMessage(message);
                                 //保存信息到本地数据库
-                                DBServiceOperate db =new DBServiceOperate(uploadActivity.this);
-                                db.saveInformation(name, new get_time().getTime(), "上传");
+                                db_file =new ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(uploadActivity.this);
+                                db_file.saveInformation(name, new get_time().getTime(), "上传");
                             }
 
                             @Override

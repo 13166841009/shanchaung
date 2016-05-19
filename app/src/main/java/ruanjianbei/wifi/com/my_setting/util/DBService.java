@@ -22,7 +22,7 @@ public class DBService extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table information(_id integer primary key autoincrement," +
-                "Photo binary,Nicheng char(10),Name char(10),Sex char(5)," +
+                "Photo binary,Name char(10),Sex char(5)," +
                 "Number char(20),Email char(30),Address char(30))");
     }
 

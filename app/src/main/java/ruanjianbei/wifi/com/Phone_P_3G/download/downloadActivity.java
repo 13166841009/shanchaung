@@ -1,12 +1,11 @@
 package ruanjianbei.wifi.com.Phone_P_3G.download;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,12 +24,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import ruanjianbei.wifi.com.Phone_P_3G.download.Service.DownloadService;
 import ruanjianbei.wifi.com.Phone_P_3G.download.entities.FileInfo;
 import ruanjianbei.wifi.com.Phone_P_3G.download.util.dialog;
 import ruanjianbei.wifi.com.Phone_P_3G.download.util.zip;
-import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -47,6 +44,8 @@ public class downloadActivity extends Activity {
     private TextView textView = null;
     private Map<String, String[]> file;
     private int number = 0;
+    private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
+    private String user_name = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +53,31 @@ public class downloadActivity extends Activity {
         setContentView(R.layout.activity_download_main);
         //textView = (TextView) findViewById(R.id.textView1);
         mMainActivity = this;
+        db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
         onConn();
     }
     public void onClick(View v){
         onConn();
     }
     public void onConn() {
+        //获取用户名
+        Cursor cursor =  db_user.selectInformation();
+        if (cursor != null&&cursor.getCount()!=0) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                user_name = cursor.getString(cursor.getColumnIndex("user_name"));
+            }
+        }
+        cursor.close();
+        if("".equals(user_name)){
+            Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //文件下载
         file = new HashMap<String, String[]>();
         //String toman = textView.getText().toString();
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
                 .url("http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Get")
-                .addFormData("Toman", "linankun")//设置form表单数据，也可以调用setFormDatas方法
+                .addFormData("Toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override
                     public void onFailed(int errorCode, String errorMsg) {
@@ -174,8 +187,9 @@ public class downloadActivity extends Activity {
                 files_delete files = new files_delete(DownloadService.DOWNLOAD_PATH);
                 files.deleteAll();
                 //保存信息到本地数据库
-                DBServiceOperate db =new DBServiceOperate(mMainActivity);
-                db.saveInformation(fileInfo.gettrueName(),new get_time().getTime(),"下载");
+                ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file =
+                        new ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mMainActivity);
+                db_file.saveInformation(fileInfo.gettrueName(),new get_time().getTime(),"下载");
             }
         }
     };

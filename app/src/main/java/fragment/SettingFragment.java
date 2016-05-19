@@ -21,6 +21,7 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.my_music;
+import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -62,9 +63,22 @@ public class SettingFragment extends Activity {
 	}
 	public void get_your_infor(){
 		//初始化个人信息
+		StartSetting();
+		//查看文件传输记录
+		ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
+				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
+		Cursor cursor1 = db.selectInformation();
+		if(cursor1 != null&&cursor1.getCount()!=0){
+			tv_tran.setText("您有"+cursor1.getCount()+"条传输记录，点击查看");
+		}else{
+			tv_tran.setText("您没有传输记录");
+		}
+		cursor1.close();
+	}
+	public void StartSetting(){
 		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
 		if(!db.selectInformation().moveToFirst()) {
-			db.saveInformation(image, "熊孩子", "张行", "未知", "110", "110@120.com", "火星");
+			db.saveInformation(image,null, null, null, null, null);
 			db.selectInformation().close();
 		}
 		//更新头像
@@ -85,16 +99,6 @@ public class SettingFragment extends Activity {
 			Drawable drawable = Drawable.createFromStream(bais, "Photo");
 			iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
 		}
-		//查看文件传输记录
-		ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
-				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
-		Cursor cursor1 = db.selectInformation();
-		if(cursor1 != null&&cursor1.getCount()!=0){
-			tv_tran.setText("您有"+cursor1.getCount()+"条传输记录，点击查看");
-		}else{
-			tv_tran.setText("您没有传输记录");
-		}
-		cursor.close();
 	}
 	public void aboutMe(View view){
 		Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
@@ -107,7 +111,7 @@ public class SettingFragment extends Activity {
 		startActivity(intent);
 	}
 	public void my_photo(View view){
-		Intent intent = new Intent(mContext,RecevieByWifi.class);
+		Intent intent = new Intent(mContext,my_photo.class);
 		startActivity(intent);
 	}
 	public void my_file(View view){
