@@ -64,7 +64,7 @@ public class downloadActivity extends Activity {
         Cursor cursor =  db_user.selectInformation();
         if (cursor != null&&cursor.getCount()!=0) {
             if (cursor.moveToFirst()) {//just need to query one time
-                user_name = cursor.getString(cursor.getColumnIndex("user_name"));
+//                user_name = cursor.getString(cursor.getColumnIndex("Name"));
             }
         }
         cursor.close();

@@ -72,6 +72,11 @@ public class DBServiceOperate {
     //查询的结果集
     public Cursor selectInformation(){
         database = operate.getWritableDatabase();
-        return database.rawQuery("select * from information where _id = 1", new String[]{});
+        Cursor cs = database.rawQuery("select * from information where _id = 1", new String[]{});
+//        database.close();
+        return cs;
+    }
+    public void Close(){
+        database.close();
     }
 }

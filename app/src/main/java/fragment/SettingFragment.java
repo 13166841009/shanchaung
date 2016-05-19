@@ -76,11 +76,11 @@ public class SettingFragment extends Activity {
 		cursor1.close();
 	}
 	public void StartSetting(){
-		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
+/*		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
 		if(!db.selectInformation().moveToFirst()) {
 			db.saveInformation(image,null, null, null, null, null);
 			db.selectInformation().close();
-		}
+		}*/
 		//更新头像
 		Cursor cursor =  db.selectInformation();
 		//取出头像
@@ -99,6 +99,7 @@ public class SettingFragment extends Activity {
 			Drawable drawable = Drawable.createFromStream(bais, "Photo");
 			iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
 		}
+        db.Close();
 	}
 	public void aboutMe(View view){
 		Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
