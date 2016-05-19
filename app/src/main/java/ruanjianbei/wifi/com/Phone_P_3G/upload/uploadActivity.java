@@ -90,6 +90,19 @@ public class uploadActivity extends Activity {
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
         list_choosed = (ListView) findViewById(R.id.list_choosed);
+
+        //读取用户名
+        db_user = new DBServiceOperate(uploadActivity.this);
+        Cursor cursor =  db_user.selectInformation();
+        if (cursor != null&&cursor.getCount()!=0) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                user_name = cursor.getString(cursor.getColumnIndex("Name"));
+            }
+        }else {
+            Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        cursor.close();
         /**
          * 将已选文件设置到此处
          */
@@ -106,19 +119,6 @@ public class uploadActivity extends Activity {
             }
             //所有已选文件的路径
             filePath += s + ";";
-        }
-        //读取用户名
-        db_user = new DBServiceOperate(uploadActivity.this);
-        Cursor cursor =  db_user.selectInformation();
-        if (cursor != null&&cursor.getCount()!=0) {
-            if (cursor.moveToFirst()) {//just need to query one time
-                user_name = cursor.getString(cursor.getColumnIndex("Name"));
-            }
-        }
-        cursor.close();
-        if("".equals(user_name)){
-            Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
-            return;
         }
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
@@ -137,9 +137,8 @@ public class uploadActivity extends Activity {
                     return;
                 }
                 // 判断是否输入用户名
-                if(et_filepath.getText().toString().equals(null)){
+                if("".equals(et_filepath.getText().toString())){
                     Toast.makeText(context, "please input toUserName", Toast.LENGTH_LONG).show();
-                }else {
                     return;
                 }
                 //转换多文件路径

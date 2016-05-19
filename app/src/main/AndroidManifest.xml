@@ -99,7 +99,8 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +28,7 @@ import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
 import ruanjianbei.wifi.com.animation.MainPage;
+import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
 import view.TextURLView;
@@ -93,6 +98,7 @@ public class LoginActivity extends Activity {
 			pass = userpass.getText().toString();
 			//设置推送的标签
 			JPushInterface.setAlias(mContext,name,null);
+			saveSQLite();//初始化数据库
 			User_login();
 		}
 	};
@@ -157,6 +163,8 @@ public class LoginActivity extends Activity {
 						if(mChkSavePassword.isChecked()){
 							saveNameAndPassword();
 						}
+						save_Name();
+						//页面跳转
 						Intent intent = new Intent(mContext,MainPage.class);
 						startActivity(intent);
 					}else{
@@ -171,7 +179,19 @@ public class LoginActivity extends Activity {
 		});
 	}
 
-
+	//
+	private void saveSQLite(){
+		DBServiceOperate db_user = new DBServiceOperate(mContext);
+		Resources resources = mContext.getResources();
+		Drawable drawable = resources.getDrawable(R.mipmap.chengxuyuan);
+		BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+		Bitmap bt = bitmapDrawable.getBitmap();
+		db_user.saveInformation(bt,null,null,null,null,null);
+	}
+	private void save_Name(){
+		DBServiceOperate db_user = new DBServiceOperate(mContext);
+		db_user.upDateInformation("Name",name);
+	}
 	/**
 	 * 读取账号和密码
 	 */

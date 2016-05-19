@@ -53,26 +53,27 @@ public class downloadActivity extends Activity {
         setContentView(R.layout.activity_download_main);
         //textView = (TextView) findViewById(R.id.textView1);
         mMainActivity = this;
-        db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
+        checkUserState();
         onConn();
     }
     public void onClick(View v){
         onConn();
     }
-    public void onConn() {
+    public void checkUserState(){
+        db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
         //获取用户名
         Cursor cursor =  db_user.selectInformation();
         if (cursor != null&&cursor.getCount()!=0) {
             if (cursor.moveToFirst()) {//just need to query one time
-//                user_name = cursor.getString(cursor.getColumnIndex("Name"));
+                user_name = cursor.getString(cursor.getColumnIndex("Name"));
             }
-        }
-        cursor.close();
-        Log.i("1233425334535:::",user_name);
-        if("".equals(user_name)){
+        }else{
             Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
             return;
         }
+    }
+    public void onConn() {
+
         //文件下载
         file = new HashMap<String, String[]>();
         //String toman = textView.getText().toString();

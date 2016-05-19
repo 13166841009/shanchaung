@@ -68,6 +68,7 @@ public class tran_history extends Activity{
                 String type = cursor.getString(cursor.getColumnIndex("type"));
                 String str[] = {file_name,time,type};
                 file_info.add(str);
+                Log.i("",file_name+" "+time);
             }
             Toast.makeText(tran_history.this, "有内容+"+cursor.getCount(), Toast.LENGTH_SHORT).show();
             //添加适配器
