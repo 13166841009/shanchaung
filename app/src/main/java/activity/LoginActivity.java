@@ -154,7 +154,9 @@ public class LoginActivity extends Activity {
 					if(resultString.equals("1")){
 						stopDialog();
 						Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-						saveNameAndPassword();
+						if(mChkSavePassword.isChecked()){
+							saveNameAndPassword();
+						}
 						Intent intent = new Intent(mContext,MainPage.class);
 						startActivity(intent);
 					}else{
