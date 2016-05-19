@@ -39,7 +39,7 @@ import view.TitleBarView;
  */
 public class my_information extends Activity{
     private TitleBarView mtitlebar;
-    private TextView tv1,tv2,tv3,tv4,tv5,tv6;
+    private TextView tv1,tv2,tv3,tv4,tv5;
     private ImageView iv1;
     private FrameLayout switchAvatar;
     private DBServiceOperate db;
@@ -57,11 +57,11 @@ public class my_information extends Activity{
         setContentView(R.layout.activity_my_information);
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
         initTitle();
-        tv2 = (TextView) findViewById(R.id.name);
-        tv3 = (TextView) findViewById(R.id.sex);
-        tv4 = (TextView) findViewById(R.id.phone);
-        tv5 = (TextView) findViewById(R.id.email);
-        tv6 = (TextView) findViewById(R.id.address);
+        tv1 = (TextView) findViewById(R.id.name);
+        tv2 = (TextView) findViewById(R.id.sex);
+        tv3 = (TextView) findViewById(R.id.phone);
+        tv4 = (TextView) findViewById(R.id.email);
+        tv5 = (TextView) findViewById(R.id.address);
         iv1 = (ImageView) findViewById(R.id.userface);
         switchAvatar = (FrameLayout) findViewById(R.id.flayout);
         db = new DBServiceOperate(my_information.this);
@@ -107,15 +107,15 @@ public class my_information extends Activity{
         if (cursor != null) {
             cursor.close();
         }
-        tv2.setText(name);
-        tv3.setText(sex);
-        tv4.setText(number);
-        tv5.setText(email);
-        tv6.setText(address);
+        tv1.setText(name);
+        tv2.setText(sex);
+        tv3.setText(number);
+        tv4.setText(email);
+        tv5.setText(address);
     }
     public void onClickname(View v){
         String LEIXING = "Name";
-        new diolog().getContent(my_information.this, tv2,LEIXING,db);
+        new diolog().getContent(my_information.this, tv1,LEIXING,db);
     }
     public void onClicksex(View v){
         DialogSelect(items_two, 1);
@@ -124,25 +124,23 @@ public class my_information extends Activity{
     }
     public void onClickphone(View v){
         String LEIXING = "Number";
-        new diolog().getContent(my_information.this, tv4, LEIXING, db);
+        new diolog().getContent(my_information.this, tv3, LEIXING, db);
     }
     public void onClickemail(View v){
         String LEIXING = "Email";
-        new diolog().getContent(my_information.this, tv5, LEIXING, db);
+        new diolog().getContent(my_information.this, tv4, LEIXING, db);
     }
     public void onClickaddress(View v){
-        String LEIXING = "Email";
-        new diolog().getContent(my_information.this, tv6,LEIXING,db);
+        String LEIXING = "Address";
+        new diolog().getContent(my_information.this, tv5,LEIXING,db);
     }
     public void onClickTouxiang(View v) {
         //0表示图像
         DialogSelect(items, 0);
     }
 
-    private void showDialog() {
-        /**
-         * 显示选择对话框
-         */
+/*    private void showDialog() {
+        显示选择对话框
         new AlertDialog.Builder(this)
                 .setTitle("设置头像")
                 .setItems(items, new DialogInterface.OnClickListener() {
@@ -151,7 +149,7 @@ public class my_information extends Activity{
                         switch (which) {
                             case 0:
                                 Intent intentFromGallery = new Intent();
-                                intentFromGallery.setType("image/*"); // 设置文件类型
+                                intentFromGallery.setType("image*//*"); // 设置文件类型
                                 intentFromGallery
                                         .setAction(Intent.ACTION_GET_CONTENT);
                                 startActivityForResult(intentFromGallery,
@@ -181,7 +179,7 @@ public class my_information extends Activity{
                         dialog.dismiss();
                     }
                 }).show();
-    }
+    }*/
 
     /**
      * 底部弹出框选项
@@ -230,7 +228,7 @@ public class my_information extends Activity{
                                         intentFromCapture.putExtra(
                                                 MediaStore.EXTRA_OUTPUT,
                                                 Uri.fromFile(new File(Environment
-                                                        .getExternalStorageDirectory(),
+                                                        .getExternalStorageDirectory().getAbsolutePath(),
                                                         IMAGE_FILE_NAME)));
                                     }
                                     startActivityForResult(intentFromCapture,
@@ -245,13 +243,13 @@ public class my_information extends Activity{
                         case  1:
                             switch (which){
                                 case 0:
-                                    tv3.setText(tvArray[which].getText());
+                                    tv2.setText(tvArray[which].getText());
                                     DBServiceOperate db = new DBServiceOperate(getApplicationContext());
                                     db.upDateInformation("Sex", String.valueOf(tvArray[which].getText()));
                                     bottomDialog.dismiss();
                                     break;
                                 case 1:
-                                    tv3.setText(tvArray[which].getText());
+                                    tv2.setText(tvArray[which].getText());
                                     DBServiceOperate db2 = new DBServiceOperate(getApplicationContext());
                                     db2.upDateInformation("Sex", String.valueOf(tvArray[which].getText()));
                                     bottomDialog.dismiss();
@@ -278,8 +276,8 @@ public class my_information extends Activity{
                 case CAMERA_REQUEST_CODE:
                     if (Tools.hasSdcard()) {
                         File tempFile = new File(
-                                Environment.getExternalStorageDirectory()
-                                        + IMAGE_FILE_NAME);
+                                Environment.getExternalStorageDirectory().getAbsolutePath()
+                                        ,IMAGE_FILE_NAME);
                         startPhotoZoom(Uri.fromFile(tempFile));
                     } else {
                         Toast.makeText(my_information.this, "未找到存储卡，无法存储照片！",
