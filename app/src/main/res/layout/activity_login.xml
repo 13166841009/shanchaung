@@ -57,16 +57,30 @@
             android:layout_width="match_parent"
             android:background="@color/devide_line"/>
     </LinearLayout>
-        
-        <CheckBox
-            android:id="@+id/id_cb_rememberpwd"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/remberPassword"
             android:layout_below="@id/ll_user_info"
-            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:gravity="right"
             android:paddingRight="25dp"
-            android:text="记住用户名和密码"
-            />
+            >
+            <CheckBox
+                android:id="@+id/id_cb_rememberpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/checkbox_privacy"
+                android:button="@null"
+                android:checked="false"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="记住用户名和密码"/>
+        </LinearLayout>
+
     
     <Button 
         android:id="@+id/login"
@@ -76,7 +90,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="@string/login"
-        android:layout_below="@id/id_cb_rememberpwd"
+        android:layout_below="@id/remberPassword"
         android:background="@drawable/login_btn"
         android:textColor="@android:color/white"/>
     </RelativeLayout>
