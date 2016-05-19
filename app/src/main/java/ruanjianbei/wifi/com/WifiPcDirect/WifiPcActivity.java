@@ -178,6 +178,8 @@ public class WifiPcActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {

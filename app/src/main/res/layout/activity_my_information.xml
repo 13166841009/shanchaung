@@ -4,79 +4,36 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical" >
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <FrameLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="157dp"
+        android:layout_height="120dp"
         android:background="@drawable/user_info_bg">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_marginTop="30dip">
+            android:layout_marginTop="20dip">
             <FrameLayout
-                android:layout_width="60.0dip"
-                android:layout_height="60.0dip"
+                android:layout_width="88.0dip"
+                android:layout_height="88.0dip"
                 android:layout_marginLeft="15dip"
                 android:onClick="onClickTouxiang"
                 android:id="@+id/flayout">
-
-                <ImageView
+                <ruanjianbei.wifi.com.Utils.ImageCircle.CircleImage
                     android:id="@+id/userface"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@mipmap/chengxuyuan"
                     android:layout_gravity="right|top" />
             </FrameLayout>
-            <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15dip"-->
-                <!--android:layout_marginTop="10dip"-->
-                <!--android:orientation="vertical"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:onClick="onClicknicheng"-->
-                <!--android:background="@drawable/me_my_fans_bg">-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:layout_marginTop="5dip"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:text="我的昵称"/>-->
-                <!--<TextView-->
-                    <!--android:id="@+id/nicheng"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:layout_marginTop="5dip"-->
-                    <!--android:text="123"-->
-                    <!--android:textSize="20sp" />-->
-            <!--</LinearLayout>-->
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/portrait_round" />
-        </LinearLayout>
-        <!-- 简介 -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:background="#22000000"
-            android:layout_width="fill_parent"
-            android:layout_height="30dip"
-            android:layout_gravity="bottom">
-            <TextView
-                android:id="@+id/intor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10.0dip"
-                android:textColor="#ffffff"
-                android:text="个人资料" />
         </LinearLayout>
     </FrameLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -110,7 +67,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
             android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
     </RelativeLayout>
@@ -263,5 +219,4 @@
             android:scaleType="fitXY"
             android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
     </RelativeLayout>
-
 </LinearLayout>

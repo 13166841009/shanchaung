@@ -135,4 +135,7 @@
     <string name="receivetitle" >文件接收</string>
     <string name="wifipostTitle">文件传输</string>
     <string name="wifiscan" >WIFI扫描连接</string>
+    <!--个人信息-->
+    <string name="myinformation">个人信息</string>
+    <string name="tran_history">传输记录</string>
 </resources>

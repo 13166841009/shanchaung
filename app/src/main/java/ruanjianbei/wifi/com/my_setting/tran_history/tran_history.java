@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,23 +13,40 @@ import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 /**
  * Created by linankun1 on 2016/5/1.
  */
 public class tran_history extends Activity{
     private ListView mList;
+    private TitleBarView mtitlebar;
     private ListAdapter mListAdapter = null;
     private List<String[]> file_info;
     private DBServiceOperate db;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tran_list);
+        mtitlebar = (TitleBarView) findViewById(R.id.titlebar);
+        initTitle();
         mList = (ListView) findViewById(R.id.lv);
         db = new DBServiceOperate(tran_history.this);
         file_info = new ArrayList<String[]>();
         readSQLdata();
     }
+
+    private void initTitle() {
+        mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
+        mtitlebar.setTitleText(R.string.tran_history);
+        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tran_history.this.finish();
+            }
+        });
+    }
+
     public void readSQLdata(){
         Cursor cursor = db.selectInformation();
         if (cursor != null) {
