@@ -35,7 +35,7 @@ public class WifiApManager {
     /**wpa类型*/
     public static final int TYPE_WPA = 0x13;
     /**默认的网络类型*/
-    public static final int DEFAULT_TYPE = TYPE_WPA;
+    public static final int DEFAULT_TYPE = TYPE_NO_PASSWD;
     /**网络id前缀*/
     public static final String SSID_PREFIX = "_DOPTT_";
     /**默认的网络id*/
@@ -346,12 +346,10 @@ public class WifiApManager {
         //关闭已经打开的热点
         closeWifiAp();
         //激活需要创建的热点
-
         mWifiLock.acquire();
-
         WifiConfiguration wifiConfig = new WifiConfiguration();
         wifiConfig.SSID = DEFAULT_SSID;
-        wifiConfig.preSharedKey = DEFAULT_PASSWORD;
+        //wifiConfig.preSharedKey = DEFAULT_PASSWORD;
         setWifiConfigAsWPA(wifiConfig);
         return setWifiApEnabled(wifiConfig, true);
     }
@@ -364,10 +362,10 @@ public class WifiApManager {
         wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
         wifiConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
         wifiConfig.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-        wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+        wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        //wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
         wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
         wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
-
         setWifiConfigurationProfile(wifiConfig);
     }
 
@@ -421,10 +419,9 @@ public class WifiApManager {
 
         WifiConfiguration wifiConfig = new WifiConfiguration();
         wifiConfig.SSID = "\"" + result.SSID + "\"";
-        wifiConfig.preSharedKey = "\"" + DEFAULT_PASSWORD + "\"";
+        //wifiConfig.preSharedKey = "\"" + DEFAULT_PASSWORD + "\"";
         wifiConfig.BSSID = result.BSSID;
         wifiConfig.priority = DEFAULT_PRIORITY;
-
         setWifiConfigAsWPA(wifiConfig);
 
         try {
@@ -483,10 +480,10 @@ public class WifiApManager {
                     dhcpField.set(wifiApProfile, 1);
                     dhcpField.setAccessible(false);
 
-                    Field keyField = wifiApProfile.getClass().getDeclaredField("key");
-                    keyField.setAccessible(true);
-                    keyField.set(wifiApProfile, wifiConfiguration.preSharedKey);
-                    keyField.setAccessible(false);
+//                    Field keyField = wifiApProfile.getClass().getDeclaredField("key");
+//                    keyField.setAccessible(true);
+//                    keyField.set(wifiApProfile, wifiConfiguration.preSharedKey);
+//                    keyField.setAccessible(false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

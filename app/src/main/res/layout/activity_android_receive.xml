@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/activity_receive_scan_name"
             android:layout_width="wrap_content"
-            android:text="zhanghang"
+            android:text="热点创建"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             />

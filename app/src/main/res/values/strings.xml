@@ -131,11 +131,13 @@
     <string name="allow">2.扫描二维码</string>
     <string name="button_deauth">Deauth users</string>
     <string name="notification_service_name">NotificationService</string>
-    <string name="wifiAPcreate" >热点建立</string>
-    <string name="receivetitle" >文件接收</string>
+    <string name="wifiAPcreate">热点建立</string>
+    <string name="receivetitle">文件接收</string>
     <string name="wifipostTitle">文件传输</string>
-    <string name="wifiscan" >WIFI扫描连接</string>
+    <string name="wifiscan">WIFI扫描连接</string>
     <!--个人信息-->
     <string name="myinformation">个人信息</string>
     <string name="tran_history">传输记录</string>
+    <string name="post_listview">传输列表</string>
+    <string name="receivelist" >接收列表</string>
 </resources>

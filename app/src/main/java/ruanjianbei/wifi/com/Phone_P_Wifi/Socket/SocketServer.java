@@ -76,7 +76,6 @@ public class SocketServer {
                     if (connection != null) {
                         if (mSocketListener != null) {
                             mSocketListener.onReceive(connection.getInputStream());
-
                             mSocketListener.onSend(connection.getOutputStream());
                         }
 

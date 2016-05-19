@@ -34,6 +34,7 @@ import android.widget.Toast;
 import ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity;
 
 import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -248,7 +249,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.more_window_local:
 //			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
-			Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
+			Intent intentwifi = new Intent(mContext, Android_receiveActivity.class);
 			mContext.startActivity(intentwifi);
 			break;
 		case R.id.more_window_online:

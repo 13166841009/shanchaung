@@ -12,7 +12,6 @@ import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,13 +19,8 @@ import com.guo.duoduo.randomtextview.RandomTextView;
 
 import java.util.List;
 
-import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
-import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
-import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
-import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
@@ -164,8 +158,14 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     }
     private  void initTitle(){
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE,View.GONE,View.VISIBLE);
+        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
         mtitlrbar.setTitleText(R.string.wifiscan);
+        mtitlrbar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Android_postActivity.this.finish();
+            }
+        });
     }
 }

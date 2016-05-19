@@ -23,6 +23,7 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
@@ -142,7 +143,13 @@ public class ReceiveActivity extends Activity {
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
         mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
         mtitlebar.setTitleText(R.string.receivetitle);
-        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back,R.string.back);
+        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReceiveActivity.this, MainPageActivity.class));
+            }
+        });
     }
 
     public int dimen(@DimenRes int resId) {

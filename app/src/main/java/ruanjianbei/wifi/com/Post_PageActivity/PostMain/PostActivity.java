@@ -137,8 +137,14 @@ public class PostActivity extends Activity {
     private  void initTitle(){
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
         mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
-        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back,R.string.back);
+        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
         mtitlrbar.setTitleText(R.string.wifipostTitle);
+        mtitlrbar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PostActivity.this.finish();
+            }
+        });
     }
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);
@@ -211,10 +217,10 @@ public class PostActivity extends Activity {
                     /**
                      * 扫描当前热点
                      */
-                //断开当前连接热点
+                    //断开当前连接热点
                     wifiadmin.closeNetCard();
                     Toast.makeText(PostActivity.this, "您将连接热点进行发送...", Toast.LENGTH_LONG).show();
-//                    wifiadmin.openNetCard();
+//                  wifiadmin.openNetCard();
                     startActivity(new Intent(PostActivity.this,Android_postActivity.class));
                 }
                 //此处可以进行重试处理
