@@ -32,11 +32,13 @@ import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.my_setting.util.Tools;
 import ruanjianbei.wifi.com.my_setting.util.diolog;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 /**
  * Created by linankun1 on 2016/5/1.
  */
 public class my_information extends Activity{
+    private TitleBarView mtitlebar;
     private TextView tv1,tv2,tv3,tv4,tv5,tv6;
     private ImageView iv1;
     private FrameLayout switchAvatar;
@@ -53,7 +55,8 @@ public class my_information extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // 去掉标题
         setContentView(R.layout.activity_my_information);
-        //tv1 = (TextView) findViewById(R.id.nicheng);
+        mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
+        initTitle();
         tv2 = (TextView) findViewById(R.id.name);
         tv3 = (TextView) findViewById(R.id.sex);
         tv4 = (TextView) findViewById(R.id.phone);
@@ -64,6 +67,19 @@ public class my_information extends Activity{
         db = new DBServiceOperate(my_information.this);
         UpdataInformation();
     }
+
+    private void initTitle() {
+        mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
+        mtitlebar.setTitleText(R.string.myinformation);
+        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                my_information.this.finish();
+            }
+        });
+    }
+
     public void UpdataInformation(){
         String name = null,sex = null,number = null,address = null,email = null;
         Cursor cursor =  db.selectInformation();
@@ -91,17 +107,12 @@ public class my_information extends Activity{
         if (cursor != null) {
             cursor.close();
         }
-        //tv1.setText(nicheng);
         tv2.setText(name);
         tv3.setText(sex);
         tv4.setText(number);
         tv5.setText(email);
         tv6.setText(address);
     }
-    //    public void onClicknicheng(View v){
-//        String LEIXING = "Nicheng";
-//        new diolog().getContent(My_information.this, tv1, LEIXING, db);
-//    }
     public void onClickname(View v){
         String LEIXING = "Name";
         new diolog().getContent(my_information.this, tv2,LEIXING,db);
@@ -160,7 +171,6 @@ public class my_information extends Activity{
                                 }
                                 startActivityForResult(intentFromCapture,
                                         CAMERA_REQUEST_CODE);
-
                                 break;
                         }
                     }
