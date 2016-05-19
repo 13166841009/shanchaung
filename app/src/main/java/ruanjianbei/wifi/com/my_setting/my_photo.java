@@ -11,7 +11,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
  */
 public class my_photo extends Activity {
     private TextView mReceiver;
-    private String content = "我的相册";
+    private String content = "开心一刻";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_photo);
