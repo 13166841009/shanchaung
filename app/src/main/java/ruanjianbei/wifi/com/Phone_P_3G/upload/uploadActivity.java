@@ -229,6 +229,8 @@ public class uploadActivity extends Activity {
                                 message.what = MSG_HANDLER_MSG;
                                 message.obj = "全部文件上传成功！";
                                 mHandler.sendMessage(message);
+                                //将所存储选择项的集合清空
+                                FragmentChoose.setFileChoose(null);
                                 //删除压缩文件
                                 files_delete files = new files_delete(ZIP_PATH);
                                 files.deleteAll();
