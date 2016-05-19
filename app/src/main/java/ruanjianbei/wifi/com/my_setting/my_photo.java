@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -34,6 +36,8 @@ public class my_photo extends Activity {
     //配置您申请的KEY
     public static final String APPKEY ="faca8758f0e34ba1a3523b468e929c08";
 
+    private static String[] name = new String[100];
+
     private TextView mReceiver;
     private String content = "开心一刻";
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,9 @@ public class my_photo extends Activity {
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
                 detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
+        System.out.println("------------");
+        getRequest1();
+        System.out.println("------------");
 
     }
 
@@ -62,7 +69,23 @@ public class my_photo extends Activity {
             result =net(url, params, "GET");
             JSONObject object = new JSONObject(result);
             if(object.getInt("error_code")==0){
-                System.out.println(object.get("result"));
+//                System.out.println(object.get("result"));
+                //解析JSON数据
+//                parseJsonMulti(result);
+                JSONObject jsonObject = (JSONObject) object.get("result");
+                System.out.println("---------");
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                for(int i = 0 ; i < jsonArray.length() ; i++){
+                    System.out.println(jsonArray.getJSONObject(i));
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    for(int j = 1 ; j < jsonObject1.length() ; j++){
+                        String name = jsonObject1.getString(""+ j);
+                        System.out.println(j+":"+name);
+                    }
+                }
+
+                System.out.println("---------");
+
             }else{
                 System.out.println(object.get("error_code")+":"+object.get("reason"));
             }
@@ -100,7 +123,7 @@ public class my_photo extends Activity {
         Map params = new HashMap();//请求参数
         params.put("st","");//指定开始数,默认0
         params.put("count","");//指定返回数量,默认1
-        params.put("term","");//指定搜索关键词
+        params.put("term","impoverished");//指定搜索关键词
         params.put("key",APPKEY);//您申请的key
 
         try {
