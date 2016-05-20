@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.luoxudong.app.asynchttp.AsyncHttpRequest;
 import com.luoxudong.app.asynchttp.AsyncHttpUtil;
+import com.luoxudong.app.asynchttp.callable.SimpleRequestCallable;
 import com.luoxudong.app.asynchttp.callable.UploadRequestCallable;
 import com.luoxudong.app.asynchttp.model.FileWrapper;
 
@@ -58,6 +59,7 @@ public class uploadActivity extends Activity {
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
     private String user_name = null;
+    private int sign = 0;
 
     private List<String> fileNames = new ArrayList<String>();
 
@@ -181,72 +183,12 @@ public class uploadActivity extends Activity {
                         return;
                     }
                 }
-                //联网上传文件
-                request = new AsyncHttpUtil.Builder()
-                        .url(URL)
-                                //.addUploadFile("file1", new File("/storage/sdcard1/IMG_20160318_202540_HDR.jpg"))
-                        .setFileWrappers(fileWrappers)
-                        .addFormData("Postman", user_name)
-                        .addFormData("Toman", et_filepath.getText().toString())
-                                //.addFormData("Filename", filename)//添加form参数
-                        .setCallable(new UploadRequestCallable() {
-                            @Override
-                            public void onFailed(int errorCode, String errorMsg) {
-                                //上传失败
-                                Message message = new Message();
-                                message.what = MSG_HANDLER_MSG;
-                                message.obj = "上传失败：" + errorMsg;
-                                mHandler.sendMessage(message);
-                            }
-
-                            @Override
-                            public void onTransfering(String name, long totalLength, long transferedLength) {
-                                //上传进度
-                                Message message = new Message();
-                                message.what = MSG_HANDLER_MSG + 1;
-                                //message.obj = "上传进度：" + name + ">>>" + totalLength + ">>>" + transferedLength;
-                                message.obj = transferedLength * 100 / totalLength;
-                                mHandler.sendMessage(message);
-                            }
-
-                            @Override
-                            public void onTransferSuc(String name) {
-                                //文件name上传完成
-                                Message message = new Message();
-                                message.what = MSG_HANDLER_MSG;
-                                message.obj = "文件:" + name + " 上传完成";
-                                mHandler.sendMessage(message);
-                                //保存信息到本地数据库
-                                db_file =new ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(uploadActivity.this);
-                                db_file.saveInformation(name, new get_time().getTime(), "上传");
-                            }
-
-                            @Override
-                            public void onSuccess(String responseInfo) {
-                                //全部上传成功！
-                                Message message = new Message();
-                                message.what = MSG_HANDLER_MSG;
-                                message.obj = "全部文件上传成功！";
-                                mHandler.sendMessage(message);
-                                //将所存储选择项的集合清空
-                                FragmentChoose.setFileChoose(null);
-                                //删除压缩文件
-                                files_delete files = new files_delete(ZIP_PATH);
-                                files.deleteAll();
-                            }
-
-                            @Override
-                            public void onCancel() {
-                                //上传取消
-                                Message message = new Message();
-                                message.what = MSG_HANDLER_MSG;
-                                message.obj = "上传取消";
-                                mHandler.sendMessage(message);
-                            }
-                        })
-                        .build().upload();
+                //用户识别是否存在
+                if(UserCheck()) {
+                    //文件上传
+                    Fileupload();
+                }
             }
-
             @Override
             public void continueClick() {
                 request.cancel();
@@ -261,6 +203,95 @@ public class uploadActivity extends Activity {
         });
     }
 
+    private boolean UserCheck(){
+        request = new AsyncHttpUtil.Builder()
+                .url("http://zh749931552.6655.la/ThinkPHP/Index/User_is_regedit")
+                .addFormData("toman", et_filepath.getText().toString())//设置form表单数据，也可以调用setFormDatas方法
+                .setCallable(new SimpleRequestCallable() {
+                    @Override
+                    public void onFailed(int errorCode, String errorMsg) {
+                        Toast.makeText(uploadActivity.this, "网络连接错误",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onSuccess(String responseInfo) {
+                        if(responseInfo.equals("1")) {
+                            sign = 1;
+                        }
+                        Toast.makeText(uploadActivity.this, " "+responseInfo,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).build().post();
+        if(sign==1)return true;
+        return false;
+    }
+    private void Fileupload(){
+        //联网上传文件
+        request = new AsyncHttpUtil.Builder()
+                .url(URL)
+                //.addUploadFile("file1", new File("/storage/sdcard1/IMG_20160318_202540_HDR.jpg"))
+                .setFileWrappers(fileWrappers)
+                .addFormData("Postman", user_name)
+                .addFormData("Toman", et_filepath.getText().toString())
+                //.addFormData("Filename", filename)//添加form参数
+                .setCallable(new UploadRequestCallable() {
+                    @Override
+                    public void onFailed(int errorCode, String errorMsg) {
+                        //上传失败
+                        Log.i("文件上传中:",""+errorCode+" "+errorMsg);
+                        Message message = new Message();
+                        message.what = MSG_HANDLER_MSG;
+                        message.obj = "上传失败：" + errorMsg;
+                        mHandler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onTransfering(String name, long totalLength, long transferedLength) {
+                        //上传进度
+                        Message message = new Message();
+                        message.what = MSG_HANDLER_MSG + 1;
+                        //message.obj = "上传进度：" + name + ">>>" + totalLength + ">>>" + transferedLength;
+                        message.obj = transferedLength * 100 / totalLength;
+                        mHandler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onTransferSuc(String name) {
+                        //文件name上传完成
+                        Message message = new Message();
+                        message.what = MSG_HANDLER_MSG;
+                        message.obj = "文件:" + name + " 上传完成";
+                        mHandler.sendMessage(message);
+                        //保存信息到本地数据库
+                        db_file =new ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(uploadActivity.this);
+                        db_file.saveInformation(name, new get_time().getTime(), "上传");
+                    }
+
+                    @Override
+                    public void onSuccess(String responseInfo) {
+                        //全部上传成功！
+                        Message message = new Message();
+                        message.what = MSG_HANDLER_MSG;
+                        message.obj = "全部文件上传成功！";
+                        mHandler.sendMessage(message);
+                        //将所存储选择项的集合清空
+                        FragmentChoose.setFileChoose(null);
+                        //删除压缩文件
+                        files_delete files = new files_delete(ZIP_PATH);
+                        files.deleteAll();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        //上传取消
+                        Message message = new Message();
+                        message.what = MSG_HANDLER_MSG;
+                        message.obj = "上传取消";
+                        mHandler.sendMessage(message);
+                    }
+                })
+                .build().upload();
+    }
 
     private String[] filedo(String files) {
         String str[] = null;
