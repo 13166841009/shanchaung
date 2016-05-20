@@ -27,6 +27,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 @SuppressWarnings("static-access")
@@ -121,6 +122,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 } else if (id == R.id.nav_manage) {
 
                 } else if (id == R.id.nav_share) {
+                    startActivity(new Intent(getApplicationContext(), WifiPcActivity.class));
 
                 } else if (id == R.id.nav_send) {
 

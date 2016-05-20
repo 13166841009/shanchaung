@@ -9,7 +9,7 @@
         android:id="@+id/pagerindicator"
         android:layout_width="fill_parent"
         android:layout_height="34dp"
-        android:background="@drawable/tab_bg"
+        android:background="@color/blue"
         app:footerColor="@color/tab_indicator_text_selected"
         app:footerLineHeight="2dp"
         app:footerTriangleHeight="3.0dp"
