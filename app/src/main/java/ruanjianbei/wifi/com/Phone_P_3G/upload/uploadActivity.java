@@ -18,6 +18,9 @@ import com.luoxudong.app.asynchttp.callable.SimpleRequestCallable;
 import com.luoxudong.app.asynchttp.callable.UploadRequestCallable;
 import com.luoxudong.app.asynchttp.model.FileWrapper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -215,11 +218,15 @@ public class uploadActivity extends Activity {
                     }
                     @Override
                     public void onSuccess(String responseInfo) {
-                        if(responseInfo.equals("1")) {
-                            sign = 1;
+                        try {
+                            JSONObject ob = new JSONObject(responseInfo);
+                            if(ob.getString("returncode")=="1"){
+                                sign=1;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        Toast.makeText(uploadActivity.this, " "+responseInfo,
-                                Toast.LENGTH_SHORT).show();
+
                     }
                 }).build().post();
         if(sign==1)return true;
