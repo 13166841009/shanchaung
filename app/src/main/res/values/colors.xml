@@ -57,12 +57,13 @@
     <color name="common_blue">#4b8bbd</color>
     <color name="tab_indicator_text_selected">#ffffff</color>
     <color name="tab_indicator_text_unselected">#aac5d7</color>
-    <color name="page_viewer_margin_color">#007800</color>
+    <color name="page_viewer_margin_color">#499BF7</color>
 
     <!--二维码的扫描-->
     <color name="white_color">#ffffff</color>
 
 
-    <color name="colorPrimary">#007800</color>
-    <color name="colorPrimaryDark">#007800</color>
+    <!--dreamlayout-->
+    <color name="colorPrimary">#499BF7</color>
+    <color name="colorPrimaryDark">#499BF7</color>
 </resources>
