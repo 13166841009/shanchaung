@@ -192,7 +192,28 @@ public class downloadActivity extends Activity {
                 ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file =
                         new ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mMainActivity);
                 db_file.saveInformation(fileInfo.gettrueName(),new get_time().getTime(),"下载");
+               //向服务器发送文件传输成功标志
+                CheckFileFinish(fileInfo.gettrueName());
+//                Log.i("文件识别1",mFileList.get(fileInfo.getId()).gettrueName());
+//                Log.i("文件识别2",fileInfo.gettrueName());
             }
         }
     };
+    private void CheckFileFinish(String filename){
+        Log.i("文件识别",filename+" "+user_name);
+        AsyncHttpRequest request = new AsyncHttpUtil.Builder()
+                .url("http://zh749931552.6655.la/ThinkPHP/Files/Files_Isfinish")
+                .addFormData("toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
+                .addFormData("filename",filename)
+                .setCallable(new SimpleRequestCallable() {
+                    @Override
+                    public void onFailed(int errorCode, String errorMsg) {
+                        Toast.makeText(mMainActivity, "出现未知错误，请重启应用", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onSuccess(String responseInfo) {
+                        Log.i("文件接收成功","");
+                    }
+                }).build().post();
+    }
 }
