@@ -9,7 +9,7 @@
         android:layout_width="80dp"
         android:background="@drawable/login_picture_bg"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/login_default_avatar"
+        android:src="@mipmap/ic_launcher"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"/>
     
