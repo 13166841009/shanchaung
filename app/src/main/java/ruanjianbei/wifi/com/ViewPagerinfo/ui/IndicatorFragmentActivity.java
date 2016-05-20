@@ -3,40 +3,40 @@
  */
 package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
-import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
+
 import ruanjianbei.wifi.com.shanchuang.R;
 
 @SuppressWarnings("static-access")
-public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener {
+public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener{
     private static final String TAG = "DxFragmentActivity";
     public static final String EXTRA_TAB = "tab";
     public static final String EXTRA_QUIT = "extra.quit";
 
 
-    //private MainPageActivity mainPageActivity = new MainPageActivity();
+    //private MainPageActivity1 mainPageActivity = new MainPageActivity1();
     protected int mCurrentTab = 0;
     protected int mLastTab = -1;
 
@@ -106,14 +106,31 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        BottomImagePop = mainPageActivity.getBottomimage();
-//        BottomImagePop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMoreWindow(v);
-//            }
-//        });
         setContentView(getMainViewResId());
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_camera) {
+                    Toast.makeText(getApplicationContext(), "nav", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.nav_gallery) {
+
+                } else if (id == R.id.nav_slideshow) {
+
+                } else if (id == R.id.nav_manage) {
+
+                } else if (id == R.id.nav_share) {
+
+                } else if (id == R.id.nav_send) {
+
+                }
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+                //return false;
+            }
+        });
         initViews();
 
         //设置viewpager内部页面之间的间距
@@ -123,7 +140,15 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         //初始化pager界面的下面部位
         initViewpager();
     }
-
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
     private void initViewpager() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
@@ -221,18 +246,12 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
             }
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
     /**
      * 返回layout id
      * @return layout id
      */
     protected int getMainViewResId() {
-        return R.layout.titled_fragment_tab_activity;
+        return R.layout.activity_main_title;
     }
 
     /**

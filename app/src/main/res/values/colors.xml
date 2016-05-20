@@ -61,4 +61,8 @@
 
     <!--二维码的扫描-->
     <color name="white_color">#ffffff</color>
+
+
+    <color name="colorPrimary">#007800</color>
+    <color name="colorPrimaryDark">#007800</color>
 </resources>

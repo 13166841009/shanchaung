@@ -172,8 +172,10 @@
             android:name="viewpager.IntroductionPage"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
+            android:allowBackup="true"
+            android:supportsRtl="true"
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+            android:theme="@style/AppThemeT" />
         <activity
             android:name="ruanjianbei.wifi.com.animation.MainPage"
             android:theme="@android:style/Theme.Light.NoTitleBar" />

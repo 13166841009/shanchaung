@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -132,7 +133,7 @@ public class LoginActivity extends Activity {
 		}
 	}
 	public void none_account(View v){
-		startActivity(new Intent(mContext, MainPage.class));
+		startActivity(new Intent(mContext, MainPageActivity.class));
 	}
 
 	private void User_login() {
