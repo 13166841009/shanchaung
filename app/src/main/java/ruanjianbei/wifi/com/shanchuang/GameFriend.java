@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import activity.WiFiActivity;
+import view.TitleBarView;
+
 /**
  * Created by zhouyonglong on 2016/5/21.
  */
@@ -29,6 +32,7 @@ public class GameFriend extends Activity {
 
     private Button begin ;
     private ListView listView ;
+    private TitleBarView mTitleBarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,16 @@ public class GameFriend extends Activity {
         setContentView(R.layout.activity_dadisu);
         begin = (Button) findViewById(R.id.begin);
         listView = (ListView) findViewById(R.id.friend);
+        mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
+        mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+        mTitleBarView.setTitleText(R.string.dds);
+        mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+//        mTitleBarView.setBtnLeftOnclickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                GameFriend.this.finish();
+//            }
+//        });
 
         SimpleAdapter adapter = new SimpleAdapter(this,getData(),R.layout.list_dadisu,
                 new String[]{"title","info","img"},

@@ -3,9 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <ListView
+        android:id="@+id/xiaohua"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:textSize="30dp"
-        android:id="@+id/mTextView"/>
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>

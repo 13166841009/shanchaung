@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 /**
  * Created by linankun1 on 2016/5/1.
@@ -20,6 +21,7 @@ public class aboutUs extends Activity{
     private RelativeLayout weibo ;
     private RelativeLayout weixing;
     private RelativeLayout qq;
+    private TitleBarView mTitleBarView;
 
     private ImageView img_connect_us;
     private boolean flag = true;
@@ -28,9 +30,14 @@ public class aboutUs extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         findview();
+
+        mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+        mTitleBarView.setTitleText(R.string.gywm);
+        mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
     }
 
     private void findview(){
+        mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
         weibo = (RelativeLayout) findViewById(R.id.weibo);
         weixing = (RelativeLayout) findViewById(R.id.weixing);
         qq = (RelativeLayout) findViewById(R.id.qq);

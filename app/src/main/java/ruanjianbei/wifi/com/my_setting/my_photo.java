@@ -3,6 +3,8 @@ package ruanjianbei.wifi.com.my_setting;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -18,7 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -36,27 +40,24 @@ public class my_photo extends Activity {
     //配置您申请的KEY
     public static final String APPKEY ="faca8758f0e34ba1a3523b468e929c08";
 
-    private static String[] name = new String[100];
+    private static List<String> list = new ArrayList<String>();
 
-    private TextView mReceiver;
+    private ListView listView;
     private String content = "开心一刻";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_photo);
-        mReceiver = (TextView) findViewById(R.id.mTextView);
-        mReceiver.setText(content);
+        listView = (ListView) findViewById(R.id.xiaohua);
+
 
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().
                 detectDiskWrites().detectNetwork().penaltyLog().build());
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
                 detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
-        System.out.println("------------");
         getRequest1();
-        System.out.println("------------");
-
+//        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, list));
     }
-
 
     //1.返回接口类型
     public static void getRequest1(){
@@ -81,9 +82,9 @@ public class my_photo extends Activity {
                     for(int j = 1 ; j < jsonObject1.length() ; j++){
                         String name = jsonObject1.getString(""+ j);
                         System.out.println(j+":"+name);
+                        list.add(j+"、"+name);
                     }
                 }
-
                 System.out.println("---------");
 
             }else{
@@ -99,8 +100,8 @@ public class my_photo extends Activity {
         String url ="http://japi.juhe.cn/funny/list.from";//请求接口地址
         Map params = new HashMap();//请求参数
         params.put("cat","");//指定接口类型,默认1
-        params.put("st","");//指定开始数,默认0
-        params.put("count","");//指定返回个数,默认1
+        params.put("st", "");//指定开始数,默认0
+        params.put("count", "");//指定返回个数,默认1
         params.put("key",APPKEY);//您申请的key
 
         try {
@@ -159,55 +160,67 @@ public class my_photo extends Activity {
         }
     }
 
-    public static String net(String strUrl, Map params,String method) throws Exception {
-        HttpURLConnection conn = null;
-        BufferedReader reader = null;
-        String rs = null;
-        try {
-            StringBuffer sb = new StringBuffer();
-            if(method==null || method.equals("GET")){
-                strUrl = strUrl+"?"+urlencode(params);
-            }
-            URL url = new URL(strUrl);
-            conn = (HttpURLConnection) url.openConnection();
-            if(method==null || method.equals("GET")){
-                conn.setRequestMethod("GET");
-            }else{
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-            }
-            conn.setRequestProperty("User-agent", userAgent);
-            conn.setUseCaches(false);
-            conn.setConnectTimeout(DEF_CONN_TIMEOUT);
-            conn.setReadTimeout(DEF_READ_TIMEOUT);
-            conn.setInstanceFollowRedirects(false);
-            conn.connect();
-            if (params!= null && method.equals("POST")) {
+    public static String net(final String strUrl, final Map params, final String method) throws Exception {
+        final String[] str = new String[1];
+        final String[] rs = {null};
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection conn = null;
+                BufferedReader reader = null;
+
+
                 try {
-                    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.writeBytes(urlencode(params));
-                } catch (Exception e) {
-                    // TODO: handle exception
+                    StringBuffer sb = new StringBuffer();
+                    if(method==null || method.equals("GET")){
+                        str[0] = strUrl+"?"+urlencode(params);
+                    }
+                    URL url = new URL(str[0]);
+                    conn = (HttpURLConnection) url.openConnection();
+                    if(method==null || method.equals("GET")){
+                        conn.setRequestMethod("GET");
+                    }else{
+                        conn.setRequestMethod("POST");
+                        conn.setDoOutput(true);
+                    }
+                    conn.setRequestProperty("User-agent", userAgent);
+                    conn.setUseCaches(false);
+                    conn.setConnectTimeout(DEF_CONN_TIMEOUT);
+                    conn.setReadTimeout(DEF_READ_TIMEOUT);
+                    conn.setInstanceFollowRedirects(false);
+                    conn.connect();
+                    if (params!= null && method.equals("POST")) {
+                        try {
+                            DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+                            out.writeBytes(urlencode(params));
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+                    }
+                    InputStream is = conn.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(is, DEF_CHATSET));
+                    String strRead = null;
+                    while ((strRead = reader.readLine()) != null) {
+                        sb.append(strRead);
+                    }
+                    rs[0] = sb.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
                 }
             }
-            InputStream is = conn.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(is, DEF_CHATSET));
-            String strRead = null;
-            while ((strRead = reader.readLine()) != null) {
-                sb.append(strRead);
-            }
-            rs = sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-            if (conn != null) {
-                conn.disconnect();
-            }
-        }
-        return rs;
+        });
+        return rs[0];
     }
 
     //将map型转为请求参数型

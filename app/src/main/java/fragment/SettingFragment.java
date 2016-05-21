@@ -24,6 +24,7 @@ import ruanjianbei.wifi.com.my_setting.my_music;
 import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
+import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
@@ -46,11 +47,20 @@ public class SettingFragment extends Activity {
 		findView();
 		init();
 		//AboutUs();
+		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
+		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+		mTitleBarView.setTitleText(R.string.mime);
+		mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+		mTitleBarView.setBtnLeftOnclickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SettingFragment.this.finish();
+			}
+		});
 	}
 
 
 	private void findView(){
-		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		iv1 = (ImageView) findViewById(R.id.pic);
 		iv1.setDrawingCacheEnabled(true);
 		tv_tran = (TextView) findViewById(R.id.tv_tran);
@@ -58,8 +68,6 @@ public class SettingFragment extends Activity {
 
 	private void init(){
 		get_your_infor();
-		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
-		mTitleBarView.setTitleText(R.string.mime);
 	}
 	public void get_your_infor(){
 		//初始化个人信息

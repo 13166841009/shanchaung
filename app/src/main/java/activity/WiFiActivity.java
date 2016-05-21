@@ -63,7 +63,7 @@ public class WiFiActivity extends Activity {
 
 		mActivity = WiFiActivity.this;
 		// Set the application-wide context global, if not already set
-		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
+//		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		updateUi();
 		UiUpdater.registerClient(handler);
 
@@ -77,6 +77,7 @@ public class WiFiActivity extends Activity {
 					}
 				});
 
+		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.wifi);
 		mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
