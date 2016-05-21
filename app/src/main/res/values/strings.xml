@@ -141,4 +141,18 @@
     <string name="tran_history">传输记录</string>
     <string name="post_listview">传输列表</string>
     <string name="receivelist" >接收列表</string>
+
+    <!-- 右滑菜单-->
+
+    <string name="dnkc">电脑快传</string>
+    <string name="sjkc">手机快传</string>
+    <string name="wdkc">我的快传</string>
+    <string name="sz">设置</string>
+    <string name="gywm">关于我们</string>
+    <string name="fx">分享</string>
+
+    <!-- 打地鼠-->
+    <string name="begin">开始游戏</string>
+    <string name="dds">打地鼠</string>
+
 </resources>

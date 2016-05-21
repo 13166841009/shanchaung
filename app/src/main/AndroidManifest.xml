@@ -212,6 +212,9 @@
         <activity
             android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.Receive_Activity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.shanchuang.GameFriend"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- 极光推送 -->
         <!-- Required SDK 核心功能 -->

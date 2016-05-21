@@ -14,6 +14,7 @@ import cn.jpush.android.api.JPushInterface;
 import fragment.SettingFragment;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
+import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
 import ruanjianbei.wifi.com.shanchuang.UserGame;
 
@@ -57,7 +58,7 @@ public class MainPage extends Activity {
 
             @Override
             public void onClick() {
-                Intent intent = new Intent(mContext, UserGame.class);
+                Intent intent = new Intent(mContext, GameFriend.class);
                 startActivity(intent);
             }
         });
