@@ -54,15 +54,15 @@ public class uploadActivity extends Activity {
     private Map<String, FileWrapper> fileWrappers;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
-    private AsyncHttpRequest request = null;
+    private AsyncHttpRequest request1,request2;
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
     private String filePath = "";
     private ListView list_choosed;
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
-    private String user_name = null;
-    private int sign = 0;
+    private String user_name;
+    private boolean sign = false;
 
     private List<String> fileNames = new ArrayList<String>();
 
@@ -95,19 +95,11 @@ public class uploadActivity extends Activity {
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
         list_choosed = (ListView) findViewById(R.id.list_choosed);
-
-        //读取用户名
-        db_user = new DBServiceOperate(uploadActivity.this);
-        Cursor cursor =  db_user.selectInformation();
-        if (cursor != null&&cursor.getCount()!=0) {
-            if (cursor.moveToFirst()) {//just need to query one time
-                user_name = cursor.getString(cursor.getColumnIndex("Name"));
-            }
-        }else {
+//      读取本地用户
+        if(!ReadUser()){
             Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
             return;
         }
-        cursor.close();
         /**
          * 将已选文件设置到此处
          */
@@ -132,7 +124,6 @@ public class uploadActivity extends Activity {
         mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
             @Override
             public void finishClick() {
-                fileWrappers = new HashMap<String, FileWrapper>();//初始化Map集合
                 String filespath = null;
                 //判断文件选择是否为空
                 if (!filePath.equals("")) {
@@ -146,55 +137,13 @@ public class uploadActivity extends Activity {
                     Toast.makeText(context, "please input toUserName", Toast.LENGTH_LONG).show();
                     return;
                 }
-                //转换多文件路径
-                String str[] = filedo(filespath);
-                for (int x = 0; x < str.length; x++) {
-                    //获取文件全名，包括后缀
-                    String[] str1 = str[x].split("/");
-                    String file_all_name = str1[str1.length - 1];
-                    Log.i("wenjian:", file_all_name);
-                    //获取文件名
-                    String file_name = file_all_name.substring(0, file_all_name.lastIndexOf("."));
-                    File fileinfo = new File(str[x]);
-                    if (!fileinfo.exists()) {
-                        Toast.makeText(context, "file:" + file_all_name + " not exists", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    //对文件名进行URL转码
-                    String file_name_encode = url(file_name);
-                    //将文件进行压缩
-                    //Toast.makeText(context, "file:"+file_all_name+" is compressing!", Toast.LENGTH_LONG).show();
-                    String zipload = ZIP_PATH + file_name_encode + ".zip";
-                    yashuo ys = new yashuo();
-                    try {
-                        ys.zip(zipload, new File(str[x]));
-                    } catch (Exception e) {
-                        // TODO 自动生成的 catch 块
-                        e.printStackTrace();
-                    }
-                    //Toast.makeText(context, "file:"+file_all_name+" compress complete!", Toast.LENGTH_LONG).show();
-                    Log.i("文件路径/压缩路径", zipload);
-                    File files = new File(zipload);
-                    if (files.exists()) {
-                        //定义一个file容器，添加文件
-                        FileWrapper file = new FileWrapper();
-                        file.setFile(new File(zipload));
-                        fileWrappers.put(file_all_name, file);
-                        Log.i("文件路径" + x, str[x]);
-                    } else {
-                        Toast.makeText(context, "zipfile:" + file_name_encode + " not exists", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                }
                 //用户识别是否存在
-                if(UserCheck()) {
-                    //文件上传
-                    Fileupload();
-                }
+                 UserCheck(filespath);
             }
             @Override
             public void continueClick() {
-                request.cancel();
+                request1.cancel();
+                request2.cancel();
             }
         });
 
@@ -206,8 +155,66 @@ public class uploadActivity extends Activity {
         });
     }
 
-    private boolean UserCheck(){
-        request = new AsyncHttpUtil.Builder()
+    private boolean ReadUser(){
+        //读取用户名
+        db_user = new DBServiceOperate(uploadActivity.this);
+        Cursor cursor =  db_user.selectInformation();
+        if (cursor != null&&cursor.getCount()!=0) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                user_name = cursor.getString(cursor.getColumnIndex("Name"));
+            }
+            if(!"".equals(user_name+"")){
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
+    }
+    private void FileZip(String filespath){
+        fileWrappers = new HashMap<String, FileWrapper>();//初始化Map集合
+        //转换多文件路径
+        String str[] = filedo(filespath);
+        for (int x = 0; x < str.length; x++) {
+            //获取文件全名，包括后缀
+            String[] str1 = str[x].split("/");
+            String file_all_name = str1[str1.length - 1];
+            Log.i("wenjian:", file_all_name);
+            //获取文件名
+            String file_name = file_all_name.substring(0, file_all_name.lastIndexOf("."));
+            File fileinfo = new File(str[x]);
+            if (!fileinfo.exists()) {
+                Toast.makeText(context, "file:" + file_all_name + " not exists", Toast.LENGTH_LONG).show();
+                return;
+            }
+            //对文件名进行URL转码
+            String file_name_encode = url(file_name);
+            //将文件进行压缩
+            //Toast.makeText(context, "file:"+file_all_name+" is compressing!", Toast.LENGTH_LONG).show();
+            String zipload = ZIP_PATH + file_name_encode + ".zip";
+            yashuo ys = new yashuo();
+            try {
+                ys.zip(zipload, new File(str[x]));
+            } catch (Exception e) {
+                // TODO 自动生成的 catch 块
+                e.printStackTrace();
+            }
+            //Toast.makeText(context, "file:"+file_all_name+" compress complete!", Toast.LENGTH_LONG).show();
+            Log.i("文件路径/压缩路径", zipload);
+            File files = new File(zipload);
+            if (files.exists()) {
+                //定义一个file容器，添加文件
+                FileWrapper file = new FileWrapper();
+                file.setFile(new File(zipload));
+                fileWrappers.put(file_all_name, file);
+                Log.i("文件路径" + x, str[x]);
+            } else {
+                Toast.makeText(context, "zipfile:" + file_name_encode + " not exists", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+    }
+    private void UserCheck(final String filespath){
+        request1 = new AsyncHttpUtil.Builder()
                 .url("http://zh749931552.6655.la/ThinkPHP/Index/User_is_regedit")
                 .addFormData("toman", et_filepath.getText().toString())//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
@@ -219,9 +226,16 @@ public class uploadActivity extends Activity {
                     @Override
                     public void onSuccess(String responseInfo) {
                         try {
+                            sign=true;
                             JSONObject ob = new JSONObject(responseInfo);
-                            if(ob.getString("returncode")=="1"){
-                                sign=1;
+                            if(ob.getString("returncode").equals("1")){
+                                //文件解压
+                                Log.i("file:",filespath);
+                                FileZip(filespath);
+                                //文件上传
+                                Fileupload();
+                            }else{
+                                Toast.makeText(uploadActivity.this, "你传输的对象不存在，请注册", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -229,12 +243,10 @@ public class uploadActivity extends Activity {
 
                     }
                 }).build().post();
-        if(sign==1)return true;
-        return false;
     }
     private void Fileupload(){
         //联网上传文件
-        request = new AsyncHttpUtil.Builder()
+        request2 = new AsyncHttpUtil.Builder()
                 .url(URL)
                 //.addUploadFile("file1", new File("/storage/sdcard1/IMG_20160318_202540_HDR.jpg"))
                 .setFileWrappers(fileWrappers)

@@ -45,7 +45,7 @@ public class downloadActivity extends Activity {
     private Map<String, String[]> file;
     private int number = 0;
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
-    private String user_name = null;
+    private String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +53,16 @@ public class downloadActivity extends Activity {
         setContentView(R.layout.activity_download_main);
         //textView = (TextView) findViewById(R.id.textView1);
         mMainActivity = this;
-        checkUserState();
+        if(!checkUserState()){
+            Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+            return;
+        }
         onConn();
     }
     public void onClick(View v){
         onConn();
     }
-    public void checkUserState(){
+    public boolean checkUserState(){
         db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
         //获取用户名
         Cursor cursor =  db_user.selectInformation();
@@ -67,10 +70,11 @@ public class downloadActivity extends Activity {
             if (cursor.moveToFirst()) {//just need to query one time
                 user_name = cursor.getString(cursor.getColumnIndex("Name"));
             }
-        }else{
-            Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
-            return;
+            if(!"".equals(user_name+"")){
+                return true;
+            }
         }
+        return false;
     }
     public void onConn() {
 
