@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class FragmentOthers extends Fragment {
 	private ListView listview;
 	private TextView textview;
 	private CheckBox filecheckbox;
+	private boolean fristChecked = true;
 	//记录当前父文件夹
 	File currentParent;
 	File [] currentFiles;
@@ -82,39 +84,57 @@ public class FragmentOthers extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
-					try {
-						if (!currentParent.getCanonicalPath().equals(Environment
-								.getDataDirectory().getAbsolutePath())) {
-                            //获取上一级的目录
-                            currentParent = currentParent.getParentFile();
-                            //列出当前目录下的所有文件
-                            currentFiles = currentParent.listFiles();
-                            //再次更新ListView
-                            inflateListView(currentFiles);
-                        }
-					} catch (IOException e) {
-						e.printStackTrace();
+				try {
+					if (!currentParent.getCanonicalPath().equals(Environment
+							.getDataDirectory().getAbsolutePath())) {
+						//获取上一级的目录
+						currentParent = currentParent.getParentFile();
+						//列出当前目录下的所有文件
+						currentFiles = currentParent.listFiles();
+						//再次更新ListView
+						inflateListView(currentFiles);
 					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 	/**
 	 *
 	 */
-	private void inflateListView(File[] files) {
+	private void inflateListView(final File[] files) {
 		//创建一个List集合，List集合的元素是Map
-//		System.out.println(files.length);
 		List<Map<String,Object>> listItems = new ArrayList<Map<String,Object>>();
 		for(int i = 0;i<files.length;i++){
 			Map<String,Object> listItem = new HashMap<String,Object>();
 			//如果当前Files是文件夹，使用folder图标;否则使用file图标
 			if(files[i].isDirectory()){
-				listItem.put("icon",R.mipmap.file_image);
+				listItem.put("icon", R.mipmap.file_image);
 			}else{
-				listItem.put("icon",R.mipmap.file_image);
+				listItem.put("icon", R.mipmap.file_image);
 			}
-			if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("doc")){
+
+			if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("doc")||
+					files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("docx")){
 				listItem.put("icon", R.mipmap.file_doc);
+//				final int finalI = i;
+//				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//					@Override
+//					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//						CheckBox checkBox = (CheckBox) view.findViewById(R.id.filecheck);
+//						if (fristChecked) {
+//							checkBox.setChecked(true);
+//							//放入集合
+//							Toast.makeText(getContext(), files[finalI].getAbsolutePath(), Toast.LENGTH_SHORT).show();
+//							fristChecked = false;
+//						} else {
+//							checkBox.setChecked(false);
+//							//拿出集合
+//							fristChecked = true;
+//						}
+//					}
+//				});
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("xls")){
 				listItem.put("icon",R.mipmap.file_xls);
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("pdf")){
@@ -141,7 +161,7 @@ public class FragmentOthers extends Fragment {
 		//为ListView设置adapter
 		listview.setAdapter(simpleAdapter);
 		try {
-			textview.setText("当前路径为："+currentParent.getCanonicalPath());
+			textview.setText("当前路径为：" + currentParent.getCanonicalPath());
 		} catch (IOException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
