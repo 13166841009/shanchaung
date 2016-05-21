@@ -27,7 +27,10 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.WiFiActivity;
+import fragment.SettingFragment;
 import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
+import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -117,15 +120,17 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 if (id == R.id.nav_camera) {
                     Toast.makeText(getApplicationContext(), "nav", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.nav_gallery) {
-
+                    Intent intent=new Intent(getApplicationContext(), WiFiActivity.class);
+                    startActivity(intent);
                 } else if (id == R.id.nav_slideshow) {
-
+                    Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
+                    startActivity(intent);
                 } else if (id == R.id.nav_manage) {
-
+                    Intent intent = new Intent(getApplicationContext(), aboutUs.class);
+                    startActivity(intent);
                 } else if (id == R.id.nav_game) {
                     startActivity(new Intent(getApplicationContext(), GameFriend.class));
                 }else if (id == R.id.nav_share) {
-                    startActivity(new Intent(getApplicationContext(), WifiPcActivity.class));
                 } else if (id == R.id.nav_send) {
 
                 }

@@ -11,11 +11,15 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bruce.library.ComboView;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Method;
+import java.util.List;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity;
@@ -24,6 +28,7 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
@@ -32,6 +37,8 @@ public class PostActivity extends Activity {
     /**
      * 数据连接
      */
+    private TextView filesize;
+    private List<String> filesizelist = FragmentChoose.getFileChoose();
     Class telephonyManagerClass;
     Object ITelephonyStub;
     Class ITelephonyClass;
@@ -50,7 +57,7 @@ public class PostActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receive);
+        setContentView(R.layout.activity_wifi_post);
         initTitle();
         telephonyManager = (TelephonyManager) getApplicationContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
@@ -135,6 +142,8 @@ public class PostActivity extends Activity {
         ios.settingMorphParams(iosparams);
     }
     private  void initTitle(){
+        filesize = (TextView) findViewById(R.id.postfilesize);
+        filesize.setText(filesize.getText().toString()+":"+filesizelist.size()+"个");
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
         mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);

@@ -52,7 +52,7 @@ public class WifiPcActivity extends Activity {
         mTitleBarView.setBtnLeftOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WifiPcActivity.this, MainPage.class));
+                WifiPcActivity.this.finish();
             }
         });
     }

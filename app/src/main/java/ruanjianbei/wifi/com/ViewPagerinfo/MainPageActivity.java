@@ -25,7 +25,7 @@ public class MainPageActivity extends IndicatorFragmentActivity {
         super.onCreate(savedInstanceState);
         //Toast.makeText(MainPageActivity.this,"Mainpage",Toast.LENGTH_SHORT).show();
 //        System.out.print("132");
-//        BottomImage = (ImageView) findViewById(R.id.pagebottom);
+//        BottomImage = (ImageView) findViewById(R.id.mainpagebottom);
 //        BottomImage = bottomimage;
     }
 
