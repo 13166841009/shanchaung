@@ -29,7 +29,6 @@ public class AppSelectAdapter extends RecyclerView.Adapter<AppSelectAdapter.MyVi
 {
     private Context context;
     private List<InterfaceAppInfo> list;
-    public static List<String> mSelectAPP = FragmentChoose.getFileChoose();
     public interface OnItemClickListener
     {
         void onItemClick(View view, int position);

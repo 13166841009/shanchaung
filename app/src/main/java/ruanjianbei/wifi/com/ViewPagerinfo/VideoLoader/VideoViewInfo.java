@@ -5,6 +5,16 @@ public class VideoViewInfo {
 	private String mimeType;
 	private String thumbPath;
 	private String title;
+	public static final int TYPE_CHECKED = 1;
+	public static final int TYPE_NOCHECKED = 0;
+
+	String name;
+	int type;
+
+	public VideoViewInfo(String name,int type){
+		this.name = name;
+		this.type = type;
+	}
 
 	public String getVideosize() {
 		return videosize;

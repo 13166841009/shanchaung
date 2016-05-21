@@ -5,7 +5,16 @@ public class MusicInfo {
 	private String musicpeople;
 	private Boolean ifchoose;
 	private String musicdistance;
+	public static final int TYPE_CHECKED = 1;
+	public static final int TYPE_NOCHECKED = 0;
 
+	String name;
+	int type;
+
+	public MusicInfo(String name,int type){
+		this.name = name;
+		this.type = type;
+	}
 	public String getMusicdistance() {
 		return musicdistance;
 	}

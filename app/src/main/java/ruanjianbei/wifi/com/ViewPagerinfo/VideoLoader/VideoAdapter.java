@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +25,6 @@ public class VideoAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<VideoViewInfo> videoRows;
 
-	/** 标记CheckBox是否被选中 **/
-	private List<Boolean> mChecked;
-	/** 存放要显示的Item数据 **/
-	private List<VideoViewInfo> listPerson;
-	/** 一个HashMap对象 **/
-	@SuppressLint("UseSparseArrays")
-	private HashMap<Integer, View> map = new HashMap<Integer, View>();
-
 	/**
 	 * 用户选择的图片，存储为图片的完整路径
 	 */
@@ -41,13 +34,6 @@ public class VideoAdapter extends BaseAdapter{
 						ArrayList<VideoViewInfo> videoRows) {
 		this.context = context;
 		this.videoRows = videoRows;
-
-		listPerson = new ArrayList<VideoViewInfo>();
-		listPerson = videoRows;
-		mChecked = new ArrayList<Boolean>();
-		for (int i = 0; i < videoRows.size(); i++) {// 遍历且设置CheckBox默认状态为未选中
-			mChecked.add(false);
-		}
 	}
 
 	@Override
@@ -67,48 +53,45 @@ public class VideoAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		View view;
+		final int index = position;
 		ViewHolder viewHolder = null;
-		if(map.get(position)==null){
+		if(convertView==null){
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.pager_fragmentvideo, null);
+			convertView = inflater.inflate(R.layout.pager_fragmentvideo, null);
 			// 初始化ViewHolder对象
 			viewHolder = new ViewHolder();
-			viewHolder.checkBox = (CheckBox) view.findViewById(R.id.checkboxvedio);
-			viewHolder.videoThumb = (ImageView) view.findViewById(R.id.imageView);
-			viewHolder.videoTitle = (TextView) view.findViewById(R.id.videoTitle);
-			viewHolder.videoSize = (TextView) view.findViewById(R.id.videoSize);
-			final int mposition = position;
-			map.put(position, view);// 存储视图信息
-			viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CheckBox cb = (CheckBox) v;
-					mChecked.set(mposition, cb.isChecked());// 设置CheckBox为选中状态
-					/**
-					 * 存储已经选择文件
-					 */
-					if(cb.isChecked()){
-						mSelectedVideo.add(videoRows.get(position).getFilePath());
-//						Toast.makeText(context,videoRows.get(position).getFilePath(),Toast.LENGTH_SHORT).show();
-					}else{
-						mSelectedVideo.remove(videoRows.get(position).getFilePath());
-//						Toast.makeText(context,"xxxx",Toast.LENGTH_SHORT).show();
-					}
-				}
-			});
-			view.setTag(viewHolder);
+			viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkboxvedio);
+			viewHolder.videoThumb = (ImageView) convertView.findViewById(R.id.imageView);
+			viewHolder.videoTitle = (TextView) convertView.findViewById(R.id.videoTitle);
+			viewHolder.videoSize = (TextView) convertView.findViewById(R.id.videoSize);
+			convertView.setTag(viewHolder);
 		}else{
-			view = map.get(position);
-			viewHolder = (ViewHolder) view.getTag();
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+		final ViewHolder finalViewHolder = viewHolder;
+		viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(finalViewHolder.checkBox.isChecked()){
+					videoRows.get(index).type = VideoViewInfo.TYPE_CHECKED;
+					mSelectedVideo.add(videoRows.get(index).getFilePath());
+				}else{
+					videoRows.get(index).type = VideoViewInfo.TYPE_NOCHECKED;
+					mSelectedVideo.remove(videoRows.get(index).getFilePath());
+				}
+			}
+		});
+		if(videoRows.get(position).type == VideoViewInfo.TYPE_CHECKED){
+			viewHolder.checkBox.setChecked(true);
+		}else{
+			viewHolder.checkBox.setChecked(false);
 		}
 		if (videoRows.get(position).getThumbPath() != null) {
 			viewHolder.videoThumb.setImageURI(Uri.parse(videoRows.get(position).getThumbPath()));
 		}
-		viewHolder.checkBox.setChecked(mChecked.get(position));
 		viewHolder.videoTitle.setText(videoRows.get(position).getTitle());
 		viewHolder.videoSize.setText("大小："+Integer.parseInt(videoRows.get(position).getVideosize())/(1024*1024)+"M "+"类型："+videoRows.get(position).getMimeType());
-		return view;
+		return convertView;
 	}
 
 	static class ViewHolder{
