@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity">
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    <TextView
+        android:id="@+id/postfilesize"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/blue"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/title_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="传输文件数"/>
+    <com.bruce.library.ComboView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/android_receive" />
+    <com.bruce.library.ComboView
+        android:layout_below="@+id/android_receive"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/ios_receive" />
+</RelativeLayout>

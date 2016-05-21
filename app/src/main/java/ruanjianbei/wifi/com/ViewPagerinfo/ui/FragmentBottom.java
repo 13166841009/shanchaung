@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -18,7 +21,6 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentBottom extends Fragment {
     //获取Imagepop对象
     private ImageView BottomImageView;
-
     public int getCount_file() {
         return count_file;
     }
@@ -52,7 +54,6 @@ public class FragmentBottom extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        counttext = (TextView) getActivity().findViewById(R.id.checkedsize);
         BottomImageView = (ImageView) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +75,7 @@ public class FragmentBottom extends Fragment {
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        //Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
-//        BottomImageView = (ImageView) VieW.findViewById(R.id.pagebottom);
+//        BottomImageView = (ImageView) VieW.findViewById(R.id.mainpagebottom);
 //        BottomImageView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
