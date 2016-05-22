@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -158,17 +159,17 @@ public class LoginActivity extends Activity {
 				super.onSuccess(response);
 				try {
 					String resultString = response.getString("returncode");
-					if(resultString.equals("1")){
+					if (resultString.equals("1")) {
 						stopDialog();
 						Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-						if(mChkSavePassword.isChecked()){
+						if (mChkSavePassword.isChecked()) {
 							saveNameAndPassword();
 						}
 						save_Name();
 						//页面跳转
-						Intent intent = new Intent(mContext,MainPage.class);
+						Intent intent = new Intent(mContext, MainPage.class);
 						startActivity(intent);
-					}else{
+					} else {
 						stopDialog();
 						Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
 					}
@@ -187,11 +188,11 @@ public class LoginActivity extends Activity {
 		Drawable drawable = resources.getDrawable(R.mipmap.chengxuyuan);
 		BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 		Bitmap bt = bitmapDrawable.getBitmap();
-		db_user.saveInformation(bt,null,null,null,null,null);
+		db_user.saveInformation(bt, null, null, null, null, null);
 	}
 	private void save_Name(){
 		DBServiceOperate db_user = new DBServiceOperate(mContext);
-		db_user.upDateInformation("Name",name);
+		db_user.upDateInformation("Name", name);
 	}
 	/**
 	 * 读取账号和密码
@@ -221,4 +222,18 @@ public class LoginActivity extends Activity {
 		editor.commit();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		LoginActivity.this.finish();
+	}
+	//监听按钮点击
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			this.finish();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

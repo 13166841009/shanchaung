@@ -1,7 +1,10 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -12,7 +15,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 
 
 public class MainPageActivity extends IndicatorFragmentActivity {
-    private ImageView BottomImage;
+    private long exitTime = 0;
     public static final int FRAGMENT_ONE = 0;
     public static final int FRAGMENT_TWO = 1;
     public static final int FRAGMENT_THREE = 2;
@@ -23,15 +26,7 @@ public class MainPageActivity extends IndicatorFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Toast.makeText(MainPageActivity.this,"Mainpage",Toast.LENGTH_SHORT).show();
-//        System.out.print("132");
-//        BottomImage = (ImageView) findViewById(R.id.mainpagebottom);
-//        BottomImage = bottomimage;
     }
-
-//    public ImageView getBottomimage(){
-//        return BottomImage;
-//    }
 
     @Override
     protected int supplyTabs(List<TabInfo> tabs) {
@@ -48,6 +43,25 @@ public class MainPageActivity extends IndicatorFragmentActivity {
         tabs.add(new TabInfo(FRAGMENT_SIX, getString(R.string.fragment_six),
                 FragmentOthers.class));
         return FRAGMENT_ONE;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                    Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finishAffinity();
+        }
     }
 
 }

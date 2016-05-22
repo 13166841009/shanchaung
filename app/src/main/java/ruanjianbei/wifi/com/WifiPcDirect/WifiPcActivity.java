@@ -184,7 +184,6 @@ public class WifiPcActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            startActivity(new Intent(WifiPcActivity.this, MainPage.class));
             this.finish();
         }
         return super.onKeyDown(keyCode, event);

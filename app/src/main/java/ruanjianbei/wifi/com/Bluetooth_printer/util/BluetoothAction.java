@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import ruanjianbei.wifi.com.shanchuang.R;
 
+
 public class BluetoothAction implements OnClickListener {
 
 	private Button switchBT = null;
@@ -21,8 +22,8 @@ public class BluetoothAction implements OnClickListener {
 	private BluetoothService bluetoothService = null;
 
 	public BluetoothAction(Context context, ListView unbondDevices,
-			ListView bondDevices, Button switchBT, Button searchDevices,
-			Activity activity) {
+						   ListView bondDevices, Button switchBT, Button searchDevices,
+						   Activity activity) {
 		super();
 		this.context = context;
 		this.unbondDevices = unbondDevices;
@@ -48,16 +49,16 @@ public class BluetoothAction implements OnClickListener {
 	}
 
 	/**
-	 * ³õÊ¼»¯½çÃæ
+	 * åˆå§‹åŒ–ç•Œé¢
 	 */
 	public void initView() {
 
 		if (this.bluetoothService.isOpen()) {
-			System.out.println("À¶ÑÀÓĞ¿ª!");
-			switchBT.setText("¹Ø±ÕÀ¶ÑÀ");
+			System.out.println("è“ç‰™æœ‰å¼€!");
+			switchBT.setText("å…³é—­è“ç‰™");
 		}
 		if (!this.bluetoothService.isOpen()) {
-			System.out.println("À¶ÑÀÃ»¿ª!");
+			System.out.println("è“ç‰™æ²¡å¼€!");
 			this.searchDevices.setEnabled(false);
 		}
 	}
@@ -67,7 +68,7 @@ public class BluetoothAction implements OnClickListener {
 	}
 
 	/**
-	 * ¸÷ÖÖ°´Å¥µÄ¼àÌı
+	 * å„ç§æŒ‰é’®çš„ç›‘å¬
 	 */
 	@Override
 	public void onClick(View v) {
@@ -77,12 +78,12 @@ public class BluetoothAction implements OnClickListener {
 			activity.finish();
 		} else if (v.getId() == R.id.openBluetooth_tb) {
 			if (!this.bluetoothService.isOpen()) {
-				// À¶ÑÀ¹Ø±ÕµÄÇé¿ö
-				System.out.println("À¶ÑÀ¹Ø±ÕµÄÇé¿ö");
+				// è“ç‰™å…³é—­çš„æƒ…å†µ
+				System.out.println("è“ç‰™å…³é—­çš„æƒ…å†µ");
 				this.bluetoothService.openBluetooth(activity);
 			} else {
-				 // À¶ÑÀ´ò¿ªµÄÇé¿ö
-				System.out.println("À¶ÑÀ´ò¿ªµÄÇé¿ö");
+				// è“ç‰™æ‰“å¼€çš„æƒ…å†µ
+				System.out.println("è“ç‰™æ‰“å¼€çš„æƒ…å†µ");
 				this.bluetoothService.closeBluetooth();
 
 			}
