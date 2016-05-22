@@ -43,7 +43,6 @@ import ruanjianbei.wifi.com.shanchuang.R;
  * Created by linankun1 on 2016/4/21.
  */
 public class uploadActivity extends Activity {
-    private ruanjianbei.wifi.com.Phone_P_3G.upload.util.HorizontalProgressBarWithNumber mProgressBar;
     private ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber mRoundProgressBar;
     private EditText et_filepath;
     private Context context;
@@ -75,12 +74,13 @@ public class uploadActivity extends Activity {
                     Toast.makeText(uploadActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
+                    int nowProgress = Integer.parseInt(String.valueOf(msg.obj));
+                    mRoundProgressBar.setProgress(nowProgress);
                     int roundProgress = mRoundProgressBar.getProgress();
-                    //mProgressBar.setProgress(++progress);
-                    mRoundProgressBar.setProgress(Integer.parseInt(String.valueOf(msg.obj)));
-                    Log.i("记录", "" + Integer.parseInt(String.valueOf(msg.obj)));
+                    Log.i("记录进度：", "" + nowProgress+"辅："+roundProgress);
                     if (roundProgress >= 100) {
-                        mHandler.removeMessages(MSG_PROGRESS_UPDATE);
+                        mRoundProgressBar.setProgress(0);
+//                        mHandler.removeMessages(MSG_PROGRESS_UPDATE);
                     }
                     mHandler.sendEmptyMessageDelayed(MSG_PROGRESS_UPDATE, 100);//设置更新时间ms
                     break;

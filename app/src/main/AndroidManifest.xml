@@ -18,9 +18,11 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <!-- 极光推送 -->
 
+    <!--蓝牙打印机-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <!-- 文件传输协议 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -118,7 +120,7 @@
             android:name="ruanjianbei.wifi.com.my_setting.my_file"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.my_setting.my_music"
+            android:name="ruanjianbei.wifi.com.my_setting.bluetooth_printer"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.my_setting.tran_history.tran_history"
@@ -216,6 +218,8 @@
             android:name="ruanjianbei.wifi.com.shanchuang.GameFriend"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
+        <activity android:name="ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity" />
+        <activity android:name="ruanjianbei.wifi.com.Bluetooth_printer.PrintDataActivity" />
         <!-- 极光推送 -->
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->

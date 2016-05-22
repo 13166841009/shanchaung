@@ -150,7 +150,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/qianbao"
-                        android:text="我的音乐" />
+                        android:text="蓝牙打印机" />
 
                     <ImageView
                         android:layout_width="wrap_content"

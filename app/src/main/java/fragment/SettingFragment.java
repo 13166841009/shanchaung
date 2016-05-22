@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,14 +15,12 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity;
 
 import java.io.ByteArrayInputStream;
 
-import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.my_setting.my_file;
 import ruanjianbei.wifi.com.my_setting.my_information;
-import ruanjianbei.wifi.com.my_setting.my_music;
+import ruanjianbei.wifi.com.my_setting.bluetooth_printer;
 import ruanjianbei.wifi.com.my_setting.my_photo;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.my_setting.wait_kaifa;
-import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
@@ -128,7 +124,7 @@ public class SettingFragment extends Activity {
 		startActivity(intent);
 	}
 	public void my_music(View view){
-		Intent intent = new Intent(mContext,my_music.class);
+		Intent intent = new Intent(mContext,bluetooth_printer.class);
 		startActivity(intent);
 	}
 	public void tran_history(View view){
