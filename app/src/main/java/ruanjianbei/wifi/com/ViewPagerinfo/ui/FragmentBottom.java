@@ -93,7 +93,7 @@ public class FragmentBottom extends Fragment {
             mMoreWindow.init();
         }
 
-        mMoreWindow.showMoreWindow(view, 100);
+        mMoreWindow.showMoreWindow(view, 200);
     }
 
 }
