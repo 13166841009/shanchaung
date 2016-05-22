@@ -4,7 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
     <ruanjianbei.wifi.com.ViewPagerinfo.ui.TitleIndicator
         android:id="@+id/pagerindicator"
         android:layout_width="fill_parent"
@@ -19,12 +18,16 @@
 
     <!-- Don't set background for ViewPager. It doesn't work because of page margin -->
 
-    <ruanjianbei.wifi.com.ViewPagerinfo.ui.ViewPagerCompat
-        android:id="@+id/pager"
-        android:layout_width="fill_parent"
+    <RelativeLayout
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:duplicateParentState="true" />
+        android:duplicateParentState="true"
+        android:layout_width="wrap_content">
+        <ruanjianbei.wifi.com.ViewPagerinfo.ui.ViewPagerCompat
+            android:id="@+id/pager"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent" />
+    </RelativeLayout>
     <FrameLayout
         android:id="@+id/fragmentBottom"
         android:layout_width="match_parent"

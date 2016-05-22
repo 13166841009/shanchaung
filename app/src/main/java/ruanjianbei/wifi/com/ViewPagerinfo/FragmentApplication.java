@@ -23,13 +23,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ruanjianbei.wifi.com.Utils.LoadingManange.SpinnerLoading;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.Adpater.AppSelectAdapter;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.AppInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.InterfaceAppInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.AppFileInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.utils.DeviceUtils;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
+import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.CustomProgressDialog;
 
 
 /**
@@ -48,6 +51,33 @@ public class FragmentApplication extends Fragment
     private AppFragmentHandler handler;
     private AppSelectAdapter adapter;
     private RecyclerView recyclerView;
+    private static CustomProgressDialog customProgressDialog = null;
+    /**
+     * 开启进度框
+     */
+    private void startDialog(){
+        if(customProgressDialog == null){
+            customProgressDialog = CustomProgressDialog.getappApplication(getContext());
+            customProgressDialog.setMessage("加载中...");
+        }
+        customProgressDialog.show();
+    }
+    /**
+     * 隱藏進度對話框
+     */
+    private static void stopDialog(){
+        if(customProgressDialog != null){
+            customProgressDialog.cancel();
+            customProgressDialog = null;
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        startDialog();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,6 +179,11 @@ public class FragmentApplication extends Fragment
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onItemClick(View view, int position)
     {
         AppInfo info = ((AppInfo) adapter.getItem(position));
@@ -194,6 +229,7 @@ public class FragmentApplication extends Fragment
             switch (msg.what)
             {
                 case APP_OK :
+                    stopDialog();
                     fragment.adapter.notifyDataSetChanged();
                     break;
             }

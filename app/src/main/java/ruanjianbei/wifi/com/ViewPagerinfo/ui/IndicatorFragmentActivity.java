@@ -29,6 +29,7 @@ import java.util.List;
 
 import activity.WiFiActivity;
 import fragment.SettingFragment;
+import ruanjianbei.wifi.com.Utils.LoadingManange.SpinnerLoading;
 import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
 import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.shanchuang.GameFriend;
@@ -59,6 +60,9 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
 
     //初始化fragment下端
     private FragmentBottom fragmentBottom = new FragmentBottom();
+
+    //加载图
+    private SpinnerLoading spinnerLoading;
 
     public TitleIndicator getIndicator() {
         return mIndicator;
@@ -172,7 +176,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         mPager.setAdapter(null);
         mPager = null;
         mIndicator = null;
-
         super.onDestroy();
     }
 

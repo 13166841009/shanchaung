@@ -139,7 +139,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 		params.addRule(RelativeLayout.BELOW, R.id.more_window_auto);
 		params.addRule(RelativeLayout.RIGHT_OF, R.id.more_window_collect);
 		params.topMargin = 200;
-		params.leftMargin = 50;
+		params.leftMargin = 60;
 		close.setLayoutParams(params);
 		
 		close.setOnClickListener(new OnClickListener() {

@@ -47,11 +47,11 @@ public class CustomProgressDialog extends Dialog {
 	 * 注册
 	 * @param
 	 */
-	public static CustomProgressDialog regedit_instence(Context context){
+	public static CustomProgressDialog getappApplication(Context context){
 		if(cpd == null){
 			cpd = new CustomProgressDialog(context, R.style.CustomProgressDialog);
 			//设置view
-			cpd.setContentView(R.layout.act_custom_progressdialog);
+			cpd.setContentView(R.layout.act_app_progressdialog);
 			//设置对话框居中显示
 			cpd.getWindow().getAttributes().gravity = Gravity.CENTER;
 		}
