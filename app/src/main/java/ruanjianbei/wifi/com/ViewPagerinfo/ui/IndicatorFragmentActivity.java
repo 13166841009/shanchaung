@@ -5,7 +5,10 @@ package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
@@ -19,16 +22,23 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.io.ByteArrayInputStream;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 import activity.WiFiActivity;
 import fragment.SettingFragment;
+import ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity;
 import ruanjianbei.wifi.com.Utils.LoadingManange.SpinnerLoading;
 import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
 import ruanjianbei.wifi.com.my_setting.aboutUs;
@@ -39,8 +49,12 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener{
     private static final String TAG = "DxFragmentActivity";
     public static final String EXTRA_TAB = "tab";
-    public static final String EXTRA_QUIT = "extra.quit";
-
+    private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db;
+    //用户图像加载
+    private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()
+            + "/shangchuan/data/image/face.png";
+    private ImageView userimage;
+    private TextView posttimes;
 
     //private MainPageActivity1 mainPageActivity = new MainPageActivity1();
     protected int mCurrentTab = 0;
@@ -61,8 +75,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     //初始化fragment下端
     private FragmentBottom fragmentBottom = new FragmentBottom();
 
-    //加载图
-    private SpinnerLoading spinnerLoading;
 
     public TitleIndicator getIndicator() {
         return mIndicator;
@@ -101,7 +113,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 return tabs.size();
             return 0;
         }
-
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             TabInfo tab = tabs.get(position);
@@ -116,26 +127,38 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getMainViewResId());
+        db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(getApplicationContext());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View view = navigationView.getHeaderView(0);
+        userimage = (ImageView) view.findViewById(R.id.user_imageview);
+        posttimes = (TextView) view.findViewById(R.id.posttimes);
+        userimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+            }
+        });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             public boolean onNavigationItemSelected(MenuItem item) {
                 int id = item.getItemId();
 
-                if (id == R.id.nav_camera) {
-                    Toast.makeText(getApplicationContext(), "nav", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.nav_gallery) {
-                    Intent intent=new Intent(getApplicationContext(), WiFiActivity.class);
+                if (id == R.id.nav_pcpost) {
+                    Intent intent = new Intent(getApplicationContext(), WiFiActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_slideshow) {
+                } else if (id == R.id.nav_print) {
+                    Intent intent = new Intent(getApplicationContext(), BluetoothActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_happy) {
                     Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_manage) {
-                    Intent intent = new Intent(getApplicationContext(), aboutUs.class);
+                } else if (id == R.id.nav_play) {
+                    Intent intent = new Intent(getApplicationContext(), GameFriend.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_game) {
-                    startActivity(new Intent(getApplicationContext(), GameFriend.class));
-                }else if (id == R.id.nav_share) {
-                } else if (id == R.id.nav_send) {
+                } else if (id == R.id.nav_aboutus) {
+                    startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+                } else if (id == R.id.nav_share) {
+
+                } else if (id == R.id.nav_setting) {
 
                 }
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -145,7 +168,8 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
             }
         });
         initViews();
-
+        settingImage();
+        settingposttimes();
         //设置viewpager内部页面之间的间距
         mPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.page_margin_width));
         //设置viewpager内部页面间距的drawable
@@ -153,6 +177,40 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         //初始化pager界面的下面部位
         initViewpager();
     }
+
+    private void settingposttimes() {
+        //查看文件传输记录
+        ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
+                ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(getApplicationContext());
+        Cursor cursor1 = db.selectInformation();
+        if(cursor1 != null&&cursor1.getCount()!=0){
+            posttimes.setText("传输次数"+cursor1.getCount());
+        }
+        cursor1.close();
+    }
+
+    private void settingImage() {
+        //更新头像
+        Cursor cursor =  db.selectInformation();
+        //取出头像
+        byte[] photo = null;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {//just need to query one time
+                photo = cursor.getBlob(cursor.getColumnIndex("Photo"));//取出图片
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        ByteArrayInputStream bais = null;
+        if (photo != null) {
+            bais = new ByteArrayInputStream(photo);
+            Drawable drawable = Drawable.createFromStream(bais, "Photo");
+            userimage.setImageDrawable(drawable);//把图片设置到ImageView对象中
+        }
+        db.Close();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

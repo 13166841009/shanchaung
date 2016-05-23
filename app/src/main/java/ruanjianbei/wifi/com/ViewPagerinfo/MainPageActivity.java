@@ -2,20 +2,24 @@ package ruanjianbei.wifi.com.ViewPagerinfo;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import fragment.SettingFragment;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 
 public class MainPageActivity extends IndicatorFragmentActivity {
     private long exitTime = 0;
+//    private ImageView userimageview;
     public static final int FRAGMENT_ONE = 0;
     public static final int FRAGMENT_TWO = 1;
     public static final int FRAGMENT_THREE = 2;
@@ -26,6 +30,14 @@ public class MainPageActivity extends IndicatorFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        userimageview = (ImageView) findViewById(R.id.user_imageview);
+//        userimageview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -63,5 +75,4 @@ public class MainPageActivity extends IndicatorFragmentActivity {
             finishAffinity();
         }
     }
-
 }

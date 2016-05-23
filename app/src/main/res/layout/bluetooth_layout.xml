@@ -3,21 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <Button
+            android:background="@drawable/login_btn"
             android:id="@+id/openBluetooth_tb"
             android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="5dp"
-            android:text="打开蓝牙" />
+            android:layout_height="50dp"
+            android:text="打开蓝牙"
+            android:textColor="@color/whites"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <Button
+            android:background="@drawable/login_btn"
+            android:textColor="@color/whites"
             android:id="@+id/searchDevices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,14 +84,6 @@
                 android:layout_below="@+id/linearLayout1" >
             </ListView>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/return_Bluetooth_btn"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/searchDevices"
-            android:layout_alignParentLeft="true"
-            android:text="返回" />
     </RelativeLayout>
 
 </LinearLayout>

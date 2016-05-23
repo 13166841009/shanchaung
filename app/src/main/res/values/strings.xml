@@ -144,15 +144,17 @@
 
     <!-- 右滑菜单-->
 
-    <string name="dnkc">电脑快传</string>
-    <string name="sjkc">手机快传</string>
-    <string name="wdkc">我的快传</string>
-    <string name="sz">设置</string>
-    <string name="gywm">关于我们</string>
-    <string name="fx">分享</string>
-
+    <string name="pcpost">电脑快传</string>
+    <string name="bluetoothprint">蓝牙打印</string>
+    <string name="happytime">开心一刻</string>
+    <string name="playmouse">打地鼠</string>
+    <string name="aboutus">关于我们</string>
+    <string name="share">分享</string>
+    <string name="setting">设置</string>
     <!-- 打地鼠-->
     <string name="begin">开始游戏</string>
     <string name="dds">打地鼠</string>
+    <!--蓝牙打印机-->
+    <string name="bluetooth" >蓝牙打印</string>
 
 </resources>

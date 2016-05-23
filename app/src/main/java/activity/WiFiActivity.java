@@ -78,15 +78,8 @@ public class WiFiActivity extends Activity {
 				});
 
 		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
-		mTitleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
+		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.wifi);
-		mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
-		mTitleBarView.setBtnLeftOnclickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				WiFiActivity.this.finish();
-			}
-		});
 		ComboView pcwifi = (ComboView) findViewById(R.id.pc_wifi_post);
 		ComboView.Params params = ComboView.Params.create()
 

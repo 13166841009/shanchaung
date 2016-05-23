@@ -74,8 +74,6 @@ public class BluetoothAction implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.searchDevices) {
 			this.searchDevices();
-		} else if (v.getId() == R.id.return_Bluetooth_btn) {
-			activity.finish();
 		} else if (v.getId() == R.id.openBluetooth_tb) {
 			if (!this.bluetoothService.isOpen()) {
 				// 蓝牙关闭的情况

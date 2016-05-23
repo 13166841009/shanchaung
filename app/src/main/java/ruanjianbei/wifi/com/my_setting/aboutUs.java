@@ -32,7 +32,7 @@ public class aboutUs extends Activity{
         findview();
 
         mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
-        mTitleBarView.setTitleText(R.string.gywm);
+        mTitleBarView.setTitleText(R.string.aboutus);
         mTitleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
     }
 

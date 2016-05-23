@@ -3,25 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/sj"
-            android:title="@string/sjkc" />
+            android:id="@+id/nav_pcpost"
+            android:icon="@mipmap/pcpost"
+            android:title="@string/pcpost" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/dn"
-            android:title="@string/dnkc" />
+            android:id="@+id/nav_print"
+            android:icon="@mipmap/print"
+            android:title="@string/bluetoothprint" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_happy"
+            android:icon="@mipmap/happy"
+            android:title="@string/happytime" />
+        <item
+            android:id="@+id/nav_play"
+            android:icon="@mipmap/play"
+            android:title="@string/playmouse" />
+        <item
+            android:id="@+id/nav_aboutus"
             android:icon="@drawable/my"
-            android:title="@string/wdkc" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/my"
-            android:title="@string/gywm" />
-        <item
-            android:id="@+id/nav_game"
-            android:icon="@drawable/my"
-            android:title="@string/dds" />
+            android:title="@string/aboutus" />
     </group>
 
     <item android:title="Communicate">
@@ -29,11 +29,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="@string/fx" />
+                android:title="@string/share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/sz" />
+                android:title="@string/setting" />
         </menu>
     </item>
 

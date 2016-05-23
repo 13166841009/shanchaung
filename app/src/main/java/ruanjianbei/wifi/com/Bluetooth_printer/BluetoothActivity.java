@@ -3,21 +3,29 @@ package ruanjianbei.wifi.com.Bluetooth_printer;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import ruanjianbei.wifi.com.Bluetooth_printer.util.BluetoothAction;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class BluetoothActivity extends Activity {
 	private Context context = null;
-
+	private TitleBarView titleBarView;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.context = this;
-		setTitle("蓝牙打印");
 		setContentView(R.layout.bluetooth_layout);
+		inittitle();
 		this.initListener();
+	}
+
+	private void inittitle() {
+		titleBarView = (TitleBarView) findViewById(R.id.title_bar);
+		titleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+		titleBarView.setTitleText(R.string.bluetooth);
 	}
 
 	private void initListener() {
@@ -35,13 +43,10 @@ public class BluetoothActivity extends Activity {
 				unbondDevices, bondDevices, switchBT, searchDevices,
 				BluetoothActivity.this);
 
-		Button returnButton = (Button) this
-				.findViewById(R.id.return_Bluetooth_btn);
 		bluetoothAction.setSearchDevices(searchDevices);
 		bluetoothAction.initView();
 
 		switchBT.setOnClickListener(bluetoothAction);
 		searchDevices.setOnClickListener(bluetoothAction);
-		returnButton.setOnClickListener(bluetoothAction);
 	}
 }

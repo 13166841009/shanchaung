@@ -29,10 +29,8 @@ public class SettingFragment extends Activity {
 			+ "/shangchuan/data/image/face.png";
 	private Context mContext;
 	private TitleBarView mTitleBarView;
-	private ImageView iv1;
 	private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db;
 	private TextView tv_tran;
-	//private View mAboutme;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +40,6 @@ public class SettingFragment extends Activity {
 		db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mContext);
 		findView();
 		init();
-		//AboutUs();
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.mime);
@@ -57,8 +54,6 @@ public class SettingFragment extends Activity {
 
 
 	private void findView(){
-		iv1 = (ImageView) findViewById(R.id.pic);
-		iv1.setDrawingCacheEnabled(true);
 		tv_tran = (TextView) findViewById(R.id.tv_tran);
 	}
 
@@ -66,8 +61,6 @@ public class SettingFragment extends Activity {
 		get_your_infor();
 	}
 	public void get_your_infor(){
-		//初始化个人信息
-		StartSetting();
 		//查看文件传输记录
 		ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db = new
 				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
@@ -78,54 +71,6 @@ public class SettingFragment extends Activity {
 			tv_tran.setText("您没有传输记录");
 		}
 		cursor1.close();
-	}
-	public void StartSetting(){
-/*		Bitmap image = ((BitmapDrawable)iv1.getDrawable()).getBitmap();
-		if(!db.selectInformation().moveToFirst()) {
-			db.saveInformation(image,null, null, null, null, null);
-			db.selectInformation().close();
-		}*/
-		//更新头像
-		Cursor cursor =  db.selectInformation();
-		//取出头像
-		byte[] photo = null;
-		if (cursor != null) {
-			if (cursor.moveToFirst()) {//just need to query one time
-				photo = cursor.getBlob(cursor.getColumnIndex("Photo"));//取出图片
-			}
-		}
-		if (cursor != null) {
-			cursor.close();
-		}
-		ByteArrayInputStream bais = null;
-		if (photo != null) {
-			bais = new ByteArrayInputStream(photo);
-			Drawable drawable = Drawable.createFromStream(bais, "Photo");
-			iv1.setImageDrawable(drawable);//把图片设置到ImageView对象中
-		}
-        db.Close();
-	}
-	public void aboutMe(View view){
-		Intent intentwifi = new Intent(mContext, WifiShareActivity.class);
-		startActivity(intentwifi);
-//		Intent intent = new Intent(mContext,AboutUs.class);
-//		startActivity(intent);
-	}
-	public void wait_kf(View view){
-		Intent intent = new Intent(mContext,wait_kaifa.class);
-		startActivity(intent);
-	}
-	public void my_photo(View view){
-		Intent intent = new Intent(mContext,my_photo.class);
-		startActivity(intent);
-	}
-	public void my_file(View view){
-		Intent intent = new Intent(mContext,my_file.class);
-		startActivity(intent);
-	}
-	public void my_music(View view){
-		Intent intent = new Intent(mContext,bluetooth_printer.class);
-		startActivity(intent);
 	}
 	public void tran_history(View view){
 		Intent intent = new Intent(mContext,tran_history.class);
