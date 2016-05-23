@@ -3,11 +3,13 @@ package ruanjianbei.wifi.com.my_setting;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,8 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ruanjianbei.wifi.com.my_setting.util.SelectPicPopupWindow;
 import ruanjianbei.wifi.com.shanchuang.R;
-
+import android.view.View.OnClickListener;
 /**
  * Created by linankun1 on 2016/5/1.
  */
@@ -44,6 +47,9 @@ public class my_photo extends Activity {
 
     private static List<String> typeList = new ArrayList<String>();
     private static List<String> xiaohuaList = new ArrayList<String>();
+
+    //自定义的弹出框类
+    private SelectPicPopupWindow menuWindow;
 
     private ListView listView;
     private String content = "开心一刻";
@@ -64,12 +70,34 @@ public class my_photo extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //底部弹出框
+                //实例化SelectPicPopupWindow
+                menuWindow = new SelectPicPopupWindow(my_photo.this, itemsOnClick);
+                //显示窗口
+                menuWindow.showAtLocation(my_photo.this.findViewById(R.id.xiaohua), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
+
+
+                System.out.println(position);
+                System.out.println("--------");
                 getRequest2(position);
-                listView.setAdapter(new ArrayAdapter<String>(my_photo.this,
-                        android.R.layout.simple_list_item_1, xiaohuaList));
+                System.out.println("--------");
             }
         });
     }
+
+    //为弹出窗口实现监听类
+    private OnClickListener  itemsOnClick = new OnClickListener(){
+        public void onClick(View v) {
+            menuWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btn_pick_ans:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     //1.返回接口类型
     public static void getRequest1(){
@@ -86,9 +114,10 @@ public class my_photo extends Activity {
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                 for(int i = 0 ; i < jsonArray.length() ; i++){
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    for(int j = 1 ; j < jsonObject1.length() ; j++){
+                    for(int j = 1 ; j <= jsonObject1.length() ; j++){
                         String name = jsonObject1.getString(""+ j);
-                        typeList.add(j+"、"+name);
+                        typeList.add(j + "、" + name);
+                        System.out.println(name);
                     }
                 }
             }else{
@@ -103,9 +132,9 @@ public class my_photo extends Activity {
         String result =null;
         String url ="http://japi.juhe.cn/funny/list.from";//请求接口地址
         Map params = new HashMap();//请求参数
-        params.put("cat","");//指定接口类型,默认1
-        params.put("st", position);//指定开始数,默认0
-        params.put("count", "");//指定返回个数,默认1
+        params.put("cat",(position+1)+"");//指定接口类型,默认1
+        params.put("st","");//指定开始数,默认0
+        params.put("count","");//指定返回个数,默认1
         params.put("key",APPKEY);//您申请的key
 
         try {
@@ -116,10 +145,9 @@ public class my_photo extends Activity {
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
                 for(int i = 0 ; i < jsonArray.length() ; i++){
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    for(int j = 1 ; j < jsonObject1.length() ; j++){
-                        String name = jsonObject1.getString(""+ j);
-                        xiaohuaList.add(j+"、"+name);
-                    }
+                    String id = jsonObject1.getString("id");
+                    String title = jsonObject1.getString("title");
+                    System.out.println(id+"、"+title);
                 }
             }else{
                 System.out.println(object.get("error_code")+":"+object.get("reason"));
