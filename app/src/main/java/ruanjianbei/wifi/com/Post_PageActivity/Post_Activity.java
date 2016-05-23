@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.DhcpInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 
@@ -15,6 +16,9 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.PostFileAdapter.MediaItem;
 import ruanjianbei.wifi.com.Phone_P_Wifi.PostFileAdapter.MediaListAdapter;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.Utils;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
+import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.animation.MainPage;
@@ -23,6 +27,7 @@ import view.TitleBarView;
 
 public class Post_Activity extends Activity {
     //Adpater的列表展示
+    private WifiAdmin wifiAdmin;
     private TitleBarView mtitlebar;
     private MediaListAdapter mSenderMediaListAdapter;
     private DataSender mDataSender;
@@ -37,6 +42,7 @@ public class Post_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        wifiAdmin = new WifiAdmin(Post_Activity.this);
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
         inittitle();
         mListView = (ListView)findViewById(R.id.post_media_list_view);
@@ -64,8 +70,9 @@ public class Post_Activity extends Activity {
         mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Post_Activity.this, MainPage.class));
+                wifiAdmin.closeNetCard();
                 Post_Activity.this.finish();
+                startActivity(new Intent(Post_Activity.this, PostActivity.class));
             }
         });
     }
@@ -81,5 +88,15 @@ public class Post_Activity extends Activity {
             return medias;
         }
         return null;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            wifiAdmin.closeNetCard();
+            Post_Activity.this.finish();
+            startActivity(new Intent(Post_Activity.this, PostActivity.class));
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

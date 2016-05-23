@@ -12,6 +12,7 @@ import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +24,9 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
-
+/**
+ * Created by zhanghang on 2016/4/20.
+ */
 public class Android_postActivity extends Activity implements WifiApManager.WifiStateListener{
     public static final String ACTION_UPDATE_RECEIVER = "action_update_receiver";
     public static final String EXTRA_DATA = "extra_data";
@@ -129,6 +132,7 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
                     @Override
                     public void onRippleViewClicked(View view) {
                         Intent intent = new Intent();
+                        Android_postActivity.this.finish();
                         intent.setClass(Android_postActivity.this, Post_Activity.class);
                         startActivity(intent);
                     }
@@ -153,8 +157,6 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        wifiAdmin.closeNetCard();
-        //mWifiApManager.destroy(Android_postActivity.this);
     }
     private  void initTitle(){
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
@@ -164,8 +166,19 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         mtitlrbar.setBtnLeftOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wifiAdmin.closeNetCard();
                 Android_postActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            wifiAdmin.closeNetCard();
+            Android_postActivity.this.finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -141,18 +141,6 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="ruanjianbei.wifi.com.ScanActivity.ShowActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="ruanjianbei.wifi.com.ScanActivity.ScanActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
             android:name=".Wifi_PostAndroid"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity

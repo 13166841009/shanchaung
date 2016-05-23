@@ -156,5 +156,6 @@
     <string name="dds">打地鼠</string>
     <!--蓝牙打印机-->
     <string name="bluetooth" >蓝牙打印</string>
+    <string name="printinfo" >打印详情</string>
 
 </resources>

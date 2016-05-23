@@ -1,9 +1,12 @@
 package ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 
@@ -14,6 +17,9 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.PostFileAdapter.MediaListAdapter;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.WifiApAmdin.WifiApManager;
 import ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.FragmentApplication;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
@@ -54,6 +60,7 @@ public class Receive_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 mwifimanage.stopWifiAp();
+                Receive_Activity.this.finish();
                 startActivity(new Intent(Receive_Activity.this, ReceiveActivity.class));
             }
         });
@@ -63,5 +70,15 @@ public class Receive_Activity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         mwifimanage.stopWifiAp();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            mwifimanage.stopWifiAp();
+            Receive_Activity.this.finish();
+            startActivity(new Intent(Receive_Activity.this, ReceiveActivity.class));
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

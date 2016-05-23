@@ -108,6 +108,7 @@ public class Android_receiveActivity extends Activity implements WifiApManager.W
             if (wifiConfiguration!=null){
                 activity_receive_scan_name.setText(wifiConfiguration.SSID);
                 Toast.makeText(Android_receiveActivity.this, "热点"+wifiConfiguration.SSID+"创建成功", Toast.LENGTH_SHORT).show();
+                Android_receiveActivity.this.finish();
                 startActivity(new Intent(Android_receiveActivity.this, Receive_Activity.class));
             }
         }

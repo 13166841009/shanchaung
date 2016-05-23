@@ -63,6 +63,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     //存放选项卡信息的列表
     protected ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 
+    private static Context mcontext;
     //viewpager adapter
     protected MyAdapter myAdapter = null;
 
@@ -80,6 +81,9 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         return mIndicator;
     }
 
+    public static Context getContext(){
+        return mcontext;
+    }
     public class MyAdapter extends FragmentPagerAdapter {
         ArrayList<TabInfo> tabs = null;
         Context context = null;
@@ -127,6 +131,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getMainViewResId());
+        mcontext = this;
         db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(getApplicationContext());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View view = navigationView.getHeaderView(0);

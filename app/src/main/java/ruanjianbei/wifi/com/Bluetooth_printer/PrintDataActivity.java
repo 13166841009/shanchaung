@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,18 +12,32 @@ import android.widget.TextView;
 import ruanjianbei.wifi.com.Bluetooth_printer.util.PrintDataAction;
 import ruanjianbei.wifi.com.Bluetooth_printer.util.PrintDataService;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 public class PrintDataActivity extends Activity {  
     private Context context = null;  
-  
+    private TitleBarView titleBarView;
     public void onCreate(Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-        this.setTitle("蓝牙打印");
+        super.onCreate(savedInstanceState);
         this.setContentView(R.layout.printdata_layout);
+        inittitle();
         this.context = this;  
         this.initListener();  
-    }  
-  
+    }
+
+    private void inittitle() {
+        titleBarView = (TitleBarView) findViewById(R.id.title_bar);
+        titleBarView.setTitleText(R.string.printinfo);
+        titleBarView.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
+        titleBarView.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        titleBarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrintDataActivity.this.finish();
+            }
+        });
+    }
+
     /** 
      * 获得从上一个Activity传来的蓝牙地址
      * @return String 

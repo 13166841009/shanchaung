@@ -4,12 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <EditText
             android:id="@+id/print_data"
+            android:hint="输送打印内容"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
@@ -24,33 +29,38 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="打印设备信息"
+            android:textColor="@color/blue"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/connect_state"
+            android:textColor="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/device_name"
             android:layout_alignBottom="@+id/device_name"
             android:layout_marginLeft="42dp"
             android:layout_toRightOf="@+id/device_name"
-            android:text="Large Text"
+            android:text="连接状态"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
             android:id="@+id/send"
+            android:background="@drawable/login_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/print_data"
             android:layout_marginTop="21dp"
             android:text="打印" />
 
         <Button
+            android:background="@drawable/login_btn"
             android:id="@+id/command"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/send"
             android:text="指令" />

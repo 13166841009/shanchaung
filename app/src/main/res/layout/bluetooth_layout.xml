@@ -12,6 +12,7 @@
         android:layout_height="match_parent" >
 
         <Button
+            android:layout_marginTop="5dp"
             android:background="@drawable/login_btn"
             android:id="@+id/openBluetooth_tb"
             android:layout_width="130dp"
@@ -26,7 +27,7 @@
             android:textColor="@color/whites"
             android:id="@+id/searchDevices"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/openBluetooth_tb"
             android:layout_marginTop="20dp"
@@ -34,7 +35,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="1dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/searchDevices"
             android:background="@android:color/darker_gray" />
@@ -59,7 +60,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="1dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/searchDevices"
             android:layout_marginTop="160dp"

@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -143,10 +144,11 @@ public class ScanningActivity extends Activity implements Callback,
 			Toast.makeText(ScanningActivity.this, "扫描失败!", Toast.LENGTH_SHORT)
 					.show();
 		} else {
-			Intent intent = new Intent(this, ShowActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("msg", resultString);
-			intent.putExtras(bundle);
+			// 网页开启
+			String recode = Utils.recode(result.toString());
+			Intent intent = new Intent();
+			intent.setAction(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse(recode));
 			startActivity(intent);
 		}
 	}
@@ -329,18 +331,6 @@ public class ScanningActivity extends Activity implements Callback,
 				if (result == null) {
 					msgHandler.sendEmptyMessage(SHOW_TOAST_MSG);
 
-				} else {
-					// 数据返回
-
-					String recode = Utils.recode(result.toString());
-
-					Intent intent = new Intent(ScanningActivity.this,
-							ShowActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putString("msg", recode);
-					intent.putExtras(bundle);
-					startActivity(intent);
-
 				}
 			}
 		}).start();
@@ -351,7 +341,6 @@ public class ScanningActivity extends Activity implements Callback,
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 				case SHOW_TOAST_MSG:
-
 					Toast.makeText(getApplicationContext(), "未发现二维码图片", Toast.LENGTH_SHORT).show();
 					break;
 

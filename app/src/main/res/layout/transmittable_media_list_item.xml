@@ -2,12 +2,13 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
+    android:layout_height="70dp"
     android:background="#ffefefef">
     <ProgressBar android:id="@+id/translate_progress"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="5dp"
         android:background="#ffefefef"
         android:progressDrawable="@drawable/progress_drawable"
         android:max="100"
@@ -65,10 +66,8 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="#ff4f4f4f"
-            android:text="M"
             android:layout_below="@id/text_title"
             android:singleLine="true"
             android:focusable="false"/>
     </LinearLayout>
-
 </RelativeLayout>

@@ -16,21 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ruanjianbei.wifi.com.Utils.LoadingManange.SpinnerLoading;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.Adpater.AppSelectAdapter;
+import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.AppFileInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.AppInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.InterfaceAppInfo;
-import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.AppFileInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.utils.DeviceUtils;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
-import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
 
@@ -39,7 +37,7 @@ import util.CustomProgressDialog;
  * Created by zhanghang on 2016/5/16.
  */
 public class FragmentApplication extends Fragment
-    implements
+        implements
         AppSelectAdapter.OnItemClickListener
 {
     private static final String tag = FragmentApplication.class.getSimpleName();
@@ -56,11 +54,13 @@ public class FragmentApplication extends Fragment
      * 开启进度框
      */
     private void startDialog(){
-        if(customProgressDialog == null){
-            customProgressDialog = CustomProgressDialog.getappApplication(getContext());
+        if (customProgressDialog==null)
+        {
+            customProgressDialog = CustomProgressDialog.getappApplication(IndicatorFragmentActivity.getContext());
+            customProgressDialog.setCancelable(false);
             customProgressDialog.setMessage("加载中...");
+            customProgressDialog.show();
         }
-        customProgressDialog.show();
     }
     /**
      * 隱藏進度對話框
@@ -75,14 +75,14 @@ public class FragmentApplication extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startDialog();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState)
+                             Bundle savedInstanceState)
     {
+        startDialog();
         if (view == null)
         {
             Log.d(tag, "FragmentApplication onCreateView function");
@@ -142,7 +142,7 @@ public class FragmentApplication extends Fragment
         //此地方replace千万不能修改，不是空格，不知道什么东西！！！
         //String label = ((String)app.loadLabel(pkManager)).replace(" ","") + ".apk";
         String label = DeviceUtils.removeSpecial((String) app.loadLabel(pkManager))
-            + ".apk";
+                + ".apk";
         appInfo.appLabel = label;
         appInfo.appIcon = app.loadIcon(pkManager);
         appInfo.pkgName = app.packageName;

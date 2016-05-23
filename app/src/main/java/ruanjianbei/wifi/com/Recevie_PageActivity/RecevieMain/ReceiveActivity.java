@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.telephony.TelephonyManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -147,7 +148,7 @@ public class ReceiveActivity extends Activity {
         mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReceiveActivity.this, MainPageActivity.class));
+                ReceiveActivity.this.finish();
             }
         });
     }
@@ -225,6 +226,7 @@ public class ReceiveActivity extends Activity {
                      */
                     Toast.makeText(ReceiveActivity.this, "您将建立热带点进行连接", Toast.LENGTH_LONG).show();
                     wifiadmin.closeNetCard();
+                    ReceiveActivity.this.finish();
                     startActivity(new Intent(ReceiveActivity.this,Android_receiveActivity.class));
                 }
                 //此处可以进行重试处理
@@ -232,6 +234,5 @@ public class ReceiveActivity extends Activity {
             }
         }
     }
-
 }
 
