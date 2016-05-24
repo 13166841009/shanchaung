@@ -23,12 +23,12 @@
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:background="@drawable/login_btn"
+            android:background="@drawable/bluetooth"
             android:textColor="@color/whites"
             android:id="@+id/searchDevices"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/openBluetooth_tb"
             android:layout_marginTop="20dp"
             android:text="搜索设备" />
@@ -41,10 +41,10 @@
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
+            android:layout_below="@+id/searchDevices"
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="125dp"
             android:orientation="vertical" >
 
             <TextView
