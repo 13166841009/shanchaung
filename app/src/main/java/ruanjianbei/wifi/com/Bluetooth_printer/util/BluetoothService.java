@@ -20,10 +20,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.CustomProgressDialog;
 
 public class BluetoothService {  
-    private Context context = null;  
+    private Context context = null;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter  
             .getDefaultAdapter();  
     private ArrayList<BluetoothDevice> unbondDevices = null; // 用于存放未配对蓝牙设备
@@ -207,11 +209,9 @@ public class BluetoothService {
     /** 
      * 蓝牙广播接收器
      */  
-    private BroadcastReceiver receiver = new BroadcastReceiver() {  
-  
-        ProgressDialog progressDialog = null;  
-  
-        @Override  
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
         public void onReceive(Context context, Intent intent) {  
             String action = intent.getAction();  
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {  
@@ -222,15 +222,14 @@ public class BluetoothService {
                 } else {  
                     addUnbondDevices(device);  
                 }  
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {  
-                progressDialog = ProgressDialog.show(context, "请稍等...",
-                        "搜索蓝牙设备中...", true);
-  
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                searchDevices.setText("搜索中");
+                Toast.makeText(context,"搜索中...",Toast.LENGTH_SHORT).show();
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED  
-                    .equals(action)) {  
+                    .equals(action)) {
+                Toast.makeText(context,"搜索完成",Toast.LENGTH_SHORT).show();
+                searchDevices.setText("搜索设备");
                 System.out.println("设备搜索完毕");
-                progressDialog.dismiss();  
-  
                 addUnbondDevicesToListView();  
                 addBondDevicesToListView();  
                 // bluetoothAdapter.cancelDiscovery();  

@@ -4,9 +4,15 @@
     android:background="@mipmap/game_backgroung"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </view.TitleBarView>
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/game_mouse" />
+        android:src="@mipmap/game_mouse"
+        android:layout_gravity="center" />
 </FrameLayout>

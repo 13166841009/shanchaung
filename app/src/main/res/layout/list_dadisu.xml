@@ -28,15 +28,16 @@
             android:textSize="20dp" />
     </LinearLayout>
     <RelativeLayout
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
             android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textColor="@color/whites"
+            android:background="@drawable/login_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:text="挑战"
             />
     </RelativeLayout>

@@ -157,5 +157,6 @@
     <!--蓝牙打印机-->
     <string name="bluetooth" >蓝牙打印</string>
     <string name="printinfo" >打印详情</string>
+    <string name="playnow" >游戏中</string>
 
 </resources>

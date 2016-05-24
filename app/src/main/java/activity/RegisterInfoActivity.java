@@ -19,7 +19,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ruanjianbei.wifi.com.animation.MainPage;
+import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.DialogHelp;
 import view.TitleBarView;
@@ -130,8 +130,8 @@ public class RegisterInfoActivity extends Activity {
 					String resultString = response.getString("returncode");
 					if(resultString.equals("1")){
 						stopDialog();
-						Toast.makeText(RegisterInfoActivity.this, "注册成功，请登录！", Toast.LENGTH_SHORT).show();
-						startActivity(new Intent(RegisterInfoActivity.this,LoginActivity.class));
+						Toast.makeText(RegisterInfoActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+						startActivity(new Intent(RegisterInfoActivity.this,MainPageActivity.class));
 					}else if(resultString.equals("0")){
 						stopDialog();
 						Toast.makeText(RegisterInfoActivity.this, "注册失败，请重新注册！", Toast.LENGTH_SHORT).show();

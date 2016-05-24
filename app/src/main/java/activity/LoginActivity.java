@@ -29,7 +29,6 @@ import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
-import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
@@ -167,7 +166,7 @@ public class LoginActivity extends Activity {
 						}
 						save_Name();
 						//页面跳转
-						Intent intent = new Intent(mContext, MainPage.class);
+						Intent intent = new Intent(mContext, MainPageActivity.class);
 						startActivity(intent);
 					} else {
 						stopDialog();

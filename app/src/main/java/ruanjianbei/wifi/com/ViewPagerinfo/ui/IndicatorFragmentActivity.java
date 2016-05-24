@@ -27,9 +27,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Constructor;
@@ -39,8 +36,6 @@ import java.util.List;
 import activity.WiFiActivity;
 import fragment.SettingFragment;
 import ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity;
-import ruanjianbei.wifi.com.Utils.LoadingManange.SpinnerLoading;
-import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
 import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -160,7 +155,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                     Intent intent = new Intent(getApplicationContext(), GameFriend.class);
                     startActivity(intent);
                 } else if (id == R.id.nav_aboutus) {
-                    startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+                    startActivity(new Intent(getApplicationContext(), aboutUs.class));
                 } else if (id == R.id.nav_share) {
 
                 } else if (id == R.id.nav_setting) {

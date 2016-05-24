@@ -1,14 +1,6 @@
 package activity;
 
 
-
-import cn.jpush.android.api.JPushInterface;
-import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
-import ruanjianbei.wifi.com.shanchuang.R;
-import util.SpUtil;
-import test.SDManager;
-import viewpager.IntroductionPage;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +10,11 @@ import android.os.Environment;
 import android.widget.ImageView;
 
 import java.io.File;
+
+import cn.jpush.android.api.JPushInterface;
+import ruanjianbei.wifi.com.shanchuang.R;
+import util.SpUtil;
+import viewpager.IntroductionPage;
 
 public class WelcomeActivity extends Activity {
 	/**
@@ -69,8 +66,6 @@ public class WelcomeActivity extends Activity {
 				sp = SpUtil.getInstance().getSharePerference(mContext);
 				boolean isFirst = SpUtil.getInstance().isFirst(sp);
 				if (!isFirst) {
-					SDManager manager = new SDManager(mContext);
-					manager.moveUserIcon();
 					SpUtil.getInstance().setBooleanSharedPerference(sp,
 							"isFirst", true);
 					Intent intent = new Intent(mContext, IntroductionPage.class);

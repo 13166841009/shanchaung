@@ -24,9 +24,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="80dp"
             android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center_horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,8 +48,10 @@
 
     <Button
         android:id="@+id/begin"
+        android:textColor="@color/whites"
+        android:background="@drawable/login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="@string/begin"
         />
 </LinearLayout>

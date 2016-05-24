@@ -17,7 +17,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.Map;
 
-import ruanjianbei.wifi.com.animation.MainPage;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 

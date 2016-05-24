@@ -55,7 +55,12 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true" />
     <application
         android:name="ruanjianbei.wifi.com.ViewPagerinfo.App"
         android:allowBackup="true"
@@ -87,9 +92,6 @@
             android:name="activity.RegisterPhoneActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name=".MainActivityPage"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
             android:name="activity.RegisterInfoActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
@@ -97,9 +99,6 @@
         <!-- <activity -->
         <!-- android:name="" -->
         <!-- android:theme="@android:style/Theme.Light.NoTitleBar" /> -->
-        <activity
-            android:name="activity.WaterCameraActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar"
@@ -111,15 +110,6 @@
             android:name="ruanjianbei.wifi.com.my_setting.aboutUs"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.my_setting.wait_kaifa"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name="ruanjianbei.wifi.com.my_setting.my_photo"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name="ruanjianbei.wifi.com.my_setting.my_file"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
             android:name="ruanjianbei.wifi.com.my_setting.bluetooth_printer"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
@@ -127,9 +117,6 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.my_setting.my_information"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name="activity.WaterPhotoActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="activity.WiFiActivity"
@@ -166,9 +153,6 @@
             android:supportsRtl="true"
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity"
             android:theme="@style/AppThemeT" />
-        <activity
-            android:name="ruanjianbei.wifi.com.animation.MainPage"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainViewpager"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
