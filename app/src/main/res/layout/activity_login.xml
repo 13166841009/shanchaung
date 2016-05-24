@@ -57,31 +57,7 @@
             <!--android:layout_width="match_parent"-->
             <!--android:background="@color/devide_line"/>-->
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/remberPassword"
-            android:layout_below="@id/ll_user_info"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:paddingRight="25dp"
-            >
-            <CheckBox
-                android:id="@+id/id_cb_rememberpwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/checkbox_privacy"
-                android:button="@null"
-                android:checked="false"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="记住用户名和密码"/>
-        </LinearLayout>
-
-    <Button 
+    <Button
         android:id="@+id/login"
         android:layout_height="50dp"
         android:layout_width="match_parent"
@@ -89,12 +65,36 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:text="@string/login"
-        android:layout_below="@id/remberPassword"
+        android:layout_below="@id/ll_user_info"
         android:background="@drawable/login_btn"
         android:textColor="@android:color/white"/>
     </RelativeLayout>
-    
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/remberPassword"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:paddingRight="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/rl_user"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <CheckBox
+            android:id="@+id/id_cb_rememberpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_privacy"
+            android:button="@null"
+            android:checked="false"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="记住用户名和密码"/>
+    </LinearLayout>
     <view.TextURLView
         android:id="@+id/tv_forget_password"
         android:layout_height="wrap_content"

@@ -18,41 +18,46 @@
 
     <ProgressBar
         android:id="@+id/pb_progress"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@style/progressBarHorizontal_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_fileName" />
+        android:layout_below="@+id/tv_fileName"
+        android:indeterminate="false" />
     <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
+        android:layout_marginTop="5dp"
         android:id="@+id/pb_progress1"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="#44ff0000"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:progress="0"
-        app:radius="10dp"
-        android:layout_alignBottom="@+id/btn_start"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </LinearLayout>
+        app:radius="18dp"
+        android:layout_below="@+id/pb_progress"
+        android:layout_alignRight="@+id/tv_fileName"
+        android:layout_alignEnd="@+id/tv_fileName" />
     <Button
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_btn"
         android:id="@+id/btn_stop"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:textColor="@color/whites"
+        android:layout_marginRight="10dp"
         android:layout_below="@+id/pb_progress"
         android:layout_alignParentRight="true"
-        android:text="暂停" />
+        android:text="  暂停  " />
 
     <Button
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_btn"
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:textColor="@color/whites"
+        android:text="  下载  "
+        android:layout_marginRight="10dp"
         android:layout_below="@+id/pb_progress"
         android:layout_toLeftOf="@+id/btn_stop"
-        android:text="下载" />
+        android:layout_toStartOf="@+id/btn_stop" />
 
     <TextView
         android:id="@+id/tv_size"
