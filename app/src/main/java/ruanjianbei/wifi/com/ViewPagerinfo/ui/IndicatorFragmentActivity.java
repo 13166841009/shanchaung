@@ -151,10 +151,12 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 } else if (id == R.id.nav_happy) {
                     Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_play) {
-                    Intent intent = new Intent(getApplicationContext(), GameFriend.class);
-                    startActivity(intent);
-                } else if (id == R.id.nav_aboutus) {
+                }
+//                else if (id == R.id.nav_play) {
+//                    Intent intent = new Intent(getApplicationContext(), GameFriend.class);
+//                    startActivity(intent);
+//                }
+                else if (id == R.id.nav_aboutus) {
                     startActivity(new Intent(getApplicationContext(), aboutUs.class));
                 } else if (id == R.id.nav_share) {
 

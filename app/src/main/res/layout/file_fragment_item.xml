@@ -20,7 +20,7 @@
         android:id="@+id/filecheck"
         android:layout_marginRight="10dp"
         style="@style/CheckBoxstyle"
-        android:focusable="true"
+        android:focusable="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
 </RelativeLayout>

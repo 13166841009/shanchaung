@@ -8,14 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.GetDocument;
 import ruanjianbei.wifi.com.ViewPagerinfo.DocLoader.DocAdpater;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.CustomProgressDialog;
 
 public class FragmentWord extends Fragment {
 	private ListView listview;
+	private TextView textView;
 	private DocAdpater Adpater;
+	private static CustomProgressDialog customProgressDialog = null;
 	/**
 	 * 程序一个Handler，用来接收进程传过来的信息
 	 * 然后设置ListView的点击事件
@@ -25,14 +30,9 @@ public class FragmentWord extends Fragment {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what==1){
+				textView.setVisibility(View.GONE);
+				listview.setVisibility(View.VISIBLE);
 				Adpater = new DocAdpater(GetDocument.documentlist, getContext());
-				listview.setAdapter(Adpater);
-				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						System.out.print(position);
-					}
-				});
 			}
 		}
 	};
@@ -53,6 +53,7 @@ public class FragmentWord extends Fragment {
 	 * 加载视图
 	 */
 	private void findView() {
+		textView  = (TextView) getActivity().findViewById(R.id.waitdoc);
 		listview = (ListView) getActivity().findViewById(R.id.wordlistview);
 	}
 	public void initseeting(){

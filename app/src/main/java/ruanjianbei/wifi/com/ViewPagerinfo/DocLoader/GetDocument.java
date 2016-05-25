@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class GetDocument {
 	private static Context mcontext;
-	public static List<String> documentlist = new ArrayList<String>();
+	public static List<DocumentInfo> documentlist = new ArrayList<DocumentInfo>();
 	/**
 	 * 根据条件获取相应的文件
 	 */
@@ -33,7 +33,8 @@ public class GetDocument {
 						getFiles(f.getAbsolutePath()); // 递归调用
 					} else{
 						if (isDocFile(f.getPath())) { // 如果是音频文件
-							documentlist.add(f.getPath());
+							DocumentInfo documentInfo = new DocumentInfo(f.getPath());
+							documentlist.add(documentInfo);
 						}
 					}
 				}

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -22,13 +21,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
+/**
+ * create by zhanghang 2016/05/25
+ */
 public class FragmentOthers extends Fragment {
 	private ListView listview;
 	private TextView textview;
-	private CheckBox filecheckbox;
-	private boolean fristChecked = true;
+	public static List<String> mSelectFile = FragmentChoose.getFileChoose();
 	//记录当前父文件夹
 	File currentParent;
 	File [] currentFiles;
@@ -42,11 +45,10 @@ public class FragmentOthers extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		filecheckbox = (CheckBox) getActivity().findViewById(R.id.filecheck);
 		listview = (ListView) getActivity().findViewById(R.id.list);
 		textview = (TextView) getActivity().findViewById(R.id.path);
 		//获取系统SD卡的目录
-		String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
+		final String sdpath = Environment.getExternalStorageDirectory().getAbsolutePath();
 		File root = new File(sdpath);
 		if(root.exists()){
 			currentParent = root;
@@ -78,15 +80,15 @@ public class FragmentOthers extends Fragment {
 			}
 		});
 		//获取上一级目录按钮
-		Button parent = (Button) getActivity().findViewById(R.id.parent);
+		final Button parent = (Button) getActivity().findViewById(R.id.parent);
 		parent.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
 				try {
-					if (!currentParent.getCanonicalPath().equals(Environment
-							.getDataDirectory().getAbsolutePath())) {
+					if (currentParent.getCanonicalPath().equals(sdpath)) {
+						Toast.makeText(getActivity(),"到底啦...",Toast.LENGTH_SHORT).show();
+					}else{
 						//获取上一级的目录
 						currentParent = currentParent.getParentFile();
 						//列出当前目录下的所有文件
@@ -101,11 +103,11 @@ public class FragmentOthers extends Fragment {
 		});
 	}
 	/**
-	 *
+	 *获取子文件下的目录
 	 */
 	private void inflateListView(final File[] files) {
 		//创建一个List集合，List集合的元素是Map
-		List<Map<String,Object>> listItems = new ArrayList<Map<String,Object>>();
+		final List<Map<String,Object>> listItems = new ArrayList<Map<String,Object>>();
 		for(int i = 0;i<files.length;i++){
 			Map<String,Object> listItem = new HashMap<String,Object>();
 			//如果当前Files是文件夹，使用folder图标;否则使用file图标
@@ -114,27 +116,9 @@ public class FragmentOthers extends Fragment {
 			}else{
 				listItem.put("icon", R.mipmap.file_image);
 			}
-
 			if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("doc")||
 					files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("docx")){
 				listItem.put("icon", R.mipmap.file_doc);
-//				final int finalI = i;
-//				listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//					@Override
-//					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//						CheckBox checkBox = (CheckBox) view.findViewById(R.id.filecheck);
-//						if (fristChecked) {
-//							checkBox.setChecked(true);
-//							//放入集合
-//							Toast.makeText(getContext(), files[finalI].getAbsolutePath(), Toast.LENGTH_SHORT).show();
-//							fristChecked = false;
-//						} else {
-//							checkBox.setChecked(false);
-//							//拿出集合
-//							fristChecked = true;
-//						}
-//					}
-//				});
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("xls")){
 				listItem.put("icon",R.mipmap.file_xls);
 			}else if(files[i].getName().substring(files[i].getName().lastIndexOf(".")+1).equals("pdf")){
@@ -157,7 +141,34 @@ public class FragmentOthers extends Fragment {
 		//创建一个SimpleAdapter
 		SimpleAdapter simpleAdapter =
 				new SimpleAdapter(getContext(), listItems, R.layout.file_fragment_item,
-						new String[]{"icon","filename"}, new int[]{R.id.icone,R.id.file_name});
+						new String[]{"icon","filename"}, new int[]{R.id.icone,R.id.file_name}){
+					@Override
+					public View getView(final int position, View convertView, ViewGroup parent) {
+						View view = super.getView(position, convertView, parent);
+						@SuppressWarnings("unchecked")
+						//获取相应View中的Checkbox对象
+								CheckBox checkBox = (CheckBox)view.findViewById(R.id.filecheck);
+						checkBox.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								if(((CheckBox)view).isChecked()){
+									listItems.get(position).put("type",VideoViewInfo.TYPE_CHECKED);
+									Toast.makeText(getActivity(), files[position].getAbsolutePath(), Toast.LENGTH_SHORT).show();
+									mSelectFile.add(files[position].getAbsolutePath());
+								}else{
+									listItems.get(position).put("type",VideoViewInfo.TYPE_NOCHECKED);
+									mSelectFile.remove(files[position].getAbsolutePath());
+								}
+							}
+						});
+						if(listItems.get(position).get("type") == VideoViewInfo.TYPE_CHECKED){
+							checkBox.setChecked(true);
+						}else{
+							checkBox.setChecked(false);
+						}
+						return view;
+					}
+				};
 		//为ListView设置adapter
 		listview.setAdapter(simpleAdapter);
 		try {

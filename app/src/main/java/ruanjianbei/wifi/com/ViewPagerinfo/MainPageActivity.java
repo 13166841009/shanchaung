@@ -54,7 +54,7 @@ public class MainPageActivity extends IndicatorFragmentActivity {
                 FragmentWord.class));
         tabs.add(new TabInfo(FRAGMENT_SIX, getString(R.string.fragment_six),
                 FragmentOthers.class));
-        return FRAGMENT_ONE;
+        return FRAGMENT_TWO;
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

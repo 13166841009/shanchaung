@@ -60,6 +60,8 @@ public class FragmentApplication extends Fragment
             customProgressDialog.setCancelable(false);
             customProgressDialog.setMessage("加载中...");
             customProgressDialog.show();
+        }else{
+            customProgressDialog.cancel();
         }
     }
     /**
@@ -237,4 +239,10 @@ public class FragmentApplication extends Fragment
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        customProgressDialog.cancel();
+        customProgressDialog = null;
+    }
 }
