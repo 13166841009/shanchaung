@@ -1,11 +1,13 @@
 package ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +71,17 @@ public class VideoAdapter extends BaseAdapter{
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		final ViewHolder finalViewHolder = viewHolder;
+		viewHolder.videoThumb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String videoFilePath = videoRows.get(index).getFilePath();
+				String mimeType = videoRows.get(index).getMimeType();
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+				File newFile = new File(videoFilePath);
+				intent.setDataAndType(Uri.fromFile(newFile), mimeType);
+				context.startActivity(intent);
+			}
+		});
 		viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

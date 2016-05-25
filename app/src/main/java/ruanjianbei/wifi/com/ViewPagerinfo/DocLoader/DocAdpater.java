@@ -1,20 +1,29 @@
 package ruanjianbei.wifi.com.ViewPagerinfo.DocLoader;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 
+import ruanjianbei.wifi.com.Phone_P_Wifi.PostFileAdapter.MediaItem;
+import ruanjianbei.wifi.com.Utils.GetFilsSize;
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
+ *
  * create by zhanghang 2016/04/20
  */
 public class DocAdpater extends BaseAdapter {
@@ -24,7 +33,7 @@ public class DocAdpater extends BaseAdapter {
 	 */
 	private List<DocumentInfo> documentlist;
 	private Context context;
-
+	private String size;
 
 	public static List<String> mSelectedDocu = FragmentChoose.getFileChoose();
 
@@ -60,6 +69,7 @@ public class DocAdpater extends BaseAdapter {
 			LayoutInflater mInflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = mInflater.inflate(R.layout.docitem, null);
+			viewHolder.imageView = (ImageView) convertView.findViewById(R.id.imagedoc);
 			viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkboxdoc);
 			viewHolder.docname = (TextView) convertView.findViewById(R.id.docname);
 			viewHolder.docpath = (TextView) convertView.findViewById(R.id.docpath);
@@ -68,7 +78,23 @@ public class DocAdpater extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		final ViewHolder finalHolder = viewHolder;
+		long docsizeone = 0;
+		try {
+			docsizeone = GetFilsSize.getFileSizes(new File(documentlist.get(position).filepath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		viewHolder.docpath.setText(GetFilsSize.FormentFileSize(docsizeone));
 		viewHolder.docname.setText(documentlist.get(position).filepath.substring(documentlist.get(position).filepath.lastIndexOf("/") + 1));
+		viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String Dozpath = documentlist.get(position).filepath;
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.fromFile(new File(Dozpath)));
+				context.startActivity(intent);
+			}
+		});
 		viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -81,17 +107,17 @@ public class DocAdpater extends BaseAdapter {
 				}
 			}
 		});
-			if (documentlist.get(position).type==VideoViewInfo.TYPE_CHECKED){
-				viewHolder.checkBox.setChecked(true);
-			}else{
-				viewHolder.checkBox.setChecked(false);
-			}
+		if (documentlist.get(position).type==VideoViewInfo.TYPE_CHECKED){
+			viewHolder.checkBox.setChecked(true);
+		}else{
+			viewHolder.checkBox.setChecked(false);
+		}
 		return convertView;
 	}
 	class ViewHolder{
+		ImageView imageView;
 		TextView docname;
 		TextView docpath;
 		CheckBox checkBox;
 	}
-
 }

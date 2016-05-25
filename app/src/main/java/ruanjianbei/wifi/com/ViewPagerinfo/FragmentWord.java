@@ -31,8 +31,8 @@ public class FragmentWord extends Fragment {
 			super.handleMessage(msg);
 			if (msg.what==1){
 				textView.setVisibility(View.GONE);
-				listview.setVisibility(View.VISIBLE);
 				Adpater = new DocAdpater(GetDocument.documentlist, getContext());
+				listview.setAdapter(Adpater);
 			}
 		}
 	};

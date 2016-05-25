@@ -18,6 +18,7 @@ import com.bruce.library.ComboView;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -27,17 +28,22 @@ import ruanjianbei.wifi.com.Post_PageActivity.Android_postActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
+import ruanjianbei.wifi.com.Utils.GetFilsSize;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
+import static ruanjianbei.wifi.com.shanchuang.R.id.postChoose;
+
 public class PostActivity extends Activity {
     /**
      * 数据连接
      */
     private TextView filesize;
+    //当前传输文件大小
+    private String size;
     private List<String> filesizelist = FragmentChoose.getFileChoose();
     Class telephonyManagerClass;
     Object ITelephonyStub;
@@ -142,8 +148,17 @@ public class PostActivity extends Activity {
         ios.settingMorphParams(iosparams);
     }
     private  void initTitle(){
+        long fileall = 0;
         filesize = (TextView) findViewById(R.id.postfilesize);
-        filesize.setText(filesize.getText().toString()+":"+filesizelist.size()+"个");
+        for(int i =0 ;i<filesizelist.size();i++){
+            try {
+                fileall += GetFilsSize.getFileSizes(new File(filesizelist.get(i)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        size = GetFilsSize.FormentFileSize(fileall);
+        filesize.setText(filesize.getText().toString()+":"+filesizelist.size()+"个"+" "+"("+size+")");
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
         mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
@@ -197,7 +212,7 @@ public class PostActivity extends Activity {
                     if((wifiCheck.isNetworkAvailable())||wifiCheck.is3G()){
                         Toast.makeText(PostActivity.this,"您将选择有网传递",Toast.LENGTH_LONG).show();
                         final CustomDialog dialog = new CustomDialog("网络类型选择",PostActivity.this,
-                                R.style.dialogstyle, R.layout.custom_dialog_update);
+                                R.style.dialogstyle,"您当前传输文件大小为"+size, R.layout.custom_dialog_update);
                         dialog.setOnOkClickListener(new CustomDialog.OnCustomClickListener() {
                             @Override
                             public void onClick(CustomDialog dialog) {

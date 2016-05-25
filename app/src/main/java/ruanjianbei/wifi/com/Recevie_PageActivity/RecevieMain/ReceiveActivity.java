@@ -195,7 +195,7 @@ public class ReceiveActivity extends Activity {
                     if((wifiCheck.isNetworkAvailable())||wifiCheck.is3G()){
                         Toast.makeText(ReceiveActivity.this,"您将选择有网接收",Toast.LENGTH_LONG).show();
                         final CustomDialog dialog = new CustomDialog("网络类型选择",ReceiveActivity.this,
-                                R.style.dialogstyle, R.layout.custom_dialog_update);
+                                R.style.dialogstyle, "请选择接收方式",R.layout.custom_dialog_update);
                         dialog.setOnOkClickListener(new CustomDialog.OnCustomClickListener() {
                             @Override
                             public void onClick(CustomDialog dialog) {

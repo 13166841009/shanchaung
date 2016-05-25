@@ -14,6 +14,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class CustomDialog extends Dialog implements
         View.OnClickListener {
     private String dlgContent;
+    private String dlgPoatChoose;
     private int	layoutRes;
     private Context context;
     private TextView			dlgbackTV;
@@ -39,6 +40,14 @@ public class CustomDialog extends Dialog implements
         layoutRes = resLayout;
     }
 
+    public CustomDialog(String dlgContent, Context context, int theme,String postChoose,
+                        int resLayout) {
+        super(context, theme);
+        this.context = context;
+        layoutRes = resLayout;
+        dlgPoatChoose = postChoose;
+        this.dlgContent = dlgContent;
+    }
     public CustomDialog(String dlgContent, Context context, int theme,
                         int resLayout) {
         super(context, theme);
@@ -63,13 +72,18 @@ public class CustomDialog extends Dialog implements
         this.setContentView(layoutRes);
         dlgPosTV = (TextView) findViewById(R.id.dlgPosTV);
         TextView dialog_contentTV = (TextView) findViewById(R.id.dialog_contentTV);
+        TextView postchoose = (TextView) findViewById(R.id.postChoose);
         dialog_contentTV.setText(dlgContent);
+        postchoose.setText(dlgPoatChoose);
         dlgPosTV.setOnClickListener(this);
         dlgbackTV = (TextView) findViewById(R.id.dlgbackTV);
         dlgbackTV.setOnClickListener(this);
 //        edtInfoName = (EditText) findViewById(R.id.new_info);
     }
-
+//
+//    public void setTextView(String postChoose){
+//        postchoose.setText(postChoose);
+//    }
     public String getNewInfo() {
         return edtInfoName.getText().toString();
     }

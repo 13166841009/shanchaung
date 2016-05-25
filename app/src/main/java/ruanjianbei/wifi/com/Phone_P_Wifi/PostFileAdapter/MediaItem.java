@@ -13,15 +13,14 @@ import java.util.Properties;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 
 /**
- * 媒体对象
- * @author simon.L
- * @version 1.0.0
+ * 文件对象
+ * @author zhanghang
  */
 
 /**
  * _ID唯一识别
  * —Data文件的目录地址
- * @author dell-pc
+ * @author zhanghang
  *
  */
 public class MediaItem {
@@ -37,6 +36,9 @@ public class MediaItem {
 	public String mMimeType;
 	public String size;
 
+	public MediaItem(){
+
+	}
 	public MediaItem(Properties properties) {
 		try {
 			mId = Integer.parseInt(properties.getProperty(MediaStore.Audio.Media._ID));
@@ -109,22 +111,4 @@ public class MediaItem {
 		}
 		return s;
 	}
-
-//	/**
-//	 * 转换文件大小
-//	 * */
-//	public String FormentFileSize(long fileS) {
-//		DecimalFormat df = new DecimalFormat("#.00");
-//		String fileSizeString = "";
-//		if (fileS < 1024) {
-//			fileSizeString = df.format((double) fileS);
-//		} else if (fileS < 1048576) {
-//			fileSizeString = df.format((double) fileS / 1024);
-//		} else if (fileS < 1073741824) {
-//			fileSizeString = df.format((double) fileS / 1048576);
-//		} else {
-//			fileSizeString = df.format((double) fileS / 1073741824);
-//		}
-//		return fileSizeString;
-//	}
 }

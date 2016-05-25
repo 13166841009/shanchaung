@@ -19,8 +19,7 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.Utils;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
- * 音频媒体数据列表Adapter
- * @author simon.L
+ *create by zhanghang 2016/04/15
  */
 public class MediaListAdapter extends BaseAdapter implements DataTransferListener {
 
@@ -251,7 +250,7 @@ public class MediaListAdapter extends BaseAdapter implements DataTransferListene
     }
 
     /**
-     * 传输状态
+     * 文件传输状态传输状态
      */
     public enum TransmitState{
         /**闲置状态*/

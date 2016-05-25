@@ -1,79 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity">
 
-    <TextView
-        android:id="@+id/tv_fileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="file name" />
-
-    <ProgressBar
-        android:id="@+id/pb_progress"
-        style="@style/progressBarHorizontal_color"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_fileName"
-        android:indeterminate="false" />
-    <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
-        android:layout_marginTop="5dp"
-        android:id="@+id/pb_progress1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:progress="0"
-        app:radius="18dp"
-        android:layout_below="@+id/pb_progress"
-        android:layout_alignRight="@+id/tv_fileName"
-        android:layout_alignEnd="@+id/tv_fileName" />
-    <Button
-        android:layout_marginTop="5dp"
-        android:background="@drawable/login_btn"
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textColor="@color/whites"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/pb_progress"
-        android:layout_alignParentRight="true"
-        android:text="  暂停  " />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/tv_fileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="file name" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/pb_progress"
+                style="@style/progressBarHorizontal_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_fileName"
+                android:indeterminate="false" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ruanjianbei.wifi.com.Phone_P_3G.upload.util.RoundProgressBarWidthNumber
+                android:layout_marginTop="5dp"
+                android:id="@+id/pb_progress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:progress="0"
+                app:radius="18dp"
+                />
+            <LinearLayout
+                android:id="@+id/file_one"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="724.52 KB"
+                    />
+                <TextView
+                    android:id="@+id/tv_filesize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文件大小"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="50dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/login_btn"
+                    android:id="@+id/btn_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="@color/whites"
+                    android:text="  暂停  " />
 
-    <Button
-        android:layout_marginTop="5dp"
-        android:background="@drawable/login_btn"
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textColor="@color/whites"
-        android:text="  下载  "
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/pb_progress"
-        android:layout_toLeftOf="@+id/btn_stop"
-        android:layout_toStartOf="@+id/btn_stop" />
-
-    <TextView
-        android:id="@+id/tv_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="724.52 KB"
-        android:layout_alignBottom="@+id/btn_start"
-        android:layout_toRightOf="@+id/pb_progress1"
-        android:layout_toEndOf="@+id/pb_progress1" />
-    <TextView
-        android:id="@+id/tv_filesize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="文件大小"
-        android:layout_above="@+id/tv_size"
-        android:layout_toRightOf="@+id/pb_progress1"
-        android:layout_toEndOf="@+id/pb_progress1" />
-</RelativeLayout>
+                <Button
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/login_btn"
+                    android:id="@+id/btn_start"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textColor="@color/whites"
+                    android:text="  下载  " />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
