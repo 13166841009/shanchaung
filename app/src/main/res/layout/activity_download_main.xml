@@ -3,21 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity" >
 
-<!--    <EditText
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/lv_file"
-        android:hint="用户名" />-->
-
-    <Button
+    <!--<Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +18,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/button1"
-        />
+        />-->
+    <view.CustomListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_file"/>
+
 
 
 

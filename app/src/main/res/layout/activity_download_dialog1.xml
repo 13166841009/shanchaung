@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" >
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:scrollbars="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:text="点击确认返回"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="#50aaaaaa" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp">
+            <!--<LinearLayout style="@style/user_info_detail_item" >-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:background="@null"
+                    android:text="你没有文件需要接收"
+                    android:id="@+id/tv1"/>
+            <!--</LinearLayout>-->
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="#50aaaaaa" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/dlgPosTV"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_dlg_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#1177ff"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="#50aaaaaa" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

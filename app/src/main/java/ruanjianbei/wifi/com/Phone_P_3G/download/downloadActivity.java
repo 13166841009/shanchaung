@@ -31,6 +31,7 @@ import ruanjianbei.wifi.com.Phone_P_3G.download.util.zip;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.CustomListView;
 
 /**
  * Created by linankun1 on 2016/4/23.
@@ -38,7 +39,8 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class downloadActivity extends Activity {
 
     public static downloadActivity mMainActivity = null;
-    private ListView mListView = null;
+    private CustomListView mListView;
+//    private ListView mListView = null;
     private List<FileInfo> mFileList = null;
     private FileListAdapter mAdapter = null;
     private TextView textView = null;
@@ -57,9 +59,20 @@ public class downloadActivity extends Activity {
             Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
             return;
         }
-        onConn();
-    }
-    public void onClick(View v){
+        //创建文件集合
+        mFileList = new ArrayList<FileInfo>();
+        mListView = (CustomListView) findViewById(R.id.lv_file);
+        mListView.setCanRefresh(true);
+        mListView.setCanLoadMore(false);
+        mListView.setOnRefreshListener(new CustomListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //if(mFileList.size()!=0) {
+                    mFileList.removeAll(mFileList);//清楚所有列表
+                    onConn();
+                //}
+            }
+        });
         onConn();
     }
     public boolean checkUserState(){
@@ -111,10 +124,6 @@ public class downloadActivity extends Activity {
                         //对话框
                         Log.i("数据", number + "");
                         if (new dialog().checkDialog(number, mMainActivity) == 1) {
-
-                            //创建文件集合
-                            mFileList = new ArrayList<FileInfo>();
-                            mListView = (ListView) findViewById(R.id.lv_file);
                             int count = 0;//计数器
                             for (Map.Entry<String, String[]> entry : file.entrySet()) {
                                 String zipname = entry.getKey().substring(0, entry.getKey().lastIndexOf(".")) + ".zip";
@@ -136,6 +145,7 @@ public class downloadActivity extends Activity {
                     }
                 })
                 .build().post();
+        mListView.onRefreshComplete();
     }
 
     protected void onDestroy() {
@@ -185,7 +195,7 @@ public class downloadActivity extends Activity {
                 Log.i("输出：", str1);
                 z.jieya(str1);
                 // 当任务下载完毕，进度条设置为0
-                mAdapter.updateProgress(fileInfo.getId(), 0);
+                //mAdapter.updateProgress(fileInfo.getId(), 0);
                 Toast.makeText(downloadActivity.this,
                         mFileList.get(fileInfo.getId()).gettrueName() + " 下载完成",
                         Toast.LENGTH_SHORT).show();
