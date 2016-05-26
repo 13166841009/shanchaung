@@ -58,14 +58,6 @@ public class FragmentBottom extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        imageView = (ImageView) getActivity().findViewById(R.id.bottomimage);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-                drawer.isDrawerOpen(GravityCompat.START);
-            }
-        });
         BottomImageView = (Button) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override

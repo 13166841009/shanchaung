@@ -14,6 +14,7 @@ import java.util.List;
 import ruanjianbei.wifi.com.ViewPagerinfo.FragmentPhoto;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.CommonAdapter;
 import ruanjianbei.wifi.com.ViewPagerinfo.ImageLoader.utils.ViewHolder;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -74,6 +75,7 @@ public class ImageAdapter extends CommonAdapter<String>
 					fragmentPhoto.selectsize(countphoto);
 					Toast.makeText(mContext, "不选了", Toast.LENGTH_SHORT).show();
 					mSelectedImage.remove(mDirPath + "/" + item);
+					IndicatorFragmentActivity.updateBottom();
 					mSelect.setImageResource(R.mipmap.picture_unselected);
 					mImageView.setColorFilter(null);
 				} else
@@ -85,6 +87,7 @@ public class ImageAdapter extends CommonAdapter<String>
 					Toast.makeText(mContext, mDirPath + "/" + item, Toast.LENGTH_SHORT).show();
 					System.out.println(mDirPath + "/" + item);
 					mSelectedImage.add(mDirPath + "/" + item);
+					IndicatorFragmentActivity.updateBottom();
 					mSelect.setImageResource(R.mipmap.pictures_selected);
 					mImageView.setColorFilter(Color.parseColor("#77000000"));
 				}
