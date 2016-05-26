@@ -99,7 +99,7 @@ public class LoginActivity extends Activity {
 			pass = userpass.getText().toString();
 			//设置推送的标签
 			JPushInterface.setAlias(mContext,name,null);
-			saveSQLite();//初始化数据库
+			saveSQLite();
 			User_login();
 		}
 	};
@@ -183,11 +183,13 @@ public class LoginActivity extends Activity {
 	//
 	private void saveSQLite(){
 		DBServiceOperate db_user = new DBServiceOperate(mContext);
-		Resources resources = mContext.getResources();
-		Drawable drawable = resources.getDrawable(R.mipmap.chengxuyuan);
-		BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-		Bitmap bt = bitmapDrawable.getBitmap();
-		db_user.saveInformation(bt, null, null, null, null, null);
+		if(db_user.selectInformation().getCount()==0) {
+			Resources resources = mContext.getResources();
+			Drawable drawable = resources.getDrawable(R.mipmap.chengxuyuan);
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			Bitmap bt = bitmapDrawable.getBitmap();
+			db_user.saveInformation(bt, null, null, null, null, null);
+		}
 	}
 	private void save_Name(){
 		DBServiceOperate db_user = new DBServiceOperate(mContext);
