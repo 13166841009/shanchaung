@@ -85,14 +85,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     private void initViewpager() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
-        ImageView imageView = (ImageView) findViewById(R.id.bottomimage);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.isDrawerOpen(GravityCompat.START);
-            }
-        });
     }
     public class MyAdapter extends FragmentPagerAdapter {
         ArrayList<TabInfo> tabs = null;

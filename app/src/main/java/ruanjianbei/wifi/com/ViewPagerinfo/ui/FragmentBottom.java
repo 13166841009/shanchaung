@@ -2,6 +2,8 @@ package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentBottom extends Fragment {
     //获取Imagepop对象
     private Button BottomImageView;
+    private ImageView imageView;
     public int getCount_file() {
         return count_file;
     }
@@ -55,6 +58,14 @@ public class FragmentBottom extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        imageView = (ImageView) getActivity().findViewById(R.id.bottomimage);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+                drawer.isDrawerOpen(GravityCompat.START);
+            }
+        });
         BottomImageView = (Button) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override
