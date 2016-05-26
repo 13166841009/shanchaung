@@ -161,11 +161,11 @@ public class FragmentOthers extends Fragment {
 								}
 							}
 						});
-						if(listItems.get(position).get("type") == VideoViewInfo.TYPE_CHECKED){
-							checkBox.setChecked(true);
-						}else{
-							checkBox.setChecked(false);
-						}
+//						if(listItems.get(position).get("type") == VideoViewInfo.TYPE_CHECKED){
+//							checkBox.setChecked(true);
+//						}else{
+//							checkBox.setChecked(false);
+//						}
 						return view;
 					}
 				};

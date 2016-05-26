@@ -17,6 +17,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -152,7 +153,24 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			}
 
 		});
-		
+
+		//mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
+		layout.setOnTouchListener(new View.OnTouchListener() {
+
+			public boolean onTouch(View v, MotionEvent event) {
+
+//				int height = layout.findViewById(R.id.pop_layout).getTop();
+				int height = layout.findViewById(R.id.pop_layout).getHeight();
+				int y = (int) event.getY();
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (y < height/2 || y > 1600) {
+						closeAnimation(layout);
+					}
+				}
+				return true;
+			}
+		});
+
 		showAnimation(layout);
 		setBackgroundDrawable(new BitmapDrawable(mContext.getResources(), blur()));
 		setOutsideTouchable(true);
@@ -169,11 +187,11 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			child.setOnClickListener(this);
 			child.setVisibility(View.INVISIBLE);
 			mHandler.postDelayed(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					child.setVisibility(View.VISIBLE);
-					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 600, 0);
+					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 500, 0);
 					fadeAnim.setDuration(300);
 					KickBackAnimator kickAnimator = new KickBackAnimator();
 					kickAnimator.setDuration(150);
@@ -197,7 +215,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 				@Override
 				public void run() {
 					child.setVisibility(View.VISIBLE);
-					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
+					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 500);
 					fadeAnim.setDuration(200);
 					KickBackAnimator kickAnimator = new KickBackAnimator();
 					kickAnimator.setDuration(100);
@@ -220,6 +238,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 						@Override
 						public void onAnimationEnd(Animator animation) {
 							child.setVisibility(View.INVISIBLE);
+							dismiss();
 						}
 						
 						@Override
@@ -231,15 +250,15 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 				}
 			}, (layout.getChildCount()-i-1) * 30);
 			
-			if(child.getId() == R.id.more_window_local){
-				mHandler.postDelayed(new Runnable() {
-					
-					@Override
-					public void run() {
-						dismiss();
-					}
-				}, (layout.getChildCount()-i) * 30 + 80);
-			}
+//			if(child.getId() == R.id.more_window_local){
+//				mHandler.postDelayed(new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						dismiss();
+//					}
+//				}, (layout.getChildCount()-i) * 30 + 80);
+//			}
 		}
 		
 	}
@@ -247,20 +266,20 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.more_window_local:
-//			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
-			Intent intentwifi = new Intent(mContext, Android_receiveActivity.class);
-			mContext.startActivity(intentwifi);
-			break;
-		case R.id.more_window_online:
-			Toast.makeText(mContext, "Ios", Toast.LENGTH_SHORT).show();
-			break;
-		case R.id.more_window_delete:
-			Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent();
-			intent.setClass(mContext, ScanningActivity.class);
-			mContext.startActivity(intent);
-			break;
+//		case R.id.more_window_local:
+////			Toast.makeText(mContext, "Android", Toast.LENGTH_SHORT).show();
+//			Intent intentwifi = new Intent(mContext, Android_receiveActivity.class);
+//			mContext.startActivity(intentwifi);
+//			break;
+//		case R.id.more_window_online:
+//			Toast.makeText(mContext, "Ios", Toast.LENGTH_SHORT).show();
+//			break;
+//		case R.id.more_window_delete:
+//			Toast.makeText(mContext, "扫一扫", Toast.LENGTH_SHORT).show();
+//			Intent intent = new Intent();
+//			intent.setClass(mContext, ScanningActivity.class);
+//			mContext.startActivity(intent);
+//			break;
 		case R.id.more_window_collect:
 			mContext.startActivity(new Intent(mContext, ReceiveActivity.class));
 			Toast.makeText(mContext, "我要接收",  Toast.LENGTH_SHORT).show();
@@ -272,23 +291,23 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 			Intent intent1 = new Intent(mContext, PostActivity.class);
 			mContext.startActivity(intent1);
 			break;
-
 		default:
 			break;
 		}
+		dismiss();
 	}
 	
-	public void destroy() {
-		if (null != overlay) {
-			overlay.recycle();
-			overlay = null;
-			System.gc();
-		}
-		if (null != mBitmap) {
-			mBitmap.recycle();
-			mBitmap = null;
-			System.gc();
-		}
-	}
+//	public void destroy() {
+//		if (null != overlay) {
+//			overlay.recycle();
+//			overlay = null;
+//			System.gc();
+//		}
+//		if (null != mBitmap) {
+//			mBitmap.recycle();
+//			mBitmap = null;
+//			System.gc();
+//		}
+//	}
 	
 }
