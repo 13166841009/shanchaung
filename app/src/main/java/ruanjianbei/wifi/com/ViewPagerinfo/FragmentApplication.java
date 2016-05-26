@@ -1,6 +1,7 @@
 package ruanjianbei.wifi.com.ViewPagerinfo;
 
 
+import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.InterfaceAppInfo;
 import ruanjianbei.wifi.com.ViewPagerinfo.AppLoader.utils.DeviceUtils;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.OnSelectItemClickListener;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
 
@@ -38,7 +40,7 @@ import util.CustomProgressDialog;
  */
 public class FragmentApplication extends Fragment
         implements
-        AppSelectAdapter.OnItemClickListener
+        AppSelectAdapter.OnItemClickListener,OnSelectItemClickListener
 {
     private static final String tag = FragmentApplication.class.getSimpleName();
     public static List<String> mSelectedApp = FragmentChoose.getFileChoose();
@@ -49,14 +51,16 @@ public class FragmentApplication extends Fragment
     private AppFragmentHandler handler;
     private AppSelectAdapter adapter;
     private RecyclerView recyclerView;
+    private OnSelectItemClickListener selectItemClickListener;
     private static CustomProgressDialog customProgressDialog = null;
+
     /**
      * 开启进度框
      */
     private void startDialog(){
         if (customProgressDialog==null)
         {
-            customProgressDialog = CustomProgressDialog.getappApplication(IndicatorFragmentActivity.getContext());
+            customProgressDialog = CustomProgressDialog.getappApplication(getContext());
             customProgressDialog.setCancelable(false);
             customProgressDialog.setMessage("加载中...");
             customProgressDialog.show();
@@ -77,6 +81,7 @@ public class FragmentApplication extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -100,6 +105,23 @@ public class FragmentApplication extends Fragment
         return view;
     }
 
+    /**
+     * 绑定按钮选择事件
+     * @param activity
+     */
+    @Override
+    public void onAttach(Activity activity)
+    {
+        try
+        {
+            selectItemClickListener = (OnSelectItemClickListener) activity;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        super.onAttach(activity);
+    }
     private void getAppInfo()
     {
         new Thread()
@@ -207,7 +229,15 @@ public class FragmentApplication extends Fragment
             Toast.makeText(getContext(),fileInfo.path,Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
+        selectItemClickListener.onItemClicked();
     }
+
+
+    @Override
+    public void onItemClicked() {
+
+    }
+
     private static class AppFragmentHandler extends Handler
     {
         private WeakReference<FragmentApplication> weakReference;

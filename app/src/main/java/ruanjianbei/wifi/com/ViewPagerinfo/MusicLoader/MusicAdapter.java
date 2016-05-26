@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -76,10 +77,14 @@ public class MusicAdapter extends BaseAdapter{
 				if(finalHolder.checkBox.isChecked()){
 					lists.get(index).type = VideoViewInfo.TYPE_CHECKED;
 					mSelectedMusci.add(lists.get(index).getMusicdistance());
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 					Toast.makeText(context,"加入",Toast.LENGTH_SHORT).show();
 				} else {
 					lists.get(index).type = VideoViewInfo.TYPE_NOCHECKED;
 					mSelectedMusci.remove(lists.get(index).getMusicdistance());
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 					Toast.makeText(context,"拿出",Toast.LENGTH_SHORT).show();
 				}
 			}

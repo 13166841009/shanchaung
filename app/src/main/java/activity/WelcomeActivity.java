@@ -24,7 +24,6 @@ public class WelcomeActivity extends Activity {
 	private Context mContext;
 	private ImageView mImageView;
 	private SharedPreferences sp;
-
 	/**
 	 *主文件目录(+下载)
 	 */

@@ -20,6 +20,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,20 +37,25 @@ import java.util.List;
 import activity.WiFiActivity;
 import fragment.SettingFragment;
 import ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.OnSelectItemClickListener;
 import ruanjianbei.wifi.com.my_setting.aboutUs;
-import ruanjianbei.wifi.com.shanchuang.GameFriend;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 @SuppressWarnings("static-access")
-public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener{
+public abstract class IndicatorFragmentActivity extends FragmentActivity implements OnPageChangeListener,OnSelectItemClickListener{
     private static final String TAG = "DxFragmentActivity";
+    private static List<String> userchooosesize = FragmentChoose.getFileChoose();
     public static final String EXTRA_TAB = "tab";
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db;
+    //初始化fragment下端
+    private FragmentBottom fragmentBottom = new FragmentBottom();
     //用户图像加载
     private static final String load = Environment.getExternalStorageDirectory().getAbsolutePath()
             + "/shangchuan/data/image/face.png";
     private ImageView userimage;
     private TextView posttimes;
+    private static Toolbar toolbar;
 
     //private MainPageActivity1 mainPageActivity = new MainPageActivity1();
     protected int mCurrentTab = 0;
@@ -68,9 +74,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     //选项卡控件
     protected TitleIndicator mIndicator;
 
-    //初始化fragment下端
-    private FragmentBottom fragmentBottom = new FragmentBottom();
-
 
     public TitleIndicator getIndicator() {
         return mIndicator;
@@ -79,10 +82,21 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
     public static Context getContext(){
         return mcontext;
     }
+    private void initViewpager() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
+        ImageView imageView = (ImageView) findViewById(R.id.bottomimage);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.isDrawerOpen(GravityCompat.START);
+            }
+        });
+    }
     public class MyAdapter extends FragmentPagerAdapter {
         ArrayList<TabInfo> tabs = null;
         Context context = null;
-
         public MyAdapter(Context context, FragmentManager fm, ArrayList<TabInfo> tabs) {
             super(fm);
             this.tabs = tabs;
@@ -126,6 +140,9 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getMainViewResId());
+        toolbar = (Toolbar) findViewById(R.id.activity_file_toolbar);
+        toolbar.setTitle("已选文件");
+        toolbar.setTitleTextColor(R.color.whites);
         mcontext = this;
         db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(getApplicationContext());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -151,12 +168,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 } else if (id == R.id.nav_happy) {
                     Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
                     startActivity(intent);
-                }
-//                else if (id == R.id.nav_play) {
-//                    Intent intent = new Intent(getApplicationContext(), GameFriend.class);
-//                    startActivity(intent);
-//                }
-                else if (id == R.id.nav_aboutus) {
+                } else if (id == R.id.nav_aboutus) {
                     startActivity(new Intent(getApplicationContext(), aboutUs.class));
                 } else if (id == R.id.nav_share) {
 
@@ -172,12 +184,12 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         initViews();
         settingImage();
         settingposttimes();
+        //初始化pager界面的下面部位
+        initViewpager();
         //设置viewpager内部页面之间的间距
         mPager.setPageMargin(getResources().getDimensionPixelSize(R.dimen.page_margin_width));
         //设置viewpager内部页面间距的drawable
         mPager.setPageMarginDrawable(R.color.page_viewer_margin_color);
-        //初始化pager界面的下面部位
-        initViewpager();
     }
 
     private void settingposttimes() {
@@ -186,7 +198,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(getApplicationContext());
         Cursor cursor1 = db.selectInformation();
         if(cursor1 != null&&cursor1.getCount()!=0){
-            posttimes.setText("传输次数"+cursor1.getCount());
+            posttimes.setText("传输次数" + cursor1.getCount());
         }
         cursor1.close();
     }
@@ -222,11 +234,6 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
             super.onBackPressed();
         }
     }
-    private void initViewpager() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.fragmentBottom,fragmentBottom).commit();
-    }
-
     @Override
     protected void onDestroy() {
         mTabs.clear();
@@ -256,10 +263,19 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
 
         mIndicator = (TitleIndicator) findViewById(R.id.pagerindicator);
         mIndicator.init(mCurrentTab, mTabs, mPager);
-
         mPager.setCurrentItem(mCurrentTab);
         mLastTab = mCurrentTab;
     }
+
+    @Override
+    public void onItemClicked( ) {
+        updateBottom();
+    }
+
+    public static void updateBottom() {
+        toolbar.setTitle("已选文件:"+userchooosesize.size()+"个");
+    }
+
 
     /**
      * 添加一个选项卡

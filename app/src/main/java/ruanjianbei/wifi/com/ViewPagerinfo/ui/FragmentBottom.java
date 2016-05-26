@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
  */
 public class FragmentBottom extends Fragment {
     //获取Imagepop对象
-    private ImageView BottomImageView;
+    private Button BottomImageView;
     public int getCount_file() {
         return count_file;
     }
@@ -54,7 +55,7 @@ public class FragmentBottom extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        BottomImageView = (ImageView) getActivity().findViewById(R.id.pagebottom);
+        BottomImageView = (Button) getActivity().findViewById(R.id.pagebottom);
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
