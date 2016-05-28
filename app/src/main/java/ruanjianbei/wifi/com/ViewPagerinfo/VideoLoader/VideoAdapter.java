@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.MusicLoader.MusicInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -88,9 +89,13 @@ public class VideoAdapter extends BaseAdapter{
 				if(finalViewHolder.checkBox.isChecked()){
 					videoRows.get(index).type = VideoViewInfo.TYPE_CHECKED;
 					mSelectedVideo.add(videoRows.get(index).getFilePath());
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 				}else{
 					videoRows.get(index).type = VideoViewInfo.TYPE_NOCHECKED;
 					mSelectedVideo.remove(videoRows.get(index).getFilePath());
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 				}
 			}
 		});

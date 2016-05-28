@@ -19,6 +19,7 @@ import java.util.List;
 import ruanjianbei.wifi.com.Phone_P_Wifi.PostFileAdapter.MediaItem;
 import ruanjianbei.wifi.com.Utils.GetFilsSize;
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -101,9 +102,13 @@ public class DocAdpater extends BaseAdapter {
 				if (finalHolder.checkBox.isChecked()){
 					documentlist.get(position).type = VideoViewInfo.TYPE_CHECKED;
 					mSelectedDocu.add(documentlist.get(position).filepath);
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 				}else{
 					documentlist.get(position).type = VideoViewInfo.TYPE_NOCHECKED;
 					mSelectedDocu.remove(documentlist.get(position).filepath);
+					IndicatorFragmentActivity.updateBottom();
+					notifyDataSetChanged();
 				}
 			}
 		});

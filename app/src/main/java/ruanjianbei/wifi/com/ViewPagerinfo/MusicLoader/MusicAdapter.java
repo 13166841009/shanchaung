@@ -79,13 +79,11 @@ public class MusicAdapter extends BaseAdapter{
 					mSelectedMusci.add(lists.get(index).getMusicdistance());
 					IndicatorFragmentActivity.updateBottom();
 					notifyDataSetChanged();
-					Toast.makeText(context,"加入",Toast.LENGTH_SHORT).show();
 				} else {
 					lists.get(index).type = VideoViewInfo.TYPE_NOCHECKED;
 					mSelectedMusci.remove(lists.get(index).getMusicdistance());
 					IndicatorFragmentActivity.updateBottom();
 					notifyDataSetChanged();
-					Toast.makeText(context,"拿出",Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

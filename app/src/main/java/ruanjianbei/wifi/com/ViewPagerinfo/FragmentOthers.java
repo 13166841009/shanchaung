@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.VideoLoader.VideoViewInfo;
+import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -155,9 +156,13 @@ public class FragmentOthers extends Fragment {
 									listItems.get(position).put("type",VideoViewInfo.TYPE_CHECKED);
 									Toast.makeText(getActivity(), files[position].getAbsolutePath(), Toast.LENGTH_SHORT).show();
 									mSelectFile.add(files[position].getAbsolutePath());
+									IndicatorFragmentActivity.updateBottom();
+									notifyDataSetChanged();
 								}else{
 									listItems.get(position).put("type",VideoViewInfo.TYPE_NOCHECKED);
 									mSelectFile.remove(files[position].getAbsolutePath());
+									IndicatorFragmentActivity.updateBottom();
+									notifyDataSetChanged();
 								}
 							}
 						});
