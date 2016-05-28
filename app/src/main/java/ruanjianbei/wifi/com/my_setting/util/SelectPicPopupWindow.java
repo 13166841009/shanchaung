@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import ruanjianbei.wifi.com.my_setting.HappyTime;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
@@ -20,15 +21,17 @@ import ruanjianbei.wifi.com.shanchuang.R;
  */
 public class SelectPicPopupWindow extends PopupWindow {
     private TextView tv_content;
-    private Button btn_pick_ans, btn_cancel;
+    private Button btn_cancel;
     private View mMenuView;
     public SelectPicPopupWindow(Activity context,OnClickListener itemsOnClick){
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mMenuView = inflater.inflate(R.layout.alert_dialog, null);
         tv_content = (TextView) mMenuView.findViewById(R.id.tv_content);
-        btn_pick_ans = (Button) mMenuView.findViewById(R.id.btn_pick_ans);
+//        btn_pick_ans = (Button) mMenuView.findViewById(R.id.btn_pick_ans);
         btn_cancel = (Button) mMenuView.findViewById(R.id.btn_cancel);
+
+        tv_content.setText(HappyTime.xiaohua_content);
         //取消按钮
         btn_cancel.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -36,8 +39,6 @@ public class SelectPicPopupWindow extends PopupWindow {
                 dismiss();
             }
         });
-        //设置按钮监听
-        btn_pick_ans.setOnClickListener(itemsOnClick);
         //设置SelectPicPopupWindow的View
         this.setContentView(mMenuView);
         //设置SelectPicPopupWindow弹出窗体的宽

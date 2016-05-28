@@ -39,6 +39,7 @@ import fragment.SettingFragment;
 import ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.OnSelectItemClickListener;
+import ruanjianbei.wifi.com.my_setting.HappyTime;
 import ruanjianbei.wifi.com.my_setting.aboutUs;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -158,7 +159,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                     Intent intent = new Intent(getApplicationContext(), BluetoothActivity.class);
                     startActivity(intent);
                 } else if (id == R.id.nav_happy) {
-                    Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
+                    Intent intent = new Intent(getApplicationContext(), HappyTime.class);
                     startActivity(intent);
                 } else if (id == R.id.nav_aboutus) {
                     startActivity(new Intent(getApplicationContext(), aboutUs.class));
