@@ -2,14 +2,11 @@ package ruanjianbei.wifi.com.WifiPcDirect;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -32,8 +29,8 @@ public class WifiPcActivity extends Activity {
         init();
         ((CheckBox)findViewById(R.id.checkbox_download)).setChecked(pref.getBoolean("download", true));
         ((CheckBox)findViewById(R.id.checkbox_upload)).setChecked(pref.getBoolean("upload", true));
-        ((CheckBox)findViewById(R.id.checkbox_rename)).setChecked(pref.getBoolean("rename", false));
-        ((CheckBox)findViewById(R.id.checkbox_deletion)).setChecked(pref.getBoolean("delete", false));
+        ((CheckBox)findViewById(R.id.checkbox_rename)).setChecked(pref.getBoolean("rename", true));
+        ((CheckBox)findViewById(R.id.checkbox_deletion)).setChecked(pref.getBoolean("delete", true));
         ((CheckBox)findViewById(R.id.checkbox_toasts)).setChecked(pref.getBoolean("toasts", true));
 
 
@@ -84,7 +81,7 @@ public class WifiPcActivity extends Activity {
             @Override
             public void run() {
                 CheckBox canToast = (CheckBox) findViewById(R.id.checkbox_toasts);
-                if(!canToast.isChecked())
+                if (!canToast.isChecked())
                     return;
                 Toast toast;
                 if (displayForLongTime)
@@ -95,13 +92,6 @@ public class WifiPcActivity extends Activity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.wifipc_menu_main, menu);
-        return true;
     }
 
     @Override
@@ -154,30 +144,6 @@ public class WifiPcActivity extends Activity {
         for (Map.Entry x : PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getAll().entrySet())
             System.out.println(x.getKey() + ":" + x.getValue());
     }
-
-    public void deauth(View view) {
-        acceptor.deauth();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-//        System.out.println(item.toString() + ":" + id);
-//        System.out.println(R.id.action_settings);
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-//            checkPassword();
-            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)

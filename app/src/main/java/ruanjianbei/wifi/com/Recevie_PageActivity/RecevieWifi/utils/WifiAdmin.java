@@ -28,6 +28,10 @@ public class WifiAdmin {
         wifiInfo = wifiManager.getConnectionInfo();
     }
 
+    //获取当前连接速度
+    public int getconncetspeed(){
+        return wifiInfo.getLinkSpeed();
+    }
     //判断是否打开wifi网卡
     public boolean isNetCardFrindly(){
         return wifiManager.isWifiEnabled();

@@ -55,7 +55,9 @@ public class FragmentOthers extends Fragment {
 			currentParent = root;
 			currentFiles = root.listFiles();
 			//使用当前目录下的全部文件、文件夹来填充ListView
-			inflateListView(currentFiles);
+			if(currentFiles!=null) {
+				inflateListView(currentFiles);
+			}
 		}
 		//weilistview绑定列表项的点击事件的监控器
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -1,5 +1,6 @@
 package ruanjianbei.wifi.com.ViewPagerinfo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -24,23 +26,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
 public class FragmentBottom extends Fragment {
     //获取Imagepop对象
     private Button BottomImageView;
-    private ImageView imageView;
-    public int getCount_file() {
-        return count_file;
-    }
-
-    public void setCount_file(int count_file) {
-        this.count_file = count_file;
-    }
-
-    /**
-     * 记录选择文件的个数
-     */
-
-    public void changetext(String text){
-        counttext.setText(text);
-    }
-    private int count_file = 0;
+    private Button receivebutton;
     /**
      * pager页面底部图标
      */
@@ -65,29 +51,14 @@ public class FragmentBottom extends Fragment {
                 showMoreWindow(v);
             }
         });
+        receivebutton = (Button) getActivity().findViewById(R.id.receive_bottom);
+        receivebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ReceiveActivity.class));
+            }
+        });
     }
-
-//    public Thread thread = new Thread(){
-//        @Override
-//        public void run() {
-//            while (true) {
-//                counttext.setText(count_file);
-//            }
-//        }
-//    };
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        //Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
-//        BottomImageView = (ImageView) VieW.findViewById(R.id.mainpagebottom);
-//        BottomImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMoreWindow(v);
-//            }
-//        });
-//    }
-
     /**
      * 显示选项进行操作popwindow
      */

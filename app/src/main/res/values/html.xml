@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="header_start"><![CDATA[<html><head>]]></string>
+    <string name="header_start"><![CDATA[<html><head> <meta charset="UTF-8"/>]]></string>
     <string name="header_end"><![CDATA[</head><body><div id="bodyContainer">]]></string>
-    <string name="upload_form_start"><![CDATA[<h1>Upload to This Directory
+    <string name="upload_form_start"><![CDATA[<h1>请选择电脑文件进行下载
             <form method="post" action="]]></string>
 
     <string name="upload_form_end"><![CDATA[" enctype="multipart/form-data">
             <input type="file" name="upfile" />
-            <input type="submit" value="Send" />
+            <input type="submit" value="发送" />
             </form>
             <button id="layoutButton" onclick="changeLayout()">Change Layout</button>
             </h1>]]></string>
@@ -24,9 +24,4 @@
             </div>]]></string>
     <string name="directory_end"><![CDATA[</td>]]></string>
     <string name="container_end"><![CDATA[</tr></tbody></table></div></body></html>]]></string>
-    <string name="login_markup_start"><![CDATA[<form action="]]></string>
-    <string name="login_markup_end"><![CDATA[" enctype="multipart/form-data" method="post">Password:
-            <input type="password" name=password>
-            <input type="submit" value="Submit">
-            </form>]]></string>
 </resources>

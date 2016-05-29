@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,18 @@ import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
+/**
+ * 文件传输列表
+ */
 public class Post_Activity extends Activity {
     //Adpater的列表展示
     private WifiAdmin wifiAdmin;
+    private WifiApManager mwifimanage;
     private TitleBarView mtitlebar;
     private MediaListAdapter mSenderMediaListAdapter;
     private DataSender mDataSender;
     private WifiApManager mWifiApmanage;
     private ListView mListView;
-    /**
-     * 添加
-     */
     private ArrayList<String> testlist = (ArrayList<String>) FragmentChoose.getFileChoose();
 
     @Override

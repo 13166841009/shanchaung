@@ -55,6 +55,7 @@ public class GetVideoInfo {
 				videoRows.add(videoViewInfo);
 			} while (cursor.moveToNext());
 		}
+		cursor.close();
 		return null;
 	}
 

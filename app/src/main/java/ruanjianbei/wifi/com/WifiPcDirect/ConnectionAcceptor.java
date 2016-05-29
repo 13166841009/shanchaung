@@ -98,7 +98,7 @@ public class ConnectionAcceptor implements Runnable {
             ipstr = (ip & 0xff) + "." + ((ip >> 8) & 0xff) + "." + ((ip >> 16) & 0xff)
                     + "." + ((ip >> 24) & 0xff) + ":" + ssock.getLocalPort();
         else
-            ipstr = "Relaunch with WiFi";
+            ipstr = "请连接合适的wifi或热点";
 
 
         // changes the ip address shown in the app
@@ -148,7 +148,7 @@ public class ConnectionAcceptor implements Runnable {
                 if(!hs.contains(s.getInetAddress()))
                 {
                     hs.add(s.getInetAddress());
-                    mainActivity.makeToast("New connection: " + s.getInetAddress(), false);
+                    mainActivity.makeToast("新的PC端连接: " + s.getInetAddress(), false);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -168,10 +168,4 @@ public class ConnectionAcceptor implements Runnable {
         }
     }
 
-    public void deauth() {
-        for(SingleConnection i : hsT)
-            i.logout();
-
-        removeAllAuth();
-    }
 }

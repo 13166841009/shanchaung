@@ -18,9 +18,7 @@ import ruanjianbei.wifi.com.Phone_P_Wifi.Socket.SocketClient;
 import ruanjianbei.wifi.com.Phone_P_Wifi.Utils.Utils;
 
 /**
- * 数据发送者
- * @author simon.L
- * @version 1.0.0
+ * 数据发送者  create by zhanghang
  */
 public class DataSender {
     /**结束字符*/

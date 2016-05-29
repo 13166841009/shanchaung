@@ -30,6 +30,7 @@ import view.TitleBarView;
 public class Android_postActivity extends Activity implements WifiApManager.WifiStateListener{
     public static final String ACTION_UPDATE_RECEIVER = "action_update_receiver";
     public static final String EXTRA_DATA = "extra_data";
+    private static WifiInfo postwifiinfo;
     private static WifiApManager mWifiApManager;
     private RandomTextView randomTextView;
     private WifiAdmin wifiAdmin;
@@ -125,6 +126,7 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         if (!wifiInfo.getSSID().contains(WifiApManager.SSID_PREFIX)) {
             return;
         }
+        postwifiinfo = wifiInfo;
         Toast.makeText(Android_postActivity.this,"连接成功"
                 +wifiInfo.getBSSID(),Toast.LENGTH_SHORT).show();
         randomTextView.setOnRippleViewClickListener(
@@ -147,6 +149,14 @@ public class Android_postActivity extends Activity implements WifiApManager.Wifi
         }, 2 * 1000);
     }
 
+    /**
+     * 通过wifiinfo获取传播速度
+     * @return
+     */
+    public static WifiInfo getwifiinfo(){
+
+        return postwifiinfo;
+    }
     @Override
     public void onConnectNetworkFailed(NetworkInfo networkInfo) {
         //Toast.makeText(Android_postActivity.this,"请您退出重新连接",Toast.LENGTH_SHORT).show();

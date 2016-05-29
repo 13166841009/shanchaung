@@ -29,8 +29,8 @@ import java.util.HashMap;
 import ruanjianbei.wifi.com.shanchuang.R;
 
 /**
-* Created by lispascal on 2/15/2015.
-*/
+ * Created by zhanghang on 4/15/2016.
+ */
 public class SingleConnection implements Runnable {
 
     final private WifiPcActivity mainActivity;
@@ -45,7 +45,7 @@ public class SingleConnection implements Runnable {
         auth = authorized;
     }
 
-//    @Override
+    //    @Override
     public void close() throws Exception {
         sock.shutdownInput();
         sock.shutdownOutput();
@@ -76,27 +76,16 @@ public class SingleConnection implements Runnable {
             HttpRequest hr = conn.receiveRequestHeader();
             String method = hr.getRequestLine().getMethod();
             String uri = hr.getRequestLine().getUri();
-
-//            System.out.println("method_" + method);
-//            System.out.println("uri_" + uri);
-
             BasicHttpEntityEnclosingRequest container = new BasicHttpEntityEnclosingRequest(hr.getRequestLine());
             conn.receiveRequestEntity(container);
-
-//            System.out.println("\nHeaders:");
-
-
             String boundary = null;
             int length = 0;
             for (Header header : hr.getAllHeaders()) {
-//                System.out.println(header.getName() + ":" + header.getValue());
                 if(header.getName().toLowerCase().contains("content-type") && header.getValue().toLowerCase().contains("boundary="))
                     boundary = header.getValue().substring(header.getValue().indexOf("boundary=") + "boundary=".length());
                 else if(header.getName().toLowerCase().contains("content-length"))
                     length = Integer.decode(header.getValue());
             }
-
-//            System.out.println("\nHeaders Done");
 
             HttpEntity he = container.getEntity();
 
@@ -104,7 +93,6 @@ public class SingleConnection implements Runnable {
             BufferedInputStream is = new BufferedInputStream(he.getContent(), READ_BUFFER_SIZE);
 
 
-//            System.out.println("\n responding");
             final int WRITE_BUFFER_SIZE = 1024*1024; // 1 MB
             BufferedOutputStream os = new BufferedOutputStream(sock.getOutputStream(), WRITE_BUFFER_SIZE);
             PostInfo pi = new PostInfo(hr.getRequestLine().getMethod().equalsIgnoreCase("post"), boundary, length);
@@ -115,40 +103,14 @@ public class SingleConnection implements Runnable {
 
 
         } catch (IOException e) {
-//            System.out.println("Singleserver failed to bind");
             e.printStackTrace();
         } catch (HttpException e) {
             e.printStackTrace();
         }
 
-        // after page is served remove this conn from list.
         parent.removeConn(this);
 
     }
-
-
-
-
-    /*
-    String header_start = new String(mainActivity.getString(R.string.header_start));
-    String header_end = mainActivity.getString(R.string.header_end);
-    String upload_form_start = mainActivity.getString(R.string.upload_form_start);
-    String upload_form_end = mainActivity.getString(R.string.upload_form_end);
-    String container_start = mainActivity.getString(R.string.container_start);
-    String navigation_start = mainActivity.getString(R.string.navigation_start);
-    String navigation_end = mainActivity.getString(R.string.navigation_end);
-
-    String directory_start= mainActivity.getString(R.string.directory_start);
-    String table_head = mainActivity.getString(R.string.table_head);
-    String directory_end = mainActivity.getString(R.string.directory_end);
-    String container_end = mainActivity.getString(R.string.container_end);
-
-    String login_markup_start = mainActivity.getString(R.string.login_markup_start);
-    // insert url
-    String login_markup_end = mainActivity.getString(R.string.login_markup_end);
-    */
-
-
     private String baseDirectory;
     private String defaultDirectory;
 
@@ -157,29 +119,18 @@ public class SingleConnection implements Runnable {
         String uriStr = hr.getRequestLine().getUri();
 
         Uri uriObj = Uri.parse(uriStr);
-//        System.out.println("uri: " + uriObj.getPath());
         String uri = uriObj.getPath();
-
-        // check external storage, and set some useful strings
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-//            System.out.println("Can't open external storage");
             return;
         }
         File exStorage = Environment.getExternalStorageDirectory();
         baseDirectory = exStorage.getPath();
-        defaultDirectory = baseDirectory + "/WifiTransfer";
-
-
+        defaultDirectory = baseDirectory;
         StringBuilder dir = new StringBuilder();
         if(uriObj.getQueryParameter("path") != null)
             dir.append(uriObj.getQueryParameter("path"));
         else
             dir.append(defaultDirectory);
-
-//        System.out.println("dir preproc = " + dir);
-
-
-
         if (!dir.toString().contains(exStorage.getPath()))
             dir.insert(0, exStorage.getPath());
 
@@ -192,17 +143,11 @@ public class SingleConnection implements Runnable {
             dir.replace(0,dir.length(), defaultDirectory); // replace it with defaultDirectory if invalid
             dirFile = new File(dir.toString());
         }
-//        System.out.println("directory = " + dirFile.getAbsolutePath());
-
-        // when not auth and dir != default, serve login page instead
-        if(!auth && !dirFile.getAbsolutePath().contentEquals(defaultDirectory) && !uri.equalsIgnoreCase("/login.html") && mainActivity.isPasswordRequired())
+        if(!auth && !dirFile.getAbsolutePath().contentEquals(defaultDirectory)&& mainActivity.isPasswordRequired())
         {
             sendOk(conn, hr);
-            serveLoginPage(dirFile, os);
             return;
         }
-
-        //handle uploading of files
         if (pi.isPost && uri.equalsIgnoreCase("/upload.html"))
         {
             sendContinue(conn, hr); // change fileUpload() later to break connection as http should if no perms
@@ -210,7 +155,6 @@ public class SingleConnection implements Runnable {
             try {
                 is.close();
             } catch (IOException ex) {
-//                System.out.println("error writing or creating file");
                 ex.printStackTrace();
             }
         } else if (uri.equalsIgnoreCase("/delete.html")) // if going to delete
@@ -223,25 +167,6 @@ public class SingleConnection implements Runnable {
         {
             fileRename(dirFile, is, pi);
             sendOk(conn, hr);
-        } else if (pi.isPost && uri.equalsIgnoreCase("/login.html")) // if going to rename
-        {
-            if(login(is, pi)) {
-                sendOk(conn, hr);
-            }
-            else // login failed, serve login page again.
-            {
-                // if auth still required, serve login
-                if(mainActivity.isPasswordRequired()) {
-                    sendOk(conn, hr);
-                    serveLoginPage(dirFile, os);
-                    return;
-                }
-                else // otherwise, it should act as if there was never a login page. Doesn't auth user but doesn't require it
-                    sendOk(conn, hr); // a very niche case
-            }
-
-
-
         } else if (uri.contains("wf_images/") || uri.endsWith("favicon.ico")) // if a website image
         {
             String uriEnd = uri.substring(uri.lastIndexOf('/') + 1);
@@ -273,44 +198,6 @@ public class SingleConnection implements Runnable {
         }
     }
 
-    synchronized private boolean login(BufferedInputStream is, PostInfo pi) {
-        HashMap<String, String> i = getArgs(is, pi);
-        if(parent.authUser(this, i.get("password"))) // if login successful
-        {
-            auth = true;
-            mainActivity.makeToast("User authorized: " + sock.getInetAddress(), false);
-            return true;
-        }
-        else {
-            mainActivity.makeToast("User failed to authorize: " + sock.getInetAddress(), false);
-            return false;
-        }
-    }
-
-    // to be called from settings activity on checkbox switch on "de-authenticate users"
-    synchronized void logout() {
-        auth = false;
-    }
-
-    private void serveLoginPage(File d, BufferedOutputStream os) {
-        try {
-            os.write(getResource(R.string.header_start).getBytes());
-            String title = "<title>Log in</title>\n";
-            os.write(title.getBytes());
-//            os.write(css.getBytes());
-//            os.write(js.getBytes());
-            os.write(getResource(R.string.header_end).getBytes());
-            os.write(getResource(R.string.container_start).getBytes());
-            os.write(getResource(R.string.login_markup_start).getBytes());
-            os.write(getLoginUrl(d).getBytes());
-            os.write(getResource(R.string.login_markup_end).getBytes());
-            os.write(getResource(R.string.container_end).getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
     private String getResource(int id) {
         return mainActivity.getAppContext().getResources().getString(id);
@@ -320,7 +207,7 @@ public class SingleConnection implements Runnable {
         try {
 //            os.write(header_start.getBytes());
             os.write(getResource(R.string.header_start).getBytes());
-            String title = "<title>" + d.getPath() + "</title>\n";
+            String title = "<title>" +"闪传PC连接传输"+ "</title>\n";
             os.write(title.getBytes());
 //            os.write(mainActivity.getAppContext().getResources().getString(R.string.mainCss).getBytes());
             os.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/wf_resources/style.css\">".getBytes());
@@ -363,7 +250,7 @@ public class SingleConnection implements Runnable {
             }
         }
 
-        String argStr = new String(byteArr, Charset.forName("GBK"));
+        String argStr = new String(byteArr, Charset.forName("UTF-8"));
 //        System.out.println("argstr:\n" + argStr);
 //        System.out.println("boundary:\n" + pi.boundary);
 
@@ -508,7 +395,7 @@ public class SingleConnection implements Runnable {
 
         CheckBox cb = (CheckBox) mainActivity.findViewById(R.id.checkbox_download);
         if (!cb.isChecked()) {
-            mainActivity.makeToast("Download attempted by " + sock.getInetAddress() + ", and failed", false);
+            mainActivity.makeToast("文件下载失败 " + sock.getInetAddress() + ", 请检查权限", false);
             sendOk(conn, request);
             return;
         }
@@ -538,7 +425,7 @@ public class SingleConnection implements Runnable {
                 e.printStackTrace();
                 return;
             }
-            mainActivity.makeToast("File sent: " + fileName, false);
+            mainActivity.makeToast("手机文件传输中: " + fileName, true);
 
         }
     }
@@ -590,15 +477,11 @@ public class SingleConnection implements Runnable {
                 {
                     String fname = f.getName();
                     os.write(("<div class=\"file list\" name=\"" + fname + "\">").getBytes());
-
-
                     // rename button
                     os.write("<img src=\"/wf_images/rename.png\" alt=\"Rename file\" title=\"Rename file\" name=\"".getBytes());
                     os.write(fname.getBytes());
                     os.write(("\" onclick=\"rename(this, \'" + d.getPath() + "\')\" />").getBytes());
-                        // results in onclick="rename(this, '<path>')" where <path> is the directory
-
-
+                    // results in onclick="rename(this, '<path>')" where <path> is the directory
                     // delete button
                     os.write("<form method=\"post\" action=\"".getBytes());
                     os.write(getDeleteUrl(f).getBytes());
@@ -662,15 +545,11 @@ public class SingleConnection implements Runnable {
         os.write(" bytes</span>".getBytes());
     }
 
-
-    private String getLoginUrl(File dir) {
-        return "/login.html?path=" + Uri.encode(dir.getPath() + "/");
-    }
     private String getDirectoryUrl(File dir) {
         return "/index.html?path=" + Uri.encode(dir.getPath() + "/");
     }
     private String getUploadUrl(File dir) {
-        return "/upload.html?path=" + Uri.encode(dir.getPath() + "/");
+        return "/upload.html?path=" + Uri.encode(dir.getPath() + "/")+Uri.decode(dir.getPath());
     }
     private String getDeleteUrl(File dir) {
         return "/delete.html?path=" + Uri.encode(dir.getParent() + "/") + "&file=" + Uri.encode(dir.getName());
@@ -725,7 +604,7 @@ public class SingleConnection implements Runnable {
 
         CheckBox cb = (CheckBox) mainActivity.findViewById(R.id.checkbox_upload);
         if (!cb.isChecked()) {
-            mainActivity.makeToast("File uploaded attempted and failed", false);
+            mainActivity.makeToast("文件上传失败，请检查权限", false);
             return;
         }
 
@@ -765,13 +644,12 @@ public class SingleConnection implements Runnable {
                         String subStr = lStr.substring(lStr.indexOf("filename=\"") + "filename=\"".length());
                         // filename is name from 0 to
                         fileName = subStr.substring(0, subStr.indexOf('"'));
-
 //                        System.out.println("filename get:" + fileName);
                         fs = new BufferedOutputStream(new FileOutputStream(new File(dir, fileName)));
 
                         if(pi.length > 1024*1024)   // if file bigger than 1MB, display that it started uploading.
-                                                    // Otherwise, it will see the "received" message quickly anyway
-                            mainActivity.makeToast("receiving file: " + fileName, false);
+                            // Otherwise, it will see the "received" message quickly anyway
+                            mainActivity.makeToast("接收电脑文件中: " + fileName, true);
                     }
                     if (++newLines == 4)
                     {
@@ -797,7 +675,7 @@ public class SingleConnection implements Runnable {
                     throw ai;
                 }
                 // make new string only out of the array part written
-                String xStr = new String(xArr, 0, validInArray, Charset.forName("GBK"));
+                String xStr = new String(xArr, 0, validInArray, Charset.forName("UTF-8"));
 
 
                 if(xStr.contains(pi.boundary)) // if boundary found, write everything before last newline prior to boundary
@@ -807,7 +685,7 @@ public class SingleConnection implements Runnable {
                     // Safer fix might be to check the client's OS via User-Agent header and condition behavior on that.
                     int boundaryIndex = xStr.indexOf(pi.boundary);
                     int endIndex = xStr.substring(0, boundaryIndex)
-                                   .lastIndexOf('\n'); // gets position of last newline before the boundary.
+                            .lastIndexOf('\n'); // gets position of last newline before the boundary.
 
                     if(xStr.charAt(endIndex-1) == '\r') // if carriage return
                         --endIndex;
@@ -835,7 +713,7 @@ public class SingleConnection implements Runnable {
             }
         }
 
-        mainActivity.makeToast("File received: " + fileName, false);
+        mainActivity.makeToast("文件接收完成: " + fileName, false);
 
         fs.close();
 

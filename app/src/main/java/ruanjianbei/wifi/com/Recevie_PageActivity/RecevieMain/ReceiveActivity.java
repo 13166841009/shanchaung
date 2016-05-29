@@ -23,6 +23,7 @@ import ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
+import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.dialog.CustomDialog;
@@ -100,7 +101,6 @@ public class ReceiveActivity extends Activity {
                          * 对当前网络添加判断
                          */
                         checkNetWork();
-//                        startActivity(new Intent(ReceiveActivity.this, Android_receiveActivity.class));
                     }
 
                     @Override
@@ -129,7 +129,7 @@ public class ReceiveActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(ReceiveActivity.this, downloadActivity.class));
+                        startActivity(new Intent(ReceiveActivity.this, ScanningActivity.class));
                     }
 
                     @Override

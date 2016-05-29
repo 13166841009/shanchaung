@@ -28,6 +28,7 @@ import ruanjianbei.wifi.com.Post_PageActivity.Android_postActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiRippleOutLayout;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
+import ruanjianbei.wifi.com.ScanActivity.ScanningActivity;
 import ruanjianbei.wifi.com.Utils.GetFilsSize;
 import ruanjianbei.wifi.com.Utils.WifiConnect.WifiCheck;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
@@ -136,8 +137,7 @@ public class PostActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        Toast.makeText(PostActivity.this,"IosPost",Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(PostActivity.this, Android_postActivity.class));
+                        startActivity(new Intent(PostActivity.this, ScanningActivity.class));
                     }
 
                     @Override

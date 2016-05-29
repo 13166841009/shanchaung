@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_checked="true" android:drawable="@mipmap/checkbox_tip_selected"/>
-    <item android:drawable="@mipmap/checkbox_tip_unselected"/>
+    <item android:state_checked="true" android:drawable="@mipmap/checkbox_tip_unselected"/>
+    <item android:drawable="@mipmap/checkbox_tip_selected"/>
 </selector>
