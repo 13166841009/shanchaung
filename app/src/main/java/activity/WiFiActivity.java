@@ -20,12 +20,14 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bruce.library.ComboView;
 
 import foregin.UiUpdater;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.WifiPcDirect.WifiPcActivity;
+import ruanjianbei.wifi.com.WifiPcDirect.mobilepost.MobilePost;
 import ruanjianbei.wifi.com.shanchuang.R;
 import view.TitleBarView;
 
@@ -80,15 +82,43 @@ public class WiFiActivity extends Activity {
 		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.wifi);
+		ComboView pcmobile = (ComboView) findViewById(R.id.mobile_wifi_post);
 		ComboView pcwifi = (ComboView) findViewById(R.id.pc_wifi_post);
-		ComboView.Params params = ComboView.Params.create()
+		ComboView.Params pcparams = ComboView.Params.create()
 
 				//Android文件传输
 				.cornerRadius(dimen(R.dimen.cb_dimen_25), dimen(R.dimen.cb_dimen_52))// Following three to***** values must be the same can morph to circle
 				.width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
 				.height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
 				.morphDuration(300)
-				.text("PC连接模式", "点击进入")
+				.text("PC有网传输", "点击进入")
+						//Option -- and values below is default
+				.color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
+				.colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
+				.strokeWidth(dimen(R.dimen.cb_dimen_1), dimen(R.dimen.cb_dimen_1))
+				.strokeColor(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
+				.circleDuration(3000)
+				.rippleDuration(200)
+				.padding(dimen(R.dimen.cb_dimen_3))
+				.textSize(16)
+				.textColor(color(R.color.cb_color_white))
+				.comboClickListener(new ComboView.ComboClickListener() {
+					@Override
+					public void onComboClick() {
+						startActivity(new Intent(WiFiActivity.this, MobilePost.class));
+					}
+
+					@Override
+					public void onNormalClick() {
+					}
+				});
+		ComboView.Params params = ComboView.Params.create()
+				//Android文件传输
+				.cornerRadius(dimen(R.dimen.cb_dimen_25), dimen(R.dimen.cb_dimen_52))// Following three to***** values must be the same can morph to circle
+				.width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
+				.height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
+				.morphDuration(300)
+				.text("PC无网传输", "点击进入")
 						//Option -- and values below is default
 				.color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
 				.colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -109,6 +139,7 @@ public class WiFiActivity extends Activity {
 					public void onNormalClick() {
 					}
 				});
+		pcmobile.settingMorphParams(pcparams);
 		pcwifi.settingMorphParams(params);
 	}
 
@@ -182,7 +213,11 @@ public class WiFiActivity extends Activity {
 		boolean isWifiReady = wifiAdmin.isNetCardFrindly();
 		setText(R.id.wifi_state, isWifiReady ? wifiId : getString(R.string.no_wifi_hint));
 		ImageView wifiImg = (ImageView)findViewById(R.id.wifi_state_image);
-		wifiImg.setImageResource(isWifiReady ? R.mipmap.wifi_state : R.mipmap.wifi_state_statu);
+		if(wifiState==4||!isWifiReady){
+			wifiImg.setImageResource(R.mipmap.wifi_state_statu);
+		}else if(isWifiReady&&wifiState==3){
+			wifiImg.setImageResource(R.mipmap.wifi_state);
+		}
 	}
 	private void setText(int id, String text) {
 		TextView tv = (TextView) findViewById(id);

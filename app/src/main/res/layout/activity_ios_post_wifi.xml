@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ruanjianbei.wifi.com.Recevie_PageActivity.Ios_recevieActivity">
+    tools:context="ruanjianbei.wifi.com.Iospost.IosPost_Activity">
     <view.TitleBarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,9 +12,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/testrecevie"
-        android:text="下载"
+        android:id="@+id/testpost"
+        android:text="发送"
         android:layout_below="@+id/title_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp" />
+        android:layout_marginTop="91dp" />
 </RelativeLayout>

@@ -1,116 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <view.TitleBarView
-        android:id="@+id/title_bar"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <view.CustomerScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title_bar" >
-
-        <RelativeLayout
+        android:layout_height="match_parent" >
+        <view.TitleBarView
+            android:id="@+id/title_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:id="@+id/ll_dynamic"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_below="@+id/title_bar"
+            android:id="@+id/ll_dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/ll_bg_d"
+            android:orientation="vertical" >
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:background="@drawable/ll_bg_d"
-                android:orientation="vertical" >
+                android:layout_height="70dp"
+                android:onClick="my_information">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:onClick="my_information">
+                <ImageView
+                    android:id="@+id/pic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/chengxuyuan" />
 
-                    <ImageView
-                        android:id="@+id/pic"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/chengxuyuan" />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/pic"
+                    android:text="修改个人信息" />
 
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/pic"
-                        android:text="修改个人信息" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/pic"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/qzone_feed_hotbar_icon_star" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/name"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_toRightOf="@id/pic"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/qzone_feed_hotbar_icon_star" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
+            </RelativeLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
-                </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/devide_line" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/devide_line" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="tran_history">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:onClick="tran_history">
+                <TextView
+                    android:id="@+id/tv_n"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="传输记录" />
 
-                    <TextView
-                        android:id="@+id/tv_n"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:text="传输记录" />
-
-                    <TextView
-                        android:id="@+id/tv_tran"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/tv_n"
-                        android:text="您已上传10个文件，点击查看"
-                        android:textColor="@color/gray" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
-                </RelativeLayout>
-            </LinearLayout>
-        </RelativeLayout>
-    </view.CustomerScrollView>
-
+                <TextView
+                    android:id="@+id/tv_tran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_n"
+                    android:text="您已上传10个文件，点击查看"
+                    android:textColor="@color/gray" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/qvip_pay_wallet_icon_arrow_right_normal" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/devide_line" />
+            <ruanjianbei.wifi.com.Utils.CircleCurculate.CircleChartView
+                android:id="@+id/circle_chart"
+                android:layout_width="match_parent"
+                android:layout_marginTop="50dp"
+                app:circleRadius="80dp"
+                app:textSize="5sp"
+                android:layout_height="200dp" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

@@ -38,10 +38,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="若无网络，请连接合适热点进入PC无网传输"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:padding="15px"
+            style="?android:attr/textAppearanceSmall"/>
     </LinearLayout>
     <com.bruce.library.ComboView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:id="@+id/pc_wifi_post" />
-
+    <com.bruce.library.ComboView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/mobile_wifi_post" />
 </LinearLayout>

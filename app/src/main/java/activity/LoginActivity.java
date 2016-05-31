@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends Activity {
 	private Context mContext;
 	private CustomProgressDialog customProgressDialog = null;
 	private RelativeLayout rl_user;
+	private RelativeLayout lin_checkbox;
 	private Button mLogin;
 	private EditText username;
 	private EditText userpass;
@@ -70,6 +72,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void findView(){
+		lin_checkbox = (RelativeLayout) findViewById(R.id.remberPassword);
 		rl_user=(RelativeLayout) findViewById(R.id.rl_user);
 		mLogin=(Button) findViewById(R.id.login);
 		register=(Button) findViewById(R.id.register);
@@ -83,6 +86,7 @@ public class LoginActivity extends Activity {
 		Animation anim=AnimationUtils.loadAnimation(mContext, R.anim.login_anim);
 		anim.setFillAfter(true);
 		rl_user.startAnimation(anim);
+		lin_checkbox.startAnimation(anim);
 		mLogin.setOnClickListener(loginOnClickListener);
 		register.setOnClickListener(registerOnClickListener);
 	}

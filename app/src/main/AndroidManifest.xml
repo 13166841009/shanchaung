@@ -20,7 +20,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 极光推送 -->
 
-    <!--蓝牙打印机-->
+
+    <!-- 蓝牙打印机 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
@@ -55,12 +56,14 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
+        android:normalScreens="true"
         android:resizeable="true"
-        android:anyDensity="true" />
+        android:smallScreens="true" />
+
     <application
         android:name="ruanjianbei.wifi.com.ViewPagerinfo.App"
         android:allowBackup="true"
@@ -102,7 +105,7 @@
         <activity
             android:name="ruanjianbei.wifi.com.Phone_P_3G.upload.uploadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name="ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
@@ -149,9 +152,9 @@
             android:name="viewpager.IntroductionPage"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
+            android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity"
             android:allowBackup="true"
             android:supportsRtl="true"
-            android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity"
             android:theme="@style/AppThemeT" />
         <activity
             android:name="ruanjianbei.wifi.com.ViewPagerinfo.MainViewpager"
@@ -187,15 +190,21 @@
             android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.Receive_Activity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.shanchuang.GameFriend"
+            android:name=".GameFriend"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-
-        <activity android:name="ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="ruanjianbei.wifi.com.Bluetooth_printer.PrintDataActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
-        <activity android:name="ruanjianbei.wifi.com.my_setting.HappyTime"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity android:name="ruanjianbei.wifi.com.WifiPcDirect.mobilepost.MobilePost"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name="ruanjianbei.wifi.com.Iospost.IosPost_Activity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.Bluetooth_printer.PrintDataActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="ruanjianbei.wifi.com.my_setting.HappyTime"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <!-- 极光推送 -->
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
@@ -262,7 +271,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
@@ -300,7 +309,7 @@
             android:name="JPUSH_APPKEY"
             android:value="e7e4916ecff59cbd503c4d49" />
         <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
+    ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <meta-data

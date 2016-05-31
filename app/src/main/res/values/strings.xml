@@ -133,14 +133,14 @@
     <string name="button_deauth">Deauth users</string>
     <string name="notification_service_name">NotificationService</string>
     <string name="wifiAPcreate">热点建立</string>
-    <string name="receivetitle">文件接收</string>
-    <string name="wifipostTitle">文件传输</string>
+    <string name="receivetitle">安卓文件接收</string>
+    <string name="wifipostTitle">安卓文件传输</string>
     <string name="wifiscan">WIFI扫描连接</string>
     <!--个人信息-->
     <string name="myinformation">个人信息</string>
     <string name="tran_history">传输记录</string>
     <string name="post_listview">传输列表</string>
-    <string name="receivelist" >接收列表</string>
+    <string name="receivelist">接收列表</string>
 
     <!-- 右滑菜单-->
 
@@ -155,8 +155,11 @@
     <string name="begin">开始游戏</string>
     <string name="dds">打地鼠</string>
     <!--蓝牙打印机-->
-    <string name="bluetooth" >蓝牙打印</string>
-    <string name="printinfo" >打印详情</string>
-    <string name="playnow" >游戏中</string>
-
+    <string name="bluetooth">蓝牙打印</string>
+    <string name="printinfo">打印详情</string>
+    <string name="playnow">游戏中</string>
+    <string name="mobilepost">有网传输</string>
+    <!--ios文件传输-->
+    <string name="iospost">苹果文件发送</string>
+    <string name="iosrecevie">苹果文件接收</string>
 </resources>

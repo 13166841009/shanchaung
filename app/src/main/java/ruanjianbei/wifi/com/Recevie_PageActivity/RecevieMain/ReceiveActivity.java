@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 
 import ruanjianbei.wifi.com.Phone_P_3G.download.downloadActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.Android_receiveActivity;
+import ruanjianbei.wifi.com.Recevie_PageActivity.Ios_recevieActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.RecevieByWifi;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.WifiAdmin;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.utils.Wifistatus;
@@ -129,7 +130,7 @@ public class ReceiveActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(ReceiveActivity.this, ScanningActivity.class));
+                        startActivity(new Intent(ReceiveActivity.this, Ios_recevieActivity.class));
                     }
 
                     @Override
