@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ruanjianbei.wifi.com.Utils.CircleCurculate.CircleChartView;
 import ruanjianbei.wifi.com.my_setting.my_information;
 import ruanjianbei.wifi.com.my_setting.tran_history.tran_history;
 import ruanjianbei.wifi.com.shanchuang.R;
@@ -26,6 +31,7 @@ public class SettingFragment extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_mine);
+		initCircle();
 		mContext=this;
 		db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mContext);
 		findView();
@@ -40,6 +46,15 @@ public class SettingFragment extends Activity {
 				SettingFragment.this.finish();
 			}
 		});
+	}
+
+	private void initCircle() {
+		CircleChartView circleChartView = (CircleChartView) findViewById(R.id.circle_chart);
+		List<CircleChartView.PieceDataHolder> pieceDataHolders = new ArrayList<>();
+
+		pieceDataHolders.add(new CircleChartView.PieceDataHolder(500,0xFFCC9933, "已传输，5"));
+		pieceDataHolders.add(new CircleChartView.PieceDataHolder(1000, 0xFF499BF7, "已接收，10"));
+		circleChartView.setData(pieceDataHolders);
 	}
 
 

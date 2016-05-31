@@ -28,6 +28,8 @@ import java.util.Map;
 
 import ruanjianbei.wifi.com.my_setting.util.SelectPicPopupWindow;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
+
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ public class HappyTime extends Activity {
     public static final String APPKEY ="14ddbbc4b060ad71a32700b9c123df0e";
 
     private static List<String> typeList = new ArrayList<String>();
+    private TitleBarView mtitlebar;
 
     public static String xiaohua_content ;
 
@@ -57,8 +60,8 @@ public class HappyTime extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haapytime);
+        inittitle();
         listView = (ListView) findViewById(R.id.xiaohua);
-
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().
                 detectDiskWrites().detectNetwork().penaltyLog().build());
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().
@@ -102,6 +105,12 @@ public class HappyTime extends Activity {
             }
         });
 //        getRequest4();
+    }
+
+    private void inittitle() {
+        mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
+        mtitlebar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+        mtitlebar.setTitleText(R.string.happytime);
     }
 
     //为弹出窗口实现监听类

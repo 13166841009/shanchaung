@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ruanjianbei.wifi.com.WifiPcDirect.mobilepost.MobilePost">
+
+    <view.TitleBarView
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </view.TitleBarView>
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:text="欢迎您使用PC传输"
+            android:textColor="@color/blue"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="100dp"
+            android:id="@+id/iamgepc"
+            android:src="@mipmap/pcpostwifi"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/relative1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView
+            android:id="@+id/pcwebview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            >
+        </WebView>
+    </RelativeLayout>
+</RelativeLayout>

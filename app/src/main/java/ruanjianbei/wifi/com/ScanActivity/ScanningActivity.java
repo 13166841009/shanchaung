@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import ruanjianbei.wifi.com.Iospost.IosPost_Activity;
 import ruanjianbei.wifi.com.ScanActivity.camera.CameraManager;
 import ruanjianbei.wifi.com.ScanActivity.camera.Utils;
 import ruanjianbei.wifi.com.ScanActivity.decoding.CaptureActivityHandler;
@@ -147,9 +148,12 @@ public class ScanningActivity extends Activity implements Callback,
 			// 网页开启
 			String recode = Utils.recode(result.toString());
 			Intent intent = new Intent();
-			intent.setAction(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse(recode));
+			intent.putExtra("recode",recode);
+			intent.setClass(ScanningActivity.this, IosPost_Activity.class);
 			startActivity(intent);
+//			intent.setAction(Intent.ACTION_VIEW);
+//			intent.setData(Uri.parse(recode));
+//			startActivity(intent);
 		}
 	}
 

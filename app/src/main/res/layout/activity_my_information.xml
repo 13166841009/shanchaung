@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="120dp"
-        android:background="@drawable/user_info_bg">
+        android:background="@color/blue">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -46,8 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/setting"
-            android:text="昵称:"
+            android:text="用户名:"
             android:textSize="20sp"
             android:id="@+id/tv11"/>
         <TextView
@@ -82,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/setting"
             android:text="性别:"
             android:textSize="20sp"
             android:id="@+id/tv22"/>
@@ -120,7 +118,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/setting"
             android:text="手机:"
             android:textSize="20sp"
             android:id="@+id/tv33"/>
@@ -157,7 +154,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/setting"
             android:text="邮箱:"
             android:textSize="20sp"
             android:id="@+id/tv44"/>
@@ -194,7 +190,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/setting"
             android:text="地址:"
             android:textSize="20sp"
             android:id="@+id/tv55"/>
