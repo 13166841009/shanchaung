@@ -209,6 +209,8 @@ public class SingleConnection implements Runnable {
             os.write(getResource(R.string.header_start).getBytes());
             String title = "<title>" +"闪传PC连接传输"+ "</title>\n";
             os.write(title.getBytes());
+            String meta = "<meta http-equiv=\"content-Type\"content=\"text/html;charset=UTF-8\">";
+            os.write(meta.getBytes());
 //            os.write(mainActivity.getAppContext().getResources().getString(R.string.mainCss).getBytes());
             os.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/wf_resources/style.css\">".getBytes());
             os.write("<script src=\"/wf_resources/script.js\"></script>".getBytes());
@@ -426,7 +428,6 @@ public class SingleConnection implements Runnable {
                 return;
             }
             mainActivity.makeToast("手机文件传输中: " + fileName, true);
-
         }
     }
 
@@ -621,21 +622,23 @@ public class SingleConnection implements Runnable {
         int bytesProcessed = 0;
         int bytesAdded;
         int prevInArray = 0;
+
         while(bytesProcessed < pi.length)
         {
             if(!fileCopying)
             {
                 x = is.read();
-//                System.out.print((char)x);
+
                 bytesProcessed++;
 
-                lineArr[pos++] = (char) x;
+                lineArr[pos++] = (char)x;
 
                 if(x == '\n' || pos == LIMIT)
                     endOfLine = true;
 
                 if(endOfLine) // if not copying yet, look for file name.
                 {
+                    System.out.println();
                     String lStr = new String(lineArr);
 
                     if(lStr.contains("filename=\""))
@@ -650,6 +653,7 @@ public class SingleConnection implements Runnable {
                         if(pi.length > 1024*1024)   // if file bigger than 1MB, display that it started uploading.
                             // Otherwise, it will see the "received" message quickly anyway
                             mainActivity.makeToast("接收电脑文件中: " + fileName, true);
+
                     }
                     if (++newLines == 4)
                     {

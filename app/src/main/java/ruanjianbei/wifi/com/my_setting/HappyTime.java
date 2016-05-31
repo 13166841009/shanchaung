@@ -29,6 +29,7 @@ import java.util.Map;
 import ruanjianbei.wifi.com.my_setting.util.SelectPicPopupWindow;
 import ruanjianbei.wifi.com.shanchuang.R;
 import android.view.View.OnClickListener;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 /**
@@ -64,8 +65,30 @@ public class HappyTime extends Activity {
                 detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
         getRequest1();
-        listView.setAdapter(new ArrayAdapter<String>(HappyTime.this,
-                android.R.layout.simple_list_item_1, typeList));
+//        listView.setAdapter(new ArrayAdapter<String>(HappyTime.this,
+//                android.R.layout.simple_list_item_1, typeList));
+
+        List<Map<String , Object>> listItems = new ArrayList<Map<String , Object>>();
+
+        String[] types = typeList.toArray(new String[typeList.size()]);
+
+
+        for(int i = 0 ; i < types.length ; i++){
+            Map<String , Object> listItem = new HashMap<String , Object>();
+            listItem.put("xiaohua_left" , R.mipmap.icon);
+            listItem.put("xiaohua_tv" , types[i]);
+            System.out.println(types[i]);
+            listItem.put("xiaohua_right", R.mipmap.qvip_pay_wallet_icon_arrow_right_normal);
+            listItems.add(listItem);
+        }
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this,listItems,R.layout.list_xiaohua,
+                new String[]{"xiaohua_left","xiaohua_tv","xiaohua_right"}
+                ,new int[]{R.id.xiaohua_left,R.id.xiaohua_tv,R.id.xiaohua_right});
+
+        listView.setAdapter(simpleAdapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,7 +133,6 @@ public class HappyTime extends Activity {
                     for(int j = 1 ; j < jsonObject1.length() ; j++){
                         String name = jsonObject1.getString(""+ j);
                         typeList.add(j + "、" + name);
-                        System.out.println(name);
                     }
                 }
             }else{
@@ -142,7 +164,6 @@ public class HappyTime extends Activity {
                     String title = jsonObject1.getString("title");
                     System.out.println(id+"、"+title);
                     xiaohua_content = id+"、"+title;
-                    System.out.println(xiaohua_content);
                 }
             }else{
                 System.out.println(object.get("error_code")+":"+object.get("reason"));
