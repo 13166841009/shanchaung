@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="header_start"><![CDATA[<html><head> <meta charset="UTF-8"/>]]></string>
-    <string name="header_end"><![CDATA[</head><body><div id="bodyContainer">]]></string>
-    <string name="upload_form_start"><![CDATA[<h1>请选择电脑文件进行下载
-            <form method="post" action="]]></string>
+    <string name="header_start"><![CDATA[<html><head> <meta charset="UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<script src="fileinput.min.js" type="text/javascript"></script>
+    ]]>
+    </string>
 
-    <string name="upload_form_end"><![CDATA[" enctype="multipart/form-data">
-            <input type="file" name="upfile" />
-            <input type="submit" value="发送" />
-            </form>
-            <button id="layoutButton" onclick="changeLayout()">Change Layout</button>
-            </h1>]]></string>
+    <string name="header_end"><![CDATA[</head><body><div id="bodyContainer">]]></string>
+    <string name="upload_form_start"><![CDATA[
+    <div id="h1">
+        <div id="logo" align="center" >
+			<img src="icon.png" width="100" height="100">
+		</div>
+		<br><h3 align="center">电脑端无网络传输</h3><br>
+    ]]></string>
+
+    <string name="upload_form_end"><![CDATA[
+        <div align="left">
+					<form role="form" id="upload" method="post" action="{:U('Files/Files_Upload')}"
+						  enctype="multipart/form-data">
+						  <h5>请选择文件传给手机</h5>
+						<input type="file" id="file-0a" class="file" name="file" value="提交"/>
+						<br>
+					</form>
+		</div>
+	</div>
+    ]]></string>
     <string name="container_start"><![CDATA[<table id="contentContainer"><tbody><tr>]]></string>
     <string name="navigation_start"><![CDATA[<td id="navigationContainer">]]></string>
     <string name="navigation_end"><![CDATA[</td>]]></string>
     <string name="directory_start"><![CDATA[<td id="directoryContainer">]]></string>
 
     <string name="table_head"><![CDATA[<div id="tableHead">
-            <span id="sortByNameSpan" onclick="sortByName()">Name</span>
-            <span id="sortBySizeSpan" onclick="sortBySize()">Size</span>
-            <span id="sortByDateSpan" onclick="sortByDate()">Last Modified</span>
-            </div>]]></string>
+            <span id="sortByNameSpan" onclick="sortByName()">名称</span>
+			<span id="sortBySizeSpan" onclick="sortBySize()">文件大小</span>
+			<span id="sortByDateSpan" onclick="sortByDate()">时间</span>
+            </div>
+            <div class="dir list"><img src="upFolder1.png">
+							<a><span>返回上层</span></a></div>
+							]]></string>
     <string name="directory_end"><![CDATA[</td>]]></string>
     <string name="container_end"><![CDATA[</tr></tbody></table></div></body></html>]]></string>
 </resources>
