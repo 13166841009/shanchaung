@@ -2,12 +2,7 @@
 <resources>
 
     <string name="header_start"><![CDATA[<html><head> <meta charset="UTF-8"/>
-        <link rel="stylesheet" type="text/css" href="style.css"/>
-		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
-		<link href="fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<script src="fileinput.min.js" type="text/javascript"></script>
+
     ]]>
     </string>
 
@@ -15,17 +10,18 @@
     <string name="upload_form_start"><![CDATA[
     <div id="h1">
         <div id="logo" align="center" >
-			<img src="icon.png" width="100" height="100">
+			<img src="/wf_resources/icon.png" width="100" height="100">
 		</div>
 		<br><h3 align="center">电脑端无网络传输</h3><br>
+		<div align="left">
+					<form role="form" id="upload" method="post" action="
     ]]></string>
 
     <string name="upload_form_end"><![CDATA[
-        <div align="left">
-					<form role="form" id="upload" method="post" action="{:U('Files/Files_Upload')}"
+        "
 						  enctype="multipart/form-data">
 						  <h5>请选择文件传给手机</h5>
-						<input type="file" id="file-0a" class="file" name="file" value="提交"/>
+						<input type="file" id="file-0a" class="file" name="file"/>
 						<br>
 					</form>
 		</div>
@@ -41,7 +37,7 @@
 			<span id="sortBySizeSpan" onclick="sortBySize()">文件大小</span>
 			<span id="sortByDateSpan" onclick="sortByDate()">时间</span>
             </div>
-            <div class="dir list"><img src="upFolder1.png">
+            <div class="dir list"><img src="/wf_resources/upFolder1.png">
 							<a><span>返回上层</span></a></div>
 							]]></string>
     <string name="directory_end"><![CDATA[</td>]]></string>

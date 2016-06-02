@@ -213,6 +213,12 @@ public class SingleConnection implements Runnable {
             os.write(meta.getBytes());
 //            os.write(mainActivity.getAppContext().getResources().getString(R.string.mainCss).getBytes());
             os.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/wf_resources/style.css\">".getBytes());
+            os.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>".getBytes());
+            os.write("<link href=\"http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css\" rel=\"stylesheet\"/>".getBytes());
+            os.write("<link href=\"/wf_resources/fileinput.min.css\" media=\"all\" rel=\"stylesheet\" type=\"text/css\"/>".getBytes());
+            os.write("<script src=\"http://libs.baidu.com/jquery/2.0.0/jquery.min.js\"></script>".getBytes());
+            os.write("<script src=\"http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js\"></script>".getBytes());
+            os.write("<script src=\"/wf_resources/fileinput.min.js\" type=\"text/javascript\"></script>".getBytes());
             os.write("<script src=\"/wf_resources/script.js\"></script>".getBytes());
             os.write(getResource(R.string.header_end).getBytes());
             os.write(getResource(R.string.upload_form_start).getBytes());
