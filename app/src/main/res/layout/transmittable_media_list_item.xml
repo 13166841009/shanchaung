@@ -15,13 +15,13 @@
         android:progress="0"
         android:focusable="false"/>
     <ImageView android:id="@+id/image_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
         android:scaleType="centerInside"
-        android:src="@drawable/icon_success"
+        android:src="@mipmap/icon_success"
         android:layout_margin="4dp"
         android:focusable="false"/>
     <Button
@@ -37,13 +37,13 @@
         android:layout_margin="4dp"
         android:focusable="false"/>
     <ImageView android:id="@+id/image_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:scaleType="centerInside"
         android:contentDescription="@string/app_name"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/icon_delete"
+        android:src="@mipmap/icon_delete"
         android:layout_margin="4dp"
         android:focusable="false"/>
     <LinearLayout android:id="@+id/text_layout"

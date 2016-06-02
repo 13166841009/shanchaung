@@ -134,9 +134,9 @@ public class MediaListAdapter extends BaseAdapter implements DataTransferListene
             holder.mDeleteView.setVisibility(View.VISIBLE);
 
             holder.mStateView.setImageResource(transmitMediaItem.mState != TransmitState.TRANSMIT_FINISHED
-                    ? R.drawable.icon_downloading : R.drawable.icon_success);
+                    ? R.mipmap.icon_downloading : R.mipmap.icon_success);
 
-            holder.mDeleteView.setImageResource(R.drawable.icon_delete);
+            holder.mDeleteView.setImageResource(R.mipmap.icon_delete);
             holder.mDeleteView.setTag(transmitMediaItem);
             holder.mDeleteView.setOnClickListener(mDeleteClickEvent);
         }

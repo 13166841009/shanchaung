@@ -31,14 +31,25 @@
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <RelativeLayout
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/relative1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/drawable_webview_progress"
+            android:max="100"
+            android:progress="20"
+            android:visibility="gone" />
         <WebView
+            android:layout_below="@+id/progress_bar"
             android:id="@+id/pcwebview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:layout_alignParentBottom="true"
             >
         </WebView>

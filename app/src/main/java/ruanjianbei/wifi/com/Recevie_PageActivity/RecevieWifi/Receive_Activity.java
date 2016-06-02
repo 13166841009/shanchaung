@@ -2,12 +2,15 @@ package ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.io.File;
@@ -25,6 +28,7 @@ import view.TitleBarView;
 
 public class Receive_Activity extends Activity {
     private ListView mListView;
+    private Button openfile;
     private MediaListAdapter mReceiverMediaListAdapter;
     private DataReceiver mDataReceiver;
     private static final String STORE_DIR = Environment.getExternalStorageDirectory().getPath()+ File.separator
@@ -53,7 +57,7 @@ public class Receive_Activity extends Activity {
         mwifimanage = Android_receiveActivity.getwifiManage();
         mListView = (ListView) findViewById(R.id.receive_media_list_view);
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
+        mtitlebar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
         mtitlebar.setTitleText(R.string.receivelist);
         mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
         mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
@@ -62,6 +66,15 @@ public class Receive_Activity extends Activity {
                 mwifimanage.stopWifiAp();
                 Receive_Activity.this.finish();
                 startActivity(new Intent(Receive_Activity.this, ReceiveActivity.class));
+            }
+        });
+        openfile = (Button) findViewById(R.id.opendown_file);
+        openfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setData(Uri.fromFile(new File(STORE_DIR+"/".trim())));
+                startActivity(intent);
             }
         });
     }

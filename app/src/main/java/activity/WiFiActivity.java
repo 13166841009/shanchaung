@@ -91,7 +91,7 @@ public class WiFiActivity extends Activity {
 				.width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
 				.height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
 				.morphDuration(300)
-				.text("PC有网传输", "点击进入")
+				.text("电脑有网传输", "点击进入")
 						//Option -- and values below is default
 				.color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
 				.colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -118,7 +118,7 @@ public class WiFiActivity extends Activity {
 				.width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
 				.height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
 				.morphDuration(300)
-				.text("PC无网传输", "点击进入")
+				.text("电脑无网传输", "点击进入")
 						//Option -- and values below is default
 				.color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
 				.colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))

@@ -41,22 +41,22 @@ public class WelcomeActivity extends Activity {
 		initfile();
 		findView();
 		init();
-		controlUserLogin();//略掉登录界面
+//		controlUserLogin();//略掉登录界面
 	}
 
-	private void controlUserLogin(){
-		DBServiceOperate db_user = new DBServiceOperate(mContext);
-		Cursor cursor = db_user.selectInformation();
-		if(cursor.getCount()!=0) {
-			if (cursor.moveToFirst()) {//just need to query one time
-				name = cursor.getString(cursor.getColumnIndex("Name"));
-			}
-//			JPushInterface.setAlias(mContext,name,null);
-			Intent intent = new Intent(mContext,IntroductionPage.class);
-			startActivity(intent);
-			finish();
-		}
-	}
+//	private void controlUserLogin(){
+//		DBServiceOperate db_user = new DBServiceOperate(mContext);
+//		Cursor cursor = db_user.selectInformation();
+//		if(cursor.getCount()!=0) {
+//			if (cursor.moveToFirst()) {//just need to query one time
+//				name = cursor.getString(cursor.getColumnIndex("Name"));
+//			}
+////			JPushInterface.setAlias(mContext,name,null);
+//			Intent intent = new Intent(mContext,IntroductionPage.class);
+//			startActivity(intent);
+//			finish();
+//		}
+//	}
 	private void initfile() {
 		maindir = new File(Environment.getExternalStorageDirectory().getPath()+File.separator
 				+"shangchuan");
