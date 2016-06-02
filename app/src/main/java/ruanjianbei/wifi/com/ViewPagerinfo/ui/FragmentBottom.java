@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ruanjianbei.wifi.com.Post_PageActivity.PostMain.PostActivity;
 import ruanjianbei.wifi.com.Recevie_PageActivity.RecevieMain.ReceiveActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.PopWindowutil.MoreWindow;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
@@ -48,7 +49,7 @@ public class FragmentBottom extends Fragment {
         BottomImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMoreWindow(v);
+                startActivity(new Intent(getContext(), PostActivity.class));
             }
         });
         receivebutton = (Button) getActivity().findViewById(R.id.receive_bottom);
@@ -59,16 +60,4 @@ public class FragmentBottom extends Fragment {
             }
         });
     }
-    /**
-     * 显示选项进行操作popwindow
-     */
-    private void showMoreWindow(View view) {
-        if (null == mMoreWindow) {
-            mMoreWindow = new MoreWindow(getActivity());
-            mMoreWindow.init();
-        }
-
-        mMoreWindow.showMoreWindow(view, 200);
-    }
-
 }

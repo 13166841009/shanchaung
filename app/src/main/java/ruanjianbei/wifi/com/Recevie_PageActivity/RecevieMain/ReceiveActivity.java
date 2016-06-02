@@ -84,7 +84,7 @@ public class ReceiveActivity extends Activity {
                 .width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
                 .height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
                 .morphDuration(300)
-                .text("ANDROID文件接收", "点击进入")
+                .text("安卓文件接收", "点击进入")
                         //Option -- and values below is default
                 .color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
                 .colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -116,7 +116,7 @@ public class ReceiveActivity extends Activity {
                 .width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
                 .height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
                 .morphDuration(300)
-                .text("IOS文件接收", "点击进入")
+                .text("苹果文件接收", "点击进入")
                         //Option -- and values below is default
                 .color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
                 .colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -143,15 +143,8 @@ public class ReceiveActivity extends Activity {
 
     private void initTitle() {
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlebar.setCommonTitle(View.VISIBLE,View.VISIBLE,View.GONE,View.GONE);
+        mtitlebar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
         mtitlebar.setTitleText(R.string.receivetitle);
-        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
-        mtitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReceiveActivity.this.finish();
-            }
-        });
     }
 
     public int dimen(@DimenRes int resId) {

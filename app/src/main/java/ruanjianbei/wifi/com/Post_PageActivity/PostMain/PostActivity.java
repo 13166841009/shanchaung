@@ -94,7 +94,7 @@ public class PostActivity extends Activity {
                 .width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
                 .height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
                 .morphDuration(300)
-                .text("ANDROID文件传输", "点击进入")
+                .text("安卓文件传输", "点击进入")
                         //Option -- and values below is default
                 .color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
                 .colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -123,7 +123,7 @@ public class PostActivity extends Activity {
                 .width(dimen(R.dimen.cb_dimen_70), dimen(R.dimen.cb_dimen_52))
                 .height(dimen(R.dimen.cb_dimen_38), dimen(R.dimen.cb_dimen_52))
                 .morphDuration(300)
-                .text("IOS文件传输", "点击进入")
+                .text("苹果文件传输", "点击进入")
                         //Option -- and values below is default
                 .color(color(R.color.cb_color_blue), color(R.color.cb_color_blue))
                 .colorPressed(color(R.color.cb_color_blue_dark), color(R.color.cb_color_blue_dark))
@@ -160,15 +160,8 @@ public class PostActivity extends Activity {
         size = GetFilsSize.FormentFileSize(fileall);
         filesize.setText(filesize.getText().toString()+":"+filesizelist.size()+"个"+" "+"("+size+")");
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
-        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlrbar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setTitleText(R.string.wifipostTitle);
-        mtitlrbar.setBtnLeftOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PostActivity.this.finish();
-            }
-        });
     }
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);
