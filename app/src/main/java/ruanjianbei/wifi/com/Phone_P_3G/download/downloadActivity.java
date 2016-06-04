@@ -48,6 +48,7 @@ public class downloadActivity extends Activity {
     private int number = 0;
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private String user_name;
+    private boolean sign=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class downloadActivity extends Activity {
         mMainActivity = this;
         if(!checkUserState()){
             Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
-            return;
+            sign = true;
         }
         //创建文件集合
         mFileList = new ArrayList<FileInfo>();
@@ -69,11 +70,19 @@ public class downloadActivity extends Activity {
             public void onRefresh() {
                 //if(mFileList.size()!=0) {
                     mFileList.removeAll(mFileList);//清楚所有列表
+                    if(sign){
+                        Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     onConn();
                 //}
             }
         });
-        onConn();
+        if(sign){
+            Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+        }else {
+            onConn();
+        }
     }
     public boolean checkUserState(){
         db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
