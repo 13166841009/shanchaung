@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
+import view.TitleBarView;
 
 /**
  * Created by linankun1 on 2016/4/21.
@@ -62,6 +64,8 @@ public class uploadActivity extends Activity {
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
     private String user_name;
     private boolean sign = false;
+
+    private TitleBarView mtitlrbar;
 
     private List<String> fileNames = new ArrayList<String>();
 
@@ -95,6 +99,11 @@ public class uploadActivity extends Activity {
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
         list_choosed = (ListView) findViewById(R.id.list_choosed);
+
+        mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
+        mtitlrbar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.VISIBLE);
+        mtitlrbar.setTitleText(R.string.wifipostTitle);
+
 //      读取本地用户
         if(!ReadUser()){
             Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
