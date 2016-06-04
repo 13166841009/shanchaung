@@ -63,7 +63,7 @@ public class uploadActivity extends Activity {
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
     private String user_name;
-    private boolean sign = false;
+    private boolean sign,sc = false;
 
     private TitleBarView mtitlrbar;
 
@@ -104,11 +104,6 @@ public class uploadActivity extends Activity {
         mtitlrbar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setTitleText(R.string.wifipostTitle);
 
-//      读取本地用户
-        if(!ReadUser()){
-            Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
-            return;
-        }
         /**
          * 将已选文件设置到此处
          */
@@ -126,14 +121,23 @@ public class uploadActivity extends Activity {
             //所有已选文件的路径
             filePath += s + ";";
         }
+
         mRoundProgressBar = (RoundProgressBarWidthNumber) findViewById(R.id.pro);
         mHandler.sendEmptyMessage(MSG_PROGRESS_UPDATE);
-
         mBtn = (MiSportButton) findViewById(R.id.mi_btn);
+        //      读取本地用户
+        if(!ReadUser()){
+            Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+            sc=true;
+        }
         mBtn.setMiSportBtnClickListener(new MiSportButton.miSportButtonClickListener() {
             @Override
             public void finishClick() {
                 String filespath = null;
+                if(sc){
+                    Toast.makeText(uploadActivity.this, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //判断文件选择是否为空
                 if (!filePath.equals("")) {
                     filespath = filePath;
