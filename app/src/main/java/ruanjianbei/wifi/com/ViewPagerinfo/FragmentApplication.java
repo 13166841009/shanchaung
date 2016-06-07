@@ -272,7 +272,5 @@ public class FragmentApplication extends Fragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        customProgressDialog.cancel();
-        customProgressDialog = null;
     }
 }
