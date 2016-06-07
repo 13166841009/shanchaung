@@ -150,6 +150,8 @@ public class downloadActivity extends Activity {
                             filter.addAction(DownloadService.ACTION_UPDATE);
                             filter.addAction(DownloadService.ACTION_FINISH);
                             registerReceiver(mReceiver, filter);
+                        }else{
+                            downloadActivity.this.finish();
                         }
                     }
                 })

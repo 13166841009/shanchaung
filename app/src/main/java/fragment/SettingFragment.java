@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,16 +27,17 @@ public class SettingFragment extends Activity {
 	private TitleBarView mTitleBarView;
 	private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db;
 	private TextView tv_tran;
+	private int countU=0,countD=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_mine);
-		initCircle();
 		mContext=this;
 		db = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mContext);
 		findView();
 		init();
+		initCircle();
 		mTitleBarView=(TitleBarView)findViewById(R.id.title_bar);
 		mTitleBarView.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
 		mTitleBarView.setTitleText(R.string.mime);
@@ -52,8 +54,8 @@ public class SettingFragment extends Activity {
 		CircleChartView circleChartView = (CircleChartView) findViewById(R.id.circle_chart);
 		List<CircleChartView.PieceDataHolder> pieceDataHolders = new ArrayList<>();
 
-		pieceDataHolders.add(new CircleChartView.PieceDataHolder(500,0xFFCC9933, "已传输，5"));
-		pieceDataHolders.add(new CircleChartView.PieceDataHolder(1000, 0xFF499BF7, "已接收，10"));
+		pieceDataHolders.add(new CircleChartView.PieceDataHolder(countU*100,0xFFCC9933, "已传输，"+countU));
+		pieceDataHolders.add(new CircleChartView.PieceDataHolder(countD*100, 0xFF499BF7, "已接收，"+countD));
 		circleChartView.setData(pieceDataHolders);
 	}
 
@@ -71,6 +73,15 @@ public class SettingFragment extends Activity {
 				ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate(mContext);
 		Cursor cursor1 = db.selectInformation();
 		if(cursor1 != null&&cursor1.getCount()!=0){
+			for(cursor1.moveToFirst();!cursor1.isAfterLast();cursor1.moveToNext()){
+				String type = cursor1.getString(cursor1.getColumnIndex("type"));
+				if(type.equals("上传")){
+					countU++;
+				}
+				if(type.equals("下载")){
+					countD++;
+				}
+			}
 			tv_tran.setText("您有"+cursor1.getCount()+"条传输记录，点击查看");
 		}else{
 			tv_tran.setText("您没有传输记录");

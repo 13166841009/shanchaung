@@ -155,8 +155,13 @@ public class uploadActivity extends Activity {
             }
             @Override
             public void continueClick() {
-                request1.cancel();
-                request2.cancel();
+                if(request1!=null&&request2!=null){
+                    request1.cancel();
+                    request2.cancel();
+                    uploadActivity.this.finish();
+                }else{
+                    uploadActivity.this.finish();
+                }
             }
         });
 
