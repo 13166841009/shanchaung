@@ -39,6 +39,7 @@ import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.MyApplication;
 import view.TitleBarView;
 
 /**
@@ -51,7 +52,7 @@ public class uploadActivity extends Activity {
     public static final String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
                     + "/shangchuan/zip/";
-    private String URL = "http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Android";
+    private String URL = MyApplication.URL;
     private Map<String, FileWrapper> fileWrappers;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
@@ -224,7 +225,7 @@ public class uploadActivity extends Activity {
     }
     private void UserCheck(final String filespath){
         request1 = new AsyncHttpUtil.Builder()
-                .url("http://zh749931552.6655.la/ThinkPHP/Index/User_is_regedit")
+                .url(MyApplication.URL)
                 .addFormData("toman", et_filepath.getText().toString())//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override

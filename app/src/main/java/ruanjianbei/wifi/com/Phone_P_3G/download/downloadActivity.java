@@ -31,6 +31,7 @@ import ruanjianbei.wifi.com.Phone_P_3G.download.util.zip;
 import ruanjianbei.wifi.com.Phone_P_3G.util.files_delete;
 import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.MyApplication;
 import view.CustomListView;
 
 /**
@@ -95,7 +96,7 @@ public class downloadActivity extends Activity {
         file = new HashMap<String, String[]>();
         //String toman = textView.getText().toString();
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
-                .url("http://zh749931552.6655.la/ThinkPHP/index.php/Files/Files_Get")
+                .url(MyApplication.URL)
                 .addFormData("Toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override
@@ -216,7 +217,7 @@ public class downloadActivity extends Activity {
     private void CheckFileFinish(String filename){
         Log.i("文件识别",filename+" "+user_name);
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
-                .url("http://zh749931552.6655.la/ThinkPHP/Files/Files_Isfinish")
+                .url(MyApplication.URL)
                 .addFormData("toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
                 .addFormData("filename",filename)
                 .setCallable(new SimpleRequestCallable() {
