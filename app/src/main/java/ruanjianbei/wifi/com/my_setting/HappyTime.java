@@ -45,7 +45,7 @@ public class HappyTime extends Activity {
     public static String userAgent =  "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
     //配置您申请的KEY
-    public static final String APPKEY ="14ddbbc4b060ad71a32700b9c123df0e";
+    public static final String APPKEY ="ff1005945d351bbdcb5d11c6f46e9023";
 
     private static List<String> typeList = new ArrayList<String>();
     private TitleBarView mtitlebar;
@@ -80,7 +80,7 @@ public class HappyTime extends Activity {
             Map<String , Object> listItem = new HashMap<String , Object>();
             listItem.put("xiaohua_left" , R.mipmap.icon);
             listItem.put("xiaohua_tv" , types[i]);
-            System.out.println(types[i]);
+
             listItem.put("xiaohua_right", R.mipmap.qvip_pay_wallet_icon_arrow_right_normal);
             listItems.add(listItem);
         }
