@@ -156,7 +156,6 @@ public class FragmentOthers extends Fragment {
 							public void onClick(View view) {
 								if(((CheckBox)view).isChecked()){
 									listItems.get(position).put("type",VideoViewInfo.TYPE_CHECKED);
-									Toast.makeText(getActivity(), files[position].getAbsolutePath(), Toast.LENGTH_SHORT).show();
 									mSelectFile.add(files[position].getAbsolutePath());
 									IndicatorFragmentActivity.updateBottom();
 									notifyDataSetChanged();

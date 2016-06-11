@@ -226,7 +226,6 @@ public class FragmentApplication extends Fragment
         {
             FragmentChoose.selectedList.add(fileInfo);
             mSelectedApp.add(fileInfo.path);
-            Toast.makeText(getContext(),fileInfo.path,Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
         selectItemClickListener.onItemClicked();

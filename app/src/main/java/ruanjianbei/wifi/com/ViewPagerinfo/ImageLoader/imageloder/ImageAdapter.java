@@ -73,7 +73,6 @@ public class ImageAdapter extends CommonAdapter<String>
 				{
 					countphoto--;
 					fragmentPhoto.selectsize(countphoto);
-					Toast.makeText(mContext, "不选了", Toast.LENGTH_SHORT).show();
 					mSelectedImage.remove(mDirPath + "/" + item);
 					IndicatorFragmentActivity.updateBottom();
 					mSelect.setImageResource(R.mipmap.picture_unselected);
@@ -84,7 +83,6 @@ public class ImageAdapter extends CommonAdapter<String>
 					countphoto++;
 					fragmentPhoto.selectsize(countphoto);
 					//System.out.print(countphoto);
-					Toast.makeText(mContext, mDirPath + "/" + item, Toast.LENGTH_SHORT).show();
 					System.out.println(mDirPath + "/" + item);
 					mSelectedImage.add(mDirPath + "/" + item);
 					IndicatorFragmentActivity.updateBottom();

@@ -194,7 +194,6 @@ public class ReceiveActivity extends Activity {
                             @Override
                             public void onClick(CustomDialog dialog) {
                                 wifiadmin.closeNetCard();
-                                Toast.makeText(ReceiveActivity.this, "打开数据连接", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(ReceiveActivity.this, downloadActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();
@@ -203,7 +202,6 @@ public class ReceiveActivity extends Activity {
                         dialog.setOnCancleClickListener(new CustomDialog.OnCustomClickListener() {
                             @Override
                             public void onClick(CustomDialog dialog) {
-                                Toast.makeText(ReceiveActivity.this, ",打开wifi连接", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(ReceiveActivity.this, downloadActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();

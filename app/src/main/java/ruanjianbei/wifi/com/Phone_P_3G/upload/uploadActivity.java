@@ -60,7 +60,6 @@ public class uploadActivity extends Activity {
 
     private static List<String> fileUpload = FragmentChoose.getFileChoose();
     private String filePath = "";
-    private ListView list_choosed;
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
     private String user_name;
@@ -99,11 +98,16 @@ public class uploadActivity extends Activity {
         context = this;
         setContentView(R.layout.activity_upload_3g);
         et_filepath = (EditText) findViewById(R.id.et_filepath);
-        list_choosed = (ListView) findViewById(R.id.list_choosed);
-
         mtitlrbar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlrbar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.VISIBLE);
+        mtitlrbar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.VISIBLE);
         mtitlrbar.setTitleText(R.string.wifipostTitle);
+        mtitlrbar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mtitlrbar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadActivity.this.finish();
+            }
+        });
 
         /**
          * 将已选文件设置到此处

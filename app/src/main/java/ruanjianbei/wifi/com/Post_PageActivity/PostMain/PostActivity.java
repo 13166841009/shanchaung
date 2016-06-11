@@ -210,7 +210,6 @@ public class PostActivity extends Activity {
                             @Override
                             public void onClick(CustomDialog dialog) {
                                 wifiadmin.closeNetCard();
-                                Toast.makeText(PostActivity.this, "打开数据连接", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(PostActivity.this, uploadActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();
@@ -219,7 +218,6 @@ public class PostActivity extends Activity {
                         dialog.setOnCancleClickListener(new CustomDialog.OnCustomClickListener() {
                             @Override
                             public void onClick(CustomDialog dialog) {
-                                Toast.makeText(PostActivity.this, ",打开wifi连接", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(PostActivity.this, uploadActivity.class);
                                 startActivity(intent);
                                 dialog.dismiss();

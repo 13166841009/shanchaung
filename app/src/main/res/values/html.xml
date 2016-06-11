@@ -14,14 +14,12 @@
 		</div>
 		<br><h3 align="center">电脑端无网络传输</h3><br>
 		<div align="left">
-					<form role="form" id="upload" method="post" action="
-    ]]></string>
+					<form method="post" action="]]></string>
 
     <string name="upload_form_end"><![CDATA[
-        "
-						  enctype="multipart/form-data">
+        "						  enctype="multipart/form-data">
 						  <h5>请选择文件传给手机</h5>
-						<input type="file" id="file-0a" class="file" name="file"/>
+						<input type="file" id="file-0a" class="file" name="upfile"/>
 						<br>
 					</form>
 		</div>
@@ -36,10 +34,7 @@
             <span id="sortByNameSpan" onclick="sortByName()">名称</span>
 			<span id="sortBySizeSpan" onclick="sortBySize()">文件大小</span>
 			<span id="sortByDateSpan" onclick="sortByDate()">时间</span>
-            </div>
-            <div class="dir list"><img src="/wf_resources/upFolder1.png">
-							<a><span>返回上层</span></a></div>
-							]]></string>
+            </div>]]></string>
     <string name="directory_end"><![CDATA[</td>]]></string>
     <string name="container_end"><![CDATA[</tr></tbody></table></div></body></html>]]></string>
 </resources>

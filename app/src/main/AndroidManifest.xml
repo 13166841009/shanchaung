@@ -146,9 +146,6 @@
             android:name=".Mobile_PostAndroid"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name=".UserGame"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
             android:name="viewpager.IntroductionPage"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
@@ -184,13 +181,7 @@
             android:name="ruanjianbei.wifi.com.Wifiandroid_transfer.WifiTranAndroid"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name="ruanjianbei.wifi.com.Phone_P_Wifi.WifiShareActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
             android:name="ruanjianbei.wifi.com.Recevie_PageActivity.RecevieWifi.Receive_Activity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity
-            android:name=".GameFriend"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity android:name="ruanjianbei.wifi.com.WifiPcDirect.mobilepost.MobilePost"
             android:theme="@android:style/Theme.Light.NoTitleBar" />

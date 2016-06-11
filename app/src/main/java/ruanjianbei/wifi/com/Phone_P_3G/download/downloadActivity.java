@@ -33,6 +33,7 @@ import ruanjianbei.wifi.com.Phone_P_3G.util.get_time;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.MyApplication;
 import view.CustomListView;
+import view.TitleBarView;
 
 /**
  * Created by linankun1 on 2016/4/23.
@@ -41,7 +42,7 @@ public class downloadActivity extends Activity {
 
     public static downloadActivity mMainActivity = null;
     private CustomListView mListView;
-//    private ListView mListView = null;
+    private TitleBarView mTitlebar;
     private List<FileInfo> mFileList = null;
     private FileListAdapter mAdapter = null;
     private TextView textView = null;
@@ -55,7 +56,7 @@ public class downloadActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_main);
-        //textView = (TextView) findViewById(R.id.textView1);
+        inittile();
         mMainActivity = this;
         if(!checkUserState()){
             Toast.makeText(mMainActivity, "请登录后使用该功能", Toast.LENGTH_SHORT).show();
@@ -85,6 +86,20 @@ public class downloadActivity extends Activity {
             onConn();
         }
     }
+
+    private void inittile() {
+        mTitlebar = (TitleBarView) findViewById(R.id.title_bar);
+        mTitlebar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
+        mTitlebar.setTitleText(R.string.post3G);
+        mTitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back, R.string.back);
+        mTitlebar.setBtnLeftOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadActivity.this.finish();
+            }
+        });
+    }
+
     public boolean checkUserState(){
         db_user = new ruanjianbei.wifi.com.my_setting.util.DBServiceOperate(mMainActivity);
         //获取用户名
