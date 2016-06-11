@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.MyApplication;
 import view.TitleBarView;
 
 public class MobilePost extends Activity {
@@ -29,7 +30,7 @@ public class MobilePost extends Activity {
     private WebView webView;
     private ValueCallback<Uri[]> mUploadCallbackAboveL;
     private ValueCallback<Uri> mUploadMessage;
-    private String url = "http://zh749931552.6655.la/thinkphp/Index/file_upload.html";
+    private static String url = MyApplication.URL+"/thinkphp/Index/file_upload.html";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

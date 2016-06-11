@@ -52,7 +52,6 @@ public class uploadActivity extends Activity {
     public static final String ZIP_PATH =
             Environment.getExternalStorageDirectory().getAbsolutePath()
                     + "/shangchuan/zip/";
-    private String URL = MyApplication.URL;
     private Map<String, FileWrapper> fileWrappers;
     private static final int MSG_HANDLER_MSG = 1;
     private static final int MSG_PROGRESS_UPDATE = 0x110;
@@ -64,6 +63,8 @@ public class uploadActivity extends Activity {
     private ruanjianbei.wifi.com.Phone_P_3G.util.DBServiceOperate db_file;
     private String user_name;
     private boolean sign,sc = false;
+    private static String url1 = MyApplication.URL+"/thinkphp/Index/User_is_regedit";
+    private static String url2 = MyApplication.URL+"/thinkphp/Index/Files/Files_Android";
 
     private TitleBarView mtitlrbar;
 
@@ -238,7 +239,7 @@ public class uploadActivity extends Activity {
     }
     private void UserCheck(final String filespath){
         request1 = new AsyncHttpUtil.Builder()
-                .url(MyApplication.URL)
+                .url(url1)
                 .addFormData("toman", et_filepath.getText().toString())//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override
@@ -270,7 +271,7 @@ public class uploadActivity extends Activity {
     private void Fileupload(){
         //联网上传文件
         request2 = new AsyncHttpUtil.Builder()
-                .url(URL)
+                .url(url2)
                 //.addUploadFile("file1", new File("/storage/sdcard1/IMG_20160318_202540_HDR.jpg"))
                 .setFileWrappers(fileWrappers)
                 .addFormData("Postman", user_name)

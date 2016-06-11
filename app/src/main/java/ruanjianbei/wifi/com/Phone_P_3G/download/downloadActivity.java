@@ -51,6 +51,8 @@ public class downloadActivity extends Activity {
     private ruanjianbei.wifi.com.my_setting.util.DBServiceOperate db_user;
     private String user_name;
     private boolean sign=false;
+    private static String url1=MyApplication.URL+"/ThinkPHP/Files/Files_Isfinish";
+    private static String url2=MyApplication.URL+"/ThinkPHP/Files/Files_Get";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +122,7 @@ public class downloadActivity extends Activity {
         file = new HashMap<String, String[]>();
         //String toman = textView.getText().toString();
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
-                .url(MyApplication.URL)
+                .url(url2)
                 .addFormData("Toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
                 .setCallable(new SimpleRequestCallable() {
                     @Override
@@ -243,7 +245,7 @@ public class downloadActivity extends Activity {
     private void CheckFileFinish(String filename){
         Log.i("文件识别",filename+" "+user_name);
         AsyncHttpRequest request = new AsyncHttpUtil.Builder()
-                .url(MyApplication.URL)
+                .url(url1)
                 .addFormData("toman", user_name)//设置form表单数据，也可以调用setFormDatas方法
                 .addFormData("filename",filename)
                 .setCallable(new SimpleRequestCallable() {

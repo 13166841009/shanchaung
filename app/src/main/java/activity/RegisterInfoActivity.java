@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.DialogHelp;
+import util.MyApplication;
 import view.TitleBarView;
 
 public class RegisterInfoActivity extends Activity {
@@ -34,6 +35,7 @@ public class RegisterInfoActivity extends Activity {
 	private String name;
 	private String pass;
 	private String phone;
+	private static String url = MyApplication.URL+"/thinkphp/index.php/Index/User_regedit?";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,7 +110,6 @@ public class RegisterInfoActivity extends Activity {
 		startDialog();
 		// TODO 自动生成的方法存根
 		AsyncHttpClient client = new AsyncHttpClient();
-		String url = "http://zh749931552.6655.la/thinkphp/index.php/Index/User_regedit?";
 		RequestParams params = new RequestParams();
 		params.put("name", name);
 		params.put("phone",phone);

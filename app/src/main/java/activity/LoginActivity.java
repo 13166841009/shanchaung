@@ -33,6 +33,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
+import util.MyApplication;
 import view.TextURLView;
 
 public class LoginActivity extends Activity {
@@ -46,7 +47,7 @@ public class LoginActivity extends Activity {
 	private EditText userpass;
 	private Button register;
 	private TextURLView mTextViewURL;
-	private String url = "http://zh749931552.6655.la/thinkphp/index.php/Index/User_login?";
+	private String url = MyApplication.URL+"/thinkphp/index.php/Index/User_login?";
 	private String name = null;
 	private String pass =null;
 	private String result = null ;//判断返回的类型
@@ -144,7 +145,6 @@ public class LoginActivity extends Activity {
 		startDialog();
 		// TODO 自动生成的方法存根
 		AsyncHttpClient client = new AsyncHttpClient();
-		String url = "http://zh749931552.6655.la/thinkphp/index.php/Index/User_login?";
 		RequestParams params = new RequestParams();
 		params.put("name", name);
 		params.put("pass", pass);
