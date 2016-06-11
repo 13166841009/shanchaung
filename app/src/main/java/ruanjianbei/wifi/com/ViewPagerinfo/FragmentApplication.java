@@ -54,29 +54,29 @@ public class FragmentApplication extends Fragment
     private OnSelectItemClickListener selectItemClickListener;
     private static CustomProgressDialog customProgressDialog = null;
 
-    /**
-     * 开启进度框
-     */
-    private void startDialog(){
-        if (customProgressDialog==null)
-        {
-            customProgressDialog = CustomProgressDialog.getappApplication(getContext());
-            customProgressDialog.setCancelable(false);
-            customProgressDialog.setMessage("加载中...");
-            customProgressDialog.show();
-        }else{
-            customProgressDialog.cancel();
-        }
-    }
-    /**
-     * 隱藏進度對話框
-     */
-    private static void stopDialog(){
-        if(customProgressDialog != null){
-            customProgressDialog.cancel();
-            customProgressDialog = null;
-        }
-    }
+//    /**
+//     * 开启进度框
+//     */
+//    private void startDialog(){
+//        if (customProgressDialog==null)
+//        {
+//            customProgressDialog = CustomProgressDialog.getappApplication(getContext());
+//            customProgressDialog.setCancelable(false);
+//            customProgressDialog.setMessage("加载中...");
+//            customProgressDialog.show();
+//        }else{
+//            customProgressDialog.cancel();
+//        }
+//    }
+//    /**
+//     * 隱藏進度對話框
+//     */
+//    private static void stopDialog(){
+//        if(customProgressDialog != null){
+//            customProgressDialog.cancel();
+//            customProgressDialog = null;
+//        }
+//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class FragmentApplication extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        startDialog();
+//        startDialog();
         if (view == null)
         {
             Log.d(tag, "FragmentApplication onCreateView function");
@@ -260,7 +260,7 @@ public class FragmentApplication extends Fragment
             switch (msg.what)
             {
                 case APP_OK :
-                    stopDialog();
+//                    stopDialog();
                     fragment.adapter.notifyDataSetChanged();
                     break;
             }

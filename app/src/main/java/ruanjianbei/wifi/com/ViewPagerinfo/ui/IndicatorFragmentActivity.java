@@ -167,6 +167,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 } else if (id == R.id.nav_share) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                    IndicatorFragmentActivity.this.finish();
                 } else if (id == R.id.nav_setting) {
 
                 }

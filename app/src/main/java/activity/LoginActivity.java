@@ -33,13 +33,12 @@ import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
-import util.MyApplication;
 import view.TextURLView;
 
 public class LoginActivity extends Activity {
 
 	private Context mContext;
-	private CustomProgressDialog customProgressDialog = null;
+	private CustomProgressDialog customProgressDialog;
 	private RelativeLayout rl_user;
 	private RelativeLayout lin_checkbox;
 	private Button mLogin;
@@ -47,10 +46,8 @@ public class LoginActivity extends Activity {
 	private EditText userpass;
 	private Button register;
 	private TextURLView mTextViewURL;
-	private String url = MyApplication.URL+"/thinkphp/index.php/Index/User_login?";
 	private String name = null;
 	private String pass =null;
-	private String result = null ;//判断返回的类型
 
 	//SharePreferences是用来存储一些简单配置信息的一种机制，使用Map数据结构来存储数据，以键值对的方式存储，采用了XML格式将数据存储到设备中
 	//只能在同一个包内使用，不能在不同的包之间使用，其实也就是说只能在创建它的应用中使用，其他应用无法使用。
@@ -102,10 +99,14 @@ public class LoginActivity extends Activity {
 		public void onClick(View v) {
 			name = username.getText().toString();
 			pass = userpass.getText().toString();
-			//设置推送的标签
-			JPushInterface.setAlias(mContext,name,null);
-			saveSQLite();
-			User_login();
+			if(name.equals("")||pass.equals("")){
+				Toast.makeText(LoginActivity.this,"您的信息不全",Toast.LENGTH_SHORT).show();
+			}else {
+				//设置推送的标签
+				JPushInterface.setAlias(mContext, name, null);
+				saveSQLite();
+				User_login();
+			}
 		}
 	};
 
@@ -124,6 +125,7 @@ public class LoginActivity extends Activity {
 	private void startDialog(){
 		if(customProgressDialog == null){
 			customProgressDialog = CustomProgressDialog.getInstance(this);
+			customProgressDialog.setCancelable(false);
 			customProgressDialog.setMessage("登陆中...");
 		}
 		customProgressDialog.show();
@@ -135,6 +137,8 @@ public class LoginActivity extends Activity {
 		if(customProgressDialog != null){
 			customProgressDialog.cancel();
 			customProgressDialog = null;
+		}else{
+			customProgressDialog.cancel();
 		}
 	}
 	public void none_account(View v){
@@ -145,6 +149,7 @@ public class LoginActivity extends Activity {
 		startDialog();
 		// TODO 自动生成的方法存根
 		AsyncHttpClient client = new AsyncHttpClient();
+		String url = "http://zh749931552.6655.la/thinkphp/index.php/Index/User_login?";
 		RequestParams params = new RequestParams();
 		params.put("name", name);
 		params.put("pass", pass);
@@ -172,6 +177,7 @@ public class LoginActivity extends Activity {
 						//页面跳转
 						Intent intent = new Intent(mContext, MainPageActivity.class);
 						startActivity(intent);
+						LoginActivity.this.finish();
 					} else {
 						stopDialog();
 						Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
@@ -184,7 +190,7 @@ public class LoginActivity extends Activity {
 		});
 	}
 
-	//
+	//用户信息保存
 	private void saveSQLite(){
 		DBServiceOperate db_user = new DBServiceOperate(mContext);
 		if(db_user.selectInformation().getCount()==0) {

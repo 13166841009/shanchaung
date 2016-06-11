@@ -64,12 +64,9 @@ public class WiFiActivity extends Activity {
 		setContentView(R.layout.pc_connect_wifi);
 
 		mActivity = WiFiActivity.this;
-		// Set the application-wide context global, if not already set
-//		mTitleBarView=(TitleBarView) findViewById(R.id.title_bar);
 		updateUi();
 		UiUpdater.registerClient(handler);
 
-		// quickly turn on or off wifi.
 		findViewById(R.id.wifi_state_image).setOnClickListener(
 				new OnClickListener() {
 					public void onClick(View v) {

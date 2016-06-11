@@ -21,13 +21,14 @@ import org.json.JSONObject;
 
 import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
+import util.CustomProgressDialog;
 import util.DialogHelp;
 import util.MyApplication;
 import view.TitleBarView;
 
 public class RegisterInfoActivity extends Activity {
 	private Context mContext;
-	private ProgressDialog ProgressDialog = null;
+	private CustomProgressDialog customProgressDialog;
 	private Button btn_complete;
 	private TitleBarView mTitleBarView;
 	private EditText username;
@@ -60,20 +61,22 @@ public class RegisterInfoActivity extends Activity {
 	 * 开启进度框
 	 */
 	private void startDialog(){
-		if(ProgressDialog == null){
-			ProgressDialog = DialogHelp.getWaitDialog(mContext);
-			ProgressDialog.setProgressStyle(R.style.CustomProgressDialog);
-			ProgressDialog.setMessage("注册中...");
+		if(customProgressDialog == null){
+			customProgressDialog = CustomProgressDialog.getappApplication(mContext);
+			customProgressDialog.setCancelable(false);
+			customProgressDialog.setMessage("注册中...");
 		}
-		ProgressDialog.show();
+		customProgressDialog.show();
 	}
 	/**
 	 * 隱藏進度對話框
 	 */
 	private void stopDialog(){
-		if(ProgressDialog != null){
-			ProgressDialog.cancel();
-			ProgressDialog = null;
+		if(customProgressDialog != null){
+			customProgressDialog.cancel();
+			customProgressDialog = null;
+		}else{
+			customProgressDialog.cancel();
 		}
 	}
 	private void initTitleView(){
@@ -132,7 +135,8 @@ public class RegisterInfoActivity extends Activity {
 					if(resultString.equals("1")){
 						stopDialog();
 						Toast.makeText(RegisterInfoActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-						startActivity(new Intent(RegisterInfoActivity.this,MainPageActivity.class));
+						startActivity(new Intent(RegisterInfoActivity.this, MainPageActivity.class));
+						RegisterInfoActivity.this.finish();
 					}else if(resultString.equals("0")){
 						stopDialog();
 						Toast.makeText(RegisterInfoActivity.this, "注册失败，请重新注册！", Toast.LENGTH_SHORT).show();
