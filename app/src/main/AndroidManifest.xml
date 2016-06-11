@@ -86,7 +86,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="fragment.SettingFragment"
+            android:name="fragment.UserInfoActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="activity.LoginActivity"

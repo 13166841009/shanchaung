@@ -2,17 +2,13 @@ package ruanjianbei.wifi.com.ViewPagerinfo;
 
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
 
-import fragment.SettingFragment;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.IndicatorFragmentActivity;
 import ruanjianbei.wifi.com.shanchuang.R;
 
@@ -34,7 +30,7 @@ public class MainPageActivity extends IndicatorFragmentActivity {
 //        userimageview.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), SettingFragment.class);
+//                Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
 //                startActivity(intent);
 //            }
 //        });

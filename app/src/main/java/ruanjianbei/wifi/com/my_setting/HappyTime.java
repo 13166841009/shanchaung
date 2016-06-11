@@ -78,7 +78,7 @@ public class HappyTime extends Activity {
 
         for(int i = 0 ; i < types.length ; i++){
             Map<String , Object> listItem = new HashMap<String , Object>();
-            listItem.put("xiaohua_left" , R.mipmap.icon);
+            listItem.put("xiaohua_left" , R.mipmap.happytime);
             listItem.put("xiaohua_tv" , types[i]);
 
             listItem.put("xiaohua_right", R.mipmap.qvip_pay_wallet_icon_arrow_right_normal);
@@ -109,7 +109,14 @@ public class HappyTime extends Activity {
 
     private void inittitle() {
         mtitlebar = (TitleBarView) findViewById(R.id.title_bar);
-        mtitlebar.setCommonTitle(View.GONE, View.VISIBLE, View.GONE, View.GONE);
+        mtitlebar.setBtnLeft(R.mipmap.boss_unipay_icon_back,R.string.back);
+        mtitlebar.setCommonTitle(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
+        mtitlebar.setBtnLeftOnclickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HappyTime.this.finish();
+            }
+        });
         mtitlebar.setTitleText(R.string.happytime);
     }
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/grays"
+    android:background="@color/tab_indicator_text_unselected"
     android:layout_marginBottom="15dip"
     android:layout_marginLeft="20dip"
     android:layout_marginRight="20dip"
@@ -20,6 +20,7 @@
         android:layout_marginRight="20dip"
         android:layout_marginTop="15dip"
         android:text="笑话内容"
+        android:textColor="@color/whites"
         android:textSize="20dp" />
 
     <Button
@@ -32,5 +33,6 @@
         android:layout_marginTop="15dip"
         android:background="@drawable/login_picture_bg"
         android:text="取消"
+        android:textColor="@color/whites"
         android:textStyle="bold" />
 </LinearLayout>

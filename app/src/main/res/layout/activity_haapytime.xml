@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
     </view.TitleBarView>
     <ListView
+        android:background="@color/whites"
         android:id="@+id/xiaohua"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

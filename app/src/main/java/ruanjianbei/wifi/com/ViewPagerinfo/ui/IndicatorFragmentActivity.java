@@ -34,8 +34,9 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.LoginActivity;
 import activity.WiFiActivity;
-import fragment.SettingFragment;
+import fragment.UserInfoActivity;
 import ruanjianbei.wifi.com.Bluetooth_printer.BluetoothActivity;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.FragmentChoose;
 import ruanjianbei.wifi.com.ViewPagerinfo.ui.filechoose.OnSelectItemClickListener;
@@ -145,7 +146,7 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
         userimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+                startActivity(new Intent(getApplicationContext(), UserInfoActivity.class));
             }
         });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -164,7 +165,8 @@ public abstract class IndicatorFragmentActivity extends FragmentActivity impleme
                 } else if (id == R.id.nav_aboutus) {
                     startActivity(new Intent(getApplicationContext(), aboutUs.class));
                 } else if (id == R.id.nav_share) {
-
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 } else if (id == R.id.nav_setting) {
 
                 }
