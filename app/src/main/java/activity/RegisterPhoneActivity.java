@@ -118,7 +118,6 @@ public class RegisterPhoneActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				phoneString = phone_edit.getText().toString().trim();
-				Toast.makeText(getApplicationContext(),phoneString,Toast.LENGTH_SHORT).show();
 				//获取验证码服务
 				SMSSDK.getVerificationCode("86",phoneString);
 				myCount = new MyCount(30000, 1000);

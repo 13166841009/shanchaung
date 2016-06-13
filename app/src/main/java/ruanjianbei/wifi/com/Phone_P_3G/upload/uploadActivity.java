@@ -64,7 +64,7 @@ public class uploadActivity extends Activity {
     private String user_name;
     private boolean sign,sc = false;
     private static String url1 = MyApplication.URL+"/thinkphp/Index/User_is_regedit";
-    private static String url2 = MyApplication.URL+"/thinkphp/Index/Files/Files_Android";
+    private static String url2 = MyApplication.URL+"/thinkphp/Files/Files_Android";
 
     private TitleBarView mtitlrbar;
 
@@ -77,6 +77,12 @@ public class uploadActivity extends Activity {
             switch (msg.what) {
                 case 1:
                     Toast.makeText(uploadActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
+                    //将所存储选择项的集合清空
+                    FragmentChoose.setFileChoose(null);
+                    //删除压缩文件
+                    files_delete files = new files_delete(ZIP_PATH);
+                    files.deleteAll();
+                    uploadActivity.this.finish();
                     break;
                 case 2:
                     int nowProgress = Integer.parseInt(String.valueOf(msg.obj));
@@ -207,7 +213,7 @@ public class uploadActivity extends Activity {
             String file_name = file_all_name.substring(0, file_all_name.lastIndexOf("."));
             File fileinfo = new File(str[x]);
             if (!fileinfo.exists()) {
-                Toast.makeText(context, "file:" + file_all_name + " not exists", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "文件:" + file_all_name + "不存在", Toast.LENGTH_LONG).show();
                 return;
             }
             //对文件名进行URL转码
@@ -232,7 +238,7 @@ public class uploadActivity extends Activity {
                 fileWrappers.put(file_all_name, file);
                 Log.i("文件路径" + x, str[x]);
             } else {
-                Toast.makeText(context, "zipfile:" + file_name_encode + " not exists", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "源压缩文件:" + file_name_encode + "不存在", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -250,6 +256,7 @@ public class uploadActivity extends Activity {
                     @Override
                     public void onSuccess(String responseInfo) {
                         try {
+                            Toast.makeText(uploadActivity.this, "后台压缩中...", Toast.LENGTH_SHORT).show();
                             sign=true;
                             JSONObject ob = new JSONObject(responseInfo);
                             if(ob.getString("returncode").equals("1")){
@@ -317,11 +324,6 @@ public class uploadActivity extends Activity {
                         message.what = MSG_HANDLER_MSG;
                         message.obj = "全部文件上传成功！";
                         mHandler.sendMessage(message);
-                        //将所存储选择项的集合清空
-                        FragmentChoose.setFileChoose(null);
-                        //删除压缩文件
-                        files_delete files = new files_delete(ZIP_PATH);
-                        files.deleteAll();
                     }
 
                     @Override

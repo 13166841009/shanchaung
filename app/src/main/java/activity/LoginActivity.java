@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,6 +34,7 @@ import ruanjianbei.wifi.com.ViewPagerinfo.MainPageActivity;
 import ruanjianbei.wifi.com.my_setting.util.DBServiceOperate;
 import ruanjianbei.wifi.com.shanchuang.R;
 import util.CustomProgressDialog;
+import util.MyApplication;
 import view.TextURLView;
 
 public class LoginActivity extends Activity {
@@ -124,7 +126,7 @@ public class LoginActivity extends Activity {
 	 */
 	private void startDialog(){
 		if(customProgressDialog == null){
-			customProgressDialog = CustomProgressDialog.getInstance(this);
+			customProgressDialog = CustomProgressDialog.getInstance(LoginActivity.this);
 			customProgressDialog.setCancelable(false);
 			customProgressDialog.setMessage("登陆中...");
 		}
@@ -149,7 +151,7 @@ public class LoginActivity extends Activity {
 		startDialog();
 		// TODO 自动生成的方法存根
 		AsyncHttpClient client = new AsyncHttpClient();
-		String url = "http://zh749931552.6655.la/thinkphp/index.php/Index/User_login?";
+		String url = MyApplication.URL+"/thinkphp/index.php/Index/User_login?";
 		RequestParams params = new RequestParams();
 		params.put("name", name);
 		params.put("pass", pass);
