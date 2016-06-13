@@ -100,7 +100,7 @@ public class MusicAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				if(firstonclick==0){
-					Toast.makeText(context, musicdistance, Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "开始播放：-"+lists.get(index).getName(), Toast.LENGTH_SHORT).show();
 					mediaPlayer = new MediaPlayer();
 					try {
 						mediaPlayer.reset();
@@ -113,6 +113,7 @@ public class MusicAdapter extends BaseAdapter{
 					firstonclick=1;
 					mediaPlayer.start();
 				}else{
+					Toast.makeText(context, "停止播放：-"+lists.get(index).getName(), Toast.LENGTH_SHORT).show();
 					firstonclick = 0;
 					mediaPlayer.stop();
 				}

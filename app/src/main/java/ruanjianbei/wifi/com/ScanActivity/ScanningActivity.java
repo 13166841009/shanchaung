@@ -44,7 +44,7 @@ import ruanjianbei.wifi.com.shanchuang.R;
  */
 public class ScanningActivity extends Activity implements Callback,
 		OnClickListener {
-
+	private String type = null ;//处理类型
 	private CaptureActivityHandler handler;// 消息中心
 	private ViewfinderView viewfinderView;// 绘制扫描区域
 	private boolean hasSurface;// 控制调用相机属性
@@ -65,7 +65,8 @@ public class ScanningActivity extends Activity implements Callback,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_capture);
-
+		Intent intent = getIntent();
+		type = intent.getStringExtra("type");
 		CameraManager.init(this);
 
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
@@ -145,15 +146,21 @@ public class ScanningActivity extends Activity implements Callback,
 			Toast.makeText(ScanningActivity.this, "扫描失败!", Toast.LENGTH_SHORT)
 					.show();
 		} else {
-			// 网页开启
+			// 根据类型开启不同的界面
 			String recode = Utils.recode(result.toString());
-			Intent intent = new Intent();
-			intent.putExtra("recode",recode);
-			intent.setClass(ScanningActivity.this, IosPost_Activity.class);
-			startActivity(intent);
-//			intent.setAction(Intent.ACTION_VIEW);
-//			intent.setData(Uri.parse(recode));
-//			startActivity(intent);
+			if(type.equals("1")){
+				Intent intent = new Intent();
+				intent.putExtra("recode",recode);
+				intent.setClass(ScanningActivity.this, IosPost_Activity.class);
+				startActivity(intent);
+				ScanningActivity.this.finish();
+			}else if(type.equals("0")){
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(recode));
+				startActivity(intent);
+				ScanningActivity.this.finish();
+			}
 		}
 	}
 

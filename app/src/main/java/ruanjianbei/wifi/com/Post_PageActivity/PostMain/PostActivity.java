@@ -137,7 +137,11 @@ public class PostActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(PostActivity.this, ScanningActivity.class));
+                        Intent intent = new Intent();
+                        //1表示发送
+                        intent.putExtra("type", "1");
+                        intent.setClass(PostActivity.this, ScanningActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

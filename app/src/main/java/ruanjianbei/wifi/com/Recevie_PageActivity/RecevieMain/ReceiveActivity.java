@@ -130,7 +130,11 @@ public class ReceiveActivity extends Activity {
                 .comboClickListener(new ComboView.ComboClickListener() {
                     @Override
                     public void onComboClick() {
-                        startActivity(new Intent(ReceiveActivity.this, Ios_recevieActivity.class));
+                        Intent intent = new Intent();
+                        intent.putExtra("type", "0");
+                        //1表示发送
+                        intent.setClass(ReceiveActivity.this, ScanningActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

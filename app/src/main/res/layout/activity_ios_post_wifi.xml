@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="ruanjianbei.wifi.com.Iospost.IosPost_Activity">
+    tools:context="ruanjianbei.wifi.com.Post_PageActivity.Post_Activity">
     <view.TitleBarView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/title_bar"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/testpost"
-        android:text="发送"
-        android:layout_below="@+id/title_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="91dp" />
-</RelativeLayout>
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:src="@mipmap/list_post_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <TextView
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="  您已选择文件数为：1
+     文件名为：201601020340.png"
+        android:textColor="@color/whites"
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <Button
+            android:background="@drawable/login_btn"
+            android:layout_width="match_parent"
+            android:id="@+id/testpost"
+            android:text="苹 果 文 件 发 送"
+            android:textColor="@color/whites"
+            android:layout_height="50dp" />
+    </LinearLayout>
+</LinearLayout>
+
