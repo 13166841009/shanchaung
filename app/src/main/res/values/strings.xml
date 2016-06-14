@@ -10,7 +10,7 @@
     <string name="et_password_hint">密码</string>
     <string name="register">新用户</string>
     <string name="login">登录</string>
-    <string name="forget_password">无账号登陆</string>
+    <string name="forget_password">无账号登录</string>
     <string name="tv_country">中国+86</string>
     <string name="add_verify">获取验证码</string>
     <string name="et_phoneNumber_hint">请输入您的手机号码</string>
@@ -21,7 +21,7 @@
     <string name="tv_xieyi_url">闪传使用条款和隐私服务</string>
     <string name="back">返回</string>
     <string name="tv_tips_password">密码由6~16位数字,字母或符号混合组成</string>
-    <string name="tv_tips_name">用户名是您的身份唯一标识，由6~20位字母和数字混合组成，一旦确定不得更改</string>
+    <string name="tv_tips_name">用户名是您的身份唯一标识，由6~20位字母和数字混合组成或汉字，一旦确定不得更改</string>
     <string name="et_name_hint">用户名</string>
     <string name="register_complete">完成</string>
     <string name="title_register_info">设置密码和用户名</string>

@@ -5,5 +5,5 @@ package util;
  */
 public class MyApplication {
     //public static final String URL="http://zh749931552.6655.la";
-    public static final String URL="http://192.168.23.1";
+    public static final String URL="http://192.168.1.125";
 }
